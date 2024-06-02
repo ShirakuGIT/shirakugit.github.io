@@ -7,7 +7,14 @@
     <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>© Shiraku</copyright>
-    <lastBuildDate></lastBuildDate>
+    <lastBuildDate>Sun, 02 Jun 2024 11:39:14 +0530</lastBuildDate>
     <atom:link href="https://shirakugit.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Whatsup</title>
+      <link>https://shirakugit.github.io/posts/whatsup/</link>
+      <pubDate>Sun, 02 Jun 2024 11:39:14 +0530</pubDate>
+      <guid>https://shirakugit.github.io/posts/whatsup/</guid>
+      <description>Hello!</description>
+    </item>
   </channel>
 </rss>

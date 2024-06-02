@@ -2,14 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://shirakugit.github.io/tags/hey/</loc>
+    <lastmod>2024-06-02T11:39:14+05:30</lastmod>
+  </url><url>
     <loc>https://shirakugit.github.io/posts/</loc>
-    <lastmod>2024-06-02T11:05:05+05:30</lastmod>
+    <lastmod>2024-06-02T11:39:14+05:30</lastmod>
   </url><url>
     <loc>https://shirakugit.github.io/</loc>
-    <lastmod>2024-06-02T11:05:05+05:30</lastmod>
-  </url><url>
-    <loc>https://shirakugit.github.io/categories/</loc>
+    <lastmod>2024-06-02T11:39:14+05:30</lastmod>
   </url><url>
     <loc>https://shirakugit.github.io/tags/</loc>
+    <lastmod>2024-06-02T11:39:14+05:30</lastmod>
+  </url><url>
+    <loc>https://shirakugit.github.io/posts/whatsup/</loc>
+    <lastmod>2024-06-02T11:39:14+05:30</lastmod>
+  </url><url>
+    <loc>https://shirakugit.github.io/about/</loc>
+  </url><url>
+    <loc>https://shirakugit.github.io/categories/</loc>
   </url>
 </urlset>
