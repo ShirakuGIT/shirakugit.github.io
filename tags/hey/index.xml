@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Hey on Shiraku&#39;s Blog</title>
-    <link>http://localhost:1313/tags/hey/</link>
+    <link>https://shirakugit.github.io/tags/hey/</link>
     <description>Recent content in Hey on Shiraku&#39;s Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>© Shiraku</copyright>
     <lastBuildDate>Sun, 02 Jun 2024 11:39:14 +0530</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/hey/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://shirakugit.github.io/tags/hey/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Whatsup</title>
-      <link>http://localhost:1313/posts/whatsup/</link>
+      <link>https://shirakugit.github.io/posts/whatsup/</link>
       <pubDate>Sun, 02 Jun 2024 11:39:14 +0530</pubDate>
-      <guid>http://localhost:1313/posts/whatsup/</guid>
+      <guid>https://shirakugit.github.io/posts/whatsup/</guid>
       <description>Hello!</description>
     </item>
   </channel>
