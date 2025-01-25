@@ -1,11 +1,199 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Welcome to my page</title>
-    </head>
-    <body>
-        <h1>
-            Hello!
-        </h1>
-    </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shivaram Kumar Jagannathan - Resume</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+        body {
+            font-family: 'Crimson Text', serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            width: 90%;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        header img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        h1 {
+            margin: 10px 0;
+            font-size: 2rem;
+            color: #333;
+        }
+        h2 {
+            color: #444;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .experience-item {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            margin-bottom: 15px;
+        }
+        .experience-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .details-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            margin-top: 5px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        ul li {
+            margin-bottom: 5px;
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="photo.jpeg" alt="Shivaram Kumar Jagannathan">
+            <h1>Shivaram Kumar Jagannathan</h1>
+            <p>Phone: 9686616191 | Email: <a href="mailto:shivaram.jagannathan@outlook.com">shivaram.jagannathan@outlook.com</a></p>
+            <p><a href="https://linkedin.com/in/shivaramkumarj" target="_blank">LinkedIn</a> | <a href="https://github.com/ShirakuGIT" target="_blank">GitHub</a> | <a href="./resume.pdf" target="_blank">Resume</a></p>
+        </header>
+
+        <div class="section">
+            <h2>Education</h2>
+            <div class="experience-item">
+                <div class="experience-title">Manipal Institute of Technology</div>
+                <div>Sep. 2022 – Sep. 2026</div>
+            </div>
+            <div class="details-row">
+                <div>Bachelor of Technology in Information Technology, Minor in Computational Intelligence</div>
+                <div>Bengaluru, KA</div>
+            </div>
+            <p>Relevant Coursework:</p>
+
+                Computer Networks,
+                Operating Systems,
+                Machine Learning,
+                Artificial Intelligence,
+                Distributed Database Systems,
+                Digital System Design
+
+            <p>GPA: 3.3</p>
+        </div>
+
+        <div class="section">
+            <h2>Experience</h2>
+
+            <div class="experience-item">
+                <div class="experience-title">Semi-Finalist @ eYRC Robotics Competition</div>
+                <div>Nov. 2024 – Present</div>
+            </div>
+            <div class="details-row">
+                <div>eYRC, Indian Institute of Technology Bombay</div>
+                <div>Bombay, MA</div>
+            </div>
+            <ul>
+                <li>Lead a team of 4 to develop a Logistics CoBot for warehouse robotics.</li>
+                <li>Qualified for semi-finals placing ourselves in the top 30 teams amongst 3000+ teams internationally.</li>
+                <li>Used SLAM and Nav2 navigation stack for autonomous navigation within warehouse using ROS.</li>
+                <li>Implemented controls with forward kinematics for the UR5 Robotic Arm for motion planning.</li>
+                <li>Setup Extended Kalman Filters and Monte-Carlo Localization for particle filter-based SLAM and achieved 98% accuracy.</li>
+                <li>Tools: Nav2 Commander API, ROS2 Humble, SLAM, Gazebo, OpenCV.</li>
+            </ul>
+
+            <div class="experience-item">
+                <div class="experience-title">Data Engineer Intern</div>
+                <div>July 2023 – Aug. 2023</div>
+            </div>
+            <div class="details-row">
+                <div>Exponent Energy</div>
+                <div>Bengaluru, KA</div>
+            </div>
+            <ul>
+                <li>Bootstrapped a Kubernetes backend for Charging Infrastructure using AWS EKS reducing overhead by 30%.</li>
+                <li>Designed Apache Superset dashboards to analyze EV charging metrics for 50+ stakeholders.</li>
+                <li>Authored documentation and managed version control using GitHub for a team of 20+ engineers.</li>
+                <li>Deployed a cloud-based charging station locator, improved user engagement by 25%.</li>
+            </ul>
+
+            <div class="experience-item">
+                <div class="experience-title">Embedded Systems Engineer Intern</div>
+                <div>June 2023 – July 2023</div>
+            </div>
+            <div class="details-row">
+                <div>Exponent Energy</div>
+                <div>Bengaluru, KA</div>
+            </div>
+            <ul>
+                <li>Integrated a communication protocol for MCU subsystems within EV charging networks, improving operational efficiency and reliability at the CAN layer.</li>
+                <li>Implemented an Error Detection and Immediate Response Agent to identify and rectify ECU failures, optimizing charging metrics by 20%.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Projects</h2>
+
+            <div class="experience-item">
+                <div class="experience-title">AI Tax Assistant</div>
+                <div>Feb. 2023</div>
+            </div>
+            <p>Tools: Python, LangChain, Docker, Neo4j, Docker</p>
+            <ul>
+                <li>Conceptualized a Retrieval Augmented Generation based LLM for Indian Tax Information.</li>
+                <li>The application was containerized in Docker and the data was stored in Neo4j graph database.</li>
+                <li>Tokenization of the tax information to was done through a Gemini based pipeline.</li>
+            </ul>
+
+            <div class="experience-item">
+                <div class="experience-title">Reverse Dictionary</div>
+                <div>May 2020 – July 2020</div>
+            </div>
+            <p>Tools: Django, Python, Tensorflow, Bootstrap CSS, Git</p>
+            <ul>
+                <li>Developed a website for searching words based on descriptive phrases using an LSTM sequence model.</li>
+                <li>Trained the model on over 250,000 unique English words, predicting top 10 words based on user descriptions.</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>© 2025 Shivaram Kumar Jagannathan. All Rights Reserved.</p>
+        </footer>
+    </div>
+</body>
 </html>
