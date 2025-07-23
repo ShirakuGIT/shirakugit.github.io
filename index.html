@@ -3,149 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shivaram Kumar Jagannathan - Robotics Engineer & Researcher</title>
+    <title>Shivaram Kumar Jagannathan - Robotics Engineer</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="nav" id="nav">
-        <div class="nav__container">
-            <div class="nav__logo">
-                <span class="nav__logo-text">SK</span>
-            </div>
-            <ul class="nav__menu" id="nav-menu">
-                <li class="nav__item">
-                    <a href="#home" class="nav__link">Home</a>
-                </li>
-                <li class="nav__item">
-                    <a href="#about" class="nav__link">About</a>
-                </li>
-                <li class="nav__item">
-                    <a href="#experience" class="nav__link">Experience</a>
-                </li>
-                <li class="nav__item">
-                    <a href="#projects" class="nav__link">Projects</a>
-                </li>
-                <li class="nav__item">
-                    <a href="#skills" class="nav__link">Skills</a>
-                </li>
-                <li class="nav__item">
-                    <a href="#education" class="nav__link">Education</a>
-                </li>
-                <li class="nav__item">
-                    <a href="#publications" class="nav__link">Publications</a>
-                </li>
-                <li class="nav__item">
-                    <a href="#awards" class="nav__link">Awards</a>
-                </li>
-                <li class="nav__item">
-                    <a href="#contact" class="nav__link">Contact</a>
-                </li>
-            </ul>
-            <div class="nav__hamburger" id="nav-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="cursor"></div>
+    <div class="cursor-trail" id="cursorTrail"></div>
+
+    <!-- Particle Canvas Background -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Floating Navigation -->
+    <nav class="floating-nav" id="floatingNav">
+        <div class="nav-item" data-section="hero">
+            <span class="nav-dot"></span>
+            <span class="nav-label">Home</span>
+        </div>
+        <div class="nav-item" data-section="about">
+            <span class="nav-dot"></span>
+            <span class="nav-label">About</span>
+        </div>
+        <div class="nav-item" data-section="experience">
+            <span class="nav-dot"></span>
+            <span class="nav-label">Experience</span>
+        </div>
+        <div class="nav-item" data-section="projects">
+            <span class="nav-dot"></span>
+            <span class="nav-label">Projects</span>
+        </div>
+        <div class="nav-item" data-section="skills">
+            <span class="nav-dot"></span>
+            <span class="nav-label">Skills</span>
+        </div>
+        <div class="nav-item" data-section="contact">
+            <span class="nav-dot"></span>
+            <span class="nav-label">Contact</span>
         </div>
     </nav>
 
+    <!-- Progress Indicator -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
     <!-- Hero Section -->
-    <section class="hero" id="home">
-        <canvas class="hero__canvas" id="particles-canvas"></canvas>
-        <div class="hero__content">
-            <div class="hero__text">
-                <h1 class="hero__title">
-                    <span class="hero__name" id="typing-text"></span>
-                    <span class="cursor">|</span>
-                </h1>
-                <div class="hero__subtitle">
-                    <span class="hero__profession">Robotics Engineer & Researcher</span>
+    <section id="hero" class="hero-section">
+        <div class="floating-shapes">
+            <div class="shape shape-cube"></div>
+            <div class="shape shape-sphere"></div>
+            <div class="shape shape-tetrahedron"></div>
+        </div>
+        
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="word" data-text="Shivaram">Shivaram</span>
+                <span class="word" data-text="Kumar">Kumar</span>
+                <span class="word subtitle" data-text="Robotics Engineer">Robotics Engineer</span>
+            </h1>
+            <p class="hero-subtitle">Building the future of robotics one algorithm at a time</p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="4">0</span>
+                    <span class="stat-label">Projects</span>
                 </div>
-                <p class="hero__description">
-                    Specializing in autonomous systems, SLAM, and sensor fusion. 
-                    Building the future of robotics one algorithm at a time.
-                </p>
-                <div class="hero__cta">
-                    <a href="#contact" class="btn btn--primary hero__btn">
-                        Get In Touch
-                        <span class="btn__icon">→</span>
-                    </a>
-                    <a href="#projects" class="btn btn--secondary hero__btn">
-                        View Projects
-                        <span class="btn__icon">↓</span>
-                    </a>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="3">0</span>
+                    <span class="stat-label">Years</span>
                 </div>
-            </div>
-            <div class="hero__image">
-                <div class="hero__avatar"></div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="2">0</span>
+                    <span class="stat-label">Papers</span>
+                </div>
             </div>
         </div>
-        <div class="hero__scroll">
-            <span class="hero__scroll-text">Scroll to explore</span>
-            <div class="hero__scroll-indicator"></div>
+        
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section class="about section" id="about">
+    <section id="about" class="section">
         <div class="container">
-            <div class="section__header">
-                <h2 class="section__title">About Me</h2>
-                <p class="section__subtitle">Passionate about autonomous systems and robotics</p>
-            </div>
-            <div class="about__content">
-                <div class="about__text glass-card">
-                    <p class="about__description">
-                        I'm a dedicated Robotics Engineer and Researcher specializing in autonomous systems, 
-                        SLAM, and sensor fusion. Currently pursuing B.Tech in Information Technology at MIT Bangalore, 
-                        I have extensive research experience in autonomous mobility and multi-robot coordination.
-                    </p>
-                    <div class="about__stats">
-                        <div class="stat">
-                            <span class="stat__number" data-count="25">0</span>
-                            <span class="stat__label">Projects Completed</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat__number" data-count="3">0</span>
-                            <span class="stat__label">Years Experience</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat__number" data-count="5">0</span>
-                            <span class="stat__label">Research Papers</span>
-                        </div>
-                    </div>
+            <div class="glass-card about-card">
+                <div class="card-header">
+                    <h2 class="section-title">About Me</h2>
                 </div>
-                <div class="about__info glass-card">
-                    <div class="info__item">
-                        <span class="info__icon">📍</span>
-                        <div class="info__content">
-                            <span class="info__label">Location</span>
-                            <span class="info__value">Bengaluru, Karnataka, India</span>
+                <div class="card-body">
+                    <div class="about-content">
+                        <div class="about-text">
+                            <p>Passionate robotics engineer specializing in autonomous systems, SLAM, and sensor fusion. Currently working at the Centre of Excellence in Autonomous Mobility, MIT Bangalore, where I develop cutting-edge algorithms for autonomous navigation and perception.</p>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <span class="icon">📍</span>
+                                    <span>Bengaluru, Karnataka, India</span>
+                                </div>
+                                <div class="contact-item">
+                                    <span class="icon">📧</span>
+                                    <span>shivaram.jagannathan@outlook.com</span>
+                                </div>
+                                <div class="contact-item">
+                                    <span class="icon">📱</span>
+                                    <span>+91 96866 16191</span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="info__item">
-                        <span class="info__icon">📧</span>
-                        <div class="info__content">
-                            <span class="info__label">Email</span>
-                            <span class="info__value">shivaram.jagannathan@outlook.com</span>
+                        <div class="rotating-logo">
+                            <div class="logo-3d">🤖</div>
                         </div>
-                    </div>
-                    <div class="info__item">
-                        <span class="info__icon">📱</span>
-                        <div class="info__content">
-                            <span class="info__label">Phone</span>
-                            <span class="info__value">+91 96866 16191</span>
-                        </div>
-                    </div>
-                    <div class="about__social">
-                        <a href="https://linkedin.com/in/shivaram-jagannathan" target="_blank" class="social-link">
-                            <span class="social-icon">in</span>
-                        </a>
-                        <a href="https://github.com/ShirakuGIT" target="_blank" class="social-link">
-                            <span class="social-icon">gh</span>
-                        </a>
                     </div>
                 </div>
             </div>
@@ -153,19 +117,17 @@
     </section>
 
     <!-- Experience Section -->
-    <section class="experience section" id="experience">
+    <section id="experience" class="section">
         <div class="container">
-            <div class="section__header">
-                <h2 class="section__title">Experience</h2>
-                <p class="section__subtitle">Professional journey in robotics and technology</p>
-            </div>
+            <h2 class="section-title">Experience</h2>
             <div class="timeline">
-                <div class="timeline__item glass-card" data-aos="fade-up">
-                    <div class="timeline__date">Nov. 2024 - Present</div>
-                    <div class="timeline__content">
-                        <h3 class="timeline__title">Technical Lead</h3>
-                        <h4 class="timeline__company">Centre of Excellence in Autonomous Mobility, MIT Bangalore</h4>
-                        <ul class="timeline__achievements">
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-marker"></div>
+                    <div class="glass-card timeline-card">
+                        <h3>Technical Lead</h3>
+                        <h4>Centre of Excellence in Autonomous Mobility, MIT Bangalore</h4>
+                        <p class="duration">Nov. 2024 - Present</p>
+                        <ul>
                             <li>Developed multi-sensor fusion algorithms reducing perception uncertainty by 25%</li>
                             <li>Applied RandLA-Net for real-time 3D semantic segmentation, improving accuracy by 35%</li>
                             <li>Optimized SLAM algorithms with LIO SAM, enhancing navigation robustness by 30%</li>
@@ -174,12 +136,13 @@
                     </div>
                 </div>
 
-                <div class="timeline__item glass-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="timeline__date">Nov. 2024 - Jan. 2025</div>
-                    <div class="timeline__content">
-                        <h3 class="timeline__title">Research Project Lead</h3>
-                        <h4 class="timeline__company">IIT Bombay Robotics Lab</h4>
-                        <ul class="timeline__achievements">
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="timeline-marker"></div>
+                    <div class="glass-card timeline-card">
+                        <h3>Research Project Lead</h3>
+                        <h4>IIT Bombay Robotics Lab</h4>
+                        <p class="duration">Nov. 2024 - Jan. 2025</p>
+                        <ul>
                             <li>Designed and implemented a Logistics CoBot integrating SLAM, reducing localization error by 30%</li>
                             <li>Enhanced UR5 robotic arm motion planning, decreasing trajectory deviation by 20%</li>
                             <li>Achieved 98% real-time localization accuracy using EKF and Monte Carlo SLAM methods</li>
@@ -188,12 +151,13 @@
                     </div>
                 </div>
 
-                <div class="timeline__item glass-card" data-aos="fade-up" data-aos-delay="400">
-                    <div class="timeline__date">Jun. 2022 - Jul. 2023</div>
-                    <div class="timeline__content">
-                        <h3 class="timeline__title">Software Engineer Intern</h3>
-                        <h4 class="timeline__company">Exponent Energy</h4>
-                        <ul class="timeline__achievements">
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="400">
+                    <div class="timeline-marker"></div>
+                    <div class="glass-card timeline-card">
+                        <h3>Software Engineer Intern</h3>
+                        <h4>Exponent Energy</h4>
+                        <p class="duration">Jun. 2022 - Jul. 2023</p>
+                        <ul>
                             <li>Deployed Kubernetes-based backend systems, reducing operational overhead by 30%</li>
                             <li>Developed Apache Superset dashboards for real-time analytics benefiting 50+ stakeholders</li>
                             <li>Led version control initiatives for 20+ engineers, improving deployment efficiency by 25%</li>
@@ -206,93 +170,66 @@
     </section>
 
     <!-- Projects Section -->
-    <section class="projects section" id="projects">
+    <section id="projects" class="section">
         <div class="container">
-            <div class="section__header">
-                <h2 class="section__title">Featured Projects</h2>
-                <p class="section__subtitle">Cutting-edge robotics and AI solutions</p>
-            </div>
-            <div class="projects__grid">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
                 <div class="project-card glass-card" data-aos="fade-up">
-                    <div class="project-card__header">
-                        <h3 class="project-card__title">Adaptive Autonomous Sample Retrieval for Mars Sample Return</h3>
-                        <span class="project-card__status">Current</span>
-                    </div>
-                    <p class="project-card__description">
-                        Designing an autonomous robotic system to retrieve misaligned or partially buried sample tubes 
-                        in Martian terrain, increasing reliability under off-nominal conditions for future MSR missions.
-                    </p>
-                    <div class="project-card__tech">
+                    <div class="project-status current">CURRENT</div>
+                    <h3>Adaptive Autonomous Sample Retrieval for Mars Sample Return</h3>
+                    <p>Designing an autonomous robotic system to retrieve misaligned or partially buried sample tubes in Martian terrain, increasing reliability under off-nominal conditions for future MSR missions.</p>
+                    <div class="project-tech">
                         <span class="tech-tag">ROS2</span>
                         <span class="tech-tag">CNN</span>
                         <span class="tech-tag">Behavior Trees</span>
                         <span class="tech-tag">Impedance Control</span>
                     </div>
-                    <div class="project-card__meta">
-                        <span class="project-card__role">Lead Researcher</span>
-                        <span class="project-card__duration">Jan. 2025 - Present</span>
+                    <div class="project-meta">
+                        <span>Lead Researcher • Jan. 2025 - Present</span>
                     </div>
                 </div>
 
                 <div class="project-card glass-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="project-card__header">
-                        <h3 class="project-card__title">Autonomous Mobile Manipulation Platform</h3>
-                        <span class="project-card__status">Active</span>
-                    </div>
-                    <p class="project-card__description">
-                        Integrating ROS2-based navigation stack with a custom 6-DOF robotic arm for indoor object 
-                        manipulation, achieving 92% pick success rate in cluttered environments.
-                    </p>
-                    <div class="project-card__tech">
+                    <div class="project-status active">ACTIVE</div>
+                    <h3>Autonomous Mobile Manipulation Platform</h3>
+                    <p>Integrating ROS2-based navigation stack with a custom 6-DOF robotic arm for indoor object manipulation, achieving 92% pick success rate in cluttered environments.</p>
+                    <div class="project-tech">
                         <span class="tech-tag">ROS2</span>
                         <span class="tech-tag">LiDAR</span>
                         <span class="tech-tag">Computer Vision</span>
                         <span class="tech-tag">Deep RL</span>
                     </div>
-                    <div class="project-card__meta">
-                        <span class="project-card__role">Lead Developer</span>
-                        <span class="project-card__duration">Oct. 2024 - Present</span>
+                    <div class="project-meta">
+                        <span>Lead Developer • Oct. 2024 - Present</span>
                     </div>
                 </div>
 
                 <div class="project-card glass-card" data-aos="fade-up" data-aos-delay="400">
-                    <div class="project-card__header">
-                        <h3 class="project-card__title">Real-time Multi-Vehicle SLAM System</h3>
-                        <span class="project-card__status">Active</span>
-                    </div>
-                    <p class="project-card__description">
-                        Creating distributed SLAM architecture allowing multiple robots to collaboratively build 
-                        and maintain a unified map with 60% reduced bandwidth and 40% faster convergence.
-                    </p>
-                    <div class="project-card__tech">
+                    <div class="project-status active">ACTIVE</div>
+                    <h3>Real-time Multi-Vehicle SLAM System</h3>
+                    <p>Creating distributed SLAM architecture allowing multiple robots to collaboratively build and maintain a unified map with 60% reduced bandwidth and 40% faster convergence.</p>
+                    <div class="project-tech">
                         <span class="tech-tag">SLAM</span>
                         <span class="tech-tag">Distributed Systems</span>
                         <span class="tech-tag">Multi-Robot Coordination</span>
                     </div>
-                    <div class="project-card__meta">
-                        <span class="project-card__role">Project Lead</span>
-                        <span class="project-card__duration">Aug. 2024 - Present</span>
+                    <div class="project-meta">
+                        <span>Project Lead • Aug. 2024 - Present</span>
                     </div>
                 </div>
 
                 <div class="project-card glass-card" data-aos="fade-up" data-aos-delay="600">
-                    <div class="project-card__header">
-                        <h3 class="project-card__title">LoRA + 8-bit Fine-Tuning for Extreme Multi-Label Retrieval</h3>
-                        <span class="project-card__status">Completed</span>
-                    </div>
-                    <p class="project-card__description">
-                        Ported mpnet-base retriever to parameter-efficient LoRA optimization, cutting peak VRAM 
-                        from 8GB to 3GB while boosting throughput 1.8x.
-                    </p>
-                    <div class="project-card__tech">
+                    <div class="project-status completed">COMPLETED</div>
+                    <h3>LoRA + 8-bit Fine-Tuning for Extreme Multi-Label Retrieval</h3>
+                    <p>Ported mpnet-base retriever to parameter-efficient LoRA optimization, cutting peak VRAM from 8GB to 3GB while boosting throughput 1.8x.</p>
+                    <div class="project-tech">
                         <span class="tech-tag">LoRA</span>
                         <span class="tech-tag">PyTorch</span>
                         <span class="tech-tag">VRAM Optimization</span>
                         <span class="tech-tag">Neural IR</span>
                     </div>
-                    <div class="project-card__meta">
-                        <span class="project-card__role">Systems Researcher</span>
-                        <span class="project-card__duration">Jan. 2025 – Feb. 2025</span>
+                    <div class="project-meta">
+                        <span>Systems Researcher • Jan. 2025 – Feb. 2025</span>
                     </div>
                 </div>
             </div>
@@ -300,170 +237,89 @@
     </section>
 
     <!-- Skills Section -->
-    <section class="skills section" id="skills">
+    <section id="skills" class="section">
         <div class="container">
-            <div class="section__header">
-                <h2 class="section__title">Technical Skills</h2>
-                <p class="section__subtitle">Expertise across multiple domains</p>
-            </div>
-            <div class="skills__grid">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
                 <div class="skill-category glass-card" data-aos="fade-up">
-                    <h3 class="skill-category__title">Programming Languages</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">C/C++</span>
-                        <span class="skill-tag">MATLAB</span>
-                        <span class="skill-tag">Bash</span>
+                    <h3>Programming Languages</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span class="skill-name">Python</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">C/C++</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">MATLAB</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Bash</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80%"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="skill-category glass-card" data-aos="fade-up" data-aos-delay="200">
-                    <h3 class="skill-category__title">Robotics & Automation</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">ROS</span>
-                        <span class="skill-tag">Gazebo</span>
-                        <span class="skill-tag">MoveIt</span>
-                        <span class="skill-tag">SLAM</span>
-                        <span class="skill-tag">Sensor Fusion</span>
-                        <span class="skill-tag">Motion Planning</span>
-                        <span class="skill-tag">Control Systems</span>
+                    <h3>Robotics & Automation</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span class="skill-name">ROS</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">SLAM</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="92%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Sensor Fusion</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Motion Planning</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="88%"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="skill-category glass-card" data-aos="fade-up" data-aos-delay="400">
-                    <h3 class="skill-category__title">Tools & Frameworks</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">LiDAR</span>
-                        <span class="skill-tag">RandLA-Net</span>
-                        <span class="skill-tag">Nav2</span>
-                        <span class="skill-tag">Kubernetes</span>
-                        <span class="skill-tag">AWS</span>
-                        <span class="skill-tag">Git/GitHub</span>
-                        <span class="skill-tag">ML Frameworks</span>
+                    <h3>Tools & Frameworks</h3>
+                    <div class="rotating-skills">
+                        <div class="rotating-skill" data-skill="LiDAR">🎯</div>
+                        <div class="rotating-skill" data-skill="RandLA-Net">🧠</div>
+                        <div class="rotating-skill" data-skill="Nav2">🧭</div>
+                        <div class="rotating-skill" data-skill="Kubernetes">☸️</div>
+                        <div class="rotating-skill" data-skill="AWS">☁️</div>
+                        <div class="rotating-skill" data-skill="Git/GitHub">🐙</div>
                     </div>
                 </div>
 
                 <div class="skill-category glass-card" data-aos="fade-up" data-aos-delay="600">
-                    <h3 class="skill-category__title">Specialized Domains</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Autonomous Systems</span>
-                        <span class="skill-tag">Computer Vision</span>
-                        <span class="skill-tag">Multi-Robot Coordination</span>
-                        <span class="skill-tag">Real-time Perception</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Education Section -->
-    <section class="education section" id="education">
-        <div class="container">
-            <div class="section__header">
-                <h2 class="section__title">Education</h2>
-                <p class="section__subtitle">Academic foundation in technology and engineering</p>
-            </div>
-            <div class="education__content">
-                <div class="education-card glass-card" data-aos="fade-up">
-                    <div class="education-card__header">
-                        <h3 class="education-card__degree">Bachelor of Technology in Information Technology</h3>
-                        <span class="education-card__cgpa">CGPA: 8.31/10</span>
-                    </div>
-                    <div class="education-card__institution">
-                        <span class="education-card__name">Manipal Institute of Technology</span>
-                        <span class="education-card__location">Manipal, India</span>
-                    </div>
-                    <div class="education-card__graduation">Expected 2026</div>
-                    <div class="education-card__courses">
-                        <h4>Relevant Coursework:</h4>
-                        <div class="course-tags">
-                            <span class="course-tag">Modern Robotics</span>
-                            <span class="course-tag">Embedded Systems</span>
-                            <span class="course-tag">Computer Vision</span>
-                            <span class="course-tag">Control Systems</span>
-                            <span class="course-tag">Machine Learning</span>
-                            <span class="course-tag">Kinematics and Dynamics</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Publications Section -->
-    <section class="publications section" id="publications">
-        <div class="container">
-            <div class="section__header">
-                <h2 class="section__title">Publications & Research</h2>
-                <p class="section__subtitle">Contributing to robotics knowledge</p>
-            </div>
-            <div class="publications__grid">
-                <div class="publication-card glass-card" data-aos="fade-up">
-                    <div class="publication-card__status status--warning">Manuscript in Preparation</div>
-                    <h3 class="publication-card__title">Enhanced SLAM Techniques for Autonomous Logistics CoBots</h3>
-                    <div class="publication-card__details">
-                        <span class="publication-card__target">Target: ICRA 2024</span>
-                        <span class="publication-card__role">First Author</span>
-                    </div>
-                </div>
-
-                <div class="publication-card glass-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="publication-card__status status--info">Under Internal Review</div>
-                    <h3 class="publication-card__title">Multi-Sensor Fusion for Robust Autonomous Navigation</h3>
-                    <div class="publication-card__details">
-                        <span class="publication-card__target">Target: IEEE Transactions on Robotics</span>
-                        <span class="publication-card__role">First Author</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Awards Section -->
-    <section class="awards section" id="awards">
-        <div class="container">
-            <div class="section__header">
-                <h2 class="section__title">Awards & Recognition</h2>
-                <p class="section__subtitle">Achievements and leadership roles</p>
-            </div>
-            <div class="awards__grid">
-                <div class="award-card glass-card" data-aos="fade-up">
-                    <div class="award-card__icon">🏆</div>
-                    <h3 class="award-card__title">IIT Bombay eYantra Robotics Competition</h3>
-                    <p class="award-card__description">Lead Researcher - Top 1% among participants</p>
-                    <div class="award-card__meta">
-                        <span class="award-card__duration">Nov. 2024 - Jan. 2025</span>
-                        <span class="award-card__location">Mumbai, India</span>
-                    </div>
-                </div>
-
-                <div class="award-card glass-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="award-card__icon">🎓</div>
-                    <h3 class="award-card__title">AWS DeepRacer Scholarship</h3>
-                    <p class="award-card__description">Excellence in Reinforcement Learning</p>
-                    <div class="award-card__meta">
-                        <span class="award-card__duration">Jul. 2022 - Dec. 2022</span>
-                        <span class="award-card__location">Bengaluru, India</span>
-                    </div>
-                </div>
-
-                <div class="award-card glass-card" data-aos="fade-up" data-aos-delay="400">
-                    <div class="award-card__icon">🔬</div>
-                    <h3 class="award-card__title">Centre of Excellence in Autonomous Mobility Grant</h3>
-                    <p class="award-card__description">Research Excellence Award</p>
-                    <div class="award-card__meta">
-                        <span class="award-card__duration">Nov. 2024 - Present</span>
-                        <span class="award-card__location">Bengaluru, India</span>
-                    </div>
-                </div>
-
-                <div class="award-card glass-card" data-aos="fade-up" data-aos-delay="600">
-                    <div class="award-card__icon">👥</div>
-                    <h3 class="award-card__title">Chair - IEEE RAS Society, MIT</h3>
-                    <p class="award-card__description">Leading robotics workshops and interdisciplinary research collaborations. Coordinated annual robotics symposium with 100+ participants.</p>
-                    <div class="award-card__meta">
-                        <span class="award-card__duration">March 2025 - Present</span>
-                        <span class="award-card__location">Manipal, India</span>
+                    <h3>Specialized Domains</h3>
+                    <div class="domain-tags">
+                        <span class="domain-tag">Autonomous Systems</span>
+                        <span class="domain-tag">Computer Vision</span>
+                        <span class="domain-tag">Multi-Robot Coordination</span>
+                        <span class="domain-tag">Real-time Perception</span>
                     </div>
                 </div>
             </div>
@@ -471,90 +327,61 @@
     </section>
 
     <!-- Contact Section -->
-    <section class="contact section" id="contact">
+    <section id="contact" class="section">
         <div class="container">
-            <div class="section__header">
-                <h2 class="section__title">Get In Touch</h2>
-                <p class="section__subtitle">Let's collaborate on the future of robotics</p>
-            </div>
-            <div class="contact__content">
-                <div class="contact__info glass-card" data-aos="fade-right">
-                    <h3 class="contact__info-title">Contact Information</h3>
-                    <div class="contact__item">
-                        <span class="contact__icon">📧</span>
-                        <div class="contact__details">
-                            <span class="contact__label">Email</span>
-                            <a href="mailto:shivaram.jagannathan@outlook.com" class="contact__value">
-                                shivaram.jagannathan@outlook.com
-                            </a>
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="glass-card contact-form-card" data-aos="fade-up">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" class="form-control" required>
                         </div>
-                    </div>
-                    <div class="contact__item">
-                        <span class="contact__icon">📱</span>
-                        <div class="contact__details">
-                            <span class="contact__label">Phone</span>
-                            <a href="tel:+919686616191" class="contact__value">+91 96866 16191</a>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
                         </div>
-                    </div>
-                    <div class="contact__item">
-                        <span class="contact__icon">📍</span>
-                        <div class="contact__details">
-                            <span class="contact__label">Location</span>
-                            <span class="contact__value">Bengaluru, Karnataka, India</span>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" class="form-control" rows="5" required></textarea>
                         </div>
-                    </div>
-                    <div class="contact__social">
-                        <a href="https://linkedin.com/in/shivaram-jagannathan" target="_blank" class="social-link">
-                            <span class="social-icon">in</span>
+                        <button type="submit" class="btn btn--primary submit-btn" id="submitBtn">
+                            <span class="btn-text">Send Message</span>
+                            <span class="btn-loader"></span>
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="contact-info-card glass-card" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Let's Build Something Amazing</h3>
+                    <p>Always excited to collaborate on innovative robotics projects and research opportunities.</p>
+                    
+                    <div class="social-links">
+                        <a href="mailto:shivaram.jagannathan@outlook.com" class="social-link" target="_blank">
+                            <span class="social-icon">📧</span>
+                            <span>Email</span>
                         </a>
-                        <a href="https://github.com/ShirakuGIT" target="_blank" class="social-link">
-                            <span class="social-icon">gh</span>
+                        <a href="https://linkedin.com/in/shivaram-jagannathan" class="social-link" target="_blank">
+                            <span class="social-icon">💼</span>
+                            <span>LinkedIn</span>
+                        </a>
+                        <a href="https://github.com/ShirakuGIT" class="social-link" target="_blank">
+                            <span class="social-icon">🐙</span>
+                            <span>GitHub</span>
                         </a>
                     </div>
                 </div>
-
-                <form class="contact__form glass-card" data-aos="fade-left">
-                    <h3 class="contact__form-title">Send a Message</h3>
-                    <div class="form-group">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" id="name" name="name" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" id="email" name="email" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="subject" class="form-label">Subject</label>
-                        <input type="text" id="subject" name="subject" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message" class="form-label">Message</label>
-                        <textarea id="message" name="message" class="form-control" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn--primary btn--full-width">
-                        Send Message
-                        <span class="btn__icon">→</span>
-                    </button>
-                </form>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer__content">
-                <div class="footer__text">
-                    <p>&copy; 2025 Shivaram Kumar Jagannathan. All rights reserved.</p>
-                    <p>Built with passion for robotics and innovation.</p>
-                </div>
-                <div class="footer__links">
-                    <a href="https://linkedin.com/in/shivaram-jagannathan" target="_blank" class="footer__link">LinkedIn</a>
-                    <a href="https://github.com/ShirakuGIT" target="_blank" class="footer__link">GitHub</a>
-                </div>
-            </div>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>Initializing Robotics Systems...</p>
         </div>
-    </footer>
+    </div>
 
     <script src="app.js"></script>
 </body>
