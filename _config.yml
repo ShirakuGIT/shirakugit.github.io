@@ -1,0 +1,89 @@
+# Site settings
+title: Shivaram Kumar Jagannathan
+email: shivaram.jagannathan@outlook.com
+description: Academic webpage of Shivaram!
+baseurl: ""
+url: ""
+
+# Google analytics ID: Uncomment and your own, if you like
+# google_analytics: XX
+# google_analytics_4: XXX
+# google_tag_manager: XXX
+
+# Footer info
+affiliation: >
+  Shivaram Kumar Jagannathan<br/>
+  Researcher<br/>
+  Nanyang Technological University
+
+location: >
+  50 Nanyang Ave<br/>
+  Singapore 639798<br/>
+
+contact: >
+  <a href="mailto:shivaram.jagannathan@outlook.com" target="_blank"><i class="fa fa-envelope fa-1x"></i> Contact Shiva via email</a> <br/>
+  <a href="https://github.com/sbryngelson/academic-website-template"><i class="fa fa-github fa-1x"></i> Use this site as a template!</a>
+
+# Pages shown in navbar
+nav_pages:
+  - name: about
+  - name: publications
+  - name: research
+
+include:
+  - .htaccess
+  - _pages
+
+# Conversion
+markdown: kramdown
+highlighter: rouge
+lsi: false
+excerpt_separator: "\n\n"
+incremental: false
+
+# Markdown Processing
+kramdown:
+  input: GFM
+  hard_wrap: false
+  auto_ids: true
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..6
+  smart_quotes: lsquo,rsquo,ldquo,rdquo
+  enable_coderay: false
+  parse_block_html: true # default for kramdown is false. This will enable using Markdown links
+
+plugins: ["jekyll/scholar"]
+
+scholar:
+  last_name: Doe
+  first_name: [John]
+
+  style: citesty
+  locale: en
+
+  source: /assets/
+  bibliography: ref.bib
+  bibliography_template: bibtemplate
+  sort_by: year, month
+  order: descending
+
+  replace_strings: true
+  join_strings: true
+
+  details_dir: bibliography
+  details_layout: bibtex.html
+  details_link: Details
+
+  query: "@*"
+
+  bibliography_list_attributes:
+    reversed: "reversed"
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - update_boostrap.sh
+  - switch_theme.sh
+  - tags
+  - Rakefile

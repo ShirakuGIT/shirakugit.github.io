@@ -1,0 +1,16 @@
+- name: Shivaram Kumar Jagannathan
+  photo: headshot.jpg
+  info: Researcher, Nanyang Technological University
+  #github: https://github.com/ShirakuGIT
+  cv: cv/CV_ShivaramKumar.pdf
+  email: shivaram.jagannathan@outlook.com
+  #researchgate: https://www.researchgate.net/
+  #scholar: https://scholar.google.com/citations?user=B7vSqZsAAAAJ
+  # Change the items in "education" you have (up to 6)
+  education:
+    [
+      "(2026) B.Tech. Information Technology, Manipal Institute of Technology",
+    ]
+
+  educationshort:
+    ["(2026) B.Tech. IT, Manipal Institute of Technology"]
