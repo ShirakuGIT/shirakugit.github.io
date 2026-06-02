@@ -1,6 +1,9 @@
 {
-  "updated": "2026-06-03",
+  "updated": "2026-06-02",
   "source": "cloudflare-rum",
   "days": 30,
-  "counts": {}
+  "counts": {
+    "IN": 20,
+    "SG": 10
+  }
 }
