@@ -66,6 +66,7 @@ nav_pages:
 
 include:
   - .htaccess
+  - .nojekyll
   - _pages
 
 # Conversion
