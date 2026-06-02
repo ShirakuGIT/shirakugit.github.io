@@ -36,11 +36,11 @@
         initial:  { fill: '#403a31', stroke: '#5a5248', strokeWidth: 0.6, fillOpacity: 1 },
         hover:    { fillOpacity: 1, fill: '#e89a5c' }
       },
-      // only countries with visitors get colored — orange shades, brighter = more visits
+      // only countries with visitors get colored — green shades, brighter = more visits
       series: {
         regions: [{
           attribute: 'fill',
-          scale: ['#bd5d34', '#e8a060'],
+          scale: ['#5d6b3c', '#aebd7c'],
           normalizeFunction: 'linear',
           values: counts
         }]
