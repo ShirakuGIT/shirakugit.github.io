@@ -48,8 +48,10 @@
     var map = new jsVectorMap({
       selector: '#worldmap',
       map: 'world',
-      zoomButtons: false,      // no +/- tool icons
-      zoomOnScroll: true,      // scroll to zoom
+      zoomButtons: false,        // no +/- tool icons
+      zoomOnScroll: true,        // scroll to zoom
+      zoomOnScrollSpeed: 0.6,    // gentler than default — less aggressive
+      zoomStep: 1.3,
       zoomMax: 8,
       zoomMin: 1,
       // dragging the map pans it (built in) — gives "zoom + pan, no chrome"
