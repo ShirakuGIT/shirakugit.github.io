@@ -25,24 +25,45 @@
       totalEl.textContent = total.toLocaleString() + ' visits · ' + codes.length + ' countries';
     }
 
-    new jsVectorMap({
+    // Compute an explicit green shade per visitor country (dark -> bright = fewer -> more).
+    // We map colors ourselves instead of jsVectorMap's `scale`/`series` engine, which
+    // rendered regions black here. Passing hex strings as `values` sets fill directly.
+    var GLO = [0x4d, 0x5d, 0x33];   // dark olive-green (few visits)
+    var GHI = [0xaf, 0xc1, 0x78];   // bright sage-green (most visits)
+    var max = 0;
+    codes.forEach(function(c){ if(counts[c] > max) max = counts[c]; });
+    function hex(n){ n = Math.max(0, Math.min(255, n)); return (n < 16 ? '0' : '') + n.toString(16); }
+    function greenFor(count){
+      // floor at 0.4 so even the smallest visitor country reads clearly green, not near-black
+      var t = max > 0 ? count / max : 1;
+      t = 0.4 + 0.6 * t;
+      var r = Math.round(GLO[0] + (GHI[0] - GLO[0]) * t);
+      var g = Math.round(GLO[1] + (GHI[1] - GLO[1]) * t);
+      var b = Math.round(GLO[2] + (GHI[2] - GLO[2]) * t);
+      return '#' + hex(r) + hex(g) + hex(b);
+    }
+    var colorValues = {};
+    codes.forEach(function(c){ colorValues[c] = greenFor(counts[c]); });
+
+    var map = new jsVectorMap({
       selector: '#worldmap',
       map: 'world',
-      zoomButtons: false,
-      zoomOnScroll: false,
+      zoomButtons: false,      // no +/- tool icons
+      zoomOnScroll: true,      // scroll to zoom
+      zoomMax: 8,
+      zoomMin: 1,
+      // dragging the map pans it (built in) — gives "zoom + pan, no chrome"
       backgroundColor: 'transparent',
-      // base look: empty countries stay flat & ghosted, faint borders so the map reads
+      // no borders — the dot matrix carries the shapes
       regionStyle: {
-        initial:  { fill: '#403a31', stroke: '#5a5248', strokeWidth: 0.6, fillOpacity: 1 },
+        initial:  { fill: '#403a31', stroke: 'none', fillOpacity: 1 },
         hover:    { fillOpacity: 1, fill: '#e89a5c' }
       },
-      // only countries with visitors get colored — green shades, brighter = more visits
+      // only countries with visitors get colored — explicit green hex per country
       series: {
         regions: [{
           attribute: 'fill',
-          scale: ['#5d6b3c', '#aebd7c'],
-          normalizeFunction: 'linear',
-          values: counts
+          values: colorValues
         }]
       },
       onRegionTooltipShow: function(event, tooltip, code){
@@ -55,6 +76,43 @@
         }
       }
     });
+
+    // --- Dot-matrix render -------------------------------------------------
+    // Convert every solid region fill into a pattern of small dots of that same
+    // colour, so the whole map reads as a dot matrix. Patterns live in the map's
+    // user space, so they scale/pan together with the regions on zoom.
+    try {
+      var svg = el.querySelector('svg');
+      if (svg) {
+        var NS = 'http://www.w3.org/2000/svg';
+        var defs = svg.querySelector('defs');
+        if (!defs) { defs = document.createElementNS(NS, 'defs'); svg.insertBefore(defs, svg.firstChild); }
+        var patCache = {};
+        function patternFor(color){
+          var key = String(color);
+          if (patCache[key]) return patCache[key];
+          var id = 'dot-' + key.replace(/[^a-z0-9]/gi, '');
+          var p = document.createElementNS(NS, 'pattern');
+          p.setAttribute('id', id);
+          p.setAttribute('patternUnits', 'userSpaceOnUse');
+          p.setAttribute('width', '6');
+          p.setAttribute('height', '6');
+          var c = document.createElementNS(NS, 'circle');
+          c.setAttribute('cx', '3'); c.setAttribute('cy', '3'); c.setAttribute('r', '1.5');
+          c.setAttribute('fill', color);
+          p.appendChild(c);
+          defs.appendChild(p);
+          patCache[key] = id;
+          return id;
+        }
+        var paths = svg.querySelectorAll('path');
+        Array.prototype.forEach.call(paths, function(pth){
+          var color = getComputedStyle(pth).fill;          // 'rgb(r, g, b)'
+          if (!color || color === 'none') return;
+          pth.style.fill = 'url(#' + patternFor(color) + ')';
+        });
+      }
+    } catch (e) { /* keep solid fills if dot pass fails */ }
   }).catch(function(){ /* map stays empty if data unavailable */ });
 })();
 </script>
