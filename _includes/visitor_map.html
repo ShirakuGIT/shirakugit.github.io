@@ -42,8 +42,7 @@
       var b = Math.round(GLO[2] + (GHI[2] - GLO[2]) * t);
       return '#' + hex(r) + hex(g) + hex(b);
     }
-    var colorValues = {};
-    codes.forEach(function(c){ colorValues[c] = greenFor(counts[c]); });
+    var BASE = '#403a31';   // empty-country dot colour
 
     var map = new jsVectorMap({
       selector: '#worldmap',
@@ -61,13 +60,6 @@
         initial:  { fill: '#403a31', stroke: 'none', fillOpacity: 1 },
         hover:    { fillOpacity: 1, fill: '#e89a5c' }
       },
-      // only countries with visitors get colored — explicit green hex per country
-      series: {
-        regions: [{
-          attribute: 'fill',
-          values: colorValues
-        }]
-      },
       onRegionTooltipShow: function(event, tooltip, code){
         var n = counts[code] || 0;
         var name = tooltip.text();
@@ -80,41 +72,43 @@
     });
 
     // --- Dot-matrix render -------------------------------------------------
-    // Convert every solid region fill into a pattern of small dots of that same
-    // colour, so the whole map reads as a dot matrix. Patterns live in the map's
-    // user space, so they scale/pan together with the regions on zoom.
-    try {
+    // Give every region a fill made of small dots (green for visitor countries,
+    // faint base colour otherwise). Colour is keyed off each path's data-code,
+    // so we don't depend on jsVectorMap's series engine (which didn't paint here)
+    // or on getComputedStyle (empty before first layout). Patterns live in the
+    // map's user space, so the dots scale/pan with the map on zoom.
+    var NS = 'http://www.w3.org/2000/svg';
+    function paintDots(){
       var svg = el.querySelector('svg');
-      if (svg) {
-        var NS = 'http://www.w3.org/2000/svg';
-        var defs = svg.querySelector('defs');
-        if (!defs) { defs = document.createElementNS(NS, 'defs'); svg.insertBefore(defs, svg.firstChild); }
-        var patCache = {};
-        function patternFor(color){
-          var key = String(color);
-          if (patCache[key]) return patCache[key];
-          var id = 'dot-' + key.replace(/[^a-z0-9]/gi, '');
-          var p = document.createElementNS(NS, 'pattern');
-          p.setAttribute('id', id);
-          p.setAttribute('patternUnits', 'userSpaceOnUse');
-          p.setAttribute('width', '6');
-          p.setAttribute('height', '6');
-          var c = document.createElementNS(NS, 'circle');
-          c.setAttribute('cx', '3'); c.setAttribute('cy', '3'); c.setAttribute('r', '1.5');
-          c.setAttribute('fill', color);
-          p.appendChild(c);
-          defs.appendChild(p);
-          patCache[key] = id;
-          return id;
-        }
-        var paths = svg.querySelectorAll('path');
-        Array.prototype.forEach.call(paths, function(pth){
-          var color = getComputedStyle(pth).fill;          // 'rgb(r, g, b)'
-          if (!color || color === 'none') return;
-          pth.style.fill = 'url(#' + patternFor(color) + ')';
-        });
+      var paths = svg && svg.querySelectorAll('path[data-code]');
+      if (!paths || !paths.length){ return requestAnimationFrame(paintDots); }
+
+      var defs = svg.querySelector('defs');
+      if (!defs){ defs = document.createElementNS(NS, 'defs'); svg.insertBefore(defs, svg.firstChild); }
+
+      var patCache = {};
+      function patternFor(color){
+        if (patCache[color]) return patCache[color];
+        var id = 'dot-' + color.replace(/[^a-z0-9]/gi, '');
+        var p = document.createElementNS(NS, 'pattern');
+        p.setAttribute('id', id);
+        p.setAttribute('patternUnits', 'userSpaceOnUse');
+        p.setAttribute('width', '6'); p.setAttribute('height', '6');
+        var c = document.createElementNS(NS, 'circle');
+        c.setAttribute('cx', '3'); c.setAttribute('cy', '3'); c.setAttribute('r', '1.5');
+        c.setAttribute('fill', color);
+        p.appendChild(c); defs.appendChild(p);
+        patCache[color] = id;
+        return id;
       }
-    } catch (e) { /* keep solid fills if dot pass fails */ }
+
+      Array.prototype.forEach.call(paths, function(pth){
+        var code = pth.getAttribute('data-code');
+        var color = (counts[code] > 0) ? greenFor(counts[code]) : BASE;
+        pth.setAttribute('fill', 'url(#' + patternFor(color) + ')');
+      });
+    }
+    requestAnimationFrame(paintDots);
   }).catch(function(){ /* map stays empty if data unavailable */ });
 })();
 </script>
