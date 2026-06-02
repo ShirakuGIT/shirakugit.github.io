@@ -1,0 +1,210 @@
+<div class="nav-search" id="nav-search">
+  <i class="fa-solid fa-magnifying-glass search-icon" aria-hidden="true"></i>
+  <input type="search" id="search-input" placeholder="Search…" autocomplete="off"
+         role="combobox" aria-expanded="false" aria-controls="search-results" aria-label="Search site">
+  <div class="search-panel" id="search-panel">
+    <div class="search-count" id="search-count"></div>
+    <ul id="search-results" class="search-results" role="listbox"></ul>
+  </div>
+</div>
+<script>
+(function(){
+  var input   = document.getElementById('search-input');
+  var panel   = document.getElementById('search-panel');
+  var listEl  = document.getElementById('search-results');
+  var countEl = document.getElementById('search-count');
+  var wrap    = document.getElementById('nav-search');
+  var docs = null, active = -1, current = [];
+  var indexUrl = '{{ "/search.json" | relative_url }}';
+
+  // strip stray liquid / html / markdown so indexed + shown text is plain prose
+  function clean(s){
+    return (s||'')
+      .replace(/\{[%{][\s\S]*?[%}]\}/g, ' ')      // liquid tags / output braces
+      .replace(/\{[%{][\s\S]*$/g, ' ')            // dangling (truncated) liquid
+      .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')    // markdown links -> text
+      .replace(/<[^>]*>/g, ' ')                   // real html tags
+      .replace(/&lt;[^&]*?&gt;/g, ' ')            // escaped html tags
+      .replace(/\b[a-z-]+=("|&quot;)[^"]*?("|&quot;)/gi, ' ') // leftover attr="..."
+      .replace(/&[a-z]+;/gi, ' ')                 // html entities
+      .replace(/[#>*`~|_]{1,}/g, ' ')             // markdown punctuation
+      .replace(/[\u00a0\u200b\u2009\u202f]/g, ' ') // nbsp / thin / zero-width
+      .replace(/\s+/g, ' ').trim();
+  }
+  // lowercase + drop punctuation so "I'm", "SLAM!", "task-motion" all match
+  function norm(s){ return (s||'').toLowerCase().replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim(); }
+  function terms(q){ return norm(q).split(' ').filter(function(t){ return t.length>1; }); }
+
+  // --- n-gram (trigram) helpers for typo tolerance ---
+  function trigrams(s){            // padded trigram set of a token
+    s = '  ' + s + '  ';
+    var g = {};
+    for(var i=0; i<s.length-2; i++) g[s.substr(i,3)] = 1;
+    return g;
+  }
+  function dice(a, b){             // Dice coefficient of two trigram sets (0..1)
+    var inter = 0, na = 0, nb = 0, k;
+    for(k in a){ na++; if(b[k]) inter++; }
+    for(k in b){ nb++; }
+    return (na+nb) ? (2*inter)/(na+nb) : 0;
+  }
+  // index a field into unique tokens + their trigram sets (prefix + n-gram index)
+  function fieldIndex(text, weight){
+    var seen = {}, toks = [], tri = [], parts = norm(text).split(' ');
+    for(var i=0;i<parts.length;i++){
+      var p = parts[i];
+      if(p.length>1 && !seen[p]){ seen[p]=1; toks.push(p); tri.push(trigrams(p)); }
+    }
+    return { w: weight, text: norm(text), toks: toks, tri: tri };
+  }
+
+  function load(){
+    if(docs) return Promise.resolve();
+    return fetch(indexUrl).then(function(r){ return r.json(); }).then(function(json){
+      docs = json.map(function(it){
+        var content = clean(it.content);
+        return {
+          title: it.title, url: it.url, type: it.type, date: it.date,
+          tags: it.tags, category: it.category, content: content,
+          fields: [
+            fieldIndex(it.title, 6),
+            fieldIndex((it.tags||'') + ' ' + (it.category||''), 3),
+            fieldIndex(content, 1)
+          ],
+          nt: norm(it.title), nc: norm(content)
+        };
+      });
+    });
+  }
+
+  // best match tier of query term `t` inside one field: exact > prefix > substring > fuzzy
+  function fieldTier(f, t, qtri){
+    var tier = 0;
+    for(var i=0;i<f.toks.length;i++){
+      var tok = f.toks[i];
+      if(tok === t) return 1;                          // exact word — can't beat
+      if(tok.indexOf(t) === 0){ if(tier<0.85) tier=0.85; }      // prefix (as-you-type)
+      else if(tok.indexOf(t) > -1){ if(tier<0.6) tier=0.6; }    // substring
+    }
+    if(tier < 0.85 && t.length >= 3){                  // n-gram fuzzy (typo tolerance)
+      for(var j=0;j<f.tri.length;j++){
+        var d = dice(qtri, f.tri[j]);
+        if(d >= 0.5){ var ft = 0.5*d; if(ft>tier) tier=ft; }
+      }
+    }
+    return tier;
+  }
+
+  // every query term must match some field (exact/prefix/substring/fuzzy); sum weighted best
+  function search(q){
+    var ts = terms(q);
+    if(!ts.length || !docs) return [];
+    var nq = norm(q), out = [];
+    var qtri = ts.map(trigrams);
+    docs.forEach(function(d){
+      var score = 0, all = true;
+      for(var i=0;i<ts.length;i++){
+        var best = 0;
+        for(var f=0; f<d.fields.length; f++){
+          var tier = fieldTier(d.fields[f], ts[i], qtri[i]);
+          var s = d.fields[f].w * tier;
+          if(s > best) best = s;
+        }
+        if(best === 0){ all = false; break; }
+        score += best;
+      }
+      if(!all) return;
+      if(nq && d.nt.indexOf(nq) > -1) score += 12;   // whole phrase in title
+      if(nq && d.nc.indexOf(nq) > -1) score += 4;    // whole phrase in body
+      out.push({ item: d, score: score });
+    });
+    out.sort(function(a,b){ return b.score - a.score; });
+    return out;
+  }
+
+  function esc(s){ return (s||'').replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function highlight(text, ts){
+    var out = esc(text);
+    ts.forEach(function(t){
+      var re = new RegExp('('+t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig');
+      out = out.replace(re, '<mark>$1</mark>');
+    });
+    return out;
+  }
+  function snippet(content, ts){
+    if(!content) return '';
+    var lc = content.toLowerCase(), pos = -1;
+    for(var i=0;i<ts.length;i++){ var p = lc.indexOf(ts[i]); if(p>-1 && (pos<0||p<pos)) pos = p; }
+    var start = pos>60 ? pos-60 : 0;
+    var slice = content.slice(start, start+170);
+    if(start>0) slice = '… '+slice;
+    if(start+170 < content.length) slice = slice+' …';
+    return highlight(slice, ts);
+  }
+  function icon(type){
+    return type==='post'
+      ? '<i class="fa-solid fa-pen-nib sr-icon"></i>'
+      : '<i class="fa-regular fa-file-lines sr-icon"></i>';
+  }
+  function render(results, q){
+    var ts = terms(q);
+    current = results.slice(0, 8);
+    if(!current.length){
+      countEl.textContent = '';
+      listEl.innerHTML = '<li class="search-empty">No results for “'+esc(q)+'”</li>';
+      panel.classList.add('open'); input.setAttribute('aria-expanded','true'); return;
+    }
+    countEl.textContent = current.length + (current.length===1?' result':' results');
+    listEl.innerHTML = current.map(function(r, i){
+      var it = r.item;
+      var meta = it.type==='post' ? (it.date || 'Blog post') : 'Page';
+      if(it.tags) meta += ' · ' + esc(it.tags);
+      var snip = snippet(it.content, ts);
+      return '<li role="option" data-i="'+i+'" class="sr-item">'+
+               '<a href="'+it.url+'">'+
+                 '<div class="sr-head">'+icon(it.type)+
+                   '<span class="sr-title">'+highlight(it.title, ts)+'</span>'+
+                   '<span class="sr-badge">'+(it.type==='post'?'Blog':'Page')+'</span>'+
+                 '</div>'+
+                 (snip ? '<div class="sr-snippet">'+snip+'</div>' : '')+
+                 '<div class="sr-meta">'+meta+'</div>'+
+               '</a></li>';
+    }).join('');
+    active = -1;
+    panel.classList.add('open'); input.setAttribute('aria-expanded','true');
+  }
+  function close(){ panel.classList.remove('open'); input.setAttribute('aria-expanded','false'); active = -1; }
+  function setActive(n){
+    var items = listEl.querySelectorAll('.sr-item');
+    if(!items.length) return;
+    if(active>-1 && items[active]) items[active].classList.remove('active');
+    active = (n+items.length)%items.length;
+    items[active].classList.add('active');
+    items[active].scrollIntoView({block:'nearest'});
+  }
+
+  if(input){
+    input.addEventListener('input', function(){
+      var raw = input.value.trim();
+      if(norm(raw).length < 2){ close(); listEl.innerHTML=''; countEl.textContent=''; return; }
+      load().then(function(){
+        if(input.value.trim() !== raw) return;   // ignore stale async result
+        render(search(raw), raw);
+      });
+    });
+    input.addEventListener('focus', load);
+    input.addEventListener('keydown', function(e){
+      if(e.key==='ArrowDown'){ e.preventDefault(); setActive(active+1); }
+      else if(e.key==='ArrowUp'){ e.preventDefault(); setActive(active-1); }
+      else if(e.key==='Enter'){
+        var items = listEl.querySelectorAll('.sr-item a');
+        if(active>-1 && items[active]){ window.location = items[active].getAttribute('href'); }
+        else if(items[0]){ window.location = items[0].getAttribute('href'); }
+      }
+      else if(e.key==='Escape'){ close(); input.blur(); }
+    });
+    document.addEventListener('click', function(e){ if(wrap && !wrap.contains(e.target)) close(); });
+  }
+})();
+</script>

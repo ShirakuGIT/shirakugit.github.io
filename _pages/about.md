@@ -1,92 +1,35 @@
 ---
-
 title: "About"
 layout: gridlay
 sitemap: false
 permalink: /about/
 ---
 
-## About
-
 {% for member in site.data.pi %}
-
-<div class="jumbotron">
-<div class="row">
-<div class="col-sm-4">
-  <img src="{{ site.url }}{{ site.baseurl }}/images/{{ member.photo }}" width="100%" style="max-width:250px"/>
+<div class="profile-head" markdown="0">
+  <img class="profile-pic profile-pic-lg" src="{{ site.url }}{{ site.baseurl }}/images/{{ member.photo }}" alt="{{ member.name }}"/>
+  <div class="profile-meta">
+    <h3 class="profile-name">{{ member.name }}</h3>
+    <p class="profile-role">{{ member.info }}</p>
+    {% include social.html member=member size="2" %}
+  </div>
 </div>
-<div class="col-sm-8 col-xs-12">
-  <h3>{{ member.name }}</h3>
-  <h4><i>{{ member.info }}</i></h4>
-  {% if member.email %}<a href="mailto:{{ member.email }}" target="_blank"><i class="fa fa-envelope-square fa-3x"></i></a>{% endif %}
-  {% if member.cv %}<a href="{{ site.url }}{{ site.baseurl }}/{{ member.cv }}" target="_blank"><i class="ai ai-cv-square ai-3x"></i></a>{% endif %}
-  {% if member.scholar %}<a href="{{ member.scholar }}" target="_blank"><i class="ai ai-google-scholar-square ai-3x"></i></a>{% endif %}
-  {% if member.github %}<a href="{{ member.github }}" target="_blank"><i class="fa fa-github-square fa-3x"></i></a>{% endif %}
-  {% if member.researchgate %}<a href="{{ member.researchgate }}" target="_blank"><i class="ai ai-researchgate-square ai-3x"></i></a>{% endif %}
-
-  <ul style="overflow: hidden">
-    {% for education in member.education %}
-      <li>{{ education | replace: "-","&#8211;" }}</li>
-    {% endfor %}
-  </ul>
-
-</div>
-</div>
-</div>
-
 {% endfor %}
 
-<div class="jumbotron">
-<h3>Biography</h3>
-
-<p>
-I am an undergraduate student in Information Technology at the Manipal Institute of Technology, expected to graduate in 2026. My work focuses on robotics and autonomous systems, with an emphasis on motion planning, SLAM, sensor fusion, and machine learning methods for robotic perception and control.
-</p>
-
-<p>
-I am currently a researcher with the Algorithmic Robotics Group at Nanyang Technological University in Singapore, where I work on general-purpose task and motion planning algorithms for robotic manipulation under the supervision of Dr. Yoonchang Sung. My research explores algorithmic approaches to constrained planning problems, including the Minimum Constraint Removal formulation, and investigates how learning-based priors such as graph neural networks can accelerate search and improve planning efficiency in complex environments.
-</p>
-
-<p>
-Previously, I have worked on several robotics and autonomous systems projects across both research laboratories and industry. My work includes developing multi-sensor fusion pipelines for autonomous navigation, designing SLAM systems for mobile robots, and building robotic manipulation platforms using ROS2. I have also worked on perception and localization systems for industrial autonomous mobile robots, focusing on robust localization under sensor failure and noisy environments.
-</p>
-
-<p>
-More broadly, I am interested in building reliable and scalable robotic systems that integrate classical robotics algorithms with modern machine learning techniques. My goal is to develop autonomous systems capable of robust perception, planning, and interaction in real-world environments.
-</p>
-
+<div class="logos-band">
+<p class="logos-label">Experience</p>
+{% include logos.html %}
 </div>
 
-<div class="jumbotron">
-<h3>Research Interests</h3>
-<ul>
-<li>Task and Motion Planning</li>
-<li>SLAM and Sensor Fusion</li>
-<li>Machine Learning for Robotics</li>
-<li>Reinforcement Learning</li>
-<li>Embodied Learning</li>
-<li>Perception</li>
-</ul>
-</div>
+<div class="prose">
+<p class="about-lede">I'm a roboticist working at the intersection of classical planning and machine learning — building systems that perceive, plan, and act reliably in the real world.</p>
 
-<div class="jumbotron">
-<h3>Selected Projects</h3>
-<ul>
+<p>At the <a href="https://algrobogroup.github.io/" target="_blank" rel="noopener">Algorithmic Robotics Group</a>, NTU, I work on general-purpose task &amp; motion planning for manipulation under <a href="https://yoonchangsung.com/" target="_blank" rel="noopener">Dr.&nbsp;Yoonchang Sung</a> — the Minimum Constraint Removal problem and learning-based priors that speed up planning in cluttered scenes. Before that I built multi-sensor fusion and SLAM pipelines for autonomous navigation, and perception/localization for industrial mobile robots robust to sensor failure.</p>
 
-<li>
-<strong>Adaptive Teleoperation Middleware for Humanoid Manipulation</strong><br>
-Developed a ROS2-based teleoperation framework enabling full-body humanoid control using real-time human pose tracking and inverse kinematics across multiple kinematic chains. The system supports multi-threaded execution with real-time trajectory control and visual monitoring.
-</li>
-
-<li>
-<strong>Vision-Based Autonomous Quadcopter Navigation</strong><br>
-Designed a vision-only autonomous flight system using LQR control and Kalman filtering for stable trajectory tracking. The system achieves approximately ±0.1 m positional accuracy without relying on IMU or odometry sensors.
-</li>
-
-<li>
-<strong>Autonomous Mobile Manipulation Platform</strong><br>
-Built a mobile manipulation system integrating the ROS2 navigation stack with a custom 6-DOF robotic arm. The system combines LiDAR, RGB-D, and IMU sensing with reinforcement learning-based grasping strategies.
-</li>
-
+<h3>Selected work</h3>
+<ul class="about-work">
+<li><strong>Adaptive teleoperation for humanoid manipulation</strong> — ROS2 framework for full-body control via real-time pose tracking and multi-chain inverse kinematics.</li>
+<li><strong>Vision-only quadcopter navigation</strong> — LQR + Kalman filtering for stable tracking to ≈±0.1&nbsp;m without IMU or odometry.</li>
+<li><strong>Autonomous mobile manipulation</strong> — ROS2 nav stack + custom 6-DOF arm fusing LiDAR, RGB-D, and IMU with RL-based grasping.</li>
 </ul>
 </div>

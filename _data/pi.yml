@@ -1,11 +1,13 @@
 - name: Shivaram Kumar Jagannathan
   photo: headshot.jpg
   info: Researcher, Nanyang Technological University
-  #github: https://github.com/ShirakuGIT
-  cv: cv/CV_ShivaramKumar.pdf
+  github: https://github.com/ShirakuGIT
+  cv: cv/Curriculum_Vitae.pdf
   email: shivaram.jagannathan@outlook.com
+  scholar: https://scholar.google.com/citations?user=geKWO64AAAAJ&hl=en
+  twitter: https://x.com/shirakuex
+  linkedin: https://www.linkedin.com/in/shivaramkumarj/
   #researchgate: https://www.researchgate.net/
-  #scholar: https://scholar.google.com/citations?user=B7vSqZsAAAAJ
   # Change the items in "education" you have (up to 6)
   education:
     [

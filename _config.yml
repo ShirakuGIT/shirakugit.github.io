@@ -1,9 +1,38 @@
 # Site settings
 title: Shivaram Kumar Jagannathan
 email: shivaram.jagannathan@outlook.com
-description: Academic webpage of Shivaram!
+description: >-
+  Shivaram Kumar Jagannathan — robotics researcher at NTU Singapore (Algorithmic
+  Robotics Group). Work on task & motion planning, SLAM, sensor fusion, and machine
+  learning for robotics.
 baseurl: ""
-url: ""
+# Canonical production URL (jekyll serve overrides this with localhost during preview).
+url: "https://shivaram.net"
+lang: en
+
+# SEO / structured data
+author:
+  name: Shivaram Kumar Jagannathan
+  email: shivaram.jagannathan@outlook.com
+twitter:
+  username: shirakuex
+  card: summary_large_image
+social:
+  name: Shivaram Kumar Jagannathan
+  links:
+    - https://scholar.google.com/citations?user=geKWO64AAAAJ&hl=en
+    - https://github.com/ShirakuGIT
+    - https://www.linkedin.com/in/shivaramkumarj/
+    - https://x.com/shirakuex
+# Default share image for Open Graph / Twitter cards
+logo: /images/headshot.jpg
+defaults:
+  - scope: { path: "" }
+    values:
+      image: /images/headshot.jpg
+
+# Calendly popup booking. Leave blank to hide the "Book a meeting" button.
+calendly: "https://calendly.com/shiraku-official"
 
 # Google analytics ID: Uncomment and your own, if you like
 # google_analytics: XX
@@ -21,14 +50,19 @@ location: >
   Singapore 639798<br/>
 
 contact: >
-  <a href="mailto:shivaram.jagannathan@outlook.com" target="_blank"><i class="fa fa-envelope fa-1x"></i> Contact Shiva via email</a> <br/>
-  <a href="https://github.com/sbryngelson/academic-website-template"><i class="fa fa-github fa-1x"></i> Use this site as a template!</a>
+  <a href="mailto:shivaram.jagannathan@outlook.com" target="_blank"><i class="fa-regular fa-envelope"></i> Email</a> <br/>
+  <a href="https://scholar.google.com/citations?user=geKWO64AAAAJ&hl=en" target="_blank" rel="noopener"><i class="ai ai-google-scholar"></i> Google Scholar</a> <br/>
+  <a href="https://github.com/ShirakuGIT" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a> <br/>
+  <a href="https://www.linkedin.com/in/shivaramkumarj/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a> <br/>
+  <a href="https://x.com/shirakuex" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i> X (Twitter)</a> <br/>
+  <a href="/feed.xml"><i class="fa-solid fa-rss"></i> RSS feed</a>
 
 # Pages shown in navbar
 nav_pages:
   - name: about
-  - name: publications
+  - name: projects
   - name: research
+  - name: blogs
 
 include:
   - .htaccess
@@ -53,7 +87,11 @@ kramdown:
   enable_coderay: false
   parse_block_html: true # default for kramdown is false. This will enable using Markdown links
 
-plugins: ["jekyll/scholar"]
+plugins:
+  - jekyll/scholar
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
 
 scholar:
   last_name: Doe

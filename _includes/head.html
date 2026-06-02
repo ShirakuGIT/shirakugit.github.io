@@ -3,13 +3,59 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>{% if page.title %}{{ page.title | escape }} - {{ site.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
-  <meta name="description" content="{{ site.description }}">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+  <!-- SEO: meta, Open Graph, Twitter cards, JSON-LD (jekyll-seo-tag) -->
+  {% seo %}
+  <!-- Reinforce the headshot as the share/preview image across engines -->
+  <meta property="og:image:width" content="2048">
+  <meta property="og:image:height" content="2048">
+  <meta property="og:image:alt" content="Shivaram Kumar Jagannathan">
+  <meta name="twitter:image:alt" content="Shivaram Kumar Jagannathan">
+  <!-- RSS feed discovery (jekyll-feed) -->
+  {% feed_meta %}
+
   <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
-  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
-  <link rel="shortcut icon" type ="image/x-icon" href="{{ site.url }}{{ site.baseurl }}/bnw.ico">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ site.url }}{{ site.baseurl }}/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ site.url }}{{ site.baseurl }}/images/favicon-16.png">
+  <link rel="shortcut icon" type="image/x-icon" href="{{ site.url }}{{ site.baseurl }}/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ site.url }}{{ site.baseurl }}/images/apple-touch-icon.png">
+  <meta name="theme-color" content="#201f1c">
+
+  <!-- Person structured data for richer search / AI entity understanding -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Shivaram Kumar Jagannathan",
+    "alternateName": "Shivaram Kumar",
+    "url": "{{ site.url }}{{ site.baseurl }}/",
+    "image": "{{ site.url }}{{ site.baseurl }}/images/headshot.jpg",
+    "jobTitle": "Robotics Researcher",
+    "description": "Undergraduate researcher in robotics and autonomous systems — task & motion planning, SLAM, sensor fusion, and machine learning for robotics.",
+    "affiliation": [
+      { "@type": "Organization", "name": "Nanyang Technological University" },
+      { "@type": "CollegeOrUniversity", "name": "Manipal Institute of Technology" }
+    ],
+    "knowsAbout": ["Robotics", "Task and Motion Planning", "SLAM", "Sensor Fusion", "Machine Learning", "Graph Neural Networks", "Computer Vision"],
+    "sameAs": [
+      "https://scholar.google.com/citations?user=geKWO64AAAAJ&hl=en",
+      "https://github.com/ShirakuGIT",
+      "https://www.linkedin.com/in/shivaramkumarj/",
+      "https://x.com/shirakuex"
+    ]
+  }
+  </script>
+  <!-- Modern icon sets: Font Awesome 6 (+ v4 shim for legacy classes) and Academicons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/v4-shims.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1.9.4/css/academicons.min.css">
+
+  {% if site.calendly and site.calendly != "" %}
+  <!-- Calendly popup widget -->
+  <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css">
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  {% endif %}
 
   <link rel="preconnect" href="https://player.vimeo.com">
   <link rel="preconnect" href="https://i.vimeocdn.com">

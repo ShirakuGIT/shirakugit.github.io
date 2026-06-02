@@ -1,0 +1,9 @@
+{%- comment -%}
+  Responsive video embed. One of:
+    {% include video.html youtube="VIDEO_ID" %}
+    {% include video.html vimeo="VIDEO_ID" %}
+    {% include video.html src="/videos/clip.mp4" %}
+  Optional: caption="...", width="80%"
+  Output is a single physical line so kramdown passes the <figure> through verbatim.
+{%- endcomment -%}
+{::nomarkdown}<figure class="post-video"{% if include.width %} style="max-width: {{ include.width }}"{% endif %}>{% if include.youtube %}<div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/{{ include.youtube }}" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>{% elsif include.vimeo %}<div class="video-embed"><iframe src="https://player.vimeo.com/video/{{ include.vimeo }}" title="Vimeo video" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>{% elsif include.src %}{% assign vsrc = include.src %}{% unless vsrc contains "://" %}{% assign vsrc = vsrc | prepend: site.baseurl | prepend: site.url %}{% endunless %}<video controls playsinline preload="metadata" style="width:100%"><source src="{{ vsrc }}" type="video/mp4">Your browser does not support the video tag.</video>{% endif %}{% if include.caption %}<figcaption>{{ include.caption }}</figcaption>{% endif %}</figure>{:/nomarkdown}

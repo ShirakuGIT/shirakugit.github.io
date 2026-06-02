@@ -1,0 +1,4 @@
+{%- comment -%} Renders a "Book a meeting" button only if site.calendly is set. {%- endcomment -%}
+{% if site.calendly and site.calendly != "" %}
+<div class="calendly-cta" markdown="0"><a href="#" class="btn-book" onclick="Calendly.initPopupWidget({url: '{{ site.calendly }}'}); return false;"><i class="fa-regular fa-calendar-check"></i>&nbsp;Book a meeting</a></div>
+{% endif %}

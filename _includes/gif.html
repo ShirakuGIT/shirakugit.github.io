@@ -1,0 +1,7 @@
+{%- comment -%}
+  GIF or looping clip.
+    {% include gif.html src="/images/demo.gif" caption="..." %}
+    {% include gif.html mp4="/images/demo.mp4" caption="..." %}   (lighter than a GIF)
+  Output is a single physical line so kramdown passes the <figure> through verbatim.
+{%- endcomment -%}
+{::nomarkdown}<figure class="post-gif"{% if include.width %} style="max-width: {{ include.width }}"{% endif %}>{% if include.mp4 %}{% assign gsrc = include.mp4 %}{% unless gsrc contains "://" %}{% assign gsrc = gsrc | prepend: site.baseurl | prepend: site.url %}{% endunless %}<video autoplay loop muted playsinline preload="auto" style="width:100%"><source src="{{ gsrc }}" type="video/mp4"></video>{% else %}{% assign gsrc = include.src %}{% unless gsrc contains "://" %}{% assign gsrc = gsrc | prepend: site.baseurl | prepend: site.url %}{% endunless %}<img src="{{ gsrc }}" alt="{{ include.alt | default: include.caption }}" loading="lazy" />{% endif %}{% if include.caption %}<figcaption>{{ include.caption }}</figcaption>{% endif %}</figure>{:/nomarkdown}

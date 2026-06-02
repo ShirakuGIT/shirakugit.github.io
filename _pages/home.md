@@ -5,19 +5,11 @@ sitemap: false
 permalink: /
 ---
 
-### Welcome
+<div class="hero">
+<h1 class="hero-name">Shivaram Kumar Jagannathan</h1>
+<p class="hero-role">Robotics researcher · <a href="https://algrobogroup.github.io/" target="_blank" rel="noopener">Algorithmic Robotics Group</a>, NTU Singapore</p>
 
-I am Shivaram Kumar Jagannathan, an undergraduate researcher in robotics and autonomous systems. I am currently studying Information Technology at the Manipal Institute of Technology and working with the Algorithmic Robotics Group at Nanyang Technological University.
+<p class="hero-lede">I build autonomous systems that perceive, plan, and act reliably in the real world — spanning task &amp; motion planning, SLAM, sensor fusion, and machine learning for robotics, where classical algorithms meet learned priors.</p>
 
-My research focuses on robot motion planning, SLAM, sensor fusion, and machine learning for robotics, with the goal of building autonomous systems capable of robust perception and decision-making in real-world environments.
-
-Research Interests
-
-- Robotics and Autonomous Systems
-- Task and Motion Planning
-- SLAM and Sensor Fusion
-- Machine Learning for Robotics
-- Graph Neural Networks
-- Vision & Perception
-
-For more information about my work, see the Research and Publications pages, which I will update soon!
+<p class="hero-body">Right now I'm working on general-purpose task &amp; motion planning for robotic manipulation under <a href="https://yoonchangsung.com/" target="_blank" rel="noopener">Dr.&nbsp;Yoonchang Sung</a> — including the Minimum Constraint Removal problem and learning-based priors that make planning faster in cluttered, real-world scenes.</p>
+</div>

@@ -1,0 +1,39 @@
+name: Update visitor map
+
+on:
+  schedule:
+    - cron: '17 4 * * *'   # daily, 04:17 UTC
+  workflow_dispatch:         # manual run button
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Fetch per-country human visits from Cloudflare RUM
+        env:
+          CF_API_TOKEN:  ${{ secrets.CF_API_TOKEN }}   # the only real secret
+          CF_ACCOUNT_ID: '923e914b361aac00ff4b58c2f547a0ff'
+          CF_SITE_TAG:   '5db3c939217d4970be2eee734c4cb0e6'
+          CF_DAYS: '30'
+        run: python3 scripts/fetch_visits.py
+
+      - name: Commit if changed
+        run: |
+          if ! git diff --quiet -- assets/visits.json; then
+            git config user.name  "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add assets/visits.json
+            git commit -m "chore: refresh visitor map data"
+            git push
+          else
+            echo "visits.json unchanged"
+          fi

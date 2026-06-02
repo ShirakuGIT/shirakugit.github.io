@@ -1,0 +1,11 @@
+{%- comment -%}
+  Modern social/contact icons. Usage:
+    {% include social.html member=member %}        (default size 2)
+    {% include social.html member=member size="3" %}
+  Emitted as a SINGLE physical line so kramdown (parse_block_html:true) passes the
+  whole <div> through verbatim — works in both markdown (about/team) and HTML
+  (sidebar) contexts. Centering is inherited from a parent <center>.
+{%- endcomment -%}
+{%- assign m = include.member -%}
+{%- assign s = include.size | default: "2" -%}
+<div class="social-icons" markdown="0">{% if m.website %}<a href="{{ m.website }}" target="_blank" rel="noopener" aria-label="Website" title="Website"><i class="fa-solid fa-house fa-{{ s }}x"></i></a>{% endif %}{% if m.email %}<a href="mailto:{{ m.email }}" aria-label="Email" title="Email"><i class="fa-regular fa-envelope fa-{{ s }}x"></i></a>{% endif %}{% if m.scholar %}<a href="{{ m.scholar }}" target="_blank" rel="noopener" aria-label="Google Scholar" title="Google Scholar"><i class="ai ai-google-scholar ai-{{ s }}x"></i></a>{% endif %}{% if m.github %}<a href="{{ m.github }}" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><i class="fa-brands fa-github fa-{{ s }}x"></i></a>{% endif %}{% if m.twitter %}<a href="{{ m.twitter }}" target="_blank" rel="noopener" aria-label="X" title="X (Twitter)"><i class="fa-brands fa-x-twitter fa-{{ s }}x"></i></a>{% endif %}{% if m.linkedin %}<a href="{{ m.linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><i class="fa-brands fa-linkedin fa-{{ s }}x"></i></a>{% endif %}{% if m.researchgate %}<a href="{{ m.researchgate }}" target="_blank" rel="noopener" aria-label="ResearchGate" title="ResearchGate"><i class="fa-brands fa-researchgate fa-{{ s }}x"></i></a>{% endif %}{% if m.cv %}<a href="{{ site.url }}{{ site.baseurl }}/{{ m.cv }}" target="_blank" rel="noopener" aria-label="CV" title="CV"><i class="fa-regular fa-file-lines fa-{{ s }}x"></i></a>{% endif %}{% if site.calendly and site.calendly != "" %}<a href="{{ site.calendly }}" onclick="if(window.Calendly){Calendly.initPopupWidget({url:'{{ site.calendly }}'});return false;}" target="_blank" rel="noopener" aria-label="Book a meeting" title="Book a meeting"><i class="fa-regular fa-calendar-check fa-{{ s }}x"></i></a>{% endif %}</div>

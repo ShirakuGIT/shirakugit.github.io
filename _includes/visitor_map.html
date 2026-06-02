@@ -1,0 +1,60 @@
+<div class="visitor-map">
+  <p class="visitor-label">Where you're reading from</p>
+  <p class="visitor-total" id="visitor-total"></p>
+  <div class="visitor-frame">
+    <div id="worldmap"></div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/css/jsvectormap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/js/jsvectormap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/maps/world.min.js"></script>
+<script>
+(function(){
+  var el = document.getElementById('worldmap');
+  if(!el || typeof jsVectorMap === 'undefined') return;
+  var dataUrl = '{{ "/assets/visits.json" | relative_url }}';
+
+  fetch(dataUrl).then(function(r){ return r.json(); }).then(function(json){
+    var counts = (json && json.counts) || {};
+    var total = 0, codes = Object.keys(counts);
+    codes.forEach(function(c){ total += counts[c]; });
+
+    var totalEl = document.getElementById('visitor-total');
+    if(totalEl){
+      totalEl.textContent = total.toLocaleString() + ' visits · ' + codes.length + ' countries';
+    }
+
+    new jsVectorMap({
+      selector: '#worldmap',
+      map: 'world',
+      zoomButtons: false,
+      zoomOnScroll: false,
+      backgroundColor: 'transparent',
+      // base look: empty countries stay flat & ghosted, faint borders so the map reads
+      regionStyle: {
+        initial:  { fill: '#2b2823', stroke: '#4a443b', strokeWidth: 0.5, fillOpacity: 1 },
+        hover:    { fillOpacity: 1, fill: '#e89a5c' }
+      },
+      // only countries with visitors get colored — orange shades, brighter = more visits
+      series: {
+        regions: [{
+          attribute: 'fill',
+          scale: ['#bd5d34', '#e8a060'],
+          normalizeFunction: 'linear',
+          values: counts
+        }]
+      },
+      onRegionTooltipShow: function(event, tooltip, code){
+        var n = counts[code] || 0;
+        var name = tooltip.text();
+        if(n > 0){
+          tooltip.text(name + ' — ' + n.toLocaleString() + (n === 1 ? ' visit' : ' visits'), true);
+        } else {
+          tooltip.text(name + ' — no visits yet', true);
+        }
+      }
+    });
+  }).catch(function(){ /* map stays empty if data unavailable */ });
+})();
+</script>
