@@ -102,10 +102,20 @@
         return id;
       }
 
+      // Orange dot pattern used for the hover highlight (keeps the matrix look).
+      var hoverFill = 'url(#' + patternFor('#e89a5c') + ')';
+
       Array.prototype.forEach.call(paths, function(pth){
         var code = pth.getAttribute('data-code');
         var color = (counts[code] > 0) ? greenFor(counts[code]) : BASE;
-        pth.setAttribute('fill', 'url(#' + patternFor(color) + ')');
+        var restFill = 'url(#' + patternFor(color) + ')';
+        pth.setAttribute('fill', restFill);
+
+        // Own the hover. jsVectorMap caches each region's original (solid) fill at
+        // init and restores it on mouseout, which wipes the pattern. Our listeners
+        // are added after jsVectorMap's, so they win and keep everything dotted.
+        pth.addEventListener('mouseenter', function(){ pth.setAttribute('fill', hoverFill); });
+        pth.addEventListener('mouseleave', function(){ pth.setAttribute('fill', restFill); });
       });
     }
     requestAnimationFrame(paintDots);
