@@ -109,13 +109,14 @@
         var code = pth.getAttribute('data-code');
         var color = (counts[code] > 0) ? greenFor(counts[code]) : BASE;
         var restFill = 'url(#' + patternFor(color) + ')';
-        pth.setAttribute('fill', restFill);
 
-        // Own the hover. jsVectorMap caches each region's original (solid) fill at
-        // init and restores it on mouseout, which wipes the pattern. Our listeners
-        // are added after jsVectorMap's, so they win and keep everything dotted.
-        pth.addEventListener('mouseenter', function(){ pth.setAttribute('fill', hoverFill); });
-        pth.addEventListener('mouseleave', function(){ pth.setAttribute('fill', restFill); });
+        // Drive fill via INLINE STYLE. jsVectorMap manages fill through the SVG
+        // `fill` attribute (and restores a solid colour on mouseout). Inline style
+        // always beats a presentation attribute, so our dotted fill is never wiped
+        // — regardless of jsVectorMap's event handling. We own hover the same way.
+        pth.style.fill = restFill;
+        pth.addEventListener('mouseenter', function(){ pth.style.fill = hoverFill; });
+        pth.addEventListener('mouseleave', function(){ pth.style.fill = restFill; });
       });
     }
     requestAnimationFrame(paintDots);
