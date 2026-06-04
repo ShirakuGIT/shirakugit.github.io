@@ -418,7 +418,9 @@ h1, h2, h3 { letter-spacing: -0.01em; }
   font-size: .78rem; text-transform: uppercase; letter-spacing: .12em;
   color: $earth-muted; margin: 0 0 10px; font-weight: 700;
 }
-.hero-name { font-size: 2.25rem; line-height: 1.08; margin: 0 0 10px; letter-spacing: -0.02em; }
+.hero-name { font-size: 2.25rem; line-height: 1.08; margin: 0 0 6px; letter-spacing: -0.02em; }
+.hero-aka { font-size: .9rem; color: $earth-muted; margin: 0 0 14px; }
+.hero-aka strong { color: $earth-text; font-weight: 600; }
 .hero-role { font-size: 1.02rem; color: $earth-text; margin: 0 0 18px; }
 .hero-lede { font-size: 1.1rem; line-height: 1.6; color: #e2dbcd; margin: 0 0 16px; max-width: 36em; }
 .hero-body { font-size: 1rem; line-height: 1.62; color: #c8bfb0; margin: 0 0 8px; max-width: 38em; }
