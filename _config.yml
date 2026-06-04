@@ -26,10 +26,7 @@ social:
     - https://x.com/shirakuex
 # Default share image for Open Graph / Twitter cards
 logo: /images/headshot.jpg
-defaults:
-  - scope: { path: "" }
-    values:
-      image: /images/headshot.jpg
+# (defaults defined further below)
 
 # Calendly popup booking. Leave blank to hide the "Book a meeting" button.
 calendly: "https://calendly.com/shiraku-official"
@@ -63,6 +60,27 @@ nav_pages:
   - name: projects
   - name: research
   - name: blogs
+  - name: notes
+
+# Collections — personal notes garden
+collections:
+  notes:
+    output: true
+    permalink: /notes/:path/
+
+# Default front matter values
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /images/headshot.jpg
+  - scope:
+      path: ""
+      type: notes
+    values:
+      layout: note
+      category: misc
+      excerpt_separator: ""
 
 include:
   - .htaccess

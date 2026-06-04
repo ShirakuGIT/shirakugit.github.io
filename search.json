@@ -3,7 +3,7 @@ layout: null
 permalink: /search.json
 sitemap: false
 ---
-{%- assign items = site.posts | concat: site.pages -%}
+{%- assign items = site.posts | concat: site.pages | concat: site.notes -%}
 {%- assign sep = "" -%}
 [
 {%- for item in items -%}

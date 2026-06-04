@@ -46,3 +46,15 @@ def fuse(imu, lidar):
 ```
 
 Everything above is plain Markdown plus the `figure` / `video` / `gif` includes.
+
+## Jupyter notebooks
+
+Drop a `.ipynb` anywhere under `assets/notebooks/` and embed it inline:
+
+```liquid
+{% raw %}{% jupyter_notebook "/assets/notebooks/demo.ipynb" %}{% endraw %}
+```
+
+Renders at build time — markdown cells, syntax-highlighted code, stdout, errors, plots (PNG/SVG), HTML (dataframes), and LaTeX. Live example:
+
+{% jupyter_notebook "/assets/notebooks/demo.ipynb" %}

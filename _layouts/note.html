@@ -1,0 +1,30 @@
+---
+layout: default
+---
+{% assign cat = page.category | default: "misc" %}
+{% assign cat_label = cat | capitalize %}
+<article class="note" itemscope itemtype="http://schema.org/Article">
+
+  <header class="note-header">
+    <p class="note-back"><a href="{{ site.url }}{{ site.baseurl }}/notes/">← All notes</a></p>
+    <p class="note-meta-top">
+      <span class="note-category note-category-{{ cat }}">{{ cat_label }}</span>
+      {% if page.status %}<span class="note-status note-status-{{ page.status }}">{{ page.status | upcase }}</span>{% endif %}
+    </p>
+    <h1 class="note-title" itemprop="headline">{{ page.title }}</h1>
+    <p class="note-meta">
+      {% if page.updated %}
+        <i class="fa-regular fa-clock"></i> Updated <time datetime="{{ page.updated | date_to_xmlschema }}">{{ page.updated | date: "%b %-d, %Y" }}</time>
+      {% elsif page.date %}
+        <i class="fa-regular fa-calendar"></i> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d, %Y" }}</time>
+      {% endif %}
+      {% if page.source %} &nbsp;·&nbsp; <a href="{{ page.source }}" target="_blank" rel="noopener"><i class="fa-solid fa-up-right-from-square"></i> source</a>{% endif %}
+      {% if page.tags.size > 0 %}<br>{% for tag in page.tags %}<span class="post-tag">{{ tag }}</span>{% endfor %}{% endif %}
+    </p>
+  </header>
+
+  <div class="note-content" itemprop="articleBody">
+    {{ content }}
+  </div>
+
+</article>

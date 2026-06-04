@@ -563,4 +563,222 @@ footer, .container-footer { color: $earth-muted; }
   #newsid { margin-top: 8px; }
 }
 
+/* Notes garden — listing page */
+.notes-intro {
+  color: $earth-muted;
+  font-size: .95rem;
+  margin: 4px 0 18px;
+  max-width: 70ch;
+}
+.notes-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 22px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid $earth-line;
+}
+.notes-filter-btn {
+  background: transparent;
+  color: $earth-text;
+  border: 1px solid $earth-line;
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: .82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .12s ease;
+}
+.notes-filter-btn span { color: $earth-muted; margin-left: 4px; font-weight: 400; }
+.notes-filter-btn:hover { border-color: $earth-orange; color: $earth-orange-lt; }
+.notes-filter-btn.active {
+  background: $earth-orange;
+  border-color: $earth-orange-dk;
+  color: #fff;
+}
+.notes-filter-btn.active span { color: rgba(255,255,255,.75); }
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+.note-card {
+  border: 1px solid $earth-line;
+  border-radius: 8px;
+  padding: 14px 16px;
+  background: #181612;
+  transition: border-color .12s ease, transform .12s ease;
+}
+.note-card:hover { border-color: $earth-orange; transform: translateY(-1px); }
+.note-card-head {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.note-card-title { margin: 0 0 6px; font-size: 1.05rem; line-height: 1.3; }
+.note-card-title a { color: $earth-text; text-decoration: none; }
+.note-card-title a:hover { color: $earth-orange-lt; }
+.note-card-summary { color: $earth-muted; font-size: .88rem; margin: 0 0 10px; line-height: 1.45; }
+.note-card-meta { color: $earth-muted; font-size: .76rem; margin: 0; }
+
+/* Category badges — earthy palette, low-key */
+.note-category {
+  display: inline-block;
+  font-size: .68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  padding: 3px 8px;
+  border-radius: 4px;
+  color: #f4ede0;
+  background: $earth-green-dk;
+}
+.note-category-course   { background: #5d6b8c; }
+.note-category-paper    { background: $earth-orange-dk; }
+.note-category-book     { background: #7a5e3a; }
+.note-category-tutorial { background: $earth-green-dk; }
+.note-category-lab      { background: #6e4a5c; }
+.note-category-art      { background: #8a6230; }
+.note-category-misc     { background: #4a4a44; }
+
+.note-status {
+  display: inline-block;
+  font-size: .62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  padding: 3px 7px;
+  border-radius: 4px;
+  border: 1px solid $earth-line;
+  color: $earth-muted;
+  background: transparent;
+}
+.note-status-wip { color: $earth-orange-lt; border-color: $earth-orange-dk; }
+.note-status-done { color: $earth-green; border-color: $earth-green-dk; }
+.note-status-draft { color: $earth-muted; }
+
+/* Single-note page */
+.note { margin: 10px 0; }
+.note-back { font-size: .85rem; }
+.note-back a { color: $earth-muted; }
+.note-back a:hover { color: $earth-orange-lt; }
+.note-meta-top { margin: 4px 0 6px; display: flex; gap: 6px; flex-wrap: wrap; }
+.note-title { color: $earth-text; margin: 6px 0 8px; line-height: 1.2; }
+.note-meta { color: $earth-muted; font-size: .82rem; margin-bottom: 18px; }
+.note-content { color: $earth-text; }
+.note-content h2, .note-content h3, .note-content h4 {
+  color: $earth-text;
+  margin-top: 1.6rem;
+  border-bottom: 1px solid rgba(58,53,46,.4);
+  padding-bottom: 4px;
+}
+.note-content h3 { border-bottom: 0; }
+
+/* Jupyter notebook embed */
+.jupyter-notebook {
+  margin: 22px 0;
+  border: 1px solid $earth-line;
+  border-radius: 8px;
+  background: #181612;
+  font-size: .92rem;
+  overflow: hidden;
+}
+.jupyter-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 6px 12px;
+  background: #211e19;
+  border-bottom: 1px solid $earth-line;
+}
+.jupyter-download {
+  color: $earth-muted !important;
+  font-size: .8rem;
+  text-decoration: none;
+}
+.jupyter-download:hover { color: $earth-orange-lt !important; }
+.jupyter-cell { padding: 10px 14px; border-bottom: 1px solid rgba(58,53,46,.6); }
+.jupyter-cell:last-child { border-bottom: 0; }
+.jupyter-markdown { color: $earth-text; }
+.jupyter-markdown p { margin-bottom: .5rem; }
+.jupyter-markdown h1, .jupyter-markdown h2, .jupyter-markdown h3,
+.jupyter-markdown h4, .jupyter-markdown h5 { color: $earth-text; margin-top: .8rem; }
+.jupyter-code {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 6px 10px;
+  align-items: start;
+}
+.jupyter-noprompt {
+  grid-template-columns: 1fr;
+}
+.jupyter-noprompt .jupyter-output-block { grid-column: 1 / 2; }
+.jupyter-prompt {
+  color: $earth-orange;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .78rem;
+  padding-top: 8px;
+  text-align: right;
+  user-select: none;
+}
+.jupyter-prompt-out { color: $earth-green; }
+.jupyter-input pre.highlight,
+.jupyter-input code {
+  margin: 0;
+  background: #110f0c;
+  border: 1px solid $earth-line;
+  border-radius: 6px;
+  padding: 8px 10px;
+  overflow-x: auto;
+  color: $earth-text;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .85rem;
+  line-height: 1.45;
+}
+.jupyter-input pre.highlight code {
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+.jupyter-output-block {
+  grid-column: 2 / 3;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+}
+.jupyter-output {
+  margin: 0;
+  color: $earth-text;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .82rem;
+  line-height: 1.4;
+  background: #0f0d0a;
+  border-left: 3px solid $earth-green;
+  padding: 6px 10px;
+  border-radius: 0 4px 4px 0;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.jupyter-stderr,
+.jupyter-error-output { border-left-color: $earth-orange; color: #e0bda8; }
+.jupyter-image { background: transparent; border-left: 0; padding: 6px 0; }
+.jupyter-image img,
+.jupyter-image svg { max-width: 100%; height: auto; border-radius: 4px; }
+.jupyter-html { background: transparent; border-left: 0; padding: 4px 0; color: $earth-text; }
+.jupyter-html table { color: $earth-text; }
+.jupyter-html table th, .jupyter-html table td { border-color: $earth-line; padding: 4px 8px; }
+.jupyter-latex { background: transparent; border-left: 0; padding: 4px 0; }
+.jupyter-raw pre {
+  background: #110f0c; border: 1px solid $earth-line; border-radius: 6px;
+  padding: 8px 10px; color: $earth-muted; font-size: .82rem;
+}
+.jupyter-error { color: #e0bda8; padding: 14px; }
+
+@media (max-width: 600px) {
+  .jupyter-code { grid-template-columns: 1fr; }
+  .jupyter-prompt { text-align: left; padding-top: 0; }
+  .jupyter-output-block { grid-column: 1 / 2; }
+}
+
 
