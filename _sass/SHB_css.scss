@@ -574,6 +574,119 @@ footer, .container-footer { color: $earth-muted; }
   #newsid { margin-top: 8px; }
 }
 
+/* Photography — masonry grid + lightbox */
+.photo-intro {
+  color: $earth-muted;
+  font-size: .95rem;
+  margin: 4px 0 22px;
+  max-width: 60ch;
+}
+.photo-grid {
+  column-count: 3;
+  column-gap: 12px;
+}
+@media (max-width: 900px) { .photo-grid { column-count: 2; } }
+@media (max-width: 540px) { .photo-grid { column-count: 1; } }
+
+.photo-item {
+  break-inside: avoid;
+  display: block;
+  position: relative;
+  margin: 0 0 12px;
+  cursor: zoom-in;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #181612;
+  border: 1px solid $earth-line;
+  transition: border-color .15s ease, transform .15s ease;
+}
+.photo-item:hover { border-color: $earth-orange; transform: translateY(-1px); }
+.photo-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0;
+}
+.photo-caption {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 22px 12px 10px;
+  background: linear-gradient(to top, rgba(0,0,0,.78) 30%, rgba(0,0,0,0));
+  color: #f0e9d9;
+  font-size: .82rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  opacity: 0;
+  transition: opacity .15s ease;
+}
+.photo-item:hover .photo-caption { opacity: 1; }
+.photo-title { font-weight: 600; }
+.photo-loc   { color: #c9c0ad; font-size: .75rem; }
+
+/* Lightbox */
+.photo-lightbox {
+  position: fixed; inset: 0;
+  background: rgba(10, 9, 7, .95);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+}
+.photo-lightbox.open { display: flex; }
+.photo-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  max-width: 92vw;
+  max-height: 92vh;
+}
+.photo-stage img {
+  max-width: 92vw;
+  max-height: 78vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 14px 40px rgba(0,0,0,.5);
+}
+.photo-meta {
+  color: $earth-text;
+  text-align: center;
+  font-size: .9rem;
+  max-width: 80ch;
+}
+.photo-meta .lb-title { font-size: 1.05rem; font-weight: 600; color: #f4ede0; margin-bottom: 3px; }
+.photo-meta .lb-sub   { color: $earth-muted; font-size: .82rem; margin-bottom: 3px; }
+.photo-meta .lb-tech  { color: $earth-green; font-size: .78rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+.photo-close, .photo-nav {
+  position: absolute;
+  background: transparent;
+  border: 1px solid $earth-line;
+  color: $earth-text;
+  border-radius: 999px;
+  font-size: 1.3rem;
+  line-height: 1;
+  padding: 8px 14px;
+  cursor: pointer;
+  z-index: 10000;
+  transition: all .12s ease;
+}
+.photo-close:hover, .photo-nav:hover { border-color: $earth-orange; color: $earth-orange-lt; }
+.photo-close { top: 18px; right: 18px; }
+.photo-nav   { top: 50%; transform: translateY(-50%); }
+.photo-prev  { left: 18px; }
+.photo-next  { right: 18px; }
+@media (max-width: 600px) {
+  .photo-close { top: 10px; right: 10px; }
+  .photo-prev  { left: 8px; }
+  .photo-next  { right: 8px; }
+  .photo-nav   { font-size: 1rem; padding: 6px 10px; }
+}
+
 /* Notes garden — listing page */
 .notes-intro {
   color: $earth-muted;

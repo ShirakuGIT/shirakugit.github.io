@@ -63,6 +63,7 @@ nav_pages:
   - name: research
   - name: blogs
   - name: notes
+  - name: photography
 
 # Collections — personal notes garden
 collections:
