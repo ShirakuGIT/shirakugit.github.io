@@ -22,7 +22,7 @@ permalink: /about/
 </div>
 
 <div class="prose">
-<p class="about-lede">I'm a researcher working at the intersection of robotics and intelligence — classical robotics, spatial intelligence, machine learning, and real-world robot deployments.</p>
+<p class="about-lede">I'm a researcher working at the intersection of robotics and intelligence - classical robotics, spatial intelligence, machine learning, and real-world robot deployments.</p>
 
-<p>At the <a href="https://algrobogroup.github.io/" target="_blank" rel="noopener">Algorithmic Robotics Group</a>, NTU, I work under <a href="https://yoonchangsung.com/" target="_blank" rel="noopener">Dr.&nbsp;Yoonchang Sung</a> on visual priors for robot decision-making, and 3D reconstruction for object search in cluttered scenes. Before that I worked on multi-sensor fusion and SLAM pipelines for autonomous navigation, and perception/localization for industrial mobile robots robust to sensor failure.</p>
+<p>At the <a href="https://algrobogroup.github.io/" target="_blank" rel="noopener">Algorithmic Robotics Group</a>, NTU, I work under <a href="https://yoonchangsung.com/" target="_blank" rel="noopener">Dr.&nbsp;Yoonchang Sung</a> on visual priors for robot decision-making, and 3D reconstruction for object search in cluttered scenes. Earlier, I worked extensively on perception and SLAM for industrial autonomous mobile robots.</p>
 </div>
