@@ -10,6 +10,27 @@
 #   lens      e.g. "35mm f/1.8"
 #   exif      e.g. "f/2.8 · 1/200 · ISO 400"
 
+- src: /images/photography/2026-06-14-03.jpg
+  title: ""
+  location: ""
+  date: 2026-06-14
+  camera: "Pixel 7"
+  exif: "f/1.9 · 1/374 · ISO 47"
+
+- src: /images/photography/2026-06-14-02.jpg
+  title: ""
+  location: ""
+  date: 2026-06-14
+  camera: "Pixel 7"
+  exif: "f/2.2 · 1/211 · ISO 50"
+
+- src: /images/photography/2026-06-14-01.jpg
+  title: ""
+  location: ""
+  date: 2026-06-14
+  camera: "Pixel 7"
+  exif: "f/1.9 · 1/219 · ISO 47"
+
 - src: /images/photography/2026-06-06-01.jpg
   title: ""
   location: ""
@@ -73,12 +94,26 @@
   camera: "Pixel 7"
   exif: "f/1.9 · 1/1250 · ISO 47"
 
+- src: /images/photography/2025-12-16-01.jpg
+  title: ""
+  location: ""
+  date: 2025-12-16
+  camera: "Pixel 7"
+  exif: "f/1.85 · 1/2451 · ISO 44"
+
 - src: /images/photography/2025-12-14-01.jpg
   title: ""
   location: ""
   date: 2025-12-14
   camera: "Pixel 7"
   exif: "f/1.9 · 3.2s · ISO 40"
+
+- src: /images/photography/2025-12-13-03.jpg
+  title: ""
+  location: ""
+  date: 2025-12-13
+  camera: "Pixel 7"
+  exif: "f/1.9 · 16s · ISO 743"
 
 - src: /images/photography/2025-12-13-02.jpg
   title: ""
@@ -96,4 +131,3 @@
   date: 2025-12-10
   camera: "Pixel 7"
   exif: "f/1.9 · 1/40 · ISO 2287"
-

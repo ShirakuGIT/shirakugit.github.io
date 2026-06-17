@@ -3,4 +3,6 @@ _site
 .jekyll-cache
 .jekyll-metadata
 .backup-perf/
+images/photography-originals/
+.publish*.log
 

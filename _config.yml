@@ -147,3 +147,5 @@ exclude:
   - switch_theme.sh
   - tags
   - Rakefile
+  - images/photography-originals
+  - scripts
