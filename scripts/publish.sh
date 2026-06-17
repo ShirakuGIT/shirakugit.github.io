@@ -77,9 +77,15 @@ echo "$DIM"; git -c color.ui=never status --short; echo "$X"
 # ---- 3. build with debug ---------------------------------------------------
 say "Building site (jekyll build --trace --profile)"
 if JEKYLL_ENV=production bundle exec jekyll build --trace --profile >"$BUILD_LOG" 2>&1; then
+  # Jekyll exits 0 even when it skips a file with bad front matter, so check the log.
+  ERRS=$(grep -cE 'YAML Exception|Liquid Exception|^[[:space:]]*Error:' "$BUILD_LOG" || true)
   W=$(grep -ci 'warning' "$BUILD_LOG" || true)
   tail -n 12 "$BUILD_LOG"
-  if [[ "$W" -gt 0 ]]; then warn "$W warning line(s) — see $BUILD_LOG"; fi
+  if [[ "$ERRS" -gt 0 ]]; then
+    echo "$R"; grep -nE 'YAML Exception|Liquid Exception|Error:' "$BUILD_LOG"; echo "$X"
+    die "Build reported $ERRS error(s) — e.g. malformed front matter. Fix before deploying. Log: $BUILD_LOG"
+  fi
+  [[ "$W" -gt 0 ]] && warn "$W warning line(s) (Sass deprecations etc.) — see $BUILD_LOG"
   ok "Build succeeded (full log: $BUILD_LOG)"
 else
   echo "$R"; tail -n 30 "$BUILD_LOG"; echo "$X"
@@ -130,9 +136,13 @@ read -r ans
 cleanup   # stop the preview server before deploying
 
 if [[ "$ans" =~ ^[Yy]$ ]]; then
+  # The visitor-map bot pushes to this branch daily, so the remote is usually
+  # ahead. Rebase first or the source push gets rejected (fetch first).
+  say "Syncing $BRANCH with origin (visitor-map bot also pushes here)"
+  git pull --rebase origin "$BRANCH" || die "rebase on origin/$BRANCH failed — resolve, then re-run."
   say "Deploying"
   bundle exec rake publish || die "rake publish failed — gh-pages NOT updated."
-  git push origin "$BRANCH"   || warn "source push to $BRANCH failed — gh-pages did update."
+  git push origin "$BRANCH"   || warn "source push failed — run: git pull --rebase origin $BRANCH && git push"
   ok "Deployed. Live at https://shivaram.net (GitHub Pages CDN ~1 min)."
 else
   warn "Skipped deploy. The commit is local only on '$BRANCH'."
