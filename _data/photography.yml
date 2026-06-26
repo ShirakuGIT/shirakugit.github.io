@@ -11,29 +11,29 @@
 #   exif      e.g. "f/2.8 · 1/200 · ISO 400"
 
 - src: /images/photography/2026-06-14-03.jpg
-  title: ""
-  location: ""
+  title: "Pipa Girl"
+  location: "Clarke Quay, Singapore"
   date: 2026-06-14
   camera: "Pixel 7"
   exif: "f/1.9 · 1/374 · ISO 47"
 
 - src: /images/photography/2026-06-14-02.jpg
-  title: ""
-  location: ""
+  title: "Skyline"
+  location: "Marina Bay, Singapore"
   date: 2026-06-14
   camera: "Pixel 7"
   exif: "f/2.2 · 1/211 · ISO 50"
 
 - src: /images/photography/2026-06-14-01.jpg
-  title: ""
-  location: ""
+  title: "Marina Bay Sands"
+  location: "Marina Bay, Singapore"
   date: 2026-06-14
   camera: "Pixel 7"
   exif: "f/1.9 · 1/219 · ISO 47"
 
 - src: /images/photography/2026-06-06-01.jpg
-  title: ""
-  location: ""
+  title: "Swan Lake"
+  location: "Botanic Gardens, Singapore"
   date: 2026-06-06
   camera: "Pixel 7"
   exif: "f/1.85 · 1/1166 · ISO 48"
@@ -53,81 +53,85 @@
   exif: "f/1.9 · 1/669 · ISO 59"
 
 - src: /images/photography/2026-01-02-01.jpg
-  title: ""
-  location: ""
+  title: "Weill Hall"
+  location: "UC Berkeley, California"
   date: 2026-01-02
   camera: "Pixel 7"
   exif: "f/1.9 · 1/1400 · ISO 50"
 
 - src: /images/photography/2025-12-26-02.jpg
-  title: ""
-  location: ""
+  title: "Little Havana"
+  location: "Miami, Florida"
   date: 2025-12-26
   camera: "Pixel 7"
   exif: "f/1.9 · 1/17 · ISO 337"
 
 - src: /images/photography/2025-12-26-01.jpg
-  title: ""
-  location: ""
+  title: "Little Havana"
+  location: "Miami, Florida"
   date: 2025-12-26
   camera: "Pixel 7"
   exif: "f/1.9 · 1/59 · ISO 639"
 
 - src: /images/photography/2025-12-20-01.jpg
-  title: ""
-  location: ""
+  title: "Muir Woods"
+  location: "Muir Woods, California"
   date: 2025-12-20
   camera: "Pixel 7"
   exif: "f/1.9 · 1/125 · ISO 47"
 
 - src: /images/photography/2025-12-19-02.jpg
-  title: ""
-  location: ""
+  title: "Palace of Fine Arts"
+  location: "San Francisco, California"
   date: 2025-12-19
   camera: "Pixel 7"
   exif: "f/1.9 · 1/1400 · ISO 47"
 
 - src: /images/photography/2025-12-19-01.jpg
-  title: ""
-  location: ""
+  title: "Palace of Fine Arts"
+  location: "San Francisco, California"
   date: 2025-12-19
   camera: "Pixel 7"
   exif: "f/1.9 · 1/1250 · ISO 47"
 
 - src: /images/photography/2025-12-16-01.jpg
-  title: ""
-  location: ""
+  title: "Trans America Pyramid"
+  location: "San Francisco, California"
   date: 2025-12-16
   camera: "Pixel 7"
   exif: "f/1.85 · 1/2451 · ISO 44"
 
 - src: /images/photography/2025-12-14-01.jpg
-  title: ""
-  location: ""
+  title: "Conservatory of Flowers"
+  location: "San Francisco, California"
   date: 2025-12-14
   camera: "Pixel 7"
   exif: "f/1.9 · 3.2s · ISO 40"
 
 - src: /images/photography/2025-12-13-03.jpg
-  title: ""
-  location: ""
+  title: "Mount Tamalpais"
+  location: "Marin County, California"
   date: 2025-12-13
   camera: "Pixel 7"
   exif: "f/1.9 · 16s · ISO 743"
 
 - src: /images/photography/2025-12-13-02.jpg
-  title: ""
-  location: ""
+  title: "Devil's Slide"
+  location: "Pacifica, California"
   date: 2025-12-13
+  camera: "Pixel 7"
+  exif: "f/1.9 · 16s · ISO 43"
 
 - src: /images/photography/2025-12-13-01.jpg
-  title: ""
-  location: ""
+  title: "Devil's Slide"
+  location: "Pacifica, California"
   date: 2025-12-13
+  camera: "Pixel 7"
+  exif: "f/1.9 · 16s · ISO 41"
 
 - src: /images/photography/2025-12-10-01.jpg
-  title: ""
-  location: ""
+  title: "Twin Peaks"
+  location: "San Francisco, California"
   date: 2025-12-10
   camera: "Pixel 7"
   exif: "f/1.9 · 1/40 · ISO 2287"
