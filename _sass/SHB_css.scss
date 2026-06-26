@@ -905,4 +905,116 @@ footer, .container-footer { color: $earth-muted; }
   .jupyter-output-block { grid-column: 1 / 2; }
 }
 
+/* ===========================================================================
+   Projects page — Apple-like minimal media cards
+   =========================================================================== */
+$font-garamond: "EB Garamond", "Apple Garamond", "ITC Garamond", Garamond, "Times New Roman", serif;
+
+.projects-intro {
+  color: $earth-muted;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin: 4px 0 36px;
+  max-width: 55ch;
+}
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+@media (max-width: 700px) {
+  .projects-grid { grid-template-columns: 1fr; }
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  background: #181612;
+  border: 1px solid rgba($earth-green, .25);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.project-card:hover {
+  transform: translateY(-3px);
+  border-color: $earth-orange;
+  box-shadow: 0 16px 40px rgba(0,0,0,.4);
+}
+
+.project-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: #0f0d0a;
+  overflow: hidden;
+}
+.project-media p { margin: 0; }
+.project-media img,
+.project-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 0;
+}
+
+.project-body {
+  padding: 18px 20px 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex: 1;
+}
+.project-text { min-width: 0; }
+.project-title {
+  margin: 0 0 4px;
+  font-family: $font-garamond;
+  font-size: 1.45rem;
+  font-weight: 600;
+  line-height: 1.15;
+  color: $earth-text;
+}
+.project-title a {
+  color: $earth-text;
+  text-decoration: none;
+}
+.project-title a:hover { color: $earth-orange-lt; }
+.project-subtitle {
+  margin: 0 0 10px;
+  font-family: $font-sf;
+  font-size: .84rem;
+  line-height: 1.35;
+  color: $earth-green;
+  font-weight: 500;
+  letter-spacing: .01em;
+}
+.project-description {
+  margin: 0;
+  font-family: $font-sf;
+  font-size: .86rem;
+  line-height: 1.55;
+  color: $earth-text;
+  opacity: .82;
+}
+.project-github {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin-top: 1px;
+  color: $earth-green !important;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 50%;
+  transition: color .15s ease, background .15s ease, transform .15s ease;
+}
+.project-github:hover {
+  color: $earth-orange !important;
+  background: rgba(255,255,255,.06);
+  transform: scale(1.08);
+}
+
 

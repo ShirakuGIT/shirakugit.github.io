@@ -1,0 +1,1 @@
+{%- assign src = include.media -%}{%- unless src contains "://" -%}{%- assign src = src | prepend: site.baseurl | prepend: site.url -%}{%- endunless -%}<img src="{{ src }}" alt="{{ include.caption | default: 'Project demo' }}" loading="lazy" />

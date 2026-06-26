@@ -1,0 +1,27 @@
+- name: "Logistics CoBot"
+  repo: https://github.com/ShirakuGIT/eyrc-24-25-logistic-cobot
+  media: https://raw.githubusercontent.com/ShirakuGIT/eyrc-24-25-logistic-cobot/main/gif1.gif
+  caption: "Autonomous AMR docking with a UR5 arm for pick-and-place"
+  subtitle: "ROS 2 Humble logistics system"
+  description: "Mobile robot navigation with Nav2 and slam_toolbox, paired with UR5 manipulation via MoveIt2 and ArUco markers."
+
+- name: "Perception Pipeline"
+  repo: https://github.com/ShirakuGIT/perception
+  media: https://raw.githubusercontent.com/ShirakuGIT/perception/main/docs/assets/scene_orbit.gif
+  caption: "SAM3D reconstruction + FoundationPose localization"
+  subtitle: "Perception and grasp generation"
+  description: "Metric 3D reconstruction of a scene using SAM3D, followed by object localization and grasp generation using FoundationPose and Grasp Sampler."
+
+- name: "Grasp Sampler"
+  repo: https://github.com/ShirakuGIT/grasp-sampler
+  media: /images/projects/grasp-sampler-demo.gif
+  caption: "Parallel-jaw grasp sampling on a mesh object"
+  subtitle: "Dependency-light grasp sampler"
+  description: "Generates 6-DoF parallel-jaw grasps for any mesh by combining primitive, OBB-face and antipodal samplers."
+
+- name: "ATOM"
+  repo: https://github.com/ShirakuGIT/atom
+  media: https://raw.githubusercontent.com/ShirakuGIT/atom/main/teleop.gif
+  caption: "Human-to-robot motion mimicry via adaptive IK"
+  subtitle: "ROS 2 teleoperation framework"
+  description: "Maps Meta Quest 2 controller poses to a robot arm using adaptive inverse kinematics, with support for multiple robots and teleoperation modes."

@@ -5,4 +5,6 @@ _site
 .backup-perf/
 images/photography-originals/
 .publish*.log
+.jekyll-pid
+.jekyll-serve.log
 
