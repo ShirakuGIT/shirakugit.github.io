@@ -673,6 +673,7 @@ footer, .container-footer { color: $earth-muted; }
 .photo-meta .lb-title { font-size: 1.05rem; font-weight: 600; color: #f4ede0; margin-bottom: 3px; }
 .photo-meta .lb-sub   { color: $earth-muted; font-size: .82rem; margin-bottom: 3px; }
 .photo-meta .lb-tech  { color: $earth-green; font-size: .78rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.photo-meta .lb-pc    { color: $earth-orange-lt; font-size: .75rem; margin-top: 6px; font-style: italic; }
 
 .photo-close, .photo-nav {
   position: absolute;

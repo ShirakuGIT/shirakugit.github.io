@@ -28,6 +28,7 @@ Photos from places I've been and things I've seen. Click any image to view full-
           data-camera="{{ p.camera | escape }}"
           data-lens="{{ p.lens | escape }}"
           data-exif="{{ p.exif | escape }}"
+          data-pc="{{ p.pc | escape }}"
           data-index="{{ forloop.index0 }}">
     <img loading="lazy" src="{{ thumb }}" alt="{{ alt | escape }}">
     <figcaption class="photo-caption">
@@ -72,6 +73,7 @@ Photos from places I've been and things I've seen. Click any image to view full-
     if (d.lens)   tech.push(d.lens);
     if (d.exif)   tech.push(d.exif);
     if (tech.length) bits.push('<div class="lb-tech">' + tech.join(' &nbsp;·&nbsp; ') + '</div>');
+    if (d.pc)     bits.push('<div class="lb-pc">PC: ' + d.pc + '</div>');
     return bits.join('');
   }
   function show(i) {

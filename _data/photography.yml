@@ -9,6 +9,7 @@
 #   camera    e.g. "Pixel 7"
 #   lens      e.g. "35mm f/1.8"
 #   exif      e.g. "f/2.8 · 1/200 · ISO 400"
+#   pc        (optional) picture credit / special thanks — shown only in lightbox
 
 - src: /images/photography/2026-06-14-03.jpg
   title: "Pipa Girl"
@@ -128,6 +129,7 @@
   date: 2025-12-13
   camera: "Pixel 7"
   exif: "f/1.9 · 16s · ISO 41"
+  pc: "My Incredible brother, Indrajit Rajtilak"
 
 - src: /images/photography/2025-12-10-01.jpg
   title: "Twin Peaks"
