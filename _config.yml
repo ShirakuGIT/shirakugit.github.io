@@ -49,12 +49,12 @@ location: >
   Singapore 639798<br/>
 
 contact: >
-  <a href="mailto:shivaram.jagannathan@outlook.com" target="_blank"><i class="fa-regular fa-envelope"></i> Email</a> <br/>
-  <a href="https://scholar.google.com/citations?user=geKWO64AAAAJ&hl=en" target="_blank" rel="noopener"><i class="ai ai-google-scholar"></i> Google Scholar</a> <br/>
-  <a href="https://github.com/ShirakuGIT" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a> <br/>
-  <a href="https://www.linkedin.com/in/shivaramkumarj/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a> <br/>
-  <a href="https://x.com/shirakuex" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i> X (Twitter)</a> <br/>
-  <a href="/feed.xml"><i class="fa-solid fa-rss"></i> RSS feed</a>
+  <a href="mailto:shivaram.jagannathan@outlook.com" target="_blank"><i class="ph ph-envelope-simple"></i> Email</a> <br/>
+  <a href="https://scholar.google.com/citations?user=geKWO64AAAAJ&hl=en" target="_blank" rel="noopener"><i class="ph ph-student"></i> Google Scholar</a> <br/>
+  <a href="https://github.com/ShirakuGIT" target="_blank" rel="noopener"><i class="ph ph-github-logo"></i> GitHub</a> <br/>
+  <a href="https://www.linkedin.com/in/shivaramkumarj/" target="_blank" rel="noopener"><i class="ph ph-linkedin-logo"></i> LinkedIn</a> <br/>
+  <a href="https://x.com/shirakuex" target="_blank" rel="noopener"><i class="ph ph-x-logo"></i> X (Twitter)</a> <br/>
+  <a href="/feed.xml"><i class="ph ph-rss"></i> RSS feed</a>
 
 # Pages shown in navbar
 nav_pages:

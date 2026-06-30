@@ -107,16 +107,25 @@ $earth-muted:       #8c8576;
 /* --- Social / contact icons --- */
 .social-icons {
   margin: 8px 0 4px;
-  line-height: 2.2;
+  line-height: 1;
   a {
-    display: inline-block;
-    color: $earth-text;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: $earth-green;
     margin: 0 18px 0 0;
+    transition: color .15s ease;
     &:hover { color: $earth-orange; text-decoration: none; }
   }
   /* drop trailing margin so a centered row stays visually centered */
   a:last-child { margin-right: 0; }
 }
+.social-icon {
+  font-size: 1.35rem;
+  line-height: 1;
+  display: inline-block;
+}
+.social-icon-lg { font-size: 1.7rem; }
 /* the sidebar wraps this in <center>, which centers the inline-block icons for free */
 
 /* --- Calendly "Book a meeting" button (discrete / ghost) --- */
@@ -568,6 +577,9 @@ h1, h2, h3 { letter-spacing: -0.01em; }
 .container-footer { max-width: 840px; padding-top: 8px; }
 footer, .container-footer { color: $earth-muted; }
 .container-footer h4, .container-footer h3 { color: $earth-text; font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; }
+.panel-footer a { color: $earth-green; transition: color .15s ease; }
+.panel-footer a:hover { color: $earth-orange; text-decoration: none; }
+.panel-footer a i.ph { font-size: 1.05rem; margin-right: 4px; vertical-align: -2px; display: inline-block; }
 
 @media (max-width: 767px) {
   .hero-name { font-size: 1.85rem; }

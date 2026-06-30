@@ -11,7 +11,7 @@ permalink: /about/
   <div class="profile-meta">
     <h3 class="profile-name">{{ member.name }}</h3>
     <p class="profile-role">{{ member.info }}</p>
-    {% include social.html member=member size="2" %}
+    {% include social.html member=member size="large" %}
   </div>
 </div>
 {% endfor %}
