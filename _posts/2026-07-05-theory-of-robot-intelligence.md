@@ -66,7 +66,7 @@ This view is closely aligned with several foundational ideas in cognitive scienc
 
 My argument is that robot intelligence should follow the same principle. Planning should not operate over a fixed symbolic representation of the world. Instead, planning, perception, and action should form a continuous **perception–action loop** in which acting improves understanding, and improved understanding expands the space of feasible actions.
 
-Language, planning, and reasoning are therefore downstream capabilities. They should emerge from an embodied, continually evolving world representation rather than serve as its foundation.
+Language, planning, and reasoning are therefore downstream capabilities. They should emerge from an embodied, continually evolving world representations rather than serve as its foundation.
 
 From this perspective, the primary objective of robot learning is not to imitate behavior or generate fluent language, but to acquire robust, grounded models of the world through interaction. The quality of a robot's reasoning is ultimately determined by the quality of the world representation it constructs—and that model can only be built through the continual cycle of perception and action.
 
