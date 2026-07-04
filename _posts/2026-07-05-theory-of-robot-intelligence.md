@@ -36,7 +36,7 @@ While TAMP has been highly successful for many robotic applications, its underly
 
 This has contributed to a growing interest in approaches that learn representations directly from interaction and large-scale data, such as **Reinforcement Learning** and **Foundation Models**. These paradigms have demonstrated significantly stronger generalization across tasks than many hand-engineered systems. As argued in Richard Sutton's essay, [*The Bitter Lesson*](http://www.incompleteideas.net/IncIdeas/BitterLesson.html), methods that leverage computation and learning at scale have historically outperformed approaches that rely heavily on handcrafted domain knowledge.
 
-My view is that the next step toward general robot intelligence is unlikely to come from increasingly sophisticated planners alone. Instead, it may require shifting the emphasis toward systems that first learn rich, grounded world models through interaction, with planning emerging as one component of a broader perception–action loop.
+My view is that the next step toward general robot intelligence is unlikely to come from increasingly sophisticated planners alone. Instead, it may require shifting the emphasis toward systems that first learn rich, grounded world representations through interaction, with planning emerging as one component of a broader perception–action loop.
 
 > **TODO:** Discuss robotics capabilities that remain comparatively underexplored, such as autonomous world-model acquisition, continual adaptation, and embodied interaction.
 
@@ -51,9 +51,9 @@ This is where I believe modern robotics diverges from biological intelligence.
 
 Classical AI planning reasons over highly abstract symbolic actions using representations such as **[PDDL (Planning Domain Definition Language)](https://en.wikipedia.org/wiki/Planning_Domain_Definition_Language)**. Actions such as *pick*, *place*, *move*, and *grasp* are represented by predefined preconditions and effects. This abstraction is computationally necessary, but it strips away much of the perceptual and physical nuance that real organisms exploit while acting. When these assumptions break down because of uncertainty, **[belief state](https://en.wikipedia.org/wiki/Belief_state)** errors, **[inverse kinematics](https://en.wikipedia.org/wiki/Inverse_kinematics)** failures, or incomplete observations, planners often become brittle. The search fails not because the task is impossible, but because the available action space is fixed and incomplete.
 
-Biological intelligence behaves differently. When an action fails, organisms rarely continue searching within the same abstract action space. Instead, they act to improve their understanding of the world. They change their viewpoint, manipulate the environment, probe uncertain objects, or gather additional sensory evidence. These actions are valuable not only because they accomplish tasks, but because they refine the organism's internal world model.
+Biological intelligence behaves differently. When an action fails, organisms rarely continue searching within the same abstract action space. Instead, they act to improve their understanding of the world. They change their viewpoint, manipulate the environment, probe uncertain objects, or gather additional sensory evidence. These actions are valuable not only because they accomplish tasks, but because they refine the organism's internal world representation.
 
-In other words, organisms do not simply plan over a world model—they continually construct it. Every action is simultaneously an attempt to achieve a goal and an opportunity to acquire information. As the world model improves, new affordances, strategies, and actions become available. What initially appears to be a deadlock is often a consequence of incomplete understanding rather than an impossible problem.
+In other words, organisms do not simply plan over a world representation—they continually construct it. Every action is simultaneously an attempt to achieve a goal and an opportunity to acquire information. As the world representation improves, new affordances, strategies, and actions become available. What initially appears to be a deadlock is often a consequence of incomplete understanding rather than an impossible problem.
 
 This view is closely aligned with several foundational ideas in cognitive science:
 
@@ -66,9 +66,9 @@ This view is closely aligned with several foundational ideas in cognitive scienc
 
 My argument is that robot intelligence should follow the same principle. Planning should not operate over a fixed symbolic representation of the world. Instead, planning, perception, and action should form a continuous **perception–action loop** in which acting improves understanding, and improved understanding expands the space of feasible actions.
 
-Language, planning, and reasoning are therefore downstream capabilities. They should emerge from an embodied, continually evolving world model rather than serve as its foundation.
+Language, planning, and reasoning are therefore downstream capabilities. They should emerge from an embodied, continually evolving world representation rather than serve as its foundation.
 
-From this perspective, the primary objective of robot learning is not to imitate behavior or generate fluent language, but to acquire robust, grounded models of the world through interaction. The quality of a robot's reasoning is ultimately determined by the quality of the world model it constructs—and that model can only be built through the continual cycle of perception and action.
+From this perspective, the primary objective of robot learning is not to imitate behavior or generate fluent language, but to acquire robust, grounded models of the world through interaction. The quality of a robot's reasoning is ultimately determined by the quality of the world representation it constructs—and that model can only be built through the continual cycle of perception and action.
 
 
 ### Further Reading
