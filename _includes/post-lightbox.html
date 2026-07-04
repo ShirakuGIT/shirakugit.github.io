@@ -1,0 +1,85 @@
+{%- comment -%}
+  Shared image lightbox for post and note pages.
+  Mirrors the photography lightbox (prev/next, keyboard nav, click backdrop
+  to close). Any clickable <img> in .post-content / .note-content opens it.
+  Images inside anchors, marked data-no-lightbox, or tiny inline icons
+  (<= 80px tall) are skipped.
+  NOTE: emitted WITHOUT {::nomarkdown} guards. This include is referenced
+  from post.html / note.html LAYOUTS, which are not parsed by kramdown —
+  only {{ content }} (the markdown) is. Wrapping in nomarkdown here would
+  leak the tags as literal text in the rendered HTML.
+{%- endcomment -%}
+<div class="photo-lightbox" id="post-lightbox" aria-hidden="true" role="dialog"><button class="photo-close" id="post-lb-close" aria-label="Close">&times;</button><button class="photo-nav photo-prev" id="post-lb-prev" aria-label="Previous">&larr;</button><button class="photo-nav photo-next" id="post-lb-next" aria-label="Next">&rarr;</button><div class="photo-stage"><img id="post-lb-img" alt=""><div class="photo-meta" id="post-lb-meta"></div></div></div>
+<script>
+(function() {
+  var lb = document.getElementById('post-lightbox');
+  if (!lb) return;
+  var img  = document.getElementById('post-lb-img');
+  var meta = document.getElementById('post-lb-meta');
+  var prev  = document.getElementById('post-lb-prev');
+  var next  = document.getElementById('post-lb-next');
+  var close = document.getElementById('post-lb-close');
+
+  var items = [];
+  document.querySelectorAll('.post-content img, .note-content img').forEach(function(el) {
+    if (el.closest('a')) return;
+    if (el.hasAttribute('data-no-lightbox')) return;
+    if (el.classList.contains('jvf-no-lightbox')) return;
+    if (el.naturalHeight > 0 && el.naturalHeight <= 80) return;
+    el.style.cursor = 'zoom-in';
+    el.dataset.lbIndex = items.length;
+    el.dataset.lbSrc   = el.getAttribute('data-full') || el.src;
+    el.dataset.lbAlt   = el.getAttribute('alt') || '';
+    var fig = el.closest('figure');
+    var cap = fig && fig.querySelector('figcaption');
+    el.dataset.lbCap = cap ? cap.innerHTML : '';
+    items.push(el);
+  });
+
+  var idx = 0;
+
+  function show(i) {
+    if (i < 0) i = items.length - 1;
+    if (i >= items.length) i = 0;
+    idx = i;
+    var el = items[idx];
+    img.src = el.dataset.lbSrc;
+    img.alt = el.dataset.lbAlt || '';
+    if (el.dataset.lbCap) {
+      meta.innerHTML = '<div class="lb-pc">' + el.dataset.lbCap + '</div>';
+      meta.style.display = '';
+    } else if (el.dataset.lbAlt) {
+      meta.textContent = el.dataset.lbAlt;
+      meta.style.display = '';
+    } else {
+      meta.style.display = 'none';
+    }
+  }
+  function open(i) {
+    show(i);
+    lb.classList.add('open');
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function shut() {
+    lb.classList.remove('open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    img.src = '';
+  }
+
+  items.forEach(function(el) {
+    el.addEventListener('click', function() { open(parseInt(el.dataset.lbIndex, 10)); });
+  });
+  prev.addEventListener('click', function(e) { e.stopPropagation(); show(idx - 1); });
+  next.addEventListener('click', function(e) { e.stopPropagation(); show(idx + 1); });
+  close.addEventListener('click', shut);
+  lb.addEventListener('click', function(e) { if (e.target === lb) shut(); });
+  document.addEventListener('keydown', function(e) {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape')     shut();
+    if (e.key === 'ArrowLeft')  show(idx - 1);
+    if (e.key === 'ArrowRight') show(idx + 1);
+  });
+})();
+</script>

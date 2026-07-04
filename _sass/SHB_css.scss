@@ -674,6 +674,8 @@ footer, .container-footer { color: $earth-muted; }
 .photo-meta .lb-sub   { color: $earth-muted; font-size: .82rem; margin-bottom: 3px; }
 .photo-meta .lb-tech  { color: $earth-green; font-size: .78rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
 .photo-meta .lb-pc    { color: $earth-orange-lt; font-size: .75rem; margin-top: 6px; font-style: italic; }
+#post-lightbox .photo-meta { color: $earth-muted; font-size: .85rem; line-height: 1.4; }
+#post-lightbox .photo-meta .lb-pc { color: $earth-muted; font-style: italic; }
 
 .photo-close, .photo-nav {
   position: absolute;
@@ -1029,5 +1031,241 @@ $font-garamond: "EB Garamond", "Apple Garamond", "ITC Garamond", Garamond, "Time
   background: rgba(255,255,255,.06);
   transform: scale(1.08);
 }
+
+/* ===========================================================================
+   Scrollspy TOC — quiet text rail on desktop, collapsible on mobile.
+   Pattern: Docusaurus / Stripe docs side TOC.
+   =========================================================================== */
+/* offset anchored headings so the sticky navbar doesn't cover them */
+.post-content :is(h2, h3),
+.note-content :is(h2, h3) { scroll-margin-top: 84px; }
+
+/* --- shared list styling (used by both rail + mobile) --- */
+.post-toc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-left: 1px solid rgba(255,255,255,.08);
+}
+.post-toc-item {
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+.post-toc-item.is-sub { padding-left: 12px; }
+.post-toc-link {
+  display: block;
+  padding: 5px 12px 5px 14px;
+  margin: 0 0 0 -1px;                 /* overlap the track border */
+  font-family: $font-sf;
+  font-size: .8rem;
+  line-height: 1.4;
+  color: $earth-muted;
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: color .15s ease, background .15s ease, border-color .15s ease;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.post-toc-item.is-sub .post-toc-link { font-size: .76rem; padding-left: 14px; }
+.post-toc-link:hover {
+  color: $earth-text;
+  background: rgba(255,255,255,.04);
+  border-left-color: rgba($earth-green, .5);
+}
+.post-toc-link.active {
+  color: $earth-orange-lt;
+  font-weight: 600;
+  border-left-color: $earth-orange;
+  background: linear-gradient(to right, rgba(189,93,52,.12), transparent 60%);
+}
+.post-toc-item.is-active::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: $earth-orange;
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(189,93,52,.4);
+}
+@media (prefers-reduced-motion: reduce) {
+  .post-toc-link { transition: none; }
+}
+
+/* --- desktop rail (fixed, right margin) --- */
+.post-toc {
+  position: fixed;
+  right: calc(50% - 420px - 188px);   /* line up just outside the 840px reading column */
+  top: 132px;                          /* below the sticky navbar */
+  width: 200px;
+  max-height: calc(100vh - 160px);
+  overflow-y: auto;
+  z-index: 500;
+  display: none;                       /* default hidden; CSS owns visibility below */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,.1) transparent;
+}
+.post-toc::-webkit-scrollbar { width: 6px; }
+.post-toc::-webkit-scrollbar-thumb { background: rgba(255,255,255,.1); border-radius: 3px; }
+/* scene shifts own visibility purely via media queries + .is-ready */
+@media (min-width: 1024px) {
+  .post-toc.is-ready { display: block; }
+}
+@media (max-width: 1340px) and (min-width: 1024px) {
+  .post-toc.is-ready { right: 24px; width: 180px; }
+}
+.post-toc-heading {
+  margin: 0 0 10px;
+  padding-left: 14px;
+  font-family: $font-lucida;
+  font-size: .66rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: $earth-muted;
+}
+
+/* --- mobile: floating action button + slide-up sheet (<dialog>) --- */
+.toc-fab {
+  display: none;                       /* CSS owns visibility */
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 1100;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid $earth-line;
+  background: #1c1a16;
+  color: $earth-text !important;
+  font-size: 1.25rem;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,.45);
+  cursor: pointer;
+  transition: transform .15s ease, border-color .15s ease, color .15s ease;
+}
+@media (max-width: 1023px) {
+  .toc-fab.is-ready { display: flex; }
+}
+.toc-fab:hover { transform: translateY(-2px); border-color: $earth-orange; color: $earth-orange-lt !important; }
+
+/* <dialog> — JS uses showModal()/close(); [open] is the only state.
+   On desktop, force-hide so a stray [open] never leaks the mobile sheet. */
+.toc-sheet {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  width: 100vw;
+  max-width: none;
+  max-height: none;
+}
+.toc-sheet[open] { display: flex; align-items: flex-end; justify-content: center; }
+@media (min-width: 1024px) {
+  .toc-sheet { display: none !important; }   /* desktop never shows the sheet */
+}
+.toc-sheet::backdrop {
+  background: rgba(10,9,7,.75);
+  backdrop-filter: blur(2px);
+}
+.toc-sheet-card {
+  width: 100%;
+  max-width: 520px;
+  background: #1c1a16;
+  border: 1px solid $earth-line;
+  border-bottom: 0;
+  border-radius: 16px 16px 0 0;
+  padding: 8px 16px 16px;
+  box-shadow: 0 -10px 40px rgba(0,0,0,.5);
+  max-height: 70vh;
+  overflow-y: auto;
+  animation: tocSheetUp .22s ease;
+}
+@keyframes tocSheetUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+.toc-sheet-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid $earth-line;
+}
+.toc-sheet-close {
+  background: transparent;
+  border: 0;
+  color: $earth-muted;
+  font-size: 1.5rem;
+  line-height: 1;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: color .15s ease, background .15s ease;
+}
+.toc-sheet-close:hover { color: $earth-orange-lt; background: rgba(255,255,255,.06); }
+.post-toc-heading--sheet { margin: 0; padding-left: 0; }
+.toc-sheet-list {
+  border-left: 0 !important;
+  padding-top: 4px;
+}
+.toc-sheet-list .post-toc-link {
+  border-left: 0;
+  margin-left: 0;
+  padding-left: 0;
+  padding: 7px 8px;
+  white-space: normal;
+  font-size: .92rem;
+  line-height: 1.45;
+}
+.toc-sheet-list .post-toc-item.is-sub { padding-left: 16px; }
+.toc-sheet-list .post-toc-item.is-sub2 { padding-left: 28px; }
+.toc-sheet-list .post-toc-link:hover { background: rgba(255,255,255,.04); color: $earth-orange-lt; }
+.toc-sheet-list .post-toc-link.active { background: linear-gradient(to right, rgba(189,93,52,.14), transparent 70%); border-left: 0; }
+.toc-sheet-list .post-toc-item.is-active::before { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .toc-sheet-card { animation: none; }
+  .toc-fab { transition: none; }
+}
+
+/* H1 ("top") TOC items: bold, full-size — for "Note:" style intros */
+.post-toc-item.is-top > .post-toc-link {
+  font-family: $font-lucida;
+  font-size: .82rem;
+  font-weight: 700;
+  color: $earth-text;
+  letter-spacing: .01em;
+}
+.post-toc-item.is-top > .post-toc-link.active { color: $earth-orange; }
+/* H4 — smallest indent, muted */
+.post-toc-item.is-sub2 > .post-toc-link {
+  font-size: .72rem;
+  opacity: .8;
+  padding-left: 18px;
+}
+
+/* Reading progress bar — thin top thread, only visible mid-scroll */
+.reading-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  background: linear-gradient(90deg, $earth-green, $earth-orange);
+  z-index: 2000;
+  opacity: 0;
+  transition: opacity .2s ease, transform .05s linear;
+  pointer-events: none;
+  box-shadow: 0 0 6px rgba(189,93,52,.5);
+  will-change: transform;
+}
+
+/* graceful-disable when < 3 sections — CSS only, no inline style fights */
+.post-toc[data-hidden],
+.toc-fab[data-hidden] { display: none !important; }
 
 
