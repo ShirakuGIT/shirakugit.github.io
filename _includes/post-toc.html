@@ -31,8 +31,12 @@
   if (!rail || !railList || !fab || !sheet || !sheetList) return;
 
   // Collect every heading H1..H4 inside the article body (not the title).
+  // Headings rendered by the LaTeX cells (.tex-html) are the paper's own
+  // structure — excluding them keeps the rail/spy aligned with the note's
+  // sections instead of mixing paper headings into it.
   var heads = [];
   document.querySelectorAll('.post-content h1, .post-content h2, .post-content h3, .post-content h4, .note-content h1, .note-content h2, .note-content h3, .note-content h4').forEach(function(h) {
+    if (h.closest('.tex-html')) return;
     if (!h.id) h.id = slugify(h.textContent);
     heads.push(h);
   });

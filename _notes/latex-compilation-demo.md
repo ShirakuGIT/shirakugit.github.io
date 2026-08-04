@@ -83,18 +83,17 @@ research paper, rendered in place in Computer Modern, the classic LaTeX font.
 - **A collapsible `.tex` source** — syntax-highlighted, so readers can copy the
   source directly.
 
-## Errors surface instead of crashing the build
+## Clear build diagnostics
 
-Broken sources don't break the build — they render an error card with the log,
-so you can fix the source. If pandoc can still convert the LaTeX but pdfLaTeX
-fails (say, a missing package), the page content renders anyway and the toolbar
-shows a "PDF failed" warning instead of the download link. This cell is
-deliberately broken:
+Invalid sources are isolated to their own cell instead of stopping the rest of
+the site from building. The build log identifies the source and reports the
+converter or compiler output needed to fix it. If pandoc can render the page
+content but pdfLaTeX cannot produce a PDF—for example, because a package is
+missing—the HTML remains available and the toolbar reports that the download
+could not be generated.
 
-{% tex_cell label=broken-cell %}
-\section{This section is
-never closed, so pdfLaTeX will choke right about here.
-{% endtex_cell %}
+This page keeps every example valid so it also serves as a clean visual check
+for the complete HTML, PDF, bibliography, equation, and TikZ pipeline.
 
 ## Syntax reference
 

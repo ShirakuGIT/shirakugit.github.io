@@ -1054,6 +1054,16 @@ footer, .container-footer { color: $earth-muted; }
 .tex-html a { color: $earth-orange-lt; }
 .tex-html a:hover { color: $earth-orange; }
 .tex-html .tex-eqref { color: $earth-orange-lt; text-decoration: none; }
+.tex-html .tex-tikz {
+  margin: 1.2em auto;
+  text-align: center;
+}
+.tex-html .tex-tikz img {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 0;
+}
 .tex-html table {
   width: 100%;
   margin: 1em 0;
@@ -1079,10 +1089,12 @@ footer, .container-footer { color: $earth-muted; }
 .tex-html .math.display {
   display: block;
   margin: .9em 0;
-  overflow-x: auto;
-  scrollbar-width: none;
+  overflow: visible;
 }
-.tex-html .math.display::-webkit-scrollbar { display: none; }
+.tex-html .math.display mjx-container[display="true"] svg {
+  max-width: 100%;
+  height: auto;
+}
 .tex-html .tex-references {
   margin-top: 22px;
   padding-top: 4px;
@@ -1506,5 +1518,4 @@ $font-garamond: "EB Garamond", "Apple Garamond", "ITC Garamond", Garamond, "Time
 /* graceful-disable when < 3 sections — CSS only, no inline style fights */
 .post-toc[data-hidden],
 .toc-fab[data-hidden] { display: none !important; }
-
 

@@ -34,8 +34,9 @@ module Jekyll
     PANDOC   = ENV.fetch("PANDOC", "pandoc")
     PDFLATEX = ENV.fetch("PDFLATEX", "pdflatex")
     PDFINFO  = ENV.fetch("PDFINFO", "pdfinfo")
+    PDFTOCAIRO = ENV.fetch("PDFTOCAIRO", "pdftocairo")
     # Bump when post-processing / pandoc flags change so stale caches rebuild.
-    CACHE_VERSION = "2"
+    CACHE_VERSION = "6"
 
     DEFAULT_PREAMBLE = <<~'TEX'
       \documentclass[11pt]{article}
@@ -125,7 +126,11 @@ module Jekyll
 
     def self.pandoc_html(site, source, cache)
       html_path = File.join(cache, "paper.html")
-      return [File.read(html_path), nil] if File.file?(html_path)
+      if File.file?(html_path)
+        stage_cached_tikz(site, cache,
+                          Digest::SHA256.hexdigest("#{CACHE_VERSION}:#{source}")[0, 16])
+        return [File.read(html_path), nil]
+      end
 
       tpl = File.join(site.source, ".jekyll-cache", "tex", "_template.html")
       File.write(tpl, TEMPLATE) unless File.file?(tpl)
@@ -138,10 +143,24 @@ module Jekyll
       html = fix_citations(out, source)
       html = fix_eqrefs(html)
       html = fix_bibliography(html)
+      html = inject_tikz(site, source, cache, html, Digest::SHA256.hexdigest("#{CACHE_VERSION}:#{source}")[0, 16])
       File.write(html_path, html)
       [html, nil]
     rescue Errno::ENOENT
       [nil, "#{PANDOC} not found on PATH"]
+    end
+
+    # A cached HTML fragment already contains its figure URLs, but Jekyll
+    # recreates the destination directory on every build. Restage the cached
+    # SVGs so repeat builds cannot leave those URLs pointing at missing files.
+    def self.stage_cached_tikz(site, cache, asset_key)
+      Dir.glob(File.join(cache, "tikz", "*", "tikz.svg")).sort.each_with_index do |src, index|
+        dst = File.join(site.dest, "assets", "tex", asset_key, "figures",
+                        "tikz-#{index + 1}.svg")
+        staged = site.instance_variable_get(:@tex_staged) || []
+        staged << [[src, dst]]
+        site.instance_variable_set(:@tex_staged, staged)
+      end
     end
 
     def self.compile_pdf(cache)
@@ -151,6 +170,84 @@ module Jekyll
                File.join(cache, "paper.tex"),
                out: File::NULL, err: File::NULL)
         break if File.file?(File.join(cache, "paper.pdf"))
+      end
+    end
+
+    # Pandoc intentionally drops TikZ environments from HTML. Compile each
+    # picture separately to a tight SVG, then place it into the corresponding
+    # HTML <figure>. The PDF still compiles the original TikZ natively.
+    def self.inject_tikz(site, source, cache, html, asset_key)
+      pictures = source.scan(/\\begin\{tikzpicture\}.*?\\end\{tikzpicture\}/m)
+      return html if pictures.empty? || !available?(PDFTOCAIRO)
+
+      tikz_dir = File.join(cache, "tikz")
+      FileUtils.mkdir_p(tikz_dir)
+      libraries = source.scan(/^\s*\\usetikzlibrary\{[^}]+\}\s*$/).join("\n")
+      colors = brighten_colors(source.scan(/^\s*(?:\\definecolor|\\colorlet)\{[^\n]+$/).join("\n"))
+      svgs = []
+
+      pictures.each_with_index do |picture, index|
+        key = Digest::SHA256.hexdigest("#{libraries}\n#{colors}\n#{picture}")[0, 12]
+        fig_dir = File.join(tikz_dir, "#{index}-#{key}")
+        svg_path = File.join(fig_dir, "tikz.svg")
+        unless File.file?(svg_path)
+          FileUtils.mkdir_p(fig_dir)
+          tex_path = File.join(fig_dir, "tikz.tex")
+          File.write(tex_path, tikz_document(picture, libraries, colors))
+          system(PDFLATEX, "-interaction=nonstopmode", "-halt-on-error",
+                 "-output-directory", fig_dir, tex_path,
+                 out: File::NULL, err: File::NULL)
+          pdf_path = File.join(fig_dir, "tikz.pdf")
+          system(PDFTOCAIRO, "-svg", pdf_path, svg_path,
+                 out: File::NULL, err: File::NULL) if File.file?(pdf_path)
+        end
+        next unless File.file?(svg_path)
+
+        asset_dir = File.join(site.dest, "assets", "tex", asset_key, "figures")
+        asset_path = File.join(asset_dir, "tikz-#{index + 1}.svg")
+        staged = site.instance_variable_get(:@tex_staged) || []
+        staged << [[svg_path, asset_path]]
+        site.instance_variable_set(:@tex_staged, staged)
+        svgs << "#{site.baseurl}/assets/tex/#{asset_key}/figures/tikz-#{index + 1}.svg"
+      end
+
+      inject_figure_images(html, svgs)
+    end
+
+    def self.tikz_document(picture, libraries, colors)
+      <<~TEX
+        \\documentclass[tikz,border=8pt]{standalone}
+        \\usepackage{tikz}
+        \\usepackage{amsmath,amssymb}
+        #{libraries}
+        #{colors}
+        \\pagecolor{black!90}
+        \\begin{document}
+        #{picture}
+        \\end{document}
+      TEX
+    end
+
+    # The embedded SVG figures are shown on the site's dark theme. Brighten the
+    # document's colours (HTML hex values) toward white so strokes, fills, and
+    # labels stay legible on the dark page. The white-background PDF keeps the
+    # original definitions, which is why the override happens here.
+    def self.brighten_colors(str)
+      str.gsub(/\{([0-9A-Fa-f]{6})\}/) do
+        hex = Regexp.last_match(1)
+        rgb = hex.scan(/../).map { |c| c.to_i(16) }
+        bright = rgb.map { |v| ((v + (255 - v) * 0.45).round).to_s(16).upcase.rjust(2, "0") }.join
+        "{#{bright}}"
+      end
+    end
+
+    def self.inject_figure_images(html, svgs)
+      index = 0
+      html.gsub(/<figure\b[^>]*>.*?<\/figure>/m) do |figure|
+        next figure if index >= svgs.length || figure.include?("<img")
+        image = %(<div class="tex-tikz"><img src="#{svgs[index]}" alt="TikZ diagram" loading="lazy"/></div>)
+        index += 1
+        figure.sub(/(<figcaption\b)/, "#{image}\n\\1")
       end
     end
 
