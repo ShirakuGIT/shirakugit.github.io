@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Theory of Robot Intelligence"
+title: "Towards a Theory of Robot Intelligence"
 date: 2026-07-05
 author: Shivaram Kumar Jagannathan
 tags: [robotics, ideas, shower-thoughts, work-in-progress]
@@ -86,6 +86,8 @@ The ideas in this post draw heavily from the following foundational works.
 - [*The Ecological Approach to Visual Perception* (Internet Archive)](https://archive.org/details/ecologicalapproa0000gibs)
 
 ##### Karl Friston — *Active Inference*
+
+I personally feel when you get the time, you should really investigate deeply into all the particular topics being discussed in the Free Energy Principle Wikipedia page. 
 
 - [Free Energy Principle (Wikipedia)](https://en.wikipedia.org/wiki/Free_energy_principle)
 - [Active Inference (Wikipedia)](https://en.wikipedia.org/wiki/Free_energy_principle#Active_inference)
