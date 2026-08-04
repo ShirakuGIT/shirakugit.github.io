@@ -4,20 +4,21 @@ category: misc
 status: done
 updated: 2026-08-04
 tags: [meta, syntax, latex]
-summary: "Compile research-grade LaTeX in place — like a notebook cell, but for academic papers. Drop a {% raw %}{% tex_cell %}{% endraw %} or point at a .tex file and get a rendered PDF, embedded page images, and a download link."
+summary: "Compile research-grade LaTeX in place — like a notebook cell, but for academic papers. Drop a {% raw %}{% tex_cell %}{% endraw %} or point at a .tex file and get the paper as real page content (ar5iv-style), with the compiled PDF for download."
 ---
 
 Research notes sometimes deserve to *look* like a paper — title, abstract,
 sections, tables, bibliography — not just inline math. This site can now
-compile full LaTeX documents at build time and render them in place, in the
-same spirit as the `.ipynb` notebook cells.
+compile full LaTeX documents at build time and render them *in the page* as
+real content (ar5iv-style), in the same spirit as the `.ipynb` notebook cells.
 
-Two tags, both powered by pdfLaTeX:
+Two tags — pandoc turns the LaTeX into page content, pdfLaTeX compiles the
+same source to a PDF for download:
 
 | Tag | What it does |
 | --- | --- |
-| `{% raw %}{% tex_cell %}{% endraw %}` | Compiles the inline LaTeX in the tag body |
-| `{% raw %}{% tex_file "path.tex" %}{% endraw %}` | Compiles an external `.tex` file |
+| `{% raw %}{% tex_cell %}{% endraw %}` | Renders the inline LaTeX in the tag body |
+| `{% raw %}{% tex_file "path.tex" %}{% endraw %}` | Renders an external `.tex` file |
 
 ## Inline cell
 
@@ -56,8 +57,8 @@ Legged & Higher & High \\
 More robots, more fun.
 {% endtex_cell %}
 
-The cell above compiled to a one-page PDF with `\maketitle`, an abstract, a
-table, and a caption — no build config, no helper scripts.
+The cell above rendered a full title block, abstract, table, and caption as
+selectable page content — no build config, no helper scripts.
 
 ## Full paper from a file
 
@@ -67,21 +68,28 @@ verbatim — bibliography via `\begin{thebibliography}` and all:
 
 {% tex_file "/assets/papers/example-paper.tex" %}
 
-Note the hyperlinks, the labelled equation and table, and the manual
-bibliography — a full research paper, rendered in place.
+Note the numbered equation cross-references (`\eqref`) and citations
+(`[1]`, `[2]`, `[3]`) that resolve against the manual bibliography — a full
+research paper, rendered in place in Computer Modern, the classic LaTeX font.
 
 ## Every cell gets
 
-- **Page images** — each PDF page is rasterised and stacked, so it reads like
-  the paper itself.
-- **A `.pdf` download** — the compiled file is staged next to the page images.
+- **Real page content** — pandoc converts the LaTeX to HTML: selectable,
+  searchable, mobile-friendly text in **Computer Modern** (self-hosted Latin
+  Modern). Math stays as TeX and is typeset by the site's MathJax with `ams`
+  equation numbering.
+- **A `.pdf` download** — the same source is compiled with pdfLaTeX and staged
+  next to the page for download.
 - **A collapsible `.tex` source** — syntax-highlighted, so readers can copy the
   source directly.
 
 ## Errors surface instead of crashing the build
 
-pdfLaTeX failures don't break the site — they render an error card with the
-tail of the log, so you can fix the source. This cell is deliberately broken:
+Broken sources don't break the build — they render an error card with the log,
+so you can fix the source. If pandoc can still convert the LaTeX but pdfLaTeX
+fails (say, a missing package), the page content renders anyway and the toolbar
+shows a "PDF failed" warning instead of the download link. This cell is
+deliberately broken:
 
 {% tex_cell label=broken-cell %}
 \section{This section is
@@ -107,6 +115,6 @@ never closed, so pdfLaTeX will choke right about here.
   `\documentclass` yourself to opt out.
 - Compiled artifacts are cached in `.jekyll-cache/tex/` and only recompiled
   when the source changes.
-- Requires `pdflatex` (TeX Live) and `pdftoppm` (poppler) on the machine that
-  builds the site. Binary paths can be overridden with the `PDFLATEX` /
-  `PDFTOPPM` env vars.
+- Requires `pandoc` (HTML), `pdflatex` (TeX Live, PDF), and `pdfinfo` (poppler,
+  page count) on the machine that builds the site. Binary paths can be
+  overridden with the `PANDOC` / `PDFLATEX` / `PDFINFO` env vars.
