@@ -1,0 +1,145 @@
+% ---------------------------------------------------------------------
+% Demo: a self-contained academic paper. Compile it in place with:
+%   {% tex_file "/assets/papers/example-paper.tex" %}
+% It carries its own \documentclass, so it is compiled verbatim.
+% ---------------------------------------------------------------------
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage[colorlinks=true,urlcolor=blue,linkcolor=black,citecolor=blue]{hyperref}
+\setlength{\parskip}{0.4em}
+
+\title{Planning Is Downstream: A Perception--Action View of Robot Intelligence}
+\author{Shivaram Kumar Jagannathan\\
+  \small{Nanyang Technological University, Singapore}\\
+  \small{\texttt{shivaram.jagannathan@outlook.com}}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Classical robot planning reasons over a fixed symbolic model of the world.
+We argue that this abstraction is the root cause of brittleness in the face of
+uncertainty. Drawing on cognitive neuroscience and the Free Energy Principle,
+we sketch a complementary view in which planning, perception, and action form
+a single loop: every action is simultaneously an attempt to achieve a goal and
+an opportunity to improve the agent's world model. We formalise the loop, show
+how it subsumes classical planning as a special case, and point at the open
+problems that remain.
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+
+Task and Motion Planning (TAMP) decomposes manipulation problems into symbolic
+planning over predicates and geometric reasoning over motion
+\cite{garrett2021tamp}. The symbolic layer is expressed in PDDL
+\cite{mcdermott1998pddl}, where actions are described by preconditions and
+effects. This representation is computationally attractive but brittle: when a
+precondition fails because of observation error or an incomplete model, the
+planner re-searches the same fixed action space and typically finds no better
+answer.
+
+Biological agents behave differently. When an action fails, they do not search
+harder in the same space; they act to \emph{improve} their understanding of the
+world. They change their viewpoint, probe uncertain objects, and gather sensory
+evidence. We call this the \emph{perception--action loop}.
+
+\section{A Minimal Model}
+\label{sec:model}
+
+Let $m \in \mathcal{M}$ denote the agent's internal world model, $a \in
+\mathcal{A}$ an action, and $o \in \mathcal{O}$ an observation. Classical
+planning fixes $m$ and searches over $a$ to reach a goal $g$:
+
+\begin{equation}
+  a^{*} = \operatorname*{arg\,max}_{a} \; \Pr(g \mid a, m).
+  \label{eq:planning}
+\end{equation}
+
+The perception--action view instead treats $m$ as a control variable too.
+Each action yields a reward for task progress \emph{and} information about the
+world, quantified by the mutual information between the observation and the
+model:
+
+\begin{equation}
+  a^{*} = \operatorname*{arg\,max}_{a} \; \underbrace{\Pr(g \mid a, m)}_{\text{task}} \;+\; \beta \, I(m; o \mid a).
+  \label{eq:paloop}
+\end{equation}
+
+When $\beta = 0$, Equation~\eqref{eq:paloop} reduces to classical planning,
+Equation~\eqref{eq:planning}. The agent that actively gathers information is
+exactly the one described by the Free Energy Principle
+\cite{friston2009free}: perception and action jointly minimise variational
+free energy, so that \emph{acting} reduces surprise about future observations.
+
+\section{Empirical Preview}
+\label{sec:preview}
+
+As a sanity check we compare a fixed-model planner against the active version
+in a small gridworld with partial observability, over $10^4$ episodes.
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{@{}lccc@{}}
+    \toprule
+    Agent & Success $\uparrow$ & Steps $\downarrow$ & Model error $\downarrow$ \\
+    \midrule
+    Fixed-model planner & 0.58 & 14.3 & 0.41 \\
+    Active planner ($\beta=0.5$) & \textbf{0.87} & 9.1 & 0.12 \\
+    \bottomrule
+  \end{tabular}
+  \caption{The active planner succeeds more often and in fewer steps, because it
+  spends early actions reducing model error.}
+  \label{tab:results}
+\end{table}
+
+Table~\ref{tab:results} supports the claim that information-gathering actions
+are not a detour but the mechanism by which new affordances become available.
+Results are preliminary; a full study is deferred to future work.
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+Language, planning, and reasoning are downstream capabilities. They should
+emerge from an embodied, continually evolving world representation rather than
+serve as its foundation. The primary objective of robot learning is therefore
+not to imitate behaviour, but to acquire robust grounded models of the world
+through interaction --- and that model can only be built through the continual
+cycle of perception and action.
+
+\section*{Acknowledgements}
+The author thanks the readers of the blog post this note is distilled from.
+
+\begin{thebibliography}{9}
+
+\bibitem{garrett2021tamp}
+C.~R. Garrett, R.~Chitnis, R.~Holladay, B.~Kim, T.~Silver, L.~P. Kaelbling,
+and T.~Lozano-P\'erez.
+\newblock Integrated task and motion planning.
+\newblock \emph{Annual Review of Control, Robotics, and Autonomous Systems},
+2021.
+
+\bibitem{mcdermott1998pddl}
+D.~McDermott, M.~Ghallab, A.~Howe, C.~Knoblock, A.~Ram, M.~Veloso,
+D.~Weld, and D.~Wilkins.
+\newblock PDDL --- the planning domain definition language.
+\newblock Technical Report CVC TR-98-003, Yale Center for Computational
+Vision and Control, 1998.
+
+\bibitem{friston2009free}
+K.~Friston.
+\newblock The free-energy principle: a rough guide to the brain?
+\newblock \emph{Trends in Cognitive Sciences}, 13(7):293--301, 2009.
+
+\end{thebibliography}
+
+\end{document}

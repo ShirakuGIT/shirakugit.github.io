@@ -921,6 +921,116 @@ footer, .container-footer { color: $earth-muted; }
 }
 
 /* ===========================================================================
+   LaTeX compilation cell — research-grade TeX rendered in place
+   =========================================================================== */
+.tex-paper {
+  margin: 22px 0;
+  border: 1px solid $earth-line;
+  border-radius: 8px;
+  background: #181612;
+  font-size: .92rem;
+  overflow: hidden;
+}
+.tex-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 12px;
+  background: #211e19;
+  border-bottom: 1px solid $earth-line;
+}
+.tex-label {
+  color: $earth-text;
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .03em;
+}
+.tex-label i { color: $earth-orange; margin-right: 6px; }
+.tex-meta {
+  flex: 1;
+  color: $earth-muted;
+  font-size: .75rem;
+  text-align: right;
+}
+.tex-download {
+  color: $earth-muted !important;
+  font-size: .8rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.tex-download:hover { color: $earth-orange-lt !important; }
+.tex-pages {
+  padding: 14px;
+  background: #14110e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.tex-page {
+  max-width: 100%;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, .55);
+  border-radius: 3px;
+}
+.tex-page img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 0;
+  background: #fff;
+}
+.tex-source {
+  border-top: 1px solid $earth-line;
+  background: #110f0c;
+}
+.tex-source summary {
+  cursor: pointer;
+  color: $earth-muted;
+  font-size: .78rem;
+  padding: 8px 12px;
+  user-select: none;
+}
+.tex-source summary:hover { color: $earth-orange-lt; }
+.tex-source summary i { margin-right: 6px; }
+.tex-source pre.highlight,
+.tex-source code {
+  margin: 0;
+  padding: 4px 12px 12px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  color: $earth-text;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .78rem;
+  line-height: 1.5;
+  overflow-x: auto;
+}
+.tex-error { padding-bottom: 12px; }
+.tex-error-body {
+  color: #e0bda8;
+  padding: 12px 14px;
+  font-size: .85rem;
+}
+.tex-error-body code { color: $earth-orange-lt; }
+.tex-error-log summary { color: $earth-orange; }
+.tex-error-log pre,
+.tex-error-log code {
+  background: transparent;
+  border: 0;
+  padding: 0 14px 12px;
+  color: #b0a690;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .72rem;
+  line-height: 1.4;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+@media (max-width: 600px) {
+  .tex-meta { display: none; }
+}
+
+/* ===========================================================================
    Projects page — Apple-like minimal media cards
    =========================================================================== */
 $font-garamond: "EB Garamond", "Apple Garamond", "ITC Garamond", Garamond, "Times New Roman", serif;
