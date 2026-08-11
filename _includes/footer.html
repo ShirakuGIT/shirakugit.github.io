@@ -25,3 +25,13 @@
 </div>
 
 <script src="{{ "/assets/javascript/bootstrap/bootstrap.bundle.min.js" | relative_url }}"></script>
+
+<script>
+  function emailDecode(el) {
+    var e = el.getAttribute("data-email")
+      .replace(/\s*\[at\]\s*/g, "@")
+      .replace(/\s*\[dot\]\s*/g, ".");
+    window.location.href = "mailto:" + e;
+    return false;
+  }
+</script>

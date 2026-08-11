@@ -1,6 +1,6 @@
 # Site settings
 title: Shivaram Kumar Jagannathan
-email: shivaram.jagannathan@outlook.com
+email: "shivaram.jagannathan [at] outlook [dot] com"
 description: >-
   Shivaram — robotics researcher at NTU Singapore (Algorithmic Robotics Group).
   Also known as Shivaram Kumar, Shivaram K, Shivaram Kumar Jagannathan, or
@@ -15,7 +15,7 @@ lang: en
 # SEO / structured data
 author:
   name: Shivaram Kumar Jagannathan
-  email: shivaram.jagannathan@outlook.com
+  email: "shivaram.jagannathan [at] outlook [dot] com"
 twitter:
   username: shirakuex
   card: summary_large_image
@@ -49,7 +49,7 @@ location: >
   Singapore 639798<br/>
 
 contact: >
-  <a href="mailto:shivaram.jagannathan@outlook.com" target="_blank"><i class="ph ph-envelope-simple"></i> Email</a> <br/>
+  <a href="#" onclick="return emailDecode(this);" data-email="shivaram.jagannathan [at] outlook [dot] com" target="_blank"><i class="ph ph-envelope-simple"></i> shivaram.jagannathan [at] outlook [dot] com</a> <br/>
   <a href="https://scholar.google.com/citations?user=geKWO64AAAAJ&hl=en" target="_blank" rel="noopener"><i class="ph ph-student"></i> Google Scholar</a> <br/>
   <a href="https://github.com/ShirakuGIT" target="_blank" rel="noopener"><i class="ph ph-github-logo"></i> GitHub</a> <br/>
   <a href="https://www.linkedin.com/in/shivaramkumarj/" target="_blank" rel="noopener"><i class="ph ph-linkedin-logo"></i> LinkedIn</a> <br/>
