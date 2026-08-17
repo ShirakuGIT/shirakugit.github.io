@@ -1,9 +1,9 @@
 {
-  "updated": "2026-08-16",
+  "updated": "2026-08-17",
   "source": "cloudflare-rum",
   "days": 30,
   "counts": {
-    "IN": 30,
+    "IN": 40,
     "US": 20,
     "KR": 10,
     "VN": 10
