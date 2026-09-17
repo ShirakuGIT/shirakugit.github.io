@@ -1,32 +1,35 @@
 ---
 ---
 
+{% if entry.image %}
+<div class="pub-entry">
+  <div class="pub-thumb">
+    <img src="{{ site.url }}{{ site.baseurl }}/images/{{ entry.image }}" alt="{{ entry.title }}">
+  </div>
+  <div class="pub-body">
+{% endif %}
 
-<style>
-.btn{
-    margin-bottom:5px;
-    padding-top:0px;
-    padding-bottom:0px;
-    padding-left:15px;
-    padding-right:15px;
-    height:20px
-}
+{% assign _span_open = '<span id="' | append: entry.key | append: '">' %}
+{% assign _ref_clean = reference | remove_first: _span_open | remove_first: '</span>' %}
 
-pre{
-    white-space: pre-wrap;  
-    white-space: -moz-pre-wrap; 
-    white-space: -pre-wrap; 
-    white-space: -o-pre-wrap; 
-    word-wrap: break-word; 
-    width:100%; overflow-x:auto;
-}
-</style>
+{% assign _parts = _ref_clean | split: '<i>' %}
+{% assign _rest = _parts[1] | split: '</i>' %}
+{% assign _title_html = _rest[0] %}
+{% assign _authors_html = _parts[0] %}
+{% assign _authors_len = _authors_html.size | minus: 2 %}
+{% assign _authors_clean = _authors_html | slice: 0, _authors_len | replace_first: 'Kumar, S.', '<b>Kumar, S.</b>' %}
 
+{% assign _title_link = nil %}
+{% if entry.doi %}
+  {% if entry.type == 'unpublished' %}
+    {% assign _title_link = entry.doi | prepend: 'https://arxiv.org/abs/' %}
+  {% else %}
+    {% assign _title_link = entry.doi | prepend: 'http://doi.org/' %}
+  {% endif %}
+{% endif %}
 
-<div class="text-justify">{{reference}}</div>
-
-<!-- You can use the below to make your name bold -->
-<!-- {{reference | replace_first: 'Bryngelson, S. H.', '<b>Bryngelson, S. H.</b>' | replace_first: 'Bryngelson, S.', '<b>Bryngelson, S.</b>' }}</div> -->
+<p class="pub-title" id="{{ entry.key }}">{% if _title_link %}<a href="{{ _title_link }}" target="_blank">{{ _title_html }}</a>{% else %}{{ _title_html }}{% endif %}</p>
+<p class="pub-authors">{{ _authors_clean }}</p>
 
 {% assign bibtest = false %}
 {% if entry.file %}
@@ -38,39 +41,42 @@ pre{
 {% endfor %}
 {% endif %}
 
+<div class="pub-links">
 {% if bibtest %}
-<a href="{{ site.url }}{{ site.baseurl }}/papers/{{ entry.file }}" target="_blank"><button class="btn btn-success btm-sm">PDF</button></a>
+<a class="pub-btn" href="{{ site.url }}{{ site.baseurl }}/papers/{{ entry.file }}" target="_blank">PDF</a>
 {% endif %}
 
-{% if entry.doi %}
-{% if entry.type == 'unpublished' %}
-<a href="{{ entry.doi | prepend: 'https://arxiv.org/abs/' }}" target="_blank"><button class="btn btn-primary btm-sm">ARXIV</button></a>
-{% else %}
-<a href="{{ entry.doi | prepend: 'http://doi.org/' }}" target="_blank"><button class="btn btn-primary btm-sm">DOI</button></a>
-{% endif %}
+{% if _title_link %}
+<a class="pub-btn" href="{{ _title_link }}" target="_blank">{% if entry.type == 'unpublished' %}arXiv{% else %}DOI{% endif %}</a>
 {% endif %}
 
 {% if entry.type == 'unpublished' or entry.type == 'article' or  entry.type == 'thesis' or entry.type == 'inproceedings' or entry.type == 'report' %}
-<button class="btn btn-danger btm-sm"  onclick="toggleBibtex{{entry.key}}()">BIB</button>
+<button class="pub-btn" onclick="toggleBibtex{{entry.key}}()">BibTeX</button>
 {% endif %}
 
 {% if entry.abstract %}
-<button class="btn btn-warning btm-sm"  onclick="toggleAbstract{{entry.key}}()">ABSTRACT</button>
+<button class="pub-btn" onclick="toggleAbstract{{entry.key}}()">Abstract</button>
 {% endif %}
+</div>
 
 {% if entry.abstract %}
-<div id="a{{entry.key}}" style="display: none; background-color:black; border-radius:5px; padding:10px; margin-bottom:20px;">
+<div id="a{{entry.key}}" class="pub-panel" style="display: none;">
 <pre>{{ entry.bibtex | remove: "entry.abstract" }}</pre>
 </div>
 {% else %}
-<div id="a{{entry.key}}" style="display: none; background-color:black; border-radius:5px; padding:10px; margin-bottom:20px;">
+<div id="a{{entry.key}}" class="pub-panel" style="display: none;">
 <pre>{{ entry.bibtex }}</pre>
 </div>
 {% endif %}
 
-<div id="b{{entry.key}}" style="display: none; background-color:black; border-radius:5px; padding:10px; margin-bottom:20px;">
+<div id="b{{entry.key}}" class="pub-panel" style="display: none;">
 <pre>{{entry.abstract}}</pre>
 </div>
+
+{% if entry.image %}
+  </div>
+</div>
+{% endif %}
 
 <script>
 function toggleBibtex{{entry.key}}(parameter) {

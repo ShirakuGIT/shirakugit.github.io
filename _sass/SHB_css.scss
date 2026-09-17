@@ -291,6 +291,91 @@ $earth-muted:       #8c8576;
   .post-card-more { color: $earth-green; font-weight: 600; &:hover { color: $earth-orange; text-decoration: none; } }
 }
 .post-back a { color: $earth-muted; &:hover { color: $earth-orange; } }
+
+/* --- Research: publications list (jekyll-scholar) --- */
+.bibliography {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  > li {
+    padding: 22px 0;
+    border-bottom: 1px solid $earth-line;
+    &:first-child { padding-top: 0; }
+    &:last-child { border-bottom: 0; }
+  }
+}
+.pub-entry {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 22px;
+}
+.pub-thumb {
+  flex: 0 0 auto;
+  width: 220px;
+  max-width: 100%;
+  img {
+    display: block;
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid rgba($earth-green, .22);
+  }
+}
+.pub-body {
+  flex: 1 1 320px;
+  min-width: 0;
+}
+.pub-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.35;
+  margin: 0 0 6px;
+  a { color: #efe6d3; }
+  a:hover { color: $earth-orange; text-decoration: none; }
+}
+.pub-authors {
+  color: $earth-muted;
+  line-height: 1.5;
+  margin: 0 0 14px;
+  b { color: $earth-text; }
+}
+.pub-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.pub-btn {
+  display: inline-flex;
+  align-items: center;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  color: $earth-text;
+  background: $earth-ink;
+  border: 1px solid rgba($earth-green, .25);
+  padding: 6px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color .15s ease, color .15s ease;
+  &:hover, &:focus {
+    color: $earth-orange-lt;
+    border-color: $earth-orange;
+    text-decoration: none;
+  }
+}
+.pub-panel {
+  margin-top: 14px;
+  background: $earth-raise !important;
+  border: 1px solid $earth-line;
+  border-radius: 8px;
+  padding: 14px !important;
+  pre {
+    color: $earth-text;
+    margin: 0;
+    background: transparent;
+  }
+}
 .post-tag {
   display: inline-block;
   font-size: .72rem;
@@ -309,7 +394,7 @@ $earth-muted:       #8c8576;
    Typography — Apple fonts. Lucida Grande for headings/nav/UI, San Francisco
    for body copy. (Overrides the Bootswatch "Lato" default.)
    =========================================================================== */
-$font-lucida: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+$font-lucida: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-sf: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 :root { --bs-body-font-family: #{$font-sf}; }
@@ -324,7 +409,7 @@ h1, h2, h3, h4, h5, h6,
 .hero-name, .hero-role, .hero-eyebrow, .section-title, .interest-tags span,
 .post-title, .post-card-title, .post-tag,
 .jumbotron h3, .jumbotron h4, .jumbotron h5,
-.sr-title {
+.sr-title, .pub-title {
   font-family: $font-lucida;
 }
 

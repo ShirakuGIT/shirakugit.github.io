@@ -32,4 +32,10 @@ iframe {
 
 ## Research
 
-### Coming soon!
+<div class="jumbotron">
+
+### Publications
+
+{% bibliography --query @unpublished %}
+
+</div>

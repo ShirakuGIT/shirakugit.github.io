@@ -116,8 +116,8 @@ plugins:
   - jekyll-feed
 
 scholar:
-  last_name: Doe
-  first_name: [John]
+  last_name: Kumar
+  first_name: [Shivaram]
 
   style: citesty
   locale: en
