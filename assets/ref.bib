@@ -1,35 +1,3 @@
-@incollection{example_invited_talk,
-  author = {J. Doe},
-  note = {Example Location},
-  publisher = {Example Talk Name},
-  year = {2040},
-  keywords = "invited",
-}
-
-@software{example_software,
-  author = {J. Doe},
-  title = {Example software},
-  url = {https://example.com},
-  date = {2040},
-}
-
-@inproceedings{example_proceeding,
-    Author = {J. Doe},
-    Year = {2040},
-    Title = {Example title},
-    Booktitle = {Example Book},
-    Address = {Pasadena, CA},
-    file = {example_proceeding.pdf},
-    abstract = {Example abstract.},
-}
-
-@incollection{example_conference,
-    author = {J. Doe},
-    title = {Example talk},
-    note = {Example Conference},
-    year = {2040},
-}
-
 @unpublished{kumar2026casco,
     Author = {Shivaram Kumar and Gaoyuan Liu and Yoonchang Sung},
     Title = {CaSCo: Cascade-Aware Soft-Collision Motion Planning},
@@ -40,4 +8,3 @@
     image = {research/casco-pipeline.png},
     abstract = {Conventional motion planning treats collision as a binary constraint, although contact with different objects can have drastically different consequences. A robot may safely brush against a cardboard box while even minor contact with a glass, laptop, or unstable object may be undesirable. Moreover, a direct robot--object collision can move the contacted object and trigger secondary object--object collisions, making the risk of a motion depend on the physical evolution of the scene rather than only on the robot's geometric path. We present CaSCo, a cascade-aware soft-collision motion planning framework in which a vision-language or language model assigns semantic risk to objects and a physics simulator predicts the consequences of candidate robot motions. CaSCo searches for a path that minimizes the total semantic risk of the unique objects displaced either directly by the robot or indirectly through cascaded collisions. Because collisions change the environment, we augment roadmap states with the predicted object arrangement and the set of objects whose risk has already been incurred. We develop an optimal graph-search algorithm with an admissible and consistent cascade-relaxed heuristic and caching and pruning mechanisms for efficient search. Experiments in cluttered manipulation environments evaluate semantic risk, cascade reasoning, planning efficiency, and real-robot operation.},
 }
-
