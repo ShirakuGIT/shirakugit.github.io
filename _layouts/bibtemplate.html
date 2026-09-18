@@ -15,9 +15,8 @@
 {% assign _parts = _ref_clean | split: '<i>' %}
 {% assign _rest = _parts[1] | split: '</i>' %}
 {% assign _title_html = _rest[0] %}
-{% assign _authors_html = _parts[0] %}
-{% assign _authors_len = _authors_html.size | minus: 2 %}
-{% assign _authors_clean = _authors_html | slice: 0, _authors_len | replace_first: 'Kumar, S.', '<b>Kumar, S.</b>' %}
+{% assign _names = entry.author | split: " and " %}
+{% capture _authors_clean %}{% for _n in _names %}{% assign _name = _n | split: ", " %}{% assign _last = _name[0] %}{% assign _first = _name[1] %}{% unless forloop.first %}{% if forloop.last and forloop.index0 > 1 %}, &amp; {% elsif forloop.last %} &amp; {% else %}, {% endif %}{% endunless %}{% if _last == 'Kumar' and _first == 'Shivaram' %}<b>{{ _first }} {{ _last }}</b>{% else %}{{ _first }} {{ _last }}{% endif %}{% endfor %} ({{ entry.year }}){% endcapture %}
 
 {% assign _title_link = nil %}
 {% if entry.doi %}
