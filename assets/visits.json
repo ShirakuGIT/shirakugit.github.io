@@ -1,11 +1,11 @@
 {
-  "updated": "2026-10-05",
+  "updated": "2026-10-06",
   "source": "cloudflare-rum",
   "days": 30,
   "counts": {
     "CN": 30,
-    "SG": 20,
     "US": 10,
+    "SG": 10,
     "TW": 10,
     "IN": 10
   }
