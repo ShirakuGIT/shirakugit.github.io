@@ -364,6 +364,39 @@ $earth-muted:       #8c8576;
     text-decoration: none;
   }
 }
+// TL;DR: mossy filled pill (vs. the outlined utility buttons) + a quiet pull-quote reveal (vs. the boxed panels)
+.pub-btn.pub-btn-tldr {
+  color: $earth-ink;
+  background: linear-gradient(135deg, $earth-green-dk, $earth-green);
+  border-color: transparent;
+  gap: 5px;
+  i { font-size: .9rem; }
+  .pub-tldr-caret { transition: transform .35s ease; }
+  &:hover, &:focus {
+    color: $earth-ink;
+    border-color: transparent;
+    background: linear-gradient(135deg, $earth-green, lighten($earth-green, 8%));
+  }
+  &:focus-visible { outline: 1px solid $earth-green; outline-offset: 2px; }
+  &[aria-expanded="true"] .pub-tldr-caret { transform: rotate(180deg); }
+}
+.pub-tldr-text {
+  line-height: 1.5;
+  color: #e6dccb;
+  border-left: 2px solid $earth-green;
+  padding-left: 14px;
+  margin: 0;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(-4px);
+  transition: max-height .35s ease, opacity .3s ease, transform .35s ease, margin .35s ease;
+  &.is-open {
+    opacity: 1;
+    transform: none;
+    margin-top: 14px;
+  }
+}
 .pub-panel {
   margin-top: 14px;
   background: $earth-raise !important;
@@ -394,8 +427,8 @@ $earth-muted:       #8c8576;
    Typography — Apple fonts. Lucida Grande for headings/nav/UI, San Francisco
    for body copy. (Overrides the Bootswatch "Lato" default.)
    =========================================================================== */
-$font-lucida: "Helvetica Neue", Helvetica, Arial, sans-serif;
-$font-sf: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-lucida: "Helvetica Neue", Helvetica, Inter, Arial, sans-serif;
+$font-sf: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Helvetica, Inter, Arial, sans-serif;
 
 :root { --bs-body-font-family: #{$font-sf}; }
 

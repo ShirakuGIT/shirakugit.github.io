@@ -41,6 +41,10 @@
 {% endif %}
 
 <div class="pub-links">
+{% if entry.tldr %}
+<button type="button" class="pub-btn pub-btn-tldr" aria-expanded="false" aria-controls="t{{ entry.key }}">TL;DR<i class="ph ph-caret-down pub-tldr-caret"></i></button>
+{% endif %}
+
 {% if bibtest %}
 <a class="pub-btn" href="{{ site.url }}{{ site.baseurl }}/papers/{{ entry.file }}" target="_blank">PDF</a>
 {% endif %}
@@ -52,24 +56,14 @@
 {% if entry.type == 'unpublished' or entry.type == 'article' or  entry.type == 'thesis' or entry.type == 'inproceedings' or entry.type == 'report' %}
 <button class="pub-btn" onclick="toggleBibtex{{entry.key}}()">BibTeX</button>
 {% endif %}
+</div>
 
-{% if entry.abstract %}
-<button class="pub-btn" onclick="toggleAbstract{{entry.key}}()">Abstract</button>
+{% if entry.tldr %}
+<p class="pub-tldr-text" id="t{{ entry.key }}" hidden>{{ entry.tldr }}</p>
 {% endif %}
-</div>
 
-{% if entry.abstract %}
-<div id="a{{entry.key}}" class="pub-panel" style="display: none;">
-<pre>{{ entry.bibtex | remove: "entry.abstract" }}</pre>
-</div>
-{% else %}
 <div id="a{{entry.key}}" class="pub-panel" style="display: none;">
 <pre>{{ entry.bibtex }}</pre>
-</div>
-{% endif %}
-
-<div id="b{{entry.key}}" class="pub-panel" style="display: none;">
-<pre>{{entry.abstract}}</pre>
 </div>
 
 {% if entry.image %}
@@ -78,16 +72,30 @@
 {% endif %}
 
 <script>
+// TL;DR: hidden until its button is pressed, then slides open (set up once per page)
+if (!window.__pubTldrInit) {
+  window.__pubTldrInit = true;
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.pub-btn-tldr').forEach(function (btn) {
+      var text = document.getElementById(btn.getAttribute('aria-controls'));
+      text.hidden = false; // JS on: collapse via CSS so it can animate
+      btn.addEventListener('click', function () {
+        var open = btn.getAttribute('aria-expanded') !== 'true';
+        btn.setAttribute('aria-expanded', open);
+        text.classList.toggle('is-open', open);
+        text.style.maxHeight = open ? text.scrollHeight + 'px' : '';
+      });
+    });
+    window.addEventListener('resize', function () {
+      document.querySelectorAll('.pub-tldr-text.is-open').forEach(function (t) {
+        t.style.maxHeight = t.scrollHeight + 'px';
+      });
+    });
+  });
+}
+
 function toggleBibtex{{entry.key}}(parameter) {
     var x= document.getElementById('a{{entry.key}}');
-    if (x.style.display === 'none') {
-        x.style.display = 'block';
-    } else {
-        x.style.display = 'none';
-    }
-}
-function toggleAbstract{{entry.key}}(parameter) {
-    var x= document.getElementById('b{{entry.key}}');
     if (x.style.display === 'none') {
         x.style.display = 'block';
     } else {

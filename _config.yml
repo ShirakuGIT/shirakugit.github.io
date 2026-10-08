@@ -137,6 +137,9 @@ scholar:
 
   query: "@*"
 
+  # Custom fields kept out of the BibTeX popup
+  bibtex_skip_fields: [abstract, month_numeric, tldr]
+
   bibliography_list_attributes:
     reversed: "reversed"
 
