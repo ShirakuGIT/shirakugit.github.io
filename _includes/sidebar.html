@@ -1,21 +1,5 @@
-<div>
 {% for member in site.data.pi %}
-<div class="jumbotron">
-   <center>
-   <a href="{{site.url}}{{site.baseurl}}/about"><img class="profile-pic profile-pic-home" src="{{site.url}}{{site.baseurl}}/images/{{ member.photo }}" alt="{{ member.name }}"/></a>
-  </center>
+<div class="home-photo">
+  <a href="{{site.url}}{{site.baseurl}}/about"><img class="profile-pic profile-pic-home" src="{{site.url}}{{site.baseurl}}/images/{{ member.photo }}" alt="{{ member.name }}"/></a>
 </div>
 {% endfor %}
-</div>
-
-<div class="jumbotron">
-  <h4>News</h4>
-
-  {% for article in site.data.news limit:3 %}
-  <b>{{ article.date }}</b>
-    <p>{{ article.headline }}</p>
-  {% endfor %}
-  
-  <h5><a href="{{ site.url }}{{ site.baseurl }}/allnews.html">... see all News</a></h5>
-
-</div>

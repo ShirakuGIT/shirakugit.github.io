@@ -1,0 +1,36 @@
+{% comment %}
+  News timeline, driven by _data/news.yml.
+  Usage: {% include news-list.html limit=3 %}   (omit limit to show everything)
+{% endcomment %}
+{% assign _limit = include.limit | default: site.data.news.size %}
+<ol class="news-timeline">
+{% for item in site.data.news limit: _limit %}
+  {% assign _type = item.type | default: 'milestone' %}
+  {% case _type %}
+    {% when 'preprint' %}{% assign _icon = 'ph-file-text' %}{% assign _label = 'Preprint' %}
+    {% when 'paper' %}{% assign _icon = 'ph-article' %}{% assign _label = 'Paper' %}
+    {% when 'award' %}{% assign _icon = 'ph-trophy' %}{% assign _label = 'Award' %}
+    {% when 'talk' %}{% assign _icon = 'ph-microphone-stage' %}{% assign _label = 'Talk' %}
+    {% else %}{% assign _icon = 'ph-flag' %}{% assign _label = 'Milestone' %}
+  {% endcase %}
+  <li class="news-item news-{{ _type }}">
+    <time class="news-date" datetime="{{ item.date | date: '%Y-%m-%d' }}">
+      <span class="news-day">{{ item.date | date: '%b %-d' }}</span>
+      <span class="news-year">{{ item.date | date: '%Y' }}</span>
+    </time>
+    <div class="news-body">
+      <span class="news-tag"><i class="ph {{ _icon }}"></i>{{ _label }}</span>
+      <p class="news-title">{{ item.title | default: item.headline }}</p>
+      {% if item.summary %}<p class="news-summary">{{ item.summary }}</p>{% endif %}
+      {% if item.links %}
+      <div class="news-links">
+        {% for l in item.links %}
+        {% assign _ext = l.url | slice: 0, 4 %}
+        <a class="news-link" href="{% if _ext == 'http' %}{{ l.url }}{% else %}{{ site.baseurl }}{{ l.url }}{% endif %}"{% if _ext == 'http' %} target="_blank" rel="noopener"{% endif %}>{{ l.label }}<i class="ph {% if _ext == 'http' %}ph-arrow-up-right{% else %}ph-arrow-right{% endif %}"></i></a>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </li>
+{% endfor %}
+</ol>

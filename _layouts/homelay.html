@@ -5,7 +5,15 @@ layout: default
   <div id="homeid" class="col-sm-7 col-xs-12">
 	{{ content }}
   </div>
-  
-  <div id="newsid" class="col-sm-5 col-xs-12" >
+
+  <div id="photoid" class="col-sm-5 col-xs-12">
 	{% include sidebar.html %}
   </div>
+
+  <section id="newsid" class="col-12 home-news">
+    <div class="home-news-head">
+      <h2 class="home-news-title">News</h2>
+      <a class="home-news-all" href="{{ site.url }}{{ site.baseurl }}/allnews.html">All news<i class="ph ph-arrow-right"></i></a>
+    </div>
+    {% include news-list.html limit=3 %}
+  </section>

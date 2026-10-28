@@ -1,9 +1,35 @@
-- date: 17th September, 2026
-  headline: "New preprint! \"Imagine-TAMP: Imagination-Guided Task and Motion Planning in Partial Observability\" is out on <a href=\"https://arxiv.org/abs/2609.20396\" target=\"_blank\">arXiv</a> — see the <a href=\"/research/\">Research</a> page."
+# News — newest first. Shown as a timeline on the homepage (latest 3) and on /allnews.html.
+#
+#   date:    YYYY-MM-DD
+#   type:    preprint | paper | milestone | award | talk   (sets the coloured tag + icon)
+#   title:   one short line (plain text or simple HTML)
+#   summary: optional, one sentence of context
+#   links:   optional list of { label, url } — shown as small buttons
 
-- date: 16th September, 2026
-  headline: "New preprint! \"CaSCo: Cascade-Aware Soft-Collision Motion Planning\" is out on <a href=\"https://arxiv.org/abs/2609.18910\" target=\"_blank\">arXiv</a> — see the <a href=\"/research/\">Research</a> page."
+- date: 2026-09-17
+  type: preprint
+  title: "Imagine-TAMP: Imagination-Guided Task and Motion Planning in Partial Observability"
+  summary: New preprint on deciding where to look and what to move when the target object is hidden.
+  links:
+    - label: arXiv
+      url: https://arxiv.org/abs/2609.20396
+    - label: Research
+      url: /research/
 
-- date: 16th January, 2026
-  headline: "Joined the Algorithmic Robotics Group @ NTU Singapore, under Dr. Yoonchang Sung"
+- date: 2026-09-16
+  type: preprint
+  title: "CaSCo: Cascade-Aware Soft-Collision Motion Planning"
+  summary: New preprint on motion planning that weighs the risk of bumping objects, including knock-on collisions.
+  links:
+    - label: arXiv
+      url: https://arxiv.org/abs/2609.18910
+    - label: Research
+      url: /research/
 
+- date: 2026-01-16
+  type: milestone
+  title: Joined the Algorithmic Robotics Group @ NTU Singapore
+  summary: Working under Dr. Yoonchang Sung.
+  links:
+    - label: ARG
+      url: https://algrobogroup.github.io/
