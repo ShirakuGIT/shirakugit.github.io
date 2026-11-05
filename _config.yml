@@ -152,3 +152,5 @@ exclude:
   - Rakefile
   - images/photography-originals
   - scripts
+  - aerial-scans.mp4
+  - full-map-height-above-ground.png
