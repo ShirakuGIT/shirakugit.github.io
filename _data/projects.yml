@@ -25,3 +25,10 @@
   caption: "Human-to-robot motion mimicry via adaptive IK"
   subtitle: "ROS 2 teleoperation framework"
   description: "Maps Meta Quest 2 controller poses to a robot arm using adaptive inverse kinematics, with support for multiple robots and teleoperation modes."
+
+- name: "SLAM"
+  video: https://www.youtube.com/watch?v=WF22-YcPSCo
+  media: /images/projects/aerial-scans.mp4
+  caption: "Ground-based 3D LiDAR SLAM run (2x speed)"
+  subtitle: "Simultaneous localization and mapping"
+  description: "Ground-based SLAM using a 3D LiDAR and a suite of other sensors, producing a full map colored by height above ground."

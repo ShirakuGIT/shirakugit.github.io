@@ -457,7 +457,7 @@ body {
 }
 .container-fluid { max-width: 720px; margin-left: auto; margin-right: auto; padding-left: 20px; padding-right: 20px; }
 /* Projects page escapes the reading column so the bento grid can breathe */
-body.projects-page .container-fluid { max-width: 1280px; }
+body.projects-page .container-fluid { max-width: 1600px; }
 
 /* Links — green at rest, terracotta on hover (instant, no animation) */
 a { color: $earth-green; }
@@ -1470,6 +1470,7 @@ $font-garamond: "EB Garamond", "Apple Garamond", "ITC Garamond", Garamond, "Time
 
 .bento-cell--feature { grid-column: span 7; grid-row: span 2; }
 .bento-cell--pair     { grid-column: span 5; }
+.bento-cell--lead     { grid-column: span 7; }
 .bento-cell--wide     { grid-column: span 12; }
 
 .bento-link {
@@ -1565,6 +1566,7 @@ $font-garamond: "EB Garamond", "Apple Garamond", "ITC Garamond", Garamond, "Time
 .bento-cell:hover .bento-arrow,
 .bento-cell.is-open .bento-arrow,
 .bento-cell--feature .bento-arrow,
+.bento-cell--lead .bento-arrow,
 .bento-cell--wide .bento-arrow {
   opacity: 1;
   transform: translateY(0);
@@ -1598,7 +1600,8 @@ $font-garamond: "EB Garamond", "Apple Garamond", "ITC Garamond", Garamond, "Time
   line-height: 1.08;
   color: #efe6d3;
 }
-.bento-cell--feature .bento-title { font-size: 2rem; }
+.bento-cell--feature .bento-title,
+.bento-cell--lead .bento-title { font-size: 2rem; }
 .bento-cell--wide .bento-title { font-size: 1.9rem; }
 .bento-desc {
   display: block;
@@ -1620,16 +1623,34 @@ $font-garamond: "EB Garamond", "Apple Garamond", "ITC Garamond", Garamond, "Time
   transform: none;
 }
 
+/* Randomized square layout (set by the script on _pages/projects.md); desktop only.
+   Cards tile a 12x12 grid exactly, so the whole block is a square. */
+@media (min-width: 981px) {
+  .bento-grid.is-shuffled {
+    grid-template-rows: repeat(12, minmax(0, 1fr));
+    grid-auto-rows: 0;
+    grid-auto-flow: row;
+    aspect-ratio: 7 / 5;
+  }
+  .bento-grid.is-shuffled .bento-cell {
+    grid-column: var(--col);
+    grid-row: var(--row);
+    min-height: 0;
+  }
+}
+
 @media (max-width: 980px) {
   .bento-grid { grid-template-columns: repeat(6, 1fr); gap: 18px; }
   .bento-cell--feature { grid-column: span 6; grid-row: span 2; }
   .bento-cell--pair     { grid-column: span 3; }
+  .bento-cell--lead     { grid-column: span 3; }
   .bento-cell--wide     { grid-column: span 6; }
 }
 @media (max-width: 640px) {
   .bento-grid { grid-template-columns: 1fr; }
   .bento-cell--feature,
   .bento-cell--pair,
+  .bento-cell--lead,
   .bento-cell--wide { grid-column: span 1; grid-row: span 1; }
   .bento-title { font-size: 1.45rem; }
 }
