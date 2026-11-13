@@ -1,7 +1,7 @@
 ---
 title: "Blog"
 layout: page
-sitemap: false
+description: "Essays and blog posts on robotics, intelligence and research ideas by Shivaram Kumar Jagannathan."
 permalink: /blogs/
 ---
 

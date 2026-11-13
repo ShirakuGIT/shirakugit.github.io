@@ -5,6 +5,7 @@ status: wip
 updated: 2026-06-04
 source: "https://github.com/karpathy/nanoGPT"
 tags: [llm, transformers, karpathy, pytorch]
+description: "My notes as I implement nanoGPT line by line — character-level on tinyshakespeare, then word-level."
 summary: "My notes as I implement nanoGPT line by line — character-level on tinyshakespeare, then word-level."
 ---
 

@@ -4,6 +4,7 @@ category: reading
 status: wip
 updated: 2026-06-07
 tags: [robotics, machine-learning]
+description: ""
 summary: ""
 # source: "https://..."
 ---

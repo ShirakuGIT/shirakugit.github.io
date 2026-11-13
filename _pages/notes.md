@@ -1,7 +1,7 @@
 ---
 title: "Notes"
 layout: page
-sitemap: false
+description: "A working garden of study notes, paper digests and tutorial implementations on robotics and machine learning."
 permalink: /notes/
 ---
 

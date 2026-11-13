@@ -2,8 +2,11 @@
 title: "LaTeX compilation — demo"
 category: misc
 status: done
+sitemap: false
+noindex: true
 updated: 2026-08-04
 tags: [meta, syntax, latex]
+description: "Compile research-grade LaTeX in place — like a notebook cell, but for academic papers. Drop a {% tex_cell %}{% endraw %} or point at a .tex file and get the paper as real page content (ar5iv-style), with the compiled PDF for download."
 summary: "Compile research-grade LaTeX in place — like a notebook cell, but for academic papers. Drop a {% raw %}{% tex_cell %}{% endraw %} or point at a .tex file and get the paper as real page content (ar5iv-style), with the compiled PDF for download."
 ---
 

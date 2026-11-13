@@ -50,4 +50,8 @@ Allow: /
 User-agent: Meta-ExternalAgent
 Allow: /
 
+# Compiled LaTeX demo output (not real content)
+User-agent: *
+Disallow: /assets/tex/
+
 Sitemap: {{ site.url }}{{ site.baseurl }}/sitemap.xml

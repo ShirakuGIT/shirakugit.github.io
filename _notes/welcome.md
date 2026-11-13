@@ -4,6 +4,7 @@ category: misc
 status: wip
 updated: 2026-06-04
 tags: [meta]
+description: "What lives here, how it's organized, and what to expect."
 summary: "What lives here, how it's organized, and what to expect."
 ---
 

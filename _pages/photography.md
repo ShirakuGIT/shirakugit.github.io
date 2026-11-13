@@ -1,7 +1,7 @@
 ---
 title: "Photography"
 layout: page
-sitemap: false
+description: "Photography by Shivaram Kumar Jagannathan: photos from places travelled and things seen."
 permalink: /photography/
 ---
 

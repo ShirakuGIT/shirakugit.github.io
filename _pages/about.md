@@ -1,7 +1,7 @@
 ---
 title: "About"
 layout: gridlay
-sitemap: false
+description: "About Shivaram Kumar Jagannathan, a robotics researcher at the Algorithmic Robotics Group, NTU Singapore: background, affiliations and contact."
 permalink: /about/
 ---
 

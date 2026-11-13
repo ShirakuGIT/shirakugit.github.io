@@ -5,6 +5,7 @@ status: wip
 updated: 2026-06-04
 source: "http://cs231n.stanford.edu/"
 tags: [cs231n, computer-vision, stanford]
+description: "Course intro: from Hubel & Wiesel cats to ImageNet to ViTs. Setting up the framing for the rest of the course."
 summary: "Course intro: from Hubel & Wiesel cats to ImageNet to ViTs. Setting up the framing for the rest of the course."
 ---
 

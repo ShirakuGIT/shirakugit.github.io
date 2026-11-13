@@ -4,6 +4,7 @@ category: misc
 status: done
 updated: 2026-06-04
 tags: [meta, syntax]
+description: "How to drop notebook-style In[n]/Out[n] cells inline, no .ipynb attachment required."
 summary: "How to drop notebook-style In[n]/Out[n] cells inline, no .ipynb attachment required."
 ---
 

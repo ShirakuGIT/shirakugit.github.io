@@ -1,7 +1,7 @@
 ---
 title: "Research"
 layout: gridlay
-sitemap: false
+description: "Research by Shivaram Kumar Jagannathan on spatial intelligence, visual priors, 3D reconstruction and task and motion planning for robots."
 permalink: /research/
 ---
 

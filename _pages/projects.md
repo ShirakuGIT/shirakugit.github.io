@@ -1,7 +1,7 @@
 ---
 title: "Projects"
 layout: gridlay
-sitemap: false
+description: "Robotics projects by Shivaram Kumar Jagannathan, including 3D LiDAR SLAM, planning and perception, with demos and write-ups."
 permalink: /projects/
 body_class: projects-page
 ---
