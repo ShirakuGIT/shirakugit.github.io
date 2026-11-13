@@ -1,0 +1,80 @@
+/* plain — bellard.org lists, nullprogram dated archive, Pike's "say less",
+   tuned to be easy on the eye: soft (not pure) black on white, ~65-character
+   lines, generous leading, and nothing on the page that isn't text.
+   Colours: paper, ink, grey, one quiet blue. */
+@import url("latin-modern.css");
+
+/* Body font. Latin Modern is LaTeX's typeface; for the Helvetica version use
+   --font: "Helvetica Neue", Helvetica, -apple-system, Arial, sans-serif; and 18px. */
+:root { --font: "Latin Modern", "CMU Serif", Charter, Georgia, serif; --size: 20px; }
+:root { --bg: #fcfcfa; --fg: #1f1f1f; --muted: #77756f; --rule: #e4e2dc; --link: #2f5c9e; --code: #f3f2ee; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #1c1c1e; --fg: #d6d4cf; --muted: #8e8c86; --rule: #333336; --link: #9ab6e0; --code: #26262a; }
+}
+html, body { background: var(--bg); }
+body {
+  max-width: 36em; margin: 0 auto; padding: 4em 20px 5em; color: var(--fg);
+  font: var(--size)/1.6 var(--font);
+}
+
+/* links: coloured text, underline only as a faint hint */
+a, a:visited { color: var(--link); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--link) 30%, transparent); text-underline-offset: 3px; }
+a:hover { text-decoration-color: currentColor; }
+
+p { margin: 0 0 1.1em; }
+code, pre { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .82em; }
+pre { background: var(--code); padding: 1em 1.2em; line-height: 1.5; border-radius: 4px; }
+pre code { font-size: 1em; }
+:not(pre) > code { background: var(--code); padding: .1em .3em; border-radius: 3px; }
+blockquote { margin: 1.2em 0; padding-left: 1.1em; border-left: 3px solid var(--rule); color: var(--muted); }
+th, td { border-bottom: 1px solid var(--rule); padding: .35em .8em .35em 0; text-align: left; }
+figcaption, .aside, .kind, .who, footer, .back, .proto-banner { color: var(--muted); }
+figcaption, .aside, .kind { font-size: .85em; }
+hr { border: 0; border-top: 1px solid var(--rule); margin: 2.5em 0; }
+
+/* header */
+.masthead { margin-bottom: 3em; }
+.site-name { font-size: 1.5em; font-weight: 600; line-height: 1.25; letter-spacing: -.01em; margin: 0 0 .2em; }
+p.site-name { font-size: 1.1em; }
+.site-name a { color: inherit; text-decoration: none; }
+.who { margin: 0; }
+.nav { margin: .8em 0 0; font-size: .9em; }
+.nav a { text-decoration: none; margin-right: 1.1em; white-space: nowrap; display: inline-block; }
+.nav a:hover { text-decoration: underline; }
+.nav .sep { display: none; }
+
+/* sections: quiet headings, room between them */
+h2 { font-size: .8em; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 3.2em 0 1em; }
+.intro h2 { display: none; }
+.intro .sec-body > p:first-child { font-size: 1.08em; }
+
+/* one thing per line, separated by space rather than bullets */
+ul.things { list-style: none; padding: 0; }
+ul.things li { margin: 0 0 1em; }
+
+/* dated archive: date quietly on the left */
+ol.archive li { display: flex; gap: 1.4em; margin: 0 0 .55em; }
+ol.archive time { flex: 0 0 6.2em; color: var(--muted); font-size: .85em; font-variant-numeric: tabular-nums; padding-top: .2em; }
+@media (max-width: 520px) {
+  body { font-size: 18px; padding-top: 2.5em; }
+  ol.archive li { display: block; margin-bottom: 1em; }
+  ol.archive time { display: block; padding: 0; }
+}
+
+/* articles */
+.article-head { margin-bottom: 2.5em; }
+.article-title { font-size: 1.75em; font-weight: 600; line-height: 1.25; letter-spacing: -.015em; margin: 0 0 .35em; }
+.article-meta { color: var(--muted); font-size: .9em; margin: 0; }
+.article-body h1, .article-body h2, .article-body h3 { color: var(--fg); text-transform: none; letter-spacing: 0; font-weight: 600; line-height: 1.3; }
+.article-body h1 { font-size: 1.3em; margin: 2.2em 0 .6em; }
+.article-body h2 { font-size: 1.18em; margin: 2.2em 0 .6em; }
+.article-body h3 { font-size: 1em; margin: 1.8em 0 .5em; }
+.article-body ul, .article-body ol { padding-left: 1.3em; }
+.article-body li { margin-bottom: .4em; }
+.article-body img { border-radius: 4px; }
+.highlight .c, .highlight .c1, .highlight .cm { color: var(--muted); font-style: italic; }
+.highlight .k, .highlight .kd, .highlight .kn { font-weight: 600; }
+.back { margin-top: 3em; font-size: .9em; }
+
+footer { margin-top: 4em; padding-top: 1.5em; border-top: 1px solid var(--rule); font-size: .85em; }
+footer p { margin: 0 0 .3em; }

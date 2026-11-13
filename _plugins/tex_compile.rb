@@ -36,7 +36,7 @@ module Jekyll
     PDFINFO  = ENV.fetch("PDFINFO", "pdfinfo")
     PDFTOCAIRO = ENV.fetch("PDFTOCAIRO", "pdftocairo")
     # Bump when post-processing / pandoc flags change so stale caches rebuild.
-    CACHE_VERSION = "6"
+    CACHE_VERSION = "7" # 7: TikZ SVGs on a transparent page in original colours (light theme)
 
     DEFAULT_PREAMBLE = <<~'TEX'
       \documentclass[11pt]{article}
@@ -183,7 +183,7 @@ module Jekyll
       tikz_dir = File.join(cache, "tikz")
       FileUtils.mkdir_p(tikz_dir)
       libraries = source.scan(/^\s*\\usetikzlibrary\{[^}]+\}\s*$/).join("\n")
-      colors = brighten_colors(source.scan(/^\s*(?:\\definecolor|\\colorlet)\{[^\n]+$/).join("\n"))
+      colors = source.scan(/^\s*(?:\\definecolor|\\colorlet)\{[^\n]+$/).join("\n")
       svgs = []
 
       pictures.each_with_index do |picture, index|
@@ -221,25 +221,15 @@ module Jekyll
         \\usepackage{amsmath,amssymb}
         #{libraries}
         #{colors}
-        \\pagecolor{black!90}
         \\begin{document}
         #{picture}
         \\end{document}
       TEX
     end
 
-    # The embedded SVG figures are shown on the site's dark theme. Brighten the
-    # document's colours (HTML hex values) toward white so strokes, fills, and
-    # labels stay legible on the dark page. The white-background PDF keeps the
-    # original definitions, which is why the override happens here.
-    def self.brighten_colors(str)
-      str.gsub(/\{([0-9A-Fa-f]{6})\}/) do
-        hex = Regexp.last_match(1)
-        rgb = hex.scan(/../).map { |c| c.to_i(16) }
-        bright = rgb.map { |v| ((v + (255 - v) * 0.45).round).to_s(16).upcase.rjust(2, "0") }.join
-        "{#{bright}}"
-      end
-    end
+    # TikZ figures keep the document's own colours on a transparent page, the
+    # same as the PDF. In dark mode, assets/site.css flips them with
+    # `filter: invert(1) hue-rotate(180deg)` (.tex-html .tex-tikz img).
 
     def self.inject_figure_images(html, svgs)
       index = 0

@@ -47,9 +47,12 @@ Three repos have to be tracked separately:
 | Layouts | `_layouts/*.html` | `default` → `homelay`/`gridlay`/`page`/`post`/`note`/... |
 | Reusable snippets | `_includes/*.html` | `figure video gif jupyter_notebook calendar …` |
 | Custom plugins | `_plugins/*.rb` | Require Jekyll restart |
-| Styles | `_sass/SHB_css.scss` | House theme; **two SCSS entry wobbles below** |
+| **Styles** | `assets/site.css` | The homepage style (§7.0): plain CSS, LM Roman 8, light + dark |
+| Legacy styles (unlinked) | `_sass/SHB_css.scss`, `assets/main.scss` | Old earthy Bootstrap theme; delete after redesign approval |
+| A/B regression harness | `scripts/ab_compare.py` | Old-vs-new build comparison + screenshots (§7.0) |
+| Design prototypes | `_plugins/plain_preview.rb`, `_includes/plain/`, `assets/plain/*.css` | Generates `/plain/<style>/` for home + every post/note |
 | Deploy | `scripts/publish.sh`, `Rakefile` | `rake publish` = build+push gh-pages |
-| Live data (visitor map) | `assets/visits.json` | Auto-updated daily by CI bot — don't hand-edit |
+| Live data (visitor map) | `assets/visits.json` | Refreshed by `scripts/fetch_visits.py` (CI bot removed Nov 2026) — don't hand-edit |
 | Current server log | `.jekyll-serve.log` | Generated, gitignored |
 
 ---
@@ -161,15 +164,13 @@ error card. The `research` page is meant to showcase this eventually.
   `--trace --profile`, greps the build log for real errors (Jekyll exits 0 even
   on bad front matter), commits, previews locally, then **waits for explicit
   "y"** before `rake publish` + `git push`.
-- **The visitor-map bot pushes commits every day.** GitHub Action
-  `.github/workflows/update-visits.yml` runs at `04:17 UTC`: fetches Cloudflare
-  RUM counts into `assets/visits.json`, commits to `main`, then mirrors the
-  same JSON into `gh-pages`. Consequence: `main` is frequently ahead of your
-  local copy. **Always `git pull --rebase origin main` before pushing** or the
-  push is rejected. Handle any rebase conflict by keeping theirs for
-  `assets/visits.json`.
-- Don't hand-edit `assets/visits.json`; run `bash scripts/fetch_visits.py` (or
-  the workflow's env vars) if a refresh is needed.
+- **The daily visitor-map bot is gone.** `.github/workflows/update-visits.yml`
+  (which committed `assets/visits.json` to `main` every day at 04:17 UTC) was
+  removed in `8fe9ef0` (Nov 6, 2026). `main` should no longer drift ahead on its
+  own, but still `git pull --rebase origin main` before pushing — it's cheap.
+  Older history is full of `chore: refresh visitor map data` commits from it.
+- Don't hand-edit `assets/visits.json`; run `python3 scripts/fetch_visits.py`
+  (needs the Cloudflare env vars) if a refresh is needed.
 
 ---
 
@@ -204,7 +205,105 @@ otherwise it falls back to grey `misc`.
 
 ---
 
-## 7. Design system (the house style)
+## 7. Design system
+
+### 7.0 The homepage style (chosen Nov 2026) — the site's design
+
+The site uses an **early-2000s academic homepage** look — a professor's
+`~user/` page circa 2003, in the lineage of bellard.org, nullprogram, cat-v,
+Paul Graham, Dennis Ritchie's page. Shiva picked it after comparing eight
+prototypes. **All design work builds on this**; the old dark earthy Bootstrap
+theme (§7.1) is retired.
+
+Source of truth: **`assets/site.css`** (plain CSS, no Sass, no framework; read
+its header comment), linked from `_includes/head.html`. Rules — keep them:
+
+- **Wide, near-fluid page**: `body { max-width: 980px }` (~110-char lines).
+  Shiva explicitly asked to "go wider". No narrow reading column.
+- **Font: Latin Modern Roman 8** (`--font` in `site.css`) — LaTeX's Latin
+  Modern at its 8pt optical size: same design, sturdier and wider, so it reads
+  better on screens. Shiva tried Lora, Libertinus, STIX Two, New Computer
+  Modern Book, Old Standard TT and others (`/plain/fonts/`) and chose LM8.
+  Files: `assets/fonts/LM8-{regular,italic,bold}.woff2` (+ `LM-bold-italic` as
+  the bold italic), subset from CTAN OTFs with fonttools (GUST licence). Code
+  in Courier New. No web-font services, no icon fonts.
+- **Very few colours**, all CSS variables in `:root` (light / dark): ink,
+  paper, link blue, visited purple, hover red, one section-bar tint, greys.
+  Don't add colours; add a variable only if a new role truly needs one.
+- **Dark mode**: follows `prefers-color-scheme` by swapping the variables. Shiva
+  asked for it. TikZ figures (dark-on-transparent SVG) are flipped with
+  `filter: invert(1) hue-rotate(180deg)`; photos never are.
+- **Era furniture**: home masthead = big name, postal contact block with
+  `[at] [dot]` email, portrait top-right in a 1px border (links to /about/);
+  other pages get a compact name + role. Bracketed nav `[about] [projects] …`,
+  every `h2` is a tinted section bar, plain disc bullets, **bold ISO dates**
+  (`2026-11-14: title`), always-underlined links, `[bracketed]` action links,
+  italic "Last modified" footer. No radii, shadows, cards, or animations.
+- **Pictures are centred** by CSS (figure include, lone `![](…)` images, video
+  and GIF embeds) — authors don't add per-image markup.
+- **Interactive bits are minimal and degrade**: research TL;DR / Abstract /
+  BibTeX are native `<details>`; post/note "Contents" is a JS-built inline box
+  (hidden without JS or with < 3 headings); photo thumbnails link to the full
+  image and JS upgrades them to the lightbox; notes are grouped by category
+  with anchors (no filter JS); search box kept (`includes/search.html`).
+- Must work at phone width: masthead stacks, photo above name, no horizontal
+  scroll — verify in a 390px iframe (headless Chrome won't go below 500px).
+
+Where things live: `_includes/{head,header,footer,news-list,social,post-toc}.html`,
+`_layouts/{default,homelay,page,gridlay,textlay,post,note}.html`,
+`_layouts/bibtemplate.html` (research entry) and `_layouts/bibcompact.html`
+(one-line entry; home uses `{% bibliography --template bibcompact %}`).
+Home sections (Papers, Projects, Writing, News, Elsewhere) are data-driven in
+`homelay.html`; `_pages/home.md` holds only the bio.
+
+**Status (Nov 14, 2026):** migrated on branch `redesign/homepage`, uncommitted,
+not deployed. Still present and to be removed once Shiva approves: the legacy
+`_sass/SHB_css.scss` + `_sass/bootstrap/` + `assets/main.scss` (no longer
+linked), `assets/javascript/bootstrap/`, and the prototypes (`/plain/`).
+
+#### Regression / A/B testing: `scripts/ab_compare.py`
+
+Compares two production builds page by page — SEO head (title, description,
+canonical, robots, og/twitter, JSON-LD), main-content text (similarity + words
+gone), content links/images gone, anchors gone, and broken internal refs
+(only *new* breakage FAILs). `--shots` adds desktop + 390px phone screenshots
+side by side in `report.html`. Usage:
+
+```bash
+git stash -u   # or a worktree of main
+JEKYLL_ENV=production bundle exec jekyll build -d /tmp/A   # baseline
+JEKYLL_ENV=production bundle exec jekyll build -d /tmp/B   # candidate
+python3 scripts/ab_compare.py /tmp/A /tmp/B /tmp/ab --shots
+```
+
+Known-benign diffs: dates reformatted, text moved into the masthead/footer
+(stripped as chrome), hashed `/assets/tex/<sha>/` URLs after a
+`tex_compile.rb` `CACHE_VERSION` bump. Screenshots are CPU-heavy; Shiva's
+machine runs warm — run `--shots` sparingly and stop servers afterwards.
+
+#### The prototype system (`/plain/`)
+
+- `_plugins/plain_preview.rb` generates, for each style in `STYLES`, an index at
+  `/plain/<style>/` (plain lives at `/plain/`) plus a copy of **every post and
+  note** at `/plain/<style>` + its normal URL (e.g.
+  `/plain/homepage/notes/corl26/synthesis/`). It also sets
+  `site.plain_styles` for the style switcher. **Plugin → restart the server.**
+- Every style shares identical markup: `_layouts/plain.html` (header, style
+  switcher, hidden `.runhead/.contact/.portrait` extras a style may reveal),
+  `_includes/plain/index.html` (home: About, Papers, Projects, Writing = posts +
+  notes merged by date, News, Elsewhere) and `_includes/plain/article.html`
+  (looks the post/note up by `page.doc_url` and prints its rendered content).
+  Only `assets/plain/<style>.css` differs (CSS-Zen-Garden style), on top of
+  `assets/plain/base.css`.
+- Styles: `homepage` (chosen), `plain`, `sidebar`, `book`, `contents` (the
+  calm ones `@import "plain.css"`), `swiss`, `man`, `paper`. To add one: append
+  to `STYLES`, add `assets/plain/<name>.css`, restart.
+- Papers on the prototype index are hand-written from `assets/ref.bib`; the
+  intro paragraph there is draft copy — confirm wording with Shiva.
+- All prototype pages are `noindex` + `sitemap: false`, **but they ship with
+  `rake publish`** (reachable by URL). Fine for now; remove/gate before launch.
+
+### 7.1 Legacy: the earthy theme (retired — reference only)
 
 - **Palette** (`SHB_css.scss` top):
   - `$earth-orange #bd5d34` lite `#d07a3f` dark `#9c4a28` (accents, hovers)
@@ -245,9 +344,10 @@ styling in `SHB_css.scss` under "Projects page — bento grid".
   - Hover also unrolls it on desktop.
   - The GitHub chip and arrow are the *only* links; they navigate, not toggle.
   - `aria-expanded` is kept in sync by the inline script in `projects.md`.
-- If you redesign/extend this page, preserve: full-width escape, text pinned
-  bottom, click-to-expand (mobile has no hover), explicit redirect buttons,
-  the earth palette + Garamond titles.
+- While this page stays on the legacy theme, preserve: full-width escape, text
+  pinned bottom, click-to-expand (mobile has no hover), explicit redirect
+  buttons. When it migrates to the homepage style (§7.0), the bento grid is
+  expected to become a plain bulleted list like the prototype's "Projects".
 
 ---
 
@@ -276,6 +376,9 @@ only need nomarkdown when authoring raw HTML directly (see `projects.md`,
   `lsof -i :4000` / `lsof -i :35729`. Kill stale ones before starting a new
   server (or you'll get two processes hopping ports).
 - `.jekyll-pid` is gitignored and often stale — don't trust it.
+- Shiva often has their own `jekyll serve` running on :4000 (from VS Code).
+  Don't kill it; if you need a restart for a plugin change, run a second
+  server on another port (e.g. `--port 4001 -d <scratch dir>`, no livereload).
 - Build output/log files: `.publish.build.log`, `.publish.serve.log`,
   `.jekyll-serve.log` (all gitignored).
 - Sass deprecation warnings (Bootstrap's `red()/green()` math) are **noise**,
@@ -297,6 +400,12 @@ only need nomarkdown when authoring raw HTML directly (see `projects.md`,
 
 ## 11. Current state at time of writing (fresh eyes, high fidelity)
 
+- **Nov 2026: redesign under way** — the "homepage" style (§7.0) is chosen and
+  lives as a prototype at `/plain/homepage/`; live pages are still on the
+  legacy earthy theme. `_notes/corl26/` (4 CoRL 2026 notes) and
+  `_pages/publications.md` (redirect to `/research/`) are new; two arXiv
+  preprints (Imagine-TAMP, CaSCo) are in `assets/ref.bib` and `_data/news.yml`.
+
 - Projects page has been redesigned to a full-width bento grid (see §7) and is
   working in local preview. If things look off there, check §7 invariants.
 - `_pages/research.md` is a stub ("Coming soon!") but there is a working LaTeX
@@ -317,8 +426,10 @@ only need nomarkdown when authoring raw HTML directly (see `projects.md`,
 2. Data-first: edit `_data/*.yml`, not hardcoded markup.
 3. Verify with `bundle exec jekyll build` (greps for real errors).
 4. Never edit the `gh-pages` worktree (`...-1`) or `_site/`.
-5. `git pull --rebase origin main` before any push (CI bot owns commits daily).
+5. `git pull --rebase origin main` before any push.
 6. Never commit/push without an explicit ask.
-7. Match house style (§7) — it is deliberate. Don't second-guess the palette.
-8. Fresh HTML/JS in `.md` → wrap in `{::nomarkdown}`.
-9. Plugin edits → restart the server before testing.
+7. Design work follows the homepage style (§7.0): wide, LM Roman 8, very few
+   colours (all variables, light + dark), plain HTML. Don't add colours or chrome.
+8. Regression-test layout/style changes with `scripts/ab_compare.py` (§7.0).
+9. Fresh HTML/JS in `.md` → wrap in `{::nomarkdown}`.
+10. Plugin edits → restart the server before testing.

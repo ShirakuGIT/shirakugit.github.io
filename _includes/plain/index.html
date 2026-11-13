@@ -1,0 +1,85 @@
+{%- assign me = site.data.pi[0] -%}
+<section class="intro">
+  <h2>About</h2>
+  <div class="sec-body">
+    <p>I work on robotics: planning under partial observability, 3D reconstruction
+    for object search, SLAM, and getting robots to run outside the lab. I'm at the
+    <a href="https://algrobogroup.github.io/">Algorithmic Robotics Group</a>, NTU
+    Singapore, with <a href="https://yoonchangsung.com/">Yoonchang Sung</a>.</p>
+    <p class="links"><a href="{{ '/' | append: me.cv | relative_url }}">CV</a> |
+    <a href="{{ me.scholar }}">Google Scholar</a> |
+    <a href="{{ me.github }}">GitHub</a> |
+    <a href="{{ me.linkedin }}">LinkedIn</a> |
+    <a href="{{ me.twitter }}">X</a></p>
+  </div>
+</section>
+
+<section>
+  <h2>Papers</h2>
+  <div class="sec-body">
+    <ul class="things">
+      <li><a href="https://arxiv.org/abs/2609.20396">Imagine-TAMP</a>: deciding where
+        to look and what to move when the target object is hidden. Task and motion
+        planning with imagined scene geometry. <span class="aside">Preprint, 2026.</span></li>
+      <li><a href="https://arxiv.org/abs/2609.18910">CaSCo</a>: motion planning that
+        weighs the risk of bumping objects, including the knock-on collisions that
+        follow. <span class="aside">Preprint, 2026. First author.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Projects</h2>
+  <div class="sec-body">
+    <ul class="things">
+    {%- for p in site.data.projects %}
+      <li><a href="{{ p.repo | default: p.video }}">{{ p.name }}</a>: {{ p.description }}</li>
+    {%- endfor %}
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Writing</h2>
+  <div class="sec-body">
+    {%- assign items = "" | split: "" -%}
+    {%- for post in site.posts -%}
+      {%- capture row -%}{{ post.date | date: "%Y-%m-%d" }}^^{{ post.url }}^^{{ post.title }}^^post{%- endcapture -%}
+      {%- assign items = items | push: row -%}
+    {%- endfor -%}
+    {%- for note in site.notes -%}
+      {%- assign d = note.updated | default: note.date -%}
+      {%- capture row -%}{{ d | date: "%Y-%m-%d" }}^^{{ note.url }}^^{{ note.title }}^^note{%- endcapture -%}
+      {%- assign items = items | push: row -%}
+    {%- endfor -%}
+    {%- assign items = items | sort | reverse %}
+    <ol class="archive">
+    {%- for it in items -%}
+      {%- assign f = it | split: "^^" %}
+      <li><time datetime="{{ f[0] }}">{{ f[0] }}</time>
+          <span><a href="{{ page.base | append: f[1] | relative_url }}">{{ f[2] }}</a>{% if f[3] == "note" %} <span class="kind">(note)</span>{% endif %}</span></li>
+    {%- endfor %}
+    </ol>
+  </div>
+</section>
+
+<section>
+  <h2>News</h2>
+  <div class="sec-body">
+    <ol class="archive">
+    {%- for n in site.data.news %}
+      <li><time datetime="{{ n.date | date: '%Y-%m-%d' }}">{{ n.date | date: "%Y-%m-%d" }}</time>
+          <span>{{ n.title }}</span></li>
+    {%- endfor %}
+    </ol>
+  </div>
+</section>
+
+<section>
+  <h2>Elsewhere</h2>
+  <div class="sec-body">
+    <ul class="things">
+      <li><a href="{{ '/photography/' | relative_url }}">Photographs</a> from places I've been.</li>
+    </ul>
+  </div>
+</section>

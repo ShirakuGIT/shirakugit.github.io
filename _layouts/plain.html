@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>{% if page.title and page.title != site.title %}{{ page.title }} — {% endif %}{{ site.title }}</title>
+  <link rel="stylesheet" href="{{ '/assets/plain/base.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/plain/' | append: page.style | append: '.css' | relative_url }}">
+  <link rel="alternate" type="application/rss+xml" href="{{ '/feed.xml' | relative_url }}">
+  {% if page.math %}{% include mathjax.html %}{% endif %}
+  {%- if page.style == "homepage" %}
+  <script>
+  /* Prototype only: ?font=<key> previews a candidate font from _data/plain_fonts.yml. */
+  (function () {
+    var fonts = {
+      {%- for f in site.data.plain_fonts %}
+      {{ f.key | jsonify }}: { family: {{ f.family | jsonify }}, google: {{ f.google | default: "" | jsonify }} }{% unless forloop.last %},{% endunless %}
+      {%- endfor %}
+    };
+    var key = new URLSearchParams(location.search).get("font"), f = fonts[key];
+    if (!f) return;
+    if (f.google) {
+      var l = document.createElement("link");
+      l.rel = "stylesheet";
+      l.href = "https://fonts.googleapis.com/css2?family=" + f.google + "&display=swap";
+      document.head.appendChild(l);
+    }
+    document.documentElement.style.setProperty("--preview-font", f.family + ", Georgia, serif");
+    document.documentElement.classList.add("font-preview");
+  })();
+  </script>
+  <style>.font-preview body { font-family: var(--preview-font); }</style>
+  {%- endif %}
+</head>
+<body class="style-{{ page.style }}">
+
+{%- assign here = page.doc_url | default: "/" -%}
+{%- assign styles = site.plain_styles %}
+<p class="proto-banner">Design prototype (<a href="{{ '/' | relative_url }}">live site</a>). Same page in:
+{%- for s in styles -%}
+  {%- if s == "plain" %}{% assign b = "/plain" %}{% else %}{% assign b = "/plain/" | append: s %}{% endif %}
+  {% if s == page.style %}<strong>{{ s }}</strong>{% else %}<a href="{{ b | append: here | relative_url }}">{{ s }}</a>{% endif %}
+{%- endfor %}</p>
+
+<div class="runhead" aria-hidden="true"><span>JAGANNATHAN(1)</span><span>Robotics Researcher's Manual</span><span>JAGANNATHAN(1)</span></div>
+
+<header class="masthead">
+  {% if page.doc_url %}<p class="site-name">{% else %}<h1 class="site-name">{% endif %}<a href="{{ page.base | append: '/' | relative_url }}">Shivaram Kumar Jagannathan</a>{% if page.doc_url %}</p>{% else %}</h1>{% endif %}
+  <p class="who">Robotics researcher, Algorithmic Robotics Group, NTU Singapore</p>
+  <p class="nav">
+    {%- for p in site.nav_pages -%}
+      <a href="{{ '/' | append: p.name | append: '/' | relative_url }}">{{ p.name }}</a><span class="sep"> | </span>
+    {%- endfor -%}
+    <a href="{{ '/feed.xml' | relative_url }}">rss</a>
+  </p>
+  {%- unless page.doc_url %}
+  <p class="contact">Algorithmic Robotics Group<br>Nanyang Technological University<br>50 Nanyang Ave, Singapore 639798<br>Email: shivaram.jagannathan [at] outlook [dot] com</p>
+  <img class="portrait" src="{{ '/images/headshot.jpg' | relative_url }}" alt="Shivaram Kumar Jagannathan" width="150">
+  {%- endunless %}
+</header>
+
+<main>
+{{ content }}
+</main>
+
+<footer>
+  <p>Write to shivaram.jagannathan at outlook.com.</p>
+  <p>Last update: {{ site.time | date: "%B %-d, %Y" }}.</p>
+  <div class="runfoot" aria-hidden="true"><span>NTU Singapore</span><span>{{ site.time | date: "%Y-%m-%d" }}</span><span>JAGANNATHAN(1)</span></div>
+</footer>
+
+</body>
+</html>

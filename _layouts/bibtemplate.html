@@ -1,105 +1,53 @@
 ---
 ---
-
-{% if entry.image %}
-<div class="pub-entry">
-  <div class="pub-thumb">
-    <img src="{{ site.url }}{{ site.baseurl }}/images/{{ entry.image }}" alt="{{ entry.title }}">
-  </div>
+{%- comment -%}
+  One publication on /research/ (jekyll-scholar `bibliography_template`).
+  Thumbnail left, then title / authors (Shivaram in bold) / venue, then
+  [arXiv] [PDF] links and [TL;DR] [Abstract] [BibTeX] toggles. Toggles are
+  native <details>, so they work without JavaScript. Anchor ids are kept
+  from the old template: #<key> (title), #t<key> (TL;DR), #a<key> (BibTeX).
+{%- endcomment -%}
+{%- assign _span_open = '<span id="' | append: entry.key | append: '">' -%}
+{%- assign _ref_clean = reference | remove_first: _span_open | remove_first: '</span>' -%}
+{%- assign _parts = _ref_clean | split: '<i>' -%}
+{%- assign _rest = _parts[1] | split: '</i>' -%}
+{%- assign _title_html = _rest[0] -%}
+{%- assign _names = entry.author | split: " and " -%}
+{%- capture _authors_clean %}{% for _n in _names %}{% assign _name = _n | split: ", " %}{% assign _last = _name[0] %}{% assign _first = _name[1] %}{% unless forloop.first %}{% if forloop.last and forloop.index0 > 1 %}, &amp; {% elsif forloop.last %} &amp; {% else %}, {% endif %}{% endunless %}{% if _last == 'Kumar' and _first == 'Shivaram' %}<b>{{ _first }} {{ _last }}</b>{% else %}{{ _first }} {{ _last }}{% endif %}{% endfor %} ({{ entry.year }}){% endcapture -%}
+{%- assign _title_link = nil -%}
+{%- if entry.doi -%}
+  {%- if entry.type == 'unpublished' -%}{%- assign _title_link = entry.doi | prepend: 'https://arxiv.org/abs/' -%}
+  {%- else -%}{%- assign _title_link = entry.doi | prepend: 'http://doi.org/' -%}{%- endif -%}
+{%- endif -%}
+{%- assign _venue = entry.journal | default: entry.booktitle | default: entry.note -%}
+{%- if entry.type == 'unpublished' -%}{%- assign _venue = "Preprint, " | append: entry.note -%}{%- endif -%}
+{%- assign bibtest = false -%}
+{%- if entry.file -%}
+  {%- assign bibfile = "/papers/" | append: entry.file -%}
+  {%- for file in site.static_files -%}{%- if file.path contains bibfile -%}{%- assign bibtest = true -%}{%- endif -%}{%- endfor -%}
+{%- endif -%}
+<div class="pub-entry"{% unless entry.image %} style="grid-template-columns: 1fr"{% endunless %}>
+  {%- if entry.image %}
+  <div class="pub-thumb"><img src="{{ '/images/' | append: entry.image | relative_url }}" alt="{{ entry.title }}" loading="lazy"></div>
+  {%- endif %}
   <div class="pub-body">
-{% endif %}
-
-{% assign _span_open = '<span id="' | append: entry.key | append: '">' %}
-{% assign _ref_clean = reference | remove_first: _span_open | remove_first: '</span>' %}
-
-{% assign _parts = _ref_clean | split: '<i>' %}
-{% assign _rest = _parts[1] | split: '</i>' %}
-{% assign _title_html = _rest[0] %}
-{% assign _names = entry.author | split: " and " %}
-{% capture _authors_clean %}{% for _n in _names %}{% assign _name = _n | split: ", " %}{% assign _last = _name[0] %}{% assign _first = _name[1] %}{% unless forloop.first %}{% if forloop.last and forloop.index0 > 1 %}, &amp; {% elsif forloop.last %} &amp; {% else %}, {% endif %}{% endunless %}{% if _last == 'Kumar' and _first == 'Shivaram' %}<b>{{ _first }} {{ _last }}</b>{% else %}{{ _first }} {{ _last }}{% endif %}{% endfor %} ({{ entry.year }}){% endcapture %}
-
-{% assign _title_link = nil %}
-{% if entry.doi %}
-  {% if entry.type == 'unpublished' %}
-    {% assign _title_link = entry.doi | prepend: 'https://arxiv.org/abs/' %}
-  {% else %}
-    {% assign _title_link = entry.doi | prepend: 'http://doi.org/' %}
-  {% endif %}
-{% endif %}
-
-<p class="pub-title" id="{{ entry.key }}">{% if _title_link %}<a href="{{ _title_link }}" target="_blank">{{ _title_html }}</a>{% else %}{{ _title_html }}{% endif %}</p>
-<p class="pub-authors">{{ _authors_clean }}</p>
-
-{% assign bibtest = false %}
-{% if entry.file %}
-{% assign bibfile = "/papers/" | append: entry.file %}
-{% for file in site.static_files %}
-  {% if file.path contains bibfile %}
-   {% assign bibtest = true %}
-  {% endif %}
-{% endfor %}
-{% endif %}
-
-<div class="pub-links">
-{% if entry.tldr %}
-<button type="button" class="pub-btn pub-btn-tldr" aria-expanded="false" aria-controls="t{{ entry.key }}">TL;DR<i class="ph ph-caret-down pub-tldr-caret"></i></button>
-{% endif %}
-
-{% if bibtest %}
-<a class="pub-btn" href="{{ site.url }}{{ site.baseurl }}/papers/{{ entry.file }}" target="_blank">PDF</a>
-{% endif %}
-
-{% if _title_link %}
-<a class="pub-btn" href="{{ _title_link }}" target="_blank">{% if entry.type == 'unpublished' %}arXiv{% else %}DOI{% endif %}</a>
-{% endif %}
-
-{% if entry.type == 'unpublished' or entry.type == 'article' or  entry.type == 'thesis' or entry.type == 'inproceedings' or entry.type == 'report' %}
-<button class="pub-btn" onclick="toggleBibtex{{entry.key}}()">BibTeX</button>
-{% endif %}
-</div>
-
-{% if entry.tldr %}
-<p class="pub-tldr-text" id="t{{ entry.key }}" hidden>{{ entry.tldr }}</p>
-{% endif %}
-
-<div id="a{{entry.key}}" class="pub-panel" style="display: none;">
-<pre>{{ entry.bibtex }}</pre>
-</div>
-
-{% if entry.image %}
+    <p class="pub-title" id="{{ entry.key }}">{% if _title_link %}<a href="{{ _title_link }}">{{ _title_html }}</a>{% else %}{{ _title_html }}{% endif %}</p>
+    <p class="pub-authors">{{ _authors_clean }}</p>
+    {%- if _venue %}<p class="pub-venue">{{ _venue }}</p>{% endif %}
+    <div class="pub-detail-group">
+      <span class="bracket-links">
+        {%- if _title_link %}<a href="{{ _title_link }}">{% if entry.type == 'unpublished' %}arXiv{% else %}DOI{% endif %}</a>{% endif -%}
+        {%- if bibtest %}<a href="{{ '/papers/' | append: entry.file | relative_url }}">PDF</a>{% endif -%}
+      </span>
+      {%- if entry.tldr %}
+      <details class="pub-detail" id="t{{ entry.key }}"><summary>TL;DR</summary><p>{{ entry.tldr }}</p></details>
+      {%- endif %}
+      {%- if entry.abstract %}
+      <details class="pub-detail" id="abs{{ entry.key }}"><summary>Abstract</summary><p>{{ entry.abstract }}</p></details>
+      {%- endif %}
+      {%- if entry.type == 'unpublished' or entry.type == 'article' or entry.type == 'thesis' or entry.type == 'inproceedings' or entry.type == 'report' %}
+      <details class="pub-detail" id="a{{ entry.key }}"><summary>BibTeX</summary><pre>{{ entry.bibtex }}</pre></details>
+      {%- endif %}
+    </div>
   </div>
 </div>
-{% endif %}
-
-<script>
-// TL;DR: hidden until its button is pressed, then slides open (set up once per page)
-if (!window.__pubTldrInit) {
-  window.__pubTldrInit = true;
-  document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.pub-btn-tldr').forEach(function (btn) {
-      var text = document.getElementById(btn.getAttribute('aria-controls'));
-      text.hidden = false; // JS on: collapse via CSS so it can animate
-      btn.addEventListener('click', function () {
-        var open = btn.getAttribute('aria-expanded') !== 'true';
-        btn.setAttribute('aria-expanded', open);
-        text.classList.toggle('is-open', open);
-        text.style.maxHeight = open ? text.scrollHeight + 'px' : '';
-      });
-    });
-    window.addEventListener('resize', function () {
-      document.querySelectorAll('.pub-tldr-text.is-open').forEach(function (t) {
-        t.style.maxHeight = t.scrollHeight + 'px';
-      });
-    });
-  });
-}
-
-function toggleBibtex{{entry.key}}(parameter) {
-    var x= document.getElementById('a{{entry.key}}');
-    if (x.style.display === 'none') {
-        x.style.display = 'block';
-    } else {
-        x.style.display = 'none';
-    }
-}
-</script>

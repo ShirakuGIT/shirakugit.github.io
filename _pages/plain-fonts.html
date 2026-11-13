@@ -1,0 +1,51 @@
+---
+layout: null
+permalink: /plain/fonts/
+sitemap: false
+search: false
+---
+{%- comment -%}
+  Prototype: candidate body fonts for the homepage redesign, each shown as a
+  slice of the real homepage style. Fonts come from _data/plain_fonts.yml.
+{%- endcomment -%}
+{%- capture gfams -%}{%- for f in site.data.plain_fonts -%}{%- if f.google -%}&family={{ f.google }}{%- endif -%}{%- endfor -%}{%- endcapture -%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Font candidates — {{ site.title }}</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?{{ gfams | remove_first: '&' }}&display=swap">
+  <link rel="stylesheet" href="{{ '/assets/plain/base.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/plain/homepage.css' | relative_url }}">
+  <style>
+    .specimen { margin: 0 0 2.5em; padding-bottom: 1.5em; border-bottom: 1px solid #999; }
+    .specimen-label { font: 13px/1.4 -apple-system, "Helvetica Neue", Arial, sans-serif; color: #555; margin: 0 0 .8em; }
+    .specimen-label b { color: #000; font-size: 15px; }
+    .specimen h1 { font-size: 2em; margin: 0 0 .1em; }
+    .specimen h2 { margin-top: 1em; }
+  </style>
+</head>
+<body class="style-homepage">
+<p class="proto-banner">Design prototype. Each block below is the homepage style set in a different font.
+Click “try it” to see the whole homepage in that font. Back to <a href="{{ '/plain/homepage/' | relative_url }}">homepage style</a>.</p>
+
+{%- for f in site.data.plain_fonts %}
+<div class="specimen" style="font-family: {{ f.family }}, Georgia, serif">
+  <p class="specimen-label"><b>{{ f.name }}</b> · LaTeX: <code>{{ f.latex }}</code> · {{ f.note }}
+    · <a href="{{ '/plain/homepage/' | relative_url }}?font={{ f.key }}">try it on the full homepage →</a></p>
+  <h1>Shivaram Kumar Jagannathan</h1>
+  <p class="who">Robotics researcher, Algorithmic Robotics Group, NTU Singapore</p>
+  <p>I work on robotics: planning under partial observability, 3D reconstruction for object search, SLAM,
+  and getting robots to run outside the lab. Attendance roughly doubled to about 4,800 people; one study
+  reported 66% against 28%. <a href="#">Algorithmic Robotics Group</a>, <i>italic for emphasis</i>, <b>bold for terms</b>.</p>
+  <h2>Papers</h2>
+  <ul class="things">
+    <li><a href="#">Imagine-TAMP</a>: deciding where to look and what to move when the target object is hidden. <span class="aside">Preprint, 2026.</span></li>
+  </ul>
+  <ol class="archive"><li><time>2026-11-14</time> <span><a href="#">CoRL 2026: where robot learning thinks it is going</a></span></li></ol>
+</div>
+{%- endfor %}
+</body>
+</html>

@@ -30,10 +30,10 @@ Photos from places I've been and things I've seen. Click any image to view full-
           data-exif="{{ p.exif | escape }}"
           data-pc="{{ p.pc | escape }}"
           data-index="{{ forloop.index0 }}">
-    <img loading="lazy" src="{{ thumb }}" alt="{{ alt | escape }}">
+    <a href="{{ p.src }}"><img loading="lazy" src="{{ thumb }}" alt="{{ alt | escape }}"></a>
     <figcaption class="photo-caption">
       <span class="photo-title">{{ p.title }}</span>
-      {% if p.location %}<span class="photo-loc"><i class="fa-solid fa-location-dot"></i> {{ p.location }}</span>{% endif %}
+      {% if p.location %}<span class="photo-loc">{{ p.location }}</span>{% endif %}
     </figcaption>
   </figure>
 {% endfor %}
@@ -65,8 +65,8 @@ Photos from places I've been and things I've seen. Click any image to view full-
     var bits = [];
     if (d.title)    bits.push('<div class="lb-title">' + d.title + '</div>');
     var line = [];
-    if (d.location) line.push('<i class="fa-solid fa-location-dot"></i> ' + d.location);
-    if (d.date)     line.push('<i class="fa-regular fa-calendar"></i> ' + d.date);
+    if (d.location) line.push(d.location);
+    if (d.date)     line.push(d.date);
     if (line.length) bits.push('<div class="lb-sub">' + line.join(' &nbsp;·&nbsp; ') + '</div>');
     var tech = [];
     if (d.camera) tech.push(d.camera);
@@ -99,7 +99,8 @@ Photos from places I've been and things I've seen. Click any image to view full-
     img.src = "";
   }
   items.forEach(function(el) {
-    el.addEventListener("click", function() { open(parseInt(el.dataset.index, 10)); });
+    // Each thumbnail links to the full-size file (works without JS); with JS, open the lightbox instead.
+    el.addEventListener("click", function(e) { e.preventDefault(); open(parseInt(el.dataset.index, 10)); });
   });
   prev.addEventListener("click", function(e) { e.stopPropagation(); show(idx - 1); });
   next.addEventListener("click", function(e) { e.stopPropagation(); show(idx + 1); });

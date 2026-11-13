@@ -1,33 +1,27 @@
 ---
 layout: default
 ---
-{% assign cat = page.category | default: "misc" %}
-{% assign cat_label = cat | capitalize %}
-<article class="note" itemscope itemtype="http://schema.org/Article">
+{%- assign cat = page.category | default: "misc" -%}
+<article class="article note" itemscope itemtype="http://schema.org/Article">
 
-  <header class="note-header">
-    <p class="note-back"><a href="{{ site.url }}{{ site.baseurl }}/notes/">← All notes</a></p>
-    <p class="note-meta-top">
-      <span class="note-category note-category-{{ cat }}">{{ cat_label }}</span>
-      {% if page.status %}<span class="note-status note-status-{{ page.status }}">{{ page.status | upcase }}</span>{% endif %}
-    </p>
-    <h1 class="note-title" itemprop="headline">{{ page.title }}</h1>
-    <p class="note-meta">
-      {% if page.updated %}
-        <i class="fa-regular fa-clock"></i> Updated <time datetime="{{ page.updated | date_to_xmlschema }}">{{ page.updated | date: "%b %-d, %Y" }}</time>
-      {% elsif page.date %}
-        <i class="fa-regular fa-calendar"></i> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d, %Y" }}</time>
-      {% endif %}
-      {% if page.source %} &nbsp;·&nbsp; <a href="{{ page.source }}" target="_blank" rel="noopener"><i class="fa-solid fa-up-right-from-square"></i> source</a>{% endif %}
-      {% if page.tags.size > 0 %}<br>{% for tag in page.tags %}<span class="post-tag">{{ tag }}</span>{% endfor %}{% endif %}
+  <header class="article-head">
+    <p class="article-back"><a href="{{ '/notes/' | relative_url }}">← All notes</a></p>
+    <h1 class="article-title" itemprop="headline">{{ page.title }}</h1>
+    <p class="article-meta">
+      Note · <a href="{{ '/notes/' | relative_url }}#cat-{{ cat | slugify }}">{{ cat | capitalize }}</a>{% if page.status %} · <span class="status">{{ page.status }}</span>{% endif %}
+      {%- if page.updated %} · updated <time datetime="{{ page.updated | date_to_xmlschema }}">{{ page.updated | date: "%B %-d, %Y" }}</time>
+      {%- elsif page.date %} · <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>{% endif %}
+      {%- if page.source %} · <a href="{{ page.source }}">source</a>{% endif %}
+      {%- if page.tags.size > 0 %}<br>{{ page.tags | join: ", " }}{% endif %}
     </p>
   </header>
 
-  <div class="note-content" itemprop="articleBody">
+  {% include post-toc.html %}
+
+  <div class="article-body note-content" itemprop="articleBody">
     {{ content }}
   </div>
 
 </article>
 
 {% include post-lightbox.html %}
-{% include post-toc.html %}

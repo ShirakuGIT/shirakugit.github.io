@@ -6,7 +6,7 @@ permalink: /notes/
 ---
 
 <p class="notes-intro">
-A working garden — book notes, paper digests, course study notes, tutorial implementations, and rough drafts. Categorized later. Use the tabs to filter.
+A working garden — book notes, paper digests, course study notes, tutorial implementations, and rough drafts. Grouped by category below, most recently updated first.
 </p>
 
 {% if site.notes.size == 0 %}
@@ -17,48 +17,27 @@ A working garden — book notes, paper digests, course study notes, tutorial imp
 {% assign categories = by_updated | map: "category" | uniq | sort %}
 
 {::nomarkdown}
-<div class="notes-filter" id="notes-filter">
-  <button class="notes-filter-btn active" data-filter="all">All <span>({{ by_updated.size }})</span></button>
-  {% for cat in categories %}
-    {% assign in_cat = by_updated | where: "category", cat %}
-    <button class="notes-filter-btn" data-filter="{{ cat }}">{{ cat | capitalize }} <span>({{ in_cat.size }})</span></button>
-  {% endfor %}
-</div>
+<p class="category-index bracket-links">Jump to:
+{%- for cat in categories %}
+  {%- assign in_cat = by_updated | where: "category", cat %}
+  <a href="#cat-{{ cat | slugify }}">{{ cat | capitalize }} ({{ in_cat.size }})</a>
+{%- endfor %}
+</p>
 
-<div class="notes-grid">
-{% for note in by_updated %}
-  {% assign cat = note.category | default: "misc" %}
-  <article class="note-card" data-category="{{ cat }}">
-    <div class="note-card-head">
-      <span class="note-category note-category-{{ cat }}">{{ cat | capitalize }}</span>
-      {% if note.status %}<span class="note-status note-status-{{ note.status }}">{{ note.status | upcase }}</span>{% endif %}
-    </div>
-    <h3 class="note-card-title"><a href="{{ site.url }}{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a></h3>
-    {% if note.summary %}<p class="note-card-summary">{{ note.summary }}</p>{% endif %}
-    <p class="note-card-meta">
-      {% if note.updated %}<i class="fa-regular fa-clock"></i> {{ note.updated | date: "%b %-d, %Y" }}{% endif %}
-      {% if note.tags.size > 0 %} &nbsp;·&nbsp; {% for tag in note.tags %}<span class="post-tag">{{ tag }}</span>{% endfor %}{% endif %}
-    </p>
-  </article>
-{% endfor %}
-</div>
-
-<script>
-(function() {
-  var btns = document.querySelectorAll(".notes-filter-btn");
-  var cards = document.querySelectorAll(".note-card");
-  btns.forEach(function(b) {
-    b.addEventListener("click", function() {
-      var f = b.getAttribute("data-filter");
-      btns.forEach(function(x) { x.classList.remove("active"); });
-      b.classList.add("active");
-      cards.forEach(function(c) {
-        c.style.display = (f === "all" || c.getAttribute("data-category") === f) ? "" : "none";
-      });
-    });
-  });
-})();
-</script>
+{%- for cat in categories %}
+{%- assign in_cat = by_updated | where: "category", cat %}
+<h2 id="cat-{{ cat | slugify }}">{{ cat | capitalize }}</h2>
+<ul class="post-list">
+  {%- for note in in_cat %}
+  <li>
+    {%- if note.updated %}<span class="date">{{ note.updated | date: "%Y-%m-%d" }}:</span> {% endif -%}
+    <a class="post-link" href="{{ note.url | relative_url }}">{{ note.title }}</a>{% if note.status %} <span class="status">({{ note.status }})</span>{% endif %}
+    {%- if note.summary %}<p class="excerpt">{{ note.summary }}</p>{% endif %}
+    {%- if note.tags.size > 0 %}<span class="tags">{{ note.tags | join: ", " }}</span>{% endif %}
+  </li>
+  {%- endfor %}
+</ul>
+{%- endfor %}
 {:/nomarkdown}
 
 {% endif %}

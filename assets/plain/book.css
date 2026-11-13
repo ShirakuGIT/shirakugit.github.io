@@ -1,0 +1,36 @@
+/* book — a printed page: a serif on warm paper, centred title, quiet
+   centred section breaks, indented paragraphs in articles. Colours: paper,
+   ink, grey, one warm brown for links. */
+@import url("plain.css");
+
+:root { --bg: #f8f4ec; --fg: #2a2621; --muted: #8a8377; --rule: #ddd5c6; --link: #8a4f24; --code: #efe9dd; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #1d1b18; --fg: #dcd4c4; --muted: #958c7d; --rule: #3a352e; --link: #dba878; --code: #27241f; }
+}
+body { max-width: 33em; padding-top: 4.5em; font: 20px/1.65 var(--font); font-variant-numeric: oldstyle-nums; }
+a, a:visited { text-decoration-color: color-mix(in srgb, var(--link) 35%, transparent); }
+
+.masthead { text-align: center; margin-bottom: 3.5em; }
+.site-name, p.site-name { font-size: .95em; font-weight: normal; font-variant: small-caps; letter-spacing: .12em; }
+.who { font-style: italic; font-size: .9em; }
+.nav { font-size: .82em; }
+.nav a { margin: 0 .6em; }
+
+h2 { text-align: center; text-transform: none; letter-spacing: 0; font-weight: normal; font-style: italic; font-size: 1em; color: var(--muted); margin: 3.5em 0 1.4em; }
+h2::before { content: ""; display: block; width: 2.5em; margin: 0 auto 1.6em; border-top: 1px solid var(--rule); }
+.intro .sec-body > p:first-child { font-size: 1em; }
+.intro .links { text-align: center; font-size: .85em; }
+ol.archive time { flex-basis: 6.6em; font-size: .78em; font-style: italic; padding-top: .3em; font-variant-numeric: lining-nums tabular-nums; }
+
+.article-head { text-align: center; margin-bottom: 3em; }
+.article-title { font-weight: normal; font-size: 1.7em; letter-spacing: 0; }
+.article-meta { font-style: italic; }
+.article-body h1, .article-body h2, .article-body h3 { font-weight: 600; font-style: normal; text-align: left; color: var(--fg); }
+.article-body h2::before { display: none; }
+.article-body p { margin: 0; }
+.article-body p + p { text-indent: 1.5em; }
+.article-body :is(h1, h2, h3, ul, ol, pre, blockquote, figure, div) + p { margin-top: 0; }
+.article-body :is(ul, ol, pre, blockquote, figure, div.highlighter-rouge) { margin: 1em 0; }
+.article-body h1, .article-body h2, .article-body h3 { margin-bottom: .5em; }
+.back, footer { text-align: center; }
+@media (max-width: 520px) { body { font-size: 18px; } }

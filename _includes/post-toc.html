@@ -1,150 +1,36 @@
 {%- comment -%}
-  Scrollspy table-of-contents + reading progress for posts and notes.
-
-  Two presentations from one data source, fully owned by CSS media queries:
-    - Desktop (>= 1024px): quiet fixed text rail on the right margin.
-    - Mobile  (< 1024px):  floating bottom-right button opening a native
-                            <dialog> slide-up sheet. showModal()/close()
-                            toggle the [open] attribute; CSS hides the
-                            sheet entirely on desktop so a resize from
-                            mobile->desktop can never leak it.
-
-  Auto-disabled (data-hidden) when the page has fewer than 3 H1–H4
-  sections inside .post-content / .note-content. The post title H1
-  lives in the header (not a child of .post-content), so it's excluded
-  naturally.
-
-  Output is compact HTML — no {::nomarkdown} guards — because this
-  include is referenced from HTML layouts where kramdown directives
-  would leak as literal text.
+  Inline "Contents" box for posts and notes — the old-web version of a table
+  of contents: a bordered box floated top-right of the article (stacked on
+  phones), listing the article's H1–H4. Built in JS from the rendered
+  headings; stays hidden (and the page reads normally) without JS or when the
+  article has fewer than 3 sections. Headings inside compiled LaTeX cells
+  (.tex-html) are the paper's own structure and are skipped.
+  Runs on DOMContentLoaded because it is included *before* the article body.
+  Emitted without {::nomarkdown}: it is included from HTML layouts.
 {%- endcomment -%}
-<nav class="post-toc" id="post-toc" aria-hidden="true" aria-label="On this page"><p class="post-toc-heading">On this page</p><ol class="post-toc-list" id="post-toc-list"></ol></nav><button class="toc-fab" id="toc-fab" aria-hidden="true" aria-label="Open table of contents"><i class="ph ph-list-numbers"></i></button><dialog class="toc-sheet" id="toc-sheet" aria-hidden="true"><div class="toc-sheet-card"><div class="toc-sheet-head"><p class="post-toc-heading post-toc-heading--sheet">On this page</p><button class="toc-sheet-close" type="button" id="toc-sheet-close" aria-label="Close">&times;</button></div><ol class="post-toc-list toc-sheet-list" id="toc-sheet-list"></ol></div></dialog><div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
+<nav class="toc-inline" id="toc-inline" aria-label="Contents" hidden><p>Contents</p><ol id="toc-inline-list"></ol></nav>
 <script>
-(function() {
-  var rail = document.getElementById('post-toc');
-  var railList = document.getElementById('post-toc-list');
-  var fab = document.getElementById('toc-fab');
-  var sheet = document.getElementById('toc-sheet');
-  var sheetList = document.getElementById('toc-sheet-list');
-  var closeBtn = document.getElementById('toc-sheet-close');
-  var progress = document.getElementById('reading-progress');
-  if (!rail || !railList || !fab || !sheet || !sheetList) return;
-
-  // Collect every heading H1..H4 inside the article body (not the title).
-  // Headings rendered by the LaTeX cells (.tex-html) are the paper's own
-  // structure — excluding them keeps the rail/spy aligned with the note's
-  // sections instead of mixing paper headings into it.
+document.addEventListener('DOMContentLoaded', function () {
+  var box = document.getElementById('toc-inline'), list = document.getElementById('toc-inline-list');
+  if (!box || !list) return;
+  function slugify(s) {
+    return (s || '').toLowerCase().trim().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-');
+  }
   var heads = [];
-  document.querySelectorAll('.post-content h1, .post-content h2, .post-content h3, .post-content h4, .note-content h1, .note-content h2, .note-content h3, .note-content h4').forEach(function(h) {
-    if (h.closest('.tex-html')) return;
+  document.querySelectorAll('.post-content :is(h1,h2,h3,h4), .note-content :is(h1,h2,h3,h4)').forEach(function (h) {
+    if (h.closest('.tex-html, .jupyter-notebook')) return;
     if (!h.id) h.id = slugify(h.textContent);
     heads.push(h);
   });
-
-  // Graceful disable: mark hidden, let CSS hide both views. Never touch
-  // display directly, so a later dynamic scene can't fight inline styles.
-  if (heads.length < 3) {
-    rail.setAttribute('data-hidden', '');
-    fab.setAttribute('data-hidden', '');
-    return;
-  }
-  rail.classList.add('is-ready');
-  fab.classList.add('is-ready');
-
-  function slugify(s) {
-    return (s || '').toLowerCase().trim()
-      .replace(/[^a-z0-9\s-]/g, '')
-      .replace(/\s+/g, '-');
-  }
-  function levelClass(tag) {
-    return tag === 'H1' ? 'is-top' : tag === 'H3' ? 'is-sub' : tag === 'H4' ? 'is-sub2' : '';
-  }
-
-  function setActive(i) {
-    [railList, sheetList].forEach(function(list) {
-      if (!list) return;
-      list.querySelectorAll('.post-toc-link').forEach(function(n, j) {
-        var on = j === i;
-        n.classList.toggle('active', on);
-        if (n.parentElement) n.parentElement.classList.toggle('is-active', on);
-      });
-    });
-  }
-
-  function buildInto(list, onNav) {
-    heads.forEach(function(h, i) {
-      var li = document.createElement('li');
-      li.className = 'post-toc-item ' + levelClass(h.tagName);
-      var a = document.createElement('a');
-      a.href = '#' + h.id;
-      a.className = 'post-toc-link';
-      a.textContent = h.textContent;
-      a.dataset.i = i;
-      a.title = h.textContent;
-      li.appendChild(a);
-      list.appendChild(li);
-      a.addEventListener('click', function(e) {
-        e.preventDefault();
-        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        setActive(i);                   // immediate feedback, no IO lag
-        h.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
-        history.replaceState(null, '', '#' + h.id);
-        if (onNav) onNav();
-      });
-    });
-  }
-  buildInto(railList);
-  buildInto(sheetList, function() { if (sheet.open) sheet.close(); });
-
-  // scrollspy via IntersectionObserver; fallback to scroll handler
-  if ('IntersectionObserver' in window) {
-    var obs = new IntersectionObserver(function(entries) {
-      entries.forEach(function(en) {
-        var i = heads.indexOf(en.target);
-        if (i < 0 || !en.isIntersecting) return;
-        setActive(i);
-      });
-    }, { rootMargin: '-80px 0px -50% 0px', threshold: 0 });
-    heads.forEach(function(h) { obs.observe(h); });
-  } else {
-    window.addEventListener('scroll', function() {
-      var y = window.scrollY + 120, cur = 0;
-      heads.forEach(function(h, i) { if (h.getBoundingClientRect().top + window.scrollY <= y) cur = i; });
-      setActive(cur);
-    }, { passive: true });
-  }
-
-  // mobile sheet: native <dialog>, never shown on desktop (CSS guards).
-  fab.addEventListener('click', function() {
-    if (typeof sheet.showModal === 'function') sheet.showModal();
-    else sheet.setAttribute('open', '');
+  if (heads.length < 3) return;
+  heads.forEach(function (h) {
+    var li = document.createElement('li'), a = document.createElement('a');
+    li.className = 'lvl-' + h.tagName.charAt(1);
+    a.href = '#' + h.id;
+    a.textContent = h.textContent;
+    li.appendChild(a);
+    list.appendChild(li);
   });
-  closeBtn.addEventListener('click', function() {
-    if (typeof sheet.close === 'function') sheet.close();
-    else sheet.removeAttribute('open');
-  });
-  sheet.addEventListener('click', function(e) { if (e.target === sheet) sheet.close(); });
-
-  // close the sheet on resize crossing the desktop breakpoint, so a
-  // mobile->desktop resize while the sheet is open never leaves it stale.
-  var desktopMQ = window.matchMedia('(min-width: 1024px)');
-  if (desktopMQ.addEventListener) {
-    desktopMQ.addEventListener('change', function(e) { if (e.matches && sheet.open) sheet.close(); });
-  } else if (desktopMQ.addListener) {
-    desktopMQ.addListener(function(e) { if (e.matches && sheet.open) sheet.close(); });
-  }
-
-  // reading progress bar
-  if (progress) {
-    function updateProgress() {
-      var docH = document.documentElement.scrollHeight - window.innerHeight;
-      var pct = docH > 0 ? (window.scrollY / docH * 100) : 0;
-      progress.style.transform = 'scaleX(' + (Math.max(0, Math.min(100, pct)) / 100) + ')';
-      progress.style.opacity = (window.scrollY > 60 && pct > 0 && pct < 99.2) ? '1' : '0';
-    }
-    window.addEventListener('scroll', updateProgress, { passive: true });
-    window.addEventListener('resize', updateProgress, { passive: true });
-    updateProgress();
-  }
-})();
+  box.hidden = false;
+});
 </script>

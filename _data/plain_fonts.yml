@@ -1,0 +1,63 @@
+# Candidate body fonts for the homepage redesign (prototype only — see /plain/fonts/).
+# google: family spec for fonts.googleapis.com css2 (omit for self-hosted / system fonts)
+- key: latin-modern
+  name: Latin Modern
+  family: "'Latin Modern'"
+  latex: 'default (Computer Modern)'
+  note: The real LaTeX look. Thin on screens.
+- key: newcm-book
+  name: New Computer Modern Book
+  family: "'NewCM Book'"
+  latex: '\usepackage{newcomputermodern} (Book weight)'
+  note: Computer Modern itself, with heavier strokes for legibility.
+- key: lm8
+  name: Latin Modern Roman 8
+  family: "'LM Roman 8'"
+  latex: 'Latin Modern, 8pt optical size'
+  note: Same design as Latin Modern, drawn sturdier and wider for small text.
+- key: lora
+  name: Lora
+  family: Lora
+  google: 'Lora:ital,wght@0,400;0,700;1,400'
+  latex: 'none (not a TeX font)'
+  note: Warm, calligraphic, sturdy on screens. Shiva's favourite so far.
+- key: libertinus
+  name: Libertinus Serif
+  family: Libertinus
+  latex: '\usepackage{libertinus}'
+  note: Linux Libertine's successor; ACM papers use it.
+- key: stix
+  name: STIX Two Text
+  family: "'STIX Two Text'"
+  google: 'STIX+Two+Text:ital,wght@0,400;0,700;1,400'
+  latex: '\usepackage{stix2}'
+  note: Journal-paper Times; very legible.
+- key: crimson
+  name: Crimson Pro
+  family: "'Crimson Pro'"
+  google: 'Crimson+Pro:ital,wght@0,400;0,700;1,400'
+  latex: '\usepackage{crimson}'
+  note: Book-like old-style serif, slightly small x-height.
+- key: ebgaramond
+  name: EB Garamond
+  family: "'EB Garamond'"
+  google: 'EB+Garamond:ital,wght@0,400;0,700;1,400'
+  latex: '\usepackage{ebgaramond}'
+  note: Classical; the old site's display font.
+- key: oldstandard
+  name: Old Standard TT
+  family: "'Old Standard TT'"
+  google: 'Old+Standard+TT:ital,wght@0,400;0,700;1,400'
+  latex: 'closest look-alike to Computer Modern'
+  note: Same 19th-century Modern lineage as Computer Modern, a bit sturdier.
+- key: sourceserif
+  name: Source Serif 4
+  family: "'Source Serif 4'"
+  google: 'Source+Serif+4:ital,wght@0,400;0,700;1,400'
+  latex: '\usepackage{sourceserifpro}'
+  note: Modern screen serif; calm and very readable.
+- key: charter
+  name: Charter
+  family: "Charter, 'Bitstream Charter'"
+  latex: '\usepackage{charter} / XCharter'
+  note: Built into Macs/iOS only; others fall back to Georgia.

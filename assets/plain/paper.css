@@ -1,0 +1,56 @@
+@import url("latin-modern.css");
+/* paper — the page as a LaTeX article: centred title block, abstract,
+   numbered sections, justified serif text. Ink, paper, one dark blue. */
+:root { --bg: #fffefb; --fg: #1a1a1a; --muted: #666; --link: #1f3f8f; --rule: #bbb; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #18181a; --fg: #e3e1dc; --muted: #9a9a9a; --link: #9db8f0; --rule: #444; }
+}
+html, body { background: var(--bg); }
+body {
+  max-width: 36em; margin: 0 auto; padding: 3.5em 20px 5em; color: var(--fg);
+  font: 20px/1.45 "Latin Modern", Charter, Georgia, serif;
+  font-variant-numeric: oldstyle-nums; counter-reset: sec;
+}
+a, a:visited { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+p { text-align: justify; hyphens: auto; }
+li { hyphens: auto; }
+code, pre { font-family: ui-monospace, Menlo, monospace; font-size: .8em; }
+pre { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: .6em 0; }
+blockquote { margin: 1em 2em; font-size: .95em; }
+th, td { padding: .2em .8em; } thead { border-bottom: 1px solid var(--fg); } table { border-top: 1.5px solid var(--fg); border-bottom: 1.5px solid var(--fg); }
+figure { text-align: center; } figcaption { font-size: .88em; text-align: center; }
+.aside, .kind, .back { color: var(--muted); font-style: italic; }
+time { font-variant-numeric: lining-nums tabular-nums; font-size: .9em; }
+
+/* title block */
+.masthead { text-align: center; margin-bottom: 2.5em; }
+.site-name { font-size: 1.75em; font-weight: normal; line-height: 1.2; margin: 0 0 .5em; }
+p.site-name { font-size: 1.1em; font-variant: small-caps; letter-spacing: .04em; margin-bottom: .2em; }
+.site-name a { color: inherit; }
+.who { font-style: italic; margin: 0; }
+.nav { font-variant: small-caps; letter-spacing: .04em; margin: .5em 0 0; }
+.nav .sep { color: var(--rule); }
+
+/* abstract + numbered sections */
+.intro { margin: 0 2.5em 2em; font-size: .92em; }
+.intro h2 { text-align: center; font-size: 1em; margin: 0 0 .4em; }
+.intro .links { text-align: center; }
+section:not(.intro) h2 { counter-increment: sec; font-size: 1.15em; margin: 1.8em 0 .5em; }
+section:not(.intro) h2::before { content: counter(sec); display: inline-block; min-width: 1.6em; }
+ul.things { padding-left: 1.4em; }
+ul.things li { margin: .3em 0; }
+ol.archive li { display: flex; gap: 1em; margin: .15em 0; text-align: left; }
+ol.archive time { flex: 0 0 6.5em; color: var(--muted); padding-top: .1em; }
+@media (max-width: 520px) { .intro { margin: 0 0 2em; } ol.archive li { display: block; margin: .5em 0; } }
+
+.article-head { text-align: center; margin-bottom: 2.5em; }
+.article-title { font-size: 1.75em; font-weight: normal; line-height: 1.2; margin: 0 0 .4em; }
+.article-meta { font-style: italic; margin: 0; }
+.article-body h1, .article-body h2 { font-size: 1.15em; margin-top: 1.8em; }
+.article-body h3 { font-size: 1em; font-style: italic; font-weight: normal; }
+.back { text-align: center; margin-top: 3em; }
+footer { margin-top: 4em; text-align: center; font-size: .82em; color: var(--muted); }
+footer p { text-align: center; margin: .2em 0; }
+.masthead p, .article-head p { text-align: center; }
+@media (max-width: 520px) { p { text-align: left; } .masthead p, .article-head p { text-align: center; } }

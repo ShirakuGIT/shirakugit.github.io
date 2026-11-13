@@ -1,0 +1,17 @@
+---
+---
+{%- comment -%}
+  One-line publication for the home page:
+  {% bibliography --template bibcompact %} → "Title. Authors. Venue. [arXiv]"
+{%- endcomment -%}
+{%- assign _span_open = '<span id="' | append: entry.key | append: '">' -%}
+{%- assign _ref_clean = reference | remove_first: _span_open | remove_first: '</span>' -%}
+{%- assign _parts = _ref_clean | split: '<i>' -%}
+{%- assign _rest = _parts[1] | split: '</i>' -%}
+{%- assign _title_html = _rest[0] -%}
+{%- assign _names = entry.author | split: " and " -%}
+{%- capture _authors %}{% for _n in _names %}{% assign _name = _n | split: ", " %}{% unless forloop.first %}{% if forloop.last %} and {% else %}, {% endif %}{% endunless %}{% if _name[0] == 'Kumar' and _name[1] == 'Shivaram' %}<b>{{ _name[1] }} {{ _name[0] }}</b>{% else %}{{ _name[1] }} {{ _name[0] }}{% endif %}{% endfor %}{% endcapture -%}
+{%- assign _link = nil -%}
+{%- if entry.doi -%}{%- if entry.type == 'unpublished' -%}{%- assign _link = entry.doi | prepend: 'https://arxiv.org/abs/' -%}{%- else -%}{%- assign _link = entry.doi | prepend: 'http://doi.org/' -%}{%- endif -%}{%- endif -%}
+{%- if entry.type == 'unpublished' -%}{%- assign _venue = "Preprint, " | append: entry.year -%}{%- else -%}{%- assign _venue = entry.journal | default: entry.booktitle | append: ", " | append: entry.year -%}{%- endif -%}
+{% if _link %}<a href="{{ _link }}"><b>{{ _title_html }}</b></a>{% else %}<b>{{ _title_html }}</b>{% endif %}. {{ _authors }}. <i>{{ _venue }}</i>.

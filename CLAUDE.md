@@ -56,11 +56,15 @@ Changes to `_plugins/*.rb` need a server restart (Jekyll loads plugins once); co
 - `_notes/*.md` — "digital garden" working notes with an `updated:` field and open-ended `category:`; subfolders are allowed.
 - `_layouts/*.html` + `_includes/*.html` — page scaffolds and reusable embeds (`figure`, `video`, `gif`, `jupyter_notebook`, tex includes, header/footer/sidebar).
 - `_plugins/*.rb` — custom Liquid tags: `tex_compile.rb` (LaTeX→HTML+PDF via pandoc/pdfLaTeX/pdfinfo on PATH, cached under `.jekyll-cache/tex/<sha>/`), `jupyter_notebook.rb`, `markdown.rb`, `ext.rb` (loads jekyll-scholar for the publications page, driven by `assets/ref.bib`).
-- `_sass/SHB_css.scss` — the house theme (dark "earthy" palette, EB Garamond display titles) on top of a Bootstrap 5 / Bootswatch Darkly base; compiled into `assets/main.css`.
-- `assets/visits.json` — visitor-map data auto-refreshed **daily by a GitHub Actions bot** (`.github/workflows/update-visits.yml`, 04:17 UTC) that commits directly to `main` and mirrors into `gh-pages`. **Always `git pull --rebase origin main` before pushing**, or the push will be rejected; resolve conflicts on this file by keeping theirs. Don't hand-edit it — run `scripts/fetch_visits.py` instead.
+- **`assets/site.css` — the site's design ("homepage" style, Nov 2026)**: an early-2000s academic homepage — wide 980px page, Latin Modern Roman 8 (self-hosted in `assets/fonts/`), very few colours as CSS variables, dark mode via `prefers-color-scheme`. Plain CSS, no Bootstrap, no icon fonts. Read `AGENTS.md` §7.0 before any styling work.
+- `_sass/SHB_css.scss` / `assets/main.scss` — the retired dark "earthy" Bootstrap theme, no longer linked; slated for deletion. `_plugins/plain_preview.rb` + `/plain/` are the design prototypes used to choose the style (also slated for removal).
+- `scripts/ab_compare.py` — A/B regression harness: compares two production builds page by page (SEO head, content text, links, anchors, broken refs; `--shots` for side-by-side screenshots). Run it for any layout/style change.
+- `assets/visits.json` — visitor-map data. The daily GitHub Actions bot that used to commit it was removed in `8fe9ef0` (Nov 2026); refresh with `scripts/fetch_visits.py`, don't hand-edit. Still `git pull --rebase origin main` before pushing.
 
 ## Gotchas
 
 - **kramdown mangles raw HTML in `.md` files** (`parse_block_html: true`). Any hand-written HTML/JS block in a markdown page must be wrapped in `{::nomarkdown} ... {:/nomarkdown}` (Liquid still works inside it). The built-in `include`s (figure/video/gif/jupyter/tex) already handle this themselves.
 - **Never commit or push unless explicitly asked.** When you do, follow the existing commit style (`chore:`, `content:`, `tex:`, `feat:` — check `git log --oneline -10`) and rebase before pushing per the CI-bot note above.
-- Match the existing design system (palette, fonts, the projects bento-grid's click-to-expand interaction contract) rather than second-guessing it — see `AGENTS.md` §7 for the specifics if you're touching styling.
+- Styling follows the **homepage style** (`AGENTS.md` §7.0): wide, LM Roman 8, minimal colours (variables, light + dark), plain HTML, no added chrome. Verify with `scripts/ab_compare.py`.
+- Shiva's machine runs warm: keep screenshot passes and extra servers to a minimum and stop them when done.
+- Shiva often has their own `jekyll serve` on :4000 — don't kill it. For plugin changes (which need a restart), run a second server on another port.

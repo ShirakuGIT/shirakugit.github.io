@@ -1,0 +1,23 @@
+/* contents — the home page as a book's table of contents (after Build Your
+   Own Lisp and Tony Finch's archive): numbered sections and items, dotted
+   leaders running out to right-aligned dates. Articles read like "plain". */
+@import url("plain.css");
+
+main { counter-reset: sec; }
+section:not(.intro) h2 { counter-increment: sec; font-size: 1.05em; text-transform: none; letter-spacing: 0; color: var(--fg); border-bottom: 1px solid var(--rule); padding-bottom: .4em; margin-top: 2.8em; }
+section:not(.intro) h2::before { content: counter(sec) "\2002"; color: var(--muted); font-weight: normal; font-variant-numeric: tabular-nums; }
+
+ul.things { counter-reset: item; }
+ul.things li { counter-increment: item; position: relative; padding-left: 2.6em; }
+ul.things li::before { content: counter(sec) "." counter(item); position: absolute; left: 0; color: var(--muted); font-size: .85em; padding-top: .15em; font-variant-numeric: tabular-nums; }
+
+/* dotted leaders: title ........ date */
+ol.archive li { align-items: last baseline; gap: 0; margin-bottom: .45em; }
+ol.archive li > span { order: 1; flex: 0 1 auto; }
+ol.archive li::after { content: ""; order: 2; flex: 1 1 2em; min-width: 2em; margin: 0 .6em; border-bottom: 2px dotted var(--rule); transform: translateY(-.35em); }
+ol.archive time { order: 3; flex: 0 0 auto; padding: 0; }
+@media (max-width: 520px) {
+  ol.archive li { display: flex; flex-wrap: wrap; }
+  ol.archive li::after { display: none; }
+  ol.archive time { flex-basis: 100%; order: 0; }
+}
