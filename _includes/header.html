@@ -28,7 +28,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script>
     (function () {
       var root = document.documentElement, btn = document.getElementById("theme-toggle");
-      function label() { btn.textContent = root.getAttribute("data-theme") === "dark" ? "light" : "dark"; }
+      function label() {
+        var dark = root.getAttribute("data-theme") === "dark";
+        btn.textContent = dark ? "\u2600" : "\u263E";   /* ☀ in dark mode, ☾ in light mode */
+        btn.title = btn.ariaLabel = dark ? "Switch to light mode" : "Switch to dark mode";
+      }
       btn.addEventListener("click", function () {
         var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
         root.setAttribute("data-theme", next);

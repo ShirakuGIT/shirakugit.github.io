@@ -177,8 +177,11 @@ ol.dated time::after { content: ":"; }
 /* --------------------------------------------------------------- about --- */
 .profile { overflow: hidden; margin-bottom: 1em; }
 .profile .portrait { float: right; margin: 0 0 1em 1.5em; width: 160px; }
-.logo-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 26px; margin: .4em 0 1em; }
-.logo-strip img { height: 36px; width: auto; }
+/* Experience logos: one centred row spread across the full width; each logo
+   gets an equal cell and is scaled to fit it. Wraps into centred rows on phones. */
+.logo-strip { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 22px 0; margin: 1em 0 1.2em; }
+.logo-strip a { flex: 1 1 0; min-width: 150px; display: flex; justify-content: center; align-items: center; padding: 0 14px; }
+.logo-strip img { height: 54px; width: auto; max-width: 100%; object-fit: contain; }
 
 /* ------------------------------------------------------------ research --- */
 .bib { list-style: none; padding: 0; margin: .4em 0 1em; }
@@ -350,6 +353,8 @@ figure, .post-figure, .post-video, .post-gif { text-align: center; margin-left: 
   .nav-search { margin-left: 0; width: 100%; }
   .nav-search input { width: 100%; }
   .profile .portrait { width: 110px; }
+  .logo-strip a { flex: 0 0 50%; min-width: 0; }
+  .logo-strip img { height: 42px; }
   .pub-entry, .project { grid-template-columns: 1fr; }
   .pub-thumb { max-width: 320px; }
   .toc-inline { float: none; width: auto; margin: 0 0 1em; }
