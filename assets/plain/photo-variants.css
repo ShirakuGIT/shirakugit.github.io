@@ -1,0 +1,27 @@
+/* Development-only headshot experiments: add ?photo=big|left|top to the home
+   page or /about/. Loaded by includes/head.html outside production only. */
+
+/* big — the same top-right spot, much larger */
+.photo-big .masthead--home .portrait { width: 260px; }
+.photo-big .profile .portrait { width: 300px; }
+
+/* left — photo in its own left column, name and contact beside it */
+.photo-left .masthead--home { grid-template-columns: 260px minmax(0, 1fr); }
+.photo-left .masthead--home > * { grid-column: 2; }
+.photo-left .masthead--home .portrait-link { grid-column: 1; grid-row: 1 / span 4; }
+.photo-left .masthead--home .portrait { width: 260px; grid-column: 1; }
+.photo-left .profile .portrait { float: left; width: 300px; margin: 0 1.8em 1em 0; }
+
+/* top — a large photo opening the page, above the name */
+.photo-top .masthead--home { grid-template-columns: minmax(0, 1fr); }
+.photo-top .masthead--home .portrait-link { grid-column: 1; grid-row: auto; order: -1; }
+.photo-top .masthead--home .portrait { width: 340px; grid-column: 1; margin-bottom: .8em; }
+.photo-top .profile .portrait { float: none; display: block; width: 380px; margin: 0 0 1.2em; }
+
+@media (max-width: 620px) {
+  .photo-big .masthead--home .portrait, .photo-left .masthead--home .portrait,
+  .photo-top .masthead--home .portrait { width: 200px; }
+  .photo-left .masthead--home { grid-template-columns: minmax(0, 1fr); }
+  .photo-left .masthead--home > *, .photo-left .masthead--home .portrait-link { grid-column: 1; grid-row: auto; }
+  .photo-big .profile .portrait, .photo-left .profile .portrait, .photo-top .profile .portrait { float: none; display: block; width: 220px; margin: 0 0 1em; }
+}

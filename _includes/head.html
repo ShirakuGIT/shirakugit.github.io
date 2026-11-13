@@ -3,6 +3,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {% include theme.html %}
+  {%- if jekyll.environment != "production" %}
+  <!-- Development only: headshot layout experiments, ?photo=big|left|top -->
+  <link rel="stylesheet" href="{{ '/assets/plain/photo-variants.css' | relative_url }}">
+  <script>(function () { var v = new URLSearchParams(location.search).get("photo"); if (/^(big|left|top)$/.test(v || "")) document.documentElement.classList.add("photo-" + v); })();</script>
+  {%- endif %}
 
   {% if page.noindex %}
   <meta name="robots" content="noindex, follow">
