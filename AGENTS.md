@@ -157,9 +157,13 @@ error card. The `research` page is meant to showcase this eventually.
 
 ## 5. Deployment topology & CI (read before pushing anything)
 
-- `bundle exec rake publish` builds `_site/` (production Jekyll) then initializes
-  a throwaway git repo in a tmpdir with `_site/.` and force-pushes it to
-  `origin gh-pages`. GitHub Pages serves `gh-pages` at the `CNAME` domain.
+- `bundle exec rake publish` refuses to run with uncommitted changes to tracked
+  files, builds a **clean `git worktree` of HEAD** (production Jekyll) in a
+  tmpdir — so untracked files never ship and it can't race a running
+  `jekyll serve` writing `_site/` — then force-pushes that build to
+  `origin gh-pages` from a throwaway repo. Pre-redesign live site is kept in
+  the local branch `gh-pages-before-redesign` (rollback: build nothing, just
+  `git push origin gh-pages-before-redesign:gh-pages --force`). GitHub Pages serves `gh-pages` at the `CNAME` domain.
 - `scripts/publish.sh` is the safe path: adds photos, builds with
   `--trace --profile`, greps the build log for real errors (Jekyll exits 0 even
   on bad front matter), commits, previews locally, then **waits for explicit
@@ -230,8 +234,12 @@ its header comment), linked from `_includes/head.html`. Rules — keep them:
 - **Very few colours**, all CSS variables in `:root` (light / dark): ink,
   paper, link blue, visited purple, hover red, one section-bar tint, greys.
   Don't add colours; add a variable only if a new role truly needs one.
-- **Dark mode**: follows `prefers-color-scheme` by swapping the variables. Shiva
-  asked for it. TikZ figures (dark-on-transparent SVG) are flipped with
+- **Dark mode + [light]/[dark] switch**: `includes/theme.html` (top of
+  `<head>`, no flash) sets `<html data-theme>` from the visitor's saved choice
+  (localStorage `theme`) or the system setting; the bracketed button at the
+  end of the nav flips and saves it. CSS keys the dark palette off
+  `[data-theme="dark"]`, with a `prefers-color-scheme` copy for no-JS — keep
+  the two dark blocks in `site.css` identical. TikZ figures (dark-on-transparent SVG) are flipped with
   `filter: invert(1) hue-rotate(180deg)`; photos never are.
 - **Era furniture**: home masthead = big name, postal contact block with
   `[at] [dot]` email, portrait top-right in a 1px border (links to /about/);

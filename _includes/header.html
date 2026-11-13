@@ -24,6 +24,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="{{ _url | relative_url }}"{% if page.url == _url %} aria-current="page"{% endif %}>{{ p.name }}</a>
     {%- endfor -%}
     <a href="{{ '/feed.xml' | relative_url }}">rss</a>
+    <button type="button" class="theme-toggle" id="theme-toggle" hidden aria-label="Switch colour theme"></button>
+    <script>
+    (function () {
+      var root = document.documentElement, btn = document.getElementById("theme-toggle");
+      function label() { btn.textContent = root.getAttribute("data-theme") === "dark" ? "light" : "dark"; }
+      btn.addEventListener("click", function () {
+        var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        try { localStorage.setItem("theme", next); } catch (e) {}
+        label();
+      });
+      label();
+      btn.hidden = false;
+    })();
+    </script>
     {% include search.html %}
   </nav>
 </header>

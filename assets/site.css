@@ -32,10 +32,23 @@
   --box: #fafafa; --mark: #ffff99; --target: #ffffcc; --err-wash: #fff4f4;
   --code-str: #a31515; --code-num: #000080; --code-add: #006400;
   --prompt-in: #00008b; --prompt-out: #8b0000;
-  color-scheme: light dark;
+  color-scheme: light;
+}
+/* Dark palette. The [light]/[dark] switch (includes/theme.html) sets
+   <html data-theme="light|dark">; without JS, the system setting decides.
+   The two blocks below must stay identical. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ink: #e8e6e3; --paper: #141414; --muted: #a8a8a8; --rule: #5a5a5a; --hair: #333; --wash: #1c1c1c;
+  --link: #8ab4ff; --visited: #c9a0ff; --hover: #ff8080;
+  --bar: #20263a; --bar-rule: #3e4a6b;
+  --box: #1a1a1a; --mark: #5c5200; --target: #3a3600; --err-wash: #2e1616;
+  --code-str: #f1a3a3; --code-num: #a8c7ff; --code-add: #8fd48f;
+  --prompt-in: #a8c7ff; --prompt-out: #f1a3a3;
 }
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme]) {
+    color-scheme: dark;
     --ink: #e8e6e3; --paper: #141414; --muted: #a8a8a8; --rule: #5a5a5a; --hair: #333; --wash: #1c1c1c;
     --link: #8ab4ff; --visited: #c9a0ff; --hover: #ff8080;
     --bar: #20263a; --bar-rule: #3e4a6b;
@@ -43,9 +56,10 @@
     --code-str: #f1a3a3; --code-num: #a8c7ff; --code-add: #8fd48f;
     --prompt-in: #a8c7ff; --prompt-out: #f1a3a3;
   }
-  /* TikZ figures are drawn dark-on-white; flip them, never photos. */
-  .tex-html .tex-tikz img { filter: invert(1) hue-rotate(180deg); }
 }
+/* TikZ figures are drawn dark-on-white: flip them in dark mode, never photos. */
+:root[data-theme="dark"] .tex-html .tex-tikz img { filter: invert(1) hue-rotate(180deg); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme]) .tex-html .tex-tikz img { filter: invert(1) hue-rotate(180deg); } }
 
 /* ---------------------------------------------------------------- base --- */
 *, *::before, *::after { box-sizing: border-box; }
@@ -106,6 +120,13 @@ h3 { font-size: 1.05em; margin: 1.3em 0 .5em; }
 .nav > a::before { content: "["; }
 .nav > a::after { content: "]"; }
 .nav > a[aria-current="page"] { color: var(--ink); font-weight: bold; text-decoration: none; }
+
+/* [light]/[dark] switch — a button dressed as a bracketed nav link */
+.theme-toggle { background: none; border: 0; padding: 0; color: var(--link); text-decoration: underline; cursor: pointer; font: inherit; white-space: nowrap; }
+.theme-toggle:hover { color: var(--hover); }
+.theme-toggle::before { content: "["; color: var(--ink); }
+.theme-toggle::after { content: "]"; color: var(--ink); }
+.theme-toggle[hidden] { display: none; }
 
 /* search (includes/search.html) — an old-fashioned box at the end of the nav */
 .nav-search { position: relative; margin-left: auto; }
@@ -353,4 +374,5 @@ ol.bibliography > li { margin: 0 0 1.5em; }
    silhouettes on white; in dark mode they already read as light-on-dark. */
 .logo-strip img { filter: brightness(0); opacity: .75; }
 .logo-strip a:hover img { opacity: 1; }
-@media (prefers-color-scheme: dark) { .logo-strip img { filter: none; opacity: .9; } }
+:root[data-theme="dark"] .logo-strip img { filter: none; opacity: .9; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme]) .logo-strip img { filter: none; opacity: .9; } }
