@@ -1,23 +1,29 @@
+{%- comment -%}
+  Site masthead. The home page (layout: homelay) gets the full early-2000s
+  header — big name, postal contact block, portrait top-right; every other
+  page gets the compact name + role + nav.
+{%- endcomment -%}
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ site.google_tag_manager }}"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-
-<nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark">
-    <a class="navbar-brand" href="{{ site.url }}{{ site.baseurl }}/" aria-label="{{ site.title | escape }} — home">
-     <img src="{{ site.url }}{{ site.baseurl }}/images/logo-light.png" width="44" height="44" class="brand-logo d-inline-block" alt="{{ site.title | escape }}">
-    </a>
-    <button class="toggler navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarColor02">
-        <div class="navbar-nav mr-auto">
-            <a class="nav-item nav-link" href="{{ site.url }}{{ site.baseurl }}/">Home</a>
-            {% for page in site.nav_pages %}
-                <a class="nav-item nav-link" href="{{ site.url }}{{ site.baseurl }}/{{page.name}}">{{page.name | capitalize }}</a>
-            {% endfor %}
-        </div>
-        {% include search.html %}
-    </div>
-</nav>
+{%- assign _home = false -%}{%- if page.layout == "homelay" -%}{%- assign _home = true -%}{%- endif -%}
+{%- assign _me = site.data.pi[0] -%}
+{%- assign _addr = site.location | strip_newlines | split: "<br/>" -%}
+{%- capture _addr -%}{%- for _l in _addr -%}{%- assign _t = _l | strip -%}{%- if _t != "" -%}{%- unless forloop.first -%}, {% endunless -%}{{ _t }}{%- endif -%}{%- endfor -%}{%- endcapture %}
+<header class="masthead{% if _home %} masthead--home{% endif %}">
+  {% if _home %}<h1 class="site-name">{% else %}<p class="site-name">{% endif %}<a href="{{ '/' | relative_url }}">{{ _me.name }}</a>{% if _home %}</h1>{% else %}</p>{% endif %}
+  <p class="who">Robotics researcher, <a href="https://algrobogroup.github.io/">Algorithmic Robotics Group</a>, NTU Singapore</p>
+  {%- if _home %}
+  <p class="contact">Algorithmic Robotics Group<br>Nanyang Technological University<br>{{ _addr }}<br>Email: {{ site.email }}</p>
+  <a class="portrait-link" href="{{ '/about/' | relative_url }}"><img class="portrait" src="{{ '/images/' | append: _me.photo | relative_url }}" alt="{{ _me.name }}" width="150" height="150"></a>
+  {%- endif %}
+  <nav class="nav" aria-label="Site">
+    {%- for p in site.nav_pages -%}
+      {%- assign _url = '/' | append: p.name | append: '/' -%}
+      <a href="{{ _url | relative_url }}"{% if page.url == _url %} aria-current="page"{% endif %}>{{ p.name }}</a>
+    {%- endfor -%}
+    <a href="{{ '/feed.xml' | relative_url }}">rss</a>
+    {% include search.html %}
+  </nav>
+</header>

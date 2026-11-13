@@ -19,14 +19,15 @@
   <!-- RSS feed discovery (jekyll-feed) -->
   {% feed_meta %}
 
-  <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}?v={{ site.time | date: '%s' }}">
+  <link rel="preload" href="{{ '/assets/fonts/LM8-regular.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ "/assets/site.css" | relative_url }}?v={{ site.time | date: '%s' }}">
   <link rel="icon" type="image/png" sizes="96x96" href="{{ site.url }}{{ site.baseurl }}/images/favicon-96.png">
   <link rel="icon" type="image/png" sizes="48x48" href="{{ site.url }}{{ site.baseurl }}/images/favicon-48.png">
   <link rel="icon" type="image/png" sizes="32x32" href="{{ site.url }}{{ site.baseurl }}/images/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="{{ site.url }}{{ site.baseurl }}/images/favicon-16.png">
   <link rel="shortcut icon" type="image/x-icon" href="{{ site.url }}{{ site.baseurl }}/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="{{ site.url }}{{ site.baseurl }}/images/apple-touch-icon.png">
-  <meta name="theme-color" content="#201f1c">
+  <meta name="theme-color" content="#ffffff">
 
   <!-- Person structured data for richer search / AI entity understanding -->
   <script type="application/ld+json">
@@ -77,21 +78,8 @@
     "author": { "@type": "Person", "name": "Shivaram Kumar Jagannathan" }
   }
   </script>
-  <!-- Inter: web-font fallback for devices without Helvetica / San Francisco (Windows, Android, Linux) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
-  <!-- Modern icon sets: Phosphor (Apple-like minimal UI), Font Awesome 6, and Academicons -->
-  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/v4-shims.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1.9.4/css/academicons.min.css">
-
-  {% if site.calendly and site.calendly != "" %}
-  <!-- Calendly popup widget -->
-  <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css">
-  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-  {% endif %}
+  <!-- No icon fonts or web-font services: the homepage style is text-only (AGENTS.md §7.0).
+       Latin Modern is self-hosted in assets/fonts/. Calendly is a plain link (social.html). -->
 
   <link rel="preconnect" href="https://player.vimeo.com">
   <link rel="preconnect" href="https://i.vimeocdn.com">

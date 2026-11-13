@@ -1,32 +1,14 @@
-<br/>
-<section id="footer">
-<div class="container-footer">
-  <div class="panel-footer">
-	  <div class="row">
-		<div class="col-sm-4">
-		    <h5>About</h5>	
-            <p>{{ site.affiliation }}</p>
-		</div>
-
-		<div class="col-sm-4">
-		    <h5>Contact</h5>	
-            <p>{{ site.contact }}</p>
-		</div>
-
-		<div class="col-sm-4">
-		    <h5>Coordinates</h5>	
-            <p>{{ site.location }}</p>
-		</div>
-	  </div>
-
-      <center><p>&copy {{ "now" | date: "%Y" }} {{site.title | escape }} </p></center>
-	</div>
-  </div>
-</div>
-
-<script src="{{ "/assets/javascript/bootstrap/bootstrap.bundle.min.js" | relative_url }}"></script>
+{%- assign _me = site.data.pi[0] -%}
+{%- assign _addr = site.location | strip_newlines | split: "<br/>" -%}
+{%- capture _addr -%}{%- for _l in _addr -%}{%- assign _t = _l | strip -%}{%- if _t != "" -%}{%- unless forloop.first -%}, {% endunless -%}{{ _t }}{%- endif -%}{%- endfor -%}{%- endcapture -%}
+<footer class="site-footer">
+  <p>{{ _me.name }} · Algorithmic Robotics Group, Nanyang Technological University · {{ _addr }}</p>
+  <p>Email: {{ site.email }} · <a href="{{ _me.scholar }}">Google Scholar</a> · <a href="{{ _me.github }}">GitHub</a> · <a href="{{ _me.linkedin }}">LinkedIn</a> · <a href="{{ _me.twitter }}">X</a> · <a href="{{ '/feed.xml' | relative_url }}">RSS</a></p>
+  <p class="modified">Last modified: {{ page.last_modified_at | default: page.updated | default: site.time | date: "%B %-d, %Y" }}. &copy; {{ "now" | date: "%Y" }} {{ site.title | escape }}.</p>
+</footer>
 
 <script>
+  // Email links carry "name [at] host [dot] tld" so scrapers miss them; decode on click.
   function emailDecode(el) {
     var e = el.getAttribute("data-email")
       .replace(/\s*\[at\]\s*/g, "@")

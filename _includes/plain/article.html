@@ -1,0 +1,13 @@
+{%- assign docs = site.posts | concat: site.notes -%}
+{%- assign d = docs | where: "url", page.doc_url | first -%}
+{%- assign when = d.updated | default: d.date -%}
+<article class="article">
+  <header class="article-head">
+    <h1 class="article-title">{{ d.title }}</h1>
+    <p class="article-meta"><time datetime="{{ when | date: '%Y-%m-%d' }}">{{ when | date: "%B %-d, %Y" }}</time>{% if d.collection == "notes" %} · note{% endif %}{% if d.tags.size > 0 %} · {{ d.tags | join: ", " }}{% endif %}</p>
+  </header>
+  <div class="article-body">
+    {{ d.content }}
+  </div>
+</article>
+<p class="back"><a href="{{ page.base | append: '/' | relative_url }}">← Index</a></p>

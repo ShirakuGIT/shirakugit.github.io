@@ -1,19 +1,55 @@
 ---
 layout: default
 ---
+{%- comment -%}
+  Home page (the early-2000s academic homepage). The masthead (name, contact
+  block, portrait) comes from includes/header.html; this layout adds the bio
+  from _pages/home.md and the section lists, all data-driven.
+{%- endcomment -%}
+<div class="intro">
+  {{ content }}
+</div>
 
-  <div id="homeid" class="col-sm-7 col-xs-12">
-	{{ content }}
-  </div>
+<h2 id="papers">Papers</h2>
+<div class="bib-compact">
+{% bibliography --template bibcompact %}
+</div>
+<p class="more small">Abstracts, TL;DRs and BibTeX are on the <a href="{{ '/research/' | relative_url }}">research page</a>.</p>
 
-  <div id="photoid" class="col-sm-5 col-xs-12">
-	{% include sidebar.html %}
-  </div>
+<h2 id="projects">Projects</h2>
+<ul class="things">
+{%- for p in site.data.projects %}
+  <li><a href="{{ p.repo | default: p.video }}">{{ p.name }}</a>: {{ p.description }}</li>
+{%- endfor %}
+</ul>
+<p class="more small">Demos and videos are on the <a href="{{ '/projects/' | relative_url }}">projects page</a>.</p>
 
-  <section id="newsid" class="col-12 home-news">
-    <div class="home-news-head">
-      <h2 class="home-news-title">News</h2>
-      <a class="home-news-all" href="{{ site.url }}{{ site.baseurl }}/allnews.html">All news<i class="ph ph-arrow-right"></i></a>
-    </div>
-    {% include news-list.html limit=3 %}
-  </section>
+<h2 id="writing">Writing</h2>
+{%- comment -%} Posts and notes merged, newest first (notes sort by `updated`). {%- endcomment -%}
+{%- assign _items = "" | split: "" -%}
+{%- for post in site.posts -%}
+  {%- capture _row -%}{{ post.date | date: "%Y-%m-%d" }}^^{{ post.url }}^^{{ post.title }}^^post{%- endcapture -%}
+  {%- assign _items = _items | push: _row -%}
+{%- endfor -%}
+{%- for note in site.notes -%}
+  {%- assign _d = note.updated | default: note.date -%}
+  {%- capture _row -%}{{ _d | date: "%Y-%m-%d" }}^^{{ note.url }}^^{{ note.title }}^^note{%- endcapture -%}
+  {%- assign _items = _items | push: _row -%}
+{%- endfor -%}
+{%- assign _items = _items | sort | reverse %}
+<ol class="dated">
+{%- for _it in _items limit: 10 -%}
+  {%- assign _f = _it | split: "^^" %}
+  <li><time datetime="{{ _f[0] }}">{{ _f[0] }}</time> <a href="{{ _f[1] | relative_url }}">{{ _f[2] }}</a>{% if _f[3] == "note" %} <span class="aside">(note)</span>{% endif %}</li>
+{%- endfor %}
+</ol>
+<p class="more small"><a href="{{ '/blogs/' | relative_url }}">All blog posts</a> · <a href="{{ '/notes/' | relative_url }}">All notes</a></p>
+
+<h2 id="news">News</h2>
+{% include news-list.html limit=5 %}
+<p class="more small"><a href="{{ '/allnews.html' | relative_url }}">All news</a></p>
+
+<h2 id="elsewhere">Elsewhere</h2>
+<ul class="things">
+  <li><a href="{{ '/photography/' | relative_url }}">Photographs</a> from places I've been.</li>
+</ul>

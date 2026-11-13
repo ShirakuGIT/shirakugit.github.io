@@ -1,0 +1,16 @@
+/* base.css — structure shared by every /plain/ prototype style.
+   Colours, fonts and layout live in the per-style sheet. */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; overflow-wrap: break-word; }
+img, video, iframe, svg { max-width: 100%; height: auto; }
+pre { overflow-x: auto; }
+table { border-collapse: collapse; display: block; overflow-x: auto; max-width: 100%; }
+figure { margin: 1.5em 0; }
+.video-embed { position: relative; aspect-ratio: 16 / 9; }
+.video-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+ul.things, ol.archive { margin: .4em 0; }
+ol.archive { list-style: none; padding: 0; }
+.runhead, .runfoot, .contact, .portrait { display: none; }
+.proto-banner { font: 13px/1.4 -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif; opacity: .75; margin: 0 0 2em; }
+.proto-banner strong { text-transform: none; }

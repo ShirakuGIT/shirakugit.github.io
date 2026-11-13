@@ -1,0 +1,23 @@
+/* Latin Modern — the digital Computer Modern that LaTeX typesets with.
+   Self-hosted copies from the latex.css package (GUST Font License). */
+@font-face { font-family: "Latin Modern"; font-style: normal; font-weight: normal; font-display: swap; src: url("../fonts/LM-regular.woff2") format("woff2"); }
+@font-face { font-family: "Latin Modern"; font-style: italic; font-weight: normal; font-display: swap; src: url("../fonts/LM-italic.woff2") format("woff2"); }
+@font-face { font-family: "Latin Modern"; font-style: normal; font-weight: bold; font-display: swap; src: url("../fonts/LM-bold.woff2") format("woff2"); }
+@font-face { font-family: "Latin Modern"; font-style: italic; font-weight: bold; font-display: swap; src: url("../fonts/LM-bold-italic.woff2") format("woff2"); }
+
+/* Libertinus — Linux Libertine's maintained successor (LaTeX: \usepackage{libertinus}). OFL. */
+@font-face { font-family: "Libertinus"; font-style: normal; font-weight: normal; font-display: swap; src: url("fonts/Libertinus-regular.woff2") format("woff2"); }
+@font-face { font-family: "Libertinus"; font-style: italic; font-weight: normal; font-display: swap; src: url("fonts/Libertinus-italic.woff2") format("woff2"); }
+@font-face { font-family: "Libertinus"; font-style: normal; font-weight: bold; font-display: swap; src: url("fonts/Libertinus-bold.woff2") format("woff2"); }
+@font-face { font-family: "Libertinus"; font-style: italic; font-weight: bold; font-display: swap; src: url("fonts/Libertinus-bold-italic.woff2") format("woff2"); }
+
+/* New Computer Modern, Book weight — Computer Modern with heavier strokes (GUST licence). */
+@font-face { font-family: "NewCM Book"; font-style: normal; font-weight: normal; font-display: swap; src: url("fonts/NewCM-book.woff2") format("woff2"); }
+@font-face { font-family: "NewCM Book"; font-style: italic; font-weight: normal; font-display: swap; src: url("fonts/NewCM-book-italic.woff2") format("woff2"); }
+@font-face { font-family: "NewCM Book"; font-style: normal; font-weight: bold; font-display: swap; src: url("fonts/NewCM-bold.woff2") format("woff2"); }
+@font-face { font-family: "NewCM Book"; font-style: italic; font-weight: bold; font-display: swap; src: url("fonts/NewCM-bold-italic.woff2") format("woff2"); }
+/* Latin Modern Roman 8 — LM's small-text optical size: same design, sturdier and wider. */
+@font-face { font-family: "LM Roman 8"; font-style: normal; font-weight: normal; font-display: swap; src: url("../fonts/LM8-regular.woff2") format("woff2"); }
+@font-face { font-family: "LM Roman 8"; font-style: italic; font-weight: normal; font-display: swap; src: url("../fonts/LM8-italic.woff2") format("woff2"); }
+@font-face { font-family: "LM Roman 8"; font-style: normal; font-weight: bold; font-display: swap; src: url("../fonts/LM8-bold.woff2") format("woff2"); }
+@font-face { font-family: "LM Roman 8"; font-style: italic; font-weight: bold; font-display: swap; src: url("../fonts/LM-bold-italic.woff2") format("woff2"); }

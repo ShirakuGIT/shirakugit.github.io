@@ -4,13 +4,11 @@ layout: homelay
 permalink: /
 ---
 
-<div class="hero">
-<h1 class="hero-name">Shivaram Kumar Jagannathan</h1>
-<p class="hero-aka">Hi, I'm <strong>Shiva</strong> — friends call me <strong>Shiraku</strong>.</p>
+Hi, I'm **Shiva** — friends call me **Shiraku**. I'm a researcher working at the intersection of robotics and intelligence — classical robotics, spatial intelligence, machine learning, and real-world robot deployments.
+
+Right now I'm at [ARG, NTU Singapore](https://algrobogroup.github.io/) under [Dr.&nbsp;Yoonchang Sung](https://yoonchangsung.com/) — using visual priors to inform robot decision-making, and 3D reconstruction for object search in cluttered scenes.
+
 <p class="visually-hidden">Also known as Shivaram, Shivaram Kumar, Shivaram K, Shivaram K Jagannathan, Shivaram Kumar J, Shivaram Jagannathan, S. K. Jagannathan.</p>
-<p class="hero-role">Robotics researcher · <a href="https://algrobogroup.github.io/" target="_blank" rel="noopener">Algorithmic Robotics Group</a>, NTU Singapore</p>
 
-<p class="hero-lede">I'm a researcher working at the intersection of robotics and intelligence — classical robotics, spatial intelligence, machine learning, and real-world robot deployments.</p>
-
-<p class="hero-body">Right now I'm at <a href="https://algrobogroup.github.io/" target="_blank" rel="noopener">ARG, NTU Singapore</a>, under <a href="https://yoonchangsung.com/" target="_blank" rel="noopener">Dr.&nbsp;Yoonchang Sung</a> — using visual priors to inform robot decision-making, and 3D reconstruction for object search in cluttered scenes.</p>
-</div>
+{% assign me = site.data.pi | first %}
+{% include social.html member=me %}

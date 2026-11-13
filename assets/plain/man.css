@@ -1,0 +1,58 @@
+/* man — the page as a Unix manual page (cat-v / TempleOS / 80 columns).
+   One monospace font, one size, bold for structure. Ink, paper, link blue. */
+:root { --bg: #fff; --fg: #000; --muted: #555; --link: #0000ee; --ind: 7ch; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #000; --fg: #d0d0d0; --muted: #888; --link: #6fa8ff; }
+}
+html, body { background: var(--bg); }
+body {
+  max-width: calc(80ch + 32px); margin: 0 auto; padding: 1.5em 16px 4em; color: var(--fg);
+  font: 15px/1.45 ui-monospace, "SF Mono", Menlo, "DejaVu Sans Mono", Consolas, monospace;
+}
+@media (max-width: 600px) { :root { --ind: 3ch; } body { font-size: 13.5px; } }
+a, a:visited { color: var(--link); }
+h1, h2, h3, h4, p, ul, ol, pre, blockquote, figure { font-size: 1em; }
+h1, h2, h3, h4 { font-weight: bold; margin: 1.45em 0 0; }
+p, ul, ol, pre, blockquote { margin: 0 0 1.45em; }
+pre { padding: 0; }
+blockquote { margin-left: 4ch; }
+th, td { border: 1px solid var(--muted); padding: 0 1ch; }
+.aside, .kind, figcaption, .back { color: var(--muted); }
+
+.runhead, .runfoot { display: flex; justify-content: space-between; gap: 2ch; }
+.runhead span:nth-child(2), .runfoot span:nth-child(2) { text-align: center; }
+.runhead { margin-bottom: 1.45em; }
+@media (max-width: 600px) { .runhead span:nth-child(2) { display: none; } }
+
+/* NAME / SYNOPSIS built from the masthead */
+.masthead { padding-left: var(--ind); }
+.masthead::before { content: "NAME"; display: block; font-weight: bold; margin-left: calc(-1 * var(--ind)); }
+.site-name { display: inline; margin: 0; font-weight: normal; }
+.site-name a { color: inherit; text-decoration: none; }
+.who { display: inline; margin: 0; }
+.who::before { content: " \2014  "; }
+.nav { margin: 1.45em 0 0; }
+.nav::before { content: "SYNOPSIS"; display: block; font-weight: bold; margin-left: calc(-1 * var(--ind)); }
+.nav .sep { color: var(--muted); }
+
+h2 { text-transform: uppercase; }
+.intro h2::after { content: ""; }
+.sec-body, .article-body { padding-left: var(--ind); }
+.sec-body > :last-child { margin-bottom: 0; }
+ul.things { list-style: none; padding: 0; }
+ul.things li { margin-bottom: 1em; }
+ul.things li > a:first-child { font-weight: bold; }
+ol.archive li { display: flex; gap: 2ch; }
+ol.archive time { flex: 0 0 auto; color: var(--muted); }
+@media (max-width: 600px) { ol.archive li { display: block; margin-bottom: .6em; } ol.archive time { display: block; } }
+
+.article-head { margin: 1.45em 0; }
+.article-title { text-transform: uppercase; margin: 0; }
+.article-meta { padding-left: var(--ind); margin: 0; color: var(--muted); }
+.article-body h1, .article-body h2, .article-body h3 { margin-left: calc(-1 * var(--ind)); }
+.article-body h1, .article-body h2 { text-transform: uppercase; }
+.highlight .c, .highlight .c1, .highlight .cm { color: var(--muted); }
+.highlight .k, .highlight .kd { font-weight: bold; }
+
+footer { margin-top: 2.9em; }
+footer p { display: none; }

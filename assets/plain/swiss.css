@@ -1,0 +1,63 @@
+/* swiss — International Typographic Style. Helvetica, a strict two-column
+   grid, flush-left ragged-right, hierarchy from size and weight alone.
+   Colours: black, white, one red, grey. */
+:root { --bg: #fff; --fg: #000; --muted: #767676; --red: #e2231a; --code: #f2f2f2; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #000; --fg: #fff; --muted: #8f8f8f; --red: #ff4a3d; --code: #161616; }
+}
+html, body { background: var(--bg); }
+body {
+  max-width: 68em; margin: 0 auto; padding: 3em 24px 5em; color: var(--fg);
+  font: 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+a, a:visited { color: var(--fg); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--red); }
+code, pre, time { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-variant-numeric: tabular-nums; }
+pre, pre code { font-family: ui-monospace, Menlo, monospace; font-size: .88em; }
+pre { background: var(--code); padding: 1em; }
+:not(pre) > code { font-family: ui-monospace, Menlo, monospace; font-size: .9em; }
+blockquote { margin: 1.5em 0; padding: 0; font-size: 1.25em; line-height: 1.35; font-weight: 500; }
+th, td { border-top: 1px solid var(--fg); padding: .4em 1em .4em 0; text-align: left; }
+figcaption, .aside, .kind, footer, .back { color: var(--muted); font-size: .85em; }
+
+/* masthead: big name, label line, rule */
+.masthead { border-bottom: 4px solid var(--fg); padding-bottom: 1.2em; margin-bottom: 1em; }
+.site-name { font-size: clamp(2.6em, 8vw, 5.5em); font-weight: 700; line-height: .95; letter-spacing: -.035em; margin: 0 0 .35em; }
+p.site-name { font-size: clamp(1.6em, 4vw, 2.2em); }
+.site-name a { color: inherit; text-decoration: none; }
+.who { margin: 0; font-weight: 500; }
+.nav { margin: .4em 0 0; }
+.nav a { text-decoration: none; } .nav a:hover { color: var(--red); }
+.nav .sep { color: var(--muted); }
+
+/* the grid: label column + content column */
+section, .article { display: grid; grid-template-columns: 14em minmax(0, 1fr); column-gap: 2em; border-top: 1px solid var(--fg); padding-top: .9em; margin-top: 2.5em; }
+section:first-of-type { border-top: 0; margin-top: 1em; }
+h2 { margin: 0; font-size: .8em; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--red); }
+.sec-body { max-width: 38em; }
+.intro .sec-body p:first-child { font-size: 1.45em; line-height: 1.3; font-weight: 500; letter-spacing: -.01em; margin-top: 0; }
+ul.things { list-style: none; padding: 0; margin: 0; }
+ul.things li { padding: .5em 0; border-bottom: 1px solid color-mix(in srgb, var(--fg) 15%, transparent); }
+ul.things li:first-child { padding-top: 0; }
+ul.things li > a:first-child { font-weight: 700; }
+ol.archive { margin: 0; }
+ol.archive li { display: grid; grid-template-columns: 7em 1fr; gap: 1em; padding: .35em 0; border-bottom: 1px solid color-mix(in srgb, var(--fg) 15%, transparent); }
+ol.archive li:first-child { padding-top: 0; }
+ol.archive time { color: var(--muted); }
+
+/* articles sit in the content column, title hangs across */
+.article-head { grid-column: 1 / -1; margin-bottom: 2em; }
+.article-title { font-size: clamp(2em, 5vw, 3.4em); line-height: 1.02; letter-spacing: -.03em; margin: 0 0 .3em; max-width: 16em; }
+.article-meta { color: var(--muted); margin: 0; }
+.article-body { grid-column: 2; max-width: 38em; font-size: 1.05em; }
+.article-body h1, .article-body h2, .article-body h3 { font-size: 1.15em; color: var(--fg); text-transform: none; letter-spacing: 0; margin: 2em 0 .5em; }
+.back { margin-top: 3em; }
+footer { margin-top: 4em; border-top: 4px solid var(--fg); padding-top: .8em; display: flex; gap: 2em; flex-wrap: wrap; }
+footer p { margin: 0; }
+
+@media (max-width: 760px) {
+  section, .article { grid-template-columns: 1fr; }
+  h2 { margin-bottom: .8em; }
+  .article-body { grid-column: 1; }
+}
+.article { border-top: 0; margin-top: 1.5em; }

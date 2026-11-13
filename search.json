@@ -3,11 +3,12 @@ layout: null
 permalink: /search.json
 sitemap: false
 ---
+{%- comment -%} Pages opt out of search with `search: false` in front matter. {%- endcomment -%}
 {%- assign items = site.posts | concat: site.pages | concat: site.notes -%}
 {%- assign sep = "" -%}
 [
 {%- for item in items -%}
-  {%- if item.title and item.url != "/search.json" and item.url != "/404.html" -%}
+  {%- if item.title and item.url != "/search.json" and item.url != "/404.html" and item.search != false -%}
   {%- unless item.path contains "template" -%}
   {{ sep }}{
     "title": {{ item.title | jsonify }},

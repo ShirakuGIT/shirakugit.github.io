@@ -1,22 +1,22 @@
 ---
 layout: default
 ---
-<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+<article class="article" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <header class="post-header">
-    <p class="post-back"><a href="{{ site.url }}{{ site.baseurl }}/blogs/">← All posts</a></p>
-    <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
-    <p class="post-meta">
-      <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time>{% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %} • {{ content | strip_html | number_of_words | divided_by: 200 | at_least: 1 }} min read
-      {% if page.tags.size > 0 %}<br>{% for tag in page.tags %}<span class="post-tag">{{ tag }}</span>{% endfor %}{% endif %}
+  <header class="article-head">
+    <p class="article-back"><a href="{{ '/blogs/' | relative_url }}">← All posts</a></p>
+    <h1 class="article-title" itemprop="name headline">{{ page.title }}</h1>
+    <p class="article-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%B %-d, %Y" }}</time>{% if page.author %} · <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %} · {{ content | strip_html | number_of_words | divided_by: 200 | at_least: 1 }} min read{% if page.tags.size > 0 %} · {{ page.tags | join: ", " }}{% endif %}
     </p>
   </header>
 
-  <div class="post-content" itemprop="articleBody">
+  {% include post-toc.html %}
+
+  <div class="article-body post-content" itemprop="articleBody">
     {{ content }}
   </div>
 
 </article>
 
 {% include post-lightbox.html %}
-{% include post-toc.html %}
