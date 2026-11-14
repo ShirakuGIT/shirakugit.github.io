@@ -127,5 +127,15 @@ Livestream: [Day 2](https://www.youtube.com/watch?v=uPXoJm-L3YY). Papers mention
 [Sequential asymmetric imitation](https://arxiv.org/abs/2606.16490) ·
 [RoboNaldo](https://arxiv.org/abs/2606.11092).
 Background: [π\*0.6](https://arxiv.org/abs/2511.14759) (the slower full-model RL recipe that RL Token contrasted itself with), [Gemini Robotics](https://arxiv.org/abs/2503.20020), [SONIC](https://arxiv.org/abs/2511.07820) (the 128-GPU baseline), [AgiBot World](https://arxiv.org/abs/2503.06669).
-GRAIL, Play to Perfect, DISCO, PACE, and Gemini Robotics 2.5 had no arXiv record I could find.
+[GRAIL](https://arxiv.org/abs/2606.05160) ·
+[Play2Perfect](https://arxiv.org/abs/2606.26428) ·
+[DISCO](https://arxiv.org/abs/2610.25785) ·
+[PACE](https://arxiv.org/abs/2610.16308) ·
+[FACTR 2](https://arxiv.org/abs/2606.12406) ·
+[Contact-rich VLA failures](https://arxiv.org/abs/2608.01402) ·
+[SLAC](https://arxiv.org/abs/2506.04147) ·
+[SafeMimic](https://arxiv.org/abs/2506.15847) ·
+[DataMIL](https://arxiv.org/abs/2505.09603) ·
+[GUILD](https://arxiv.org/abs/2611.05368).
+Gemini Robotics 2.5 had no paper I could find.
 

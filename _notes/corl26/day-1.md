@@ -129,5 +129,10 @@ Livestream: [Day 1](https://www.youtube.com/watch?v=F_4AAOQsWlA). Papers mention
 [Diagnosing compositional generalization](https://arxiv.org/abs/2607.29687) ·
 [BitVLA](https://arxiv.org/abs/2506.07530) ·
 [Robust autonomy emerges from self-play](https://arxiv.org/abs/2502.03349) (cited by GM).
-Physical Intelligence's π0.7, RobotTTT, MemWorld, Robot Colosseum, and GR00T 2 had no arXiv record I could find.
+[π0.7](https://arxiv.org/abs/2604.15483) ·
+[RoboTTT](https://arxiv.org/abs/2607.15275) ·
+[Mem-World](https://arxiv.org/abs/2606.18960) ·
+[TEMPO](https://arxiv.org/abs/2609.16864) ·
+[REACT](https://arxiv.org/abs/2610.12007).
+Robot Colosseum and GR00T 2 had no paper I could find.
 
