@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+(function () {
+  var saved = null;
+  try { saved = localStorage.getItem("theme"); } catch (e) {}
+  var dark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+  document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+})();
+</script>
+
+
+  
+  <meta name="robots" content="noindex, follow">
+  
+
+  <!-- SEO: meta, Open Graph, Twitter cards, JSON-LD (jekyll-seo-tag) -->
+  <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>LaTeX compilation — demo | Shivaram Kumar Jagannathan</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="LaTeX compilation — demo" />
+<meta name="author" content="Shivaram Kumar Jagannathan" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="Compile research-grade LaTeX in place — like a notebook cell, but for academic papers. Drop a {% tex_cell %}{% endraw %} or point at a .tex file and get the paper as real page content (ar5iv-style), with the compiled PDF for download." />
+<meta name="twitter:description" property="og:description" content="Compile research-grade LaTeX in place — like a notebook cell, but for academic papers. Drop a {% tex_cell %}{% endraw %} or point at a .tex file and get the paper as real page content (ar5iv-style), with the compiled PDF for download." />
+<link rel="canonical" href="https://shivaram.net/notes/latex-compilation-demo/" />
+<meta property="og:url" content="https://shivaram.net/notes/latex-compilation-demo/" />
+<meta property="og:site_name" content="Shivaram Kumar Jagannathan" />
+<meta property="og:image" content="https://shivaram.net/images/headshot.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-11-14T18:26:32+05:30" />
+<meta property="article:modified_time" content="2026-11-14T18:26:32+05:30" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://shivaram.net/images/headshot.jpg" />
+<meta name="twitter:title" content="LaTeX compilation — demo" />
+<meta name="twitter:site" content="@shirakuex" />
+<meta name="twitter:creator" content="@Shivaram Kumar Jagannathan" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Shivaram Kumar Jagannathan"},"dateModified":"2026-11-14T18:26:32+05:30","datePublished":"2026-11-14T18:26:32+05:30","description":"Compile research-grade LaTeX in place — like a notebook cell, but for academic papers. Drop a {% tex_cell %}{% endraw %} or point at a .tex file and get the paper as real page content (ar5iv-style), with the compiled PDF for download.","headline":"LaTeX compilation — demo","image":"https://shivaram.net/images/headshot.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https://shivaram.net/notes/latex-compilation-demo/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://shivaram.net/images/headshot.jpg"},"name":"Shivaram Kumar Jagannathan"},"url":"https://shivaram.net/notes/latex-compilation-demo/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <!-- Reinforce the headshot as the share/preview image across engines -->
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="1024">
+  <meta property="og:image:alt" content="Shivaram Kumar Jagannathan">
+  <meta name="twitter:image:alt" content="Shivaram Kumar Jagannathan">
+  <!-- RSS feed discovery (jekyll-feed) -->
+  <link type="application/atom+xml" rel="alternate" href="https://shivaram.net/feed.xml" title="Shivaram Kumar Jagannathan" />
+
+  <link rel="preload" href="/assets/fonts/LM8-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/site.css?v=1794660992">
+  <link rel="icon" type="image/png" sizes="96x96" href="https://shivaram.net/images/favicon-96.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="https://shivaram.net/images/favicon-48.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://shivaram.net/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://shivaram.net/images/favicon-16.png">
+  <link rel="shortcut icon" type="image/x-icon" href="https://shivaram.net/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://shivaram.net/images/apple-touch-icon.png">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#181818" media="(prefers-color-scheme: dark)">
+
+  <!-- Person structured data for richer search / AI entity understanding -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Shivaram Kumar Jagannathan",
+    "givenName": "Shivaram",
+    "additionalName": "Kumar",
+    "familyName": "Jagannathan",
+    "alternateName": [
+      "Shivaram",
+      "Shivaram Kumar",
+      "Shivaram K",
+      "Shivaram K Jagannathan",
+      "Shivaram Kumar J",
+      "Shivaram Jagannathan",
+      "S. K. Jagannathan",
+      "Shiraku"
+    ],
+    "url": "https://shivaram.net/",
+    "mainEntityOfPage": "https://shivaram.net/",
+    "image": "https://shivaram.net/images/headshot.jpg",
+    "jobTitle": "Robotics Researcher",
+    "description": "Shivaram — robotics researcher at NTU Singapore. Also goes by Shivaram Kumar, Shivaram K, Shivaram Kumar Jagannathan.",
+    "affiliation": [
+      { "@type": "Organization", "name": "Nanyang Technological University" },
+      { "@type": "CollegeOrUniversity", "name": "Manipal Institute of Technology" }
+    ],
+    "knowsAbout": ["Robotics", "Spatial Intelligence", "Task and Motion Planning", "SLAM", "Sensor Fusion", "Machine Learning", "Computer Vision", "3D Reconstruction"],
+    "sameAs": [
+      "https://scholar.google.com/citations?user=geKWO64AAAAJ&hl=en",
+      "https://github.com/ShirakuGIT",
+      "https://www.linkedin.com/in/shivaramkumarj/",
+      "https://x.com/shirakuex"
+    ]
+  }
+  </script>
+
+  <!-- WebSite schema to claim sitelinks-search-box + canonical site name -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "url": "https://shivaram.net/",
+    "name": "Shivaram",
+    "alternateName": ["Shivaram Kumar Jagannathan", "Shivaram Kumar", "Shivaram K Jagannathan"],
+    "author": { "@type": "Person", "name": "Shivaram Kumar Jagannathan" }
+  }
+  </script>
+  <!-- No icon fonts or web-font services: the homepage style is text-only (AGENTS.md §7.0).
+       Latin Modern is self-hosted in assets/fonts/. Calendly is a plain link (social.html). -->
+
+  <link rel="preconnect" href="https://player.vimeo.com">
+  <link rel="preconnect" href="https://i.vimeocdn.com">
+  <link rel="preconnect" href="https://f.vimeocdn.com">
+
+
+
+<!-- Google Analytics (original) -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '');
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','');</script>
+<!-- End Google Tag Manager -->
+
+
+
+<script>
+MathJax = {
+    tex: {
+    inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+    tags: 'ams'  // should be 'ams', 'none', or 'all' }. This line makes the equation numbering and labeling work
+    }, 
+    svg: {
+    fontCache: 'global'
+    }
+};
+</script>
+<script
+    type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script> 
+
+</head>
+
+
+  <body>
+
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id="
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="masthead">
+  <p class="site-name"><a href="/">Shivaram Kumar Jagannathan</a></p>
+  <p class="who">Robotics researcher, <a href="https://algrobogroup.github.io/">Algorithmic Robotics Group</a>, NTU Singapore</p>
+  <nav class="nav" aria-label="Site"><a href="/about/">about</a><a href="/projects/">projects</a><a href="/research/">research</a><a href="/blogs/">blogs</a><a href="/notes/">notes</a><a href="/photography/">photography</a><a href="/feed.xml">rss</a>
+    <button type="button" class="theme-toggle" id="theme-toggle" hidden aria-label="Switch colour theme"></button>
+    <script>
+    (function () {
+      var root = document.documentElement, btn = document.getElementById("theme-toggle");
+      function label() {
+        var dark = root.getAttribute("data-theme") === "dark";
+        btn.textContent = dark ? "\u2600" : "\u263E";   /* ☀ in dark mode, ☾ in light mode */
+        btn.title = btn.ariaLabel = dark ? "Switch to light mode" : "Switch to dark mode";
+      }
+      btn.addEventListener("click", function () {
+        var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        try { localStorage.setItem("theme", next); } catch (e) {}
+        label();
+      });
+      label();
+      btn.hidden = false;
+    })();
+    </script>
+    <div class="nav-search" id="nav-search">
+  <i class="fa-solid fa-magnifying-glass search-icon" aria-hidden="true"></i>
+  <input type="search" id="search-input" placeholder="Search…" autocomplete="off"
+         role="combobox" aria-expanded="false" aria-controls="search-results" aria-label="Search site">
+  <div class="search-panel" id="search-panel">
+    <div class="search-count" id="search-count"></div>
+    <ul id="search-results" class="search-results" role="listbox"></ul>
+  </div>
+</div>
+<script>
+(function(){
+  var input   = document.getElementById('search-input');
+  var panel   = document.getElementById('search-panel');
+  var listEl  = document.getElementById('search-results');
+  var countEl = document.getElementById('search-count');
+  var wrap    = document.getElementById('nav-search');
+  var docs = null, active = -1, current = [];
+  var indexUrl = '/search.json';
+
+  // strip stray liquid / html / markdown so indexed + shown text is plain prose
+  function clean(s){
+    return (s||'')
+      .replace(/\{[%{][\s\S]*?[%}]\}/g, ' ')      // liquid tags / output braces
+      .replace(/\{[%{][\s\S]*$/g, ' ')            // dangling (truncated) liquid
+      .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')    // markdown links -> text
+      .replace(/<[^>]*>/g, ' ')                   // real html tags
+      .replace(/&lt;[^&]*?&gt;/g, ' ')            // escaped html tags
+      .replace(/\b[a-z-]+=("|&quot;)[^"]*?("|&quot;)/gi, ' ') // leftover attr="..."
+      .replace(/&[a-z]+;/gi, ' ')                 // html entities
+      .replace(/[#>*`~|_]{1,}/g, ' ')             // markdown punctuation
+      .replace(/[\u00a0\u200b\u2009\u202f]/g, ' ') // nbsp / thin / zero-width
+      .replace(/\s+/g, ' ').trim();
+  }
+  // lowercase + drop punctuation so "I'm", "SLAM!", "task-motion" all match
+  function norm(s){ return (s||'').toLowerCase().replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim(); }
+  function terms(q){ return norm(q).split(' ').filter(function(t){ return t.length>1; }); }
+
+  // --- n-gram (trigram) helpers for typo tolerance ---
+  function trigrams(s){            // padded trigram set of a token
+    s = '  ' + s + '  ';
+    var g = {};
+    for(var i=0; i<s.length-2; i++) g[s.substr(i,3)] = 1;
+    return g;
+  }
+  function dice(a, b){             // Dice coefficient of two trigram sets (0..1)
+    var inter = 0, na = 0, nb = 0, k;
+    for(k in a){ na++; if(b[k]) inter++; }
+    for(k in b){ nb++; }
+    return (na+nb) ? (2*inter)/(na+nb) : 0;
+  }
+  // index a field into unique tokens + their trigram sets (prefix + n-gram index)
+  function fieldIndex(text, weight){
+    var seen = {}, toks = [], tri = [], parts = norm(text).split(' ');
+    for(var i=0;i<parts.length;i++){
+      var p = parts[i];
+      if(p.length>1 && !seen[p]){ seen[p]=1; toks.push(p); tri.push(trigrams(p)); }
+    }
+    return { w: weight, text: norm(text), toks: toks, tri: tri };
+  }
+
+  function load(){
+    if(docs) return Promise.resolve();
+    return fetch(indexUrl).then(function(r){ return r.json(); }).then(function(json){
+      docs = json.map(function(it){
+        var content = clean(it.content);
+        return {
+          title: it.title, url: it.url, type: it.type, date: it.date,
+          tags: it.tags, category: it.category, content: content,
+          fields: [
+            fieldIndex(it.title, 6),
+            fieldIndex((it.tags||'') + ' ' + (it.category||''), 3),
+            fieldIndex(content, 1)
+          ],
+          nt: norm(it.title), nc: norm(content)
+        };
+      });
+    });
+  }
+
+  // best match tier of query term `t` inside one field: exact > prefix > substring > fuzzy
+  function fieldTier(f, t, qtri){
+    var tier = 0;
+    for(var i=0;i<f.toks.length;i++){
+      var tok = f.toks[i];
+      if(tok === t) return 1;                          // exact word — can't beat
+      if(tok.indexOf(t) === 0){ if(tier<0.85) tier=0.85; }      // prefix (as-you-type)
+      else if(tok.indexOf(t) > -1){ if(tier<0.6) tier=0.6; }    // substring
+    }
+    if(tier < 0.85 && t.length >= 3){                  // n-gram fuzzy (typo tolerance)
+      for(var j=0;j<f.tri.length;j++){
+        var d = dice(qtri, f.tri[j]);
+        if(d >= 0.5){ var ft = 0.5*d; if(ft>tier) tier=ft; }
+      }
+    }
+    return tier;
+  }
+
+  // every query term must match some field (exact/prefix/substring/fuzzy); sum weighted best
+  function search(q){
+    var ts = terms(q);
+    if(!ts.length || !docs) return [];
+    var nq = norm(q), out = [];
+    var qtri = ts.map(trigrams);
+    docs.forEach(function(d){
+      var score = 0, all = true;
+      for(var i=0;i<ts.length;i++){
+        var best = 0;
+        for(var f=0; f<d.fields.length; f++){
+          var tier = fieldTier(d.fields[f], ts[i], qtri[i]);
+          var s = d.fields[f].w * tier;
+          if(s > best) best = s;
+        }
+        if(best === 0){ all = false; break; }
+        score += best;
+      }
+      if(!all) return;
+      if(nq && d.nt.indexOf(nq) > -1) score += 12;   // whole phrase in title
+      if(nq && d.nc.indexOf(nq) > -1) score += 4;    // whole phrase in body
+      out.push({ item: d, score: score });
+    });
+    out.sort(function(a,b){ return b.score - a.score; });
+    return out;
+  }
+
+  function esc(s){ return (s||'').replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function highlight(text, ts){
+    var out = esc(text);
+    ts.forEach(function(t){
+      var re = new RegExp('('+t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig');
+      out = out.replace(re, '<mark>$1</mark>');
+    });
+    return out;
+  }
+  function snippet(content, ts){
+    if(!content) return '';
+    var lc = content.toLowerCase(), pos = -1;
+    for(var i=0;i<ts.length;i++){ var p = lc.indexOf(ts[i]); if(p>-1 && (pos<0||p<pos)) pos = p; }
+    var start = pos>60 ? pos-60 : 0;
+    var slice = content.slice(start, start+170);
+    if(start>0) slice = '… '+slice;
+    if(start+170 < content.length) slice = slice+' …';
+    return highlight(slice, ts);
+  }
+  function icon(type){
+    return type==='post'
+      ? '<i class="fa-solid fa-pen-nib sr-icon"></i>'
+      : '<i class="fa-regular fa-file-lines sr-icon"></i>';
+  }
+  function render(results, q){
+    var ts = terms(q);
+    current = results.slice(0, 8);
+    if(!current.length){
+      countEl.textContent = '';
+      listEl.innerHTML = '<li class="search-empty">No results for “'+esc(q)+'”</li>';
+      panel.classList.add('open'); input.setAttribute('aria-expanded','true'); return;
+    }
+    countEl.textContent = current.length + (current.length===1?' result':' results');
+    listEl.innerHTML = current.map(function(r, i){
+      var it = r.item;
+      var meta = it.type==='post' ? (it.date || 'Blog post') : 'Page';
+      if(it.tags) meta += ' · ' + esc(it.tags);
+      var snip = snippet(it.content, ts);
+      return '<li role="option" data-i="'+i+'" class="sr-item">'+
+               '<a href="'+it.url+'">'+
+                 '<div class="sr-head">'+icon(it.type)+
+                   '<span class="sr-title">'+highlight(it.title, ts)+'</span>'+
+                   '<span class="sr-badge">'+(it.type==='post'?'Blog':'Page')+'</span>'+
+                 '</div>'+
+                 (snip ? '<div class="sr-snippet">'+snip+'</div>' : '')+
+                 '<div class="sr-meta">'+meta+'</div>'+
+               '</a></li>';
+    }).join('');
+    active = -1;
+    panel.classList.add('open'); input.setAttribute('aria-expanded','true');
+  }
+  function close(){ panel.classList.remove('open'); input.setAttribute('aria-expanded','false'); active = -1; }
+  function setActive(n){
+    var items = listEl.querySelectorAll('.sr-item');
+    if(!items.length) return;
+    if(active>-1 && items[active]) items[active].classList.remove('active');
+    active = (n+items.length)%items.length;
+    items[active].classList.add('active');
+    items[active].scrollIntoView({block:'nearest'});
+  }
+
+  if(input){
+    input.addEventListener('input', function(){
+      var raw = input.value.trim();
+      if(norm(raw).length < 2){ close(); listEl.innerHTML=''; countEl.textContent=''; return; }
+      load().then(function(){
+        if(input.value.trim() !== raw) return;   // ignore stale async result
+        render(search(raw), raw);
+      });
+    });
+    input.addEventListener('focus', load);
+    input.addEventListener('keydown', function(e){
+      if(e.key==='ArrowDown'){ e.preventDefault(); setActive(active+1); }
+      else if(e.key==='ArrowUp'){ e.preventDefault(); setActive(active-1); }
+      else if(e.key==='Enter'){
+        var items = listEl.querySelectorAll('.sr-item a');
+        if(active>-1 && items[active]){ window.location = items[active].getAttribute('href'); }
+        else if(items[0]){ window.location = items[0].getAttribute('href'); }
+      }
+      else if(e.key==='Escape'){ close(); input.blur(); }
+    });
+    document.addEventListener('click', function(e){ if(wrap && !wrap.contains(e.target)) close(); });
+  }
+})();
+</script>
+
+  </nav>
+</header>
+
+
+    <main id="content">
+      <article class="article note" itemscope itemtype="http://schema.org/Article">
+
+  <header class="article-head">
+    <p class="article-back"><a href="/notes/">← All notes</a></p>
+    <h1 class="article-title" itemprop="headline">LaTeX compilation — demo</h1>
+    <p class="article-meta">
+      Note · <a href="/notes/#cat-misc">Misc</a> · <span class="status">done</span> · updated <time datetime="2026-08-04T00:00:00+05:30">August 4, 2026</time><br>meta, syntax, latex
+    </p>
+  </header>
+
+  <nav class="toc-inline" id="toc-inline" aria-label="Contents" hidden><p>Contents</p><ol id="toc-inline-list"></ol></nav>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var box = document.getElementById('toc-inline'), list = document.getElementById('toc-inline-list');
+  if (!box || !list) return;
+  function slugify(s) {
+    return (s || '').toLowerCase().trim().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-');
+  }
+  var heads = [];
+  document.querySelectorAll('.post-content :is(h1,h2,h3,h4), .note-content :is(h1,h2,h3,h4)').forEach(function (h) {
+    if (h.closest('.tex-html, .jupyter-notebook')) return;
+    if (!h.id) h.id = slugify(h.textContent);
+    heads.push(h);
+  });
+  if (heads.length < 3) return;
+  heads.forEach(function (h) {
+    var li = document.createElement('li'), a = document.createElement('a');
+    li.className = 'lvl-' + h.tagName.charAt(1);
+    a.href = '#' + h.id;
+    a.textContent = h.textContent;
+    li.appendChild(a);
+    list.appendChild(li);
+  });
+  box.hidden = false;
+});
+</script>
+
+
+  <div class="article-body note-content" itemprop="articleBody">
+    <p>Research notes sometimes deserve to <em>look</em> like a paper — title, abstract,
+sections, tables, bibliography — not just inline math. This site can now
+compile full LaTeX documents at build time and render them <em>in the page</em> as
+real content (ar5iv-style), in the same spirit as the <code class="language-plaintext highlighter-rouge">.ipynb</code> notebook cells.</p>
+
+<p>Two tags — pandoc turns the LaTeX into page content, pdfLaTeX compiles the
+same source to a PDF for download:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Tag</th>
+      <th>What it does</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">{% tex_cell %}</code></td>
+      <td>Renders the inline LaTeX in the tag body</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">{% tex_file "path.tex" %}</code></td>
+      <td>Renders an external <code class="language-plaintext highlighter-rouge">.tex</code> file</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="inline-cell">Inline cell</h2>
+
+<p>The tag body is wrapped in a small <code class="language-plaintext highlighter-rouge">article</code> preamble for you (unless it
+already contains <code class="language-plaintext highlighter-rouge">\documentclass</code>), so you can just write the paper:</p>
+
+<div class="tex-paper" data-tex-label="short-note"><div class="tex-toolbar"><span class="tex-label"><i class="fa-solid fa-file-lines"></i> LaTeX</span><span class="tex-meta">1 pp · pdfLaTeX</span><span class="tex-actions"><a class="tex-download" href="/assets/tex/772d5c8764ecfbd0/short-note.pdf" download title="Download compiled PDF"><i class="fa-solid fa-download"></i> .pdf</a></span></div><div class="tex-html"><header class="tex-titleblock">
+<h1 class="title">A Short Note on Why I Like Robots</h1>
+<p class="author">Shivaram Kumar Jagannathan</p>
+<p class="date">2026-11-14</p>
+</header>
+<section class="tex-abstract"><h1 class="unnumbered">Abstract</h1><p>This
+note exists purely to show that inline LaTeX compiles to a real,
+down-loadable PDF.</p></section>
+<h1 id="why-robots">Why robots</h1>
+<p>Robots are fun. Table <a href="#tab:robots" data-reference-type="ref"
+data-reference="tab:robots">1</a> summarises the evidence.</p>
+<div id="tab:robots">
+<table>
+<caption>Funness by platform.</caption>
+<thead>
+<tr>
+<th style="text-align: left;">Robot</th>
+<th style="text-align: center;">Fun</th>
+<th style="text-align: center;">Upside</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Wheeled</td>
+<td style="text-align: center;">High</td>
+<td style="text-align: center;">Medium</td>
+</tr>
+<tr>
+<td style="text-align: left;">Legged</td>
+<td style="text-align: center;">Higher</td>
+<td style="text-align: center;">High</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="conclusion">Conclusion</h1>
+<p>More robots, more fun.</p>
+</div><details class="tex-source"><summary><i class="fa-solid fa-code"></i> .tex source</summary><pre class="highlight"><code>\title{A Short Note on Why I Like Robots}
+\author{Shivaram Kumar Jagannathan}
+\date{\today}
+\maketitle
+
+\begin{abstract}
+This note exists purely to show that inline LaTeX compiles to a real,
+down-loadable PDF.
+\end{abstract}
+
+\section{Why robots}
+Robots are fun. Table~\ref{tab:robots} summarises the evidence.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcc}
+\toprule
+Robot &amp; Fun &amp; Upside \\
+\midrule
+Wheeled &amp; High &amp; Medium \\
+Legged &amp; Higher &amp; High \\
+\bottomrule
+\end{tabular}
+\caption{Funness by platform.}
+\label{tab:robots}
+\end{table}
+
+\section{Conclusion}
+More robots, more fun.</code></pre></details></div>
+
+<p>The cell above rendered a full title block, abstract, table, and caption as
+selectable page content — no build config, no helper scripts.</p>
+
+<h2 id="full-paper-from-a-file">Full paper from a file</h2>
+
+<p>For a real manuscript, keep the <code class="language-plaintext highlighter-rouge">.tex</code> under <code class="language-plaintext highlighter-rouge">assets/papers/</code> and embed it
+with <code class="language-plaintext highlighter-rouge">tex_file</code>. The file carries its own <code class="language-plaintext highlighter-rouge">\documentclass</code> so it is compiled
+verbatim — bibliography via <code class="language-plaintext highlighter-rouge">\begin{thebibliography}</code> and all:</p>
+
+<div class="tex-paper" data-tex-label="example-paper"><div class="tex-toolbar"><span class="tex-label"><i class="fa-solid fa-file-lines"></i> LaTeX</span><span class="tex-meta">5 pp · pdfLaTeX</span><span class="tex-actions"><a class="tex-download" href="/assets/tex/70fd6554fda45ca2/example-paper.pdf" download title="Download compiled PDF"><i class="fa-solid fa-download"></i> .pdf</a></span></div><div class="tex-html"><header class="tex-titleblock">
+<h1 class="title">Learning to Perceive, Perceiving to Act:<br />
+An Information-Theoretic View of Robot Decision Making</h1>
+<p class="author">Shivaram Kumar Jagannathan<br />
+<span><code>shivaram.jagannathan [at] outlook [dot] com</code></span></p>
+<p class="date">2026-11-14</p>
+</header>
+<section class="tex-abstract"><h1 class="unnumbered">Abstract</h1><p>Robot
+decision making is only as reliable as the information supplied by
+perception. This paper develops a complementary view of learning-based
+robotics in which deep visual models, information theory, and physical
+inductive biases work together. A perception system should not merely
+predict what is visible; it should estimate which uncertainties matter
+for the next decision and choose observations that reduce them. We
+formalise this idea with mutual information, Bayesian belief updates,
+and expected information value. We then connect these objectives to
+physics-informed representation learning, where geometry, dynamics, and
+conservation laws regularise learned models. Optimisation-based
+controllers, search-based planners, and learned policies are treated as
+downstream decision mechanisms that can all benefit from a better belief
+state. The result is a view of perception as an active, decision-aware
+inference process rather than a passive front end.</p></section>
+<h1 id="sec:intro">Introduction</h1>
+<p>Robotic systems must infer hidden state from incomplete, noisy, and
+often adversarial observations before they can choose a useful action. A
+camera does not reveal mass, friction, contact mode, or whether an
+occluded object will move when pushed. A learned policy can be
+expressive, while a symbolic planner can be interpretable and
+compositional, but both still depend on the quality of the state or
+belief supplied to them.</p>
+<p>The choice of decision mechanism does not remove this dependence.
+Optimisation, search, sampling, and learned policies provide different
+ways to convert beliefs into actions, but each inherits the blind spots
+of its perceptual interface. Our claim is therefore narrow: perception
+should be trained and evaluated by how it changes downstream decisions,
+not only by pixel-level or object-level accuracy.</p>
+<p>The central question is therefore:</p>
+<blockquote>
+<p>Which observation should a robot seek next, and how much will that
+observation improve the decisions it can make?</p>
+</blockquote>
+<p>Figure <a href="#fig:loop" data-reference-type="ref"
+data-reference="fig:loop">1</a> gives the proposed loop. A deep model
+extracts a representation from sensor data, an information-theoretic
+objective identifies decision-relevant uncertainty, and a planner or
+controller chooses an action that both pursues the task and improves the
+next belief update.</p>
+<figure id="fig:loop" data-latex-placement="ht">
+
+<div class="tex-tikz"><img src="/assets/tex/70fd6554fda45ca2/figures/tikz-1.svg" alt="TikZ diagram" loading="lazy"/></div>
+<figcaption>Perception and decision making as one loop. The robot can
+choose actions for task progress and for information gain, while the
+downstream planner, controller, or policy operates on an explicitly
+uncertain belief.</figcaption>
+</figure>
+<figure id="fig:robot-scene" data-latex-placement="ht">
+
+<div class="tex-tikz"><img src="/assets/tex/70fd6554fda45ca2/figures/tikz-2.svg" alt="TikZ diagram" loading="lazy"/></div>
+<figcaption>A pictorial view of active perception. The robot does not
+treat the occluded object as a nuisance outside the planner: it moves
+its viewpoint or probes the scene to reduce uncertainty before
+committing to a decision.</figcaption>
+</figure>
+<h1 id="sec:information">Information as a Decision Resource</h1>
+<p>Let <span class="math inline">\(S\)</span> denote latent task state,
+<span class="math inline">\(O\)</span> an observation, <span
+class="math inline">\(A\)</span> an action, and <span
+class="math inline">\(G\)</span> the task objective. A belief <span
+class="math inline">\(q(s)\)</span> summarises what the robot currently
+knows. The uncertainty of that belief can be measured by entropy,</p>
+<p><span class="math display">\[\begin{equation}
+  H_q(S) = -\mathbb{E}_{s\sim q}\left[\log q(s)\right].
+  \label{eq:entropy}
+\end{equation}\]</span></p>
+<p>An observation is useful when it reduces uncertainty about variables
+that affect future decisions. Conditional mutual information captures
+this value:</p>
+<p><span class="math display">\[\begin{equation}
+  \mathcal{I}(A) = I(S;O\mid A=a)
+  = H(S\mid A=a) - H(S\mid O,A=a).
+  \label{eq:mutual-information}
+\end{equation}\]</span></p>
+<p>The action need not be a dedicated sensing motion. A grasp, camera
+pan, or contact-rich push can simultaneously make progress and reveal
+geometry or material properties. We can express this trade-off as</p>
+<p><span class="math display">\[\begin{equation}
+  a_t^* = \operatorname*{arg\,max}_{a\in\mathcal{A}}
+  \underbrace{\mathbb{E}[R(G)\mid a]}_{\text{task value}}
+  + \beta\underbrace{I(S;O\mid a)}_{\text{information value}}.
+  \label{eq:active-action}
+\end{equation}\]</span></p>
+<p>The coefficient <span class="math inline">\(\beta\)</span> does not
+declare planning or control unimportant. It controls when the robot
+should spend effort resolving uncertainty rather than optimising under
+an unreliable belief. In a well-observed state, the first term
+dominates; near an ambiguous contact or occlusion, the second can be
+decisive.</p>
+<figure id="fig:belief-update" data-latex-placement="ht">
+
+<div class="tex-tikz"><img src="/assets/tex/70fd6554fda45ca2/figures/tikz-3.svg" alt="TikZ diagram" loading="lazy"/></div>
+<figcaption>An informative observation transforms a broad prior into a
+more useful posterior. The value is not abstract certainty; it is the
+reduction in uncertainty relevant to the next action.</figcaption>
+</figure>
+<h1 id="sec:physics">Deep Representations with Physical Structure</h1>
+<p>Deep learning provides flexible representations for pixels, point
+clouds, proprioception, and contact histories. Yet unconstrained
+representations can use shortcuts that fail under viewpoint changes, new
+materials, or altered dynamics. Physical structure offers inductive
+biases that improve data efficiency and improve the meaning of latent
+variables.</p>
+<p>For a learned dynamics model <span
+class="math inline">\(f_\theta\)</span>, a physics-informed objective
+can combine data fit with a residual from a known differential
+equation:</p>
+<p><span class="math display">\[\begin{equation}
+  \mathcal{L}(\theta) = \mathcal{L}_{\mathrm{data}}(\theta)
+  + \lambda_{\mathrm{phys}}\,
+  \mathbb{E}_{t}\left[\left\|
+    \frac{\partial \hat{x}_\theta}{\partial t}
+    - F_{\mathrm{phys}}(\hat{x}_\theta,u_t)
+  \right\|^2\right].
+  \label{eq:physics-loss}
+\end{equation}\]</span></p>
+<p>The same principle applies beyond explicit dynamics.
+SE(3)-equivariant features respect rigid-body transformations; geometric
+encoders preserve relations between points; differentiable simulators
+expose contact and constraint structure; and neural operators can learn
+corrections to PDE or rigid-body models. These priors do not replace
+learning. They restrict the hypothesis space to functions that are
+easier for a robot to identify.</p>
+<figure id="fig:hybrid" data-latex-placement="ht">
+
+<div class="tex-tikz"><img src="/assets/tex/70fd6554fda45ca2/figures/tikz-4.svg" alt="TikZ diagram" loading="lazy"/></div>
+<figcaption>A hybrid perception model. Deep features capture appearance
+and contact cues, while physical structure regularises the latent state
+passed to the planner or controller. The decision objective can train
+the whole system.</figcaption>
+</figure>
+<h1 id="sec:unified">A Unified Learning Objective</h1>
+<p>The preceding pieces suggest a training objective that scores
+representations by both predictive quality and their usefulness for
+action. Let <span class="math inline">\(Z=f_\theta(O)\)</span> be a
+learned representation and <span class="math inline">\(\pi_\psi\)</span>
+a decision mechanism. A schematic objective is</p>
+<p><span class="math display">\[\begin{equation}
+  \min_{\theta,\psi}\;
+  \mathbb{E}\left[\mathcal{L}_{\mathrm{task}}(\pi_\psi(Z),G)
+  + \alpha\,\mathcal{L}_{\mathrm{phys}}(Z)
+  - \beta\,I(Z;S\mid G)\right].
+  \label{eq:unified-loss}
+\end{equation}\]</span></p>
+<p>The final term is deliberately conditional on the goal. Maximising
+information about every possible property is wasteful; the robot should
+preserve information that changes the decision. In practice, <span
+class="math inline">\(I(Z;S\mid G)\)</span> can be approximated with
+variational bounds, contrastive objectives, ensembles, or
+uncertainty-aware world models. The physics term can be a differentiable
+residual, an equivariance penalty, or a simulator consistency loss.</p>
+<p>This view also clarifies the role of existing decision systems. A
+structured planner can use a belief whose state variables carry
+calibrated uncertainty. An optimisation-based controller can select
+trajectories that expose informative contact modes. A learned policy can
+receive a latent state that separates task-relevant ambiguity from
+nuisance variation. The decision mechanism changes; the information
+interface remains.</p>
+<h1 id="sec:discussion">Discussion</h1>
+<p>Several challenges remain. Mutual information is difficult to
+estimate in high dimensions, and a poor variational bound can reward
+representation artifacts. Physics models are incomplete, so an overly
+strong residual can make the model less accurate in regimes where the
+assumed equations fail. Finally, active information gathering has a real
+cost: time, energy, collision risk, and hardware wear must enter the
+objective alongside information value.</p>
+<p>These limitations motivate a pragmatic combination of methods rather
+than a single replacement for existing robotics stacks. Deep networks
+provide rich perceptual features, physical priors improve extrapolation,
+information theory identifies what uncertainty matters, and planners or
+controllers turn beliefs into structured action. The most useful systems
+will likely compose all four.</p>
+<h1 id="sec:conclusion">Conclusion</h1>
+<p>Perception and decision making should not be separated by an
+interface that forgets uncertainty. A robot should learn representations
+that preserve the information needed to act, use physical structure to
+make those representations stable, and choose observations when they
+have high expected decision value. This perspective is compatible with
+search, optimisation, and learned policies: it gives each of them a
+better, more informative belief on which to operate.</p>
+<div class="thebibliography">
+<p><span>9</span> T. M. Cover and J. A. Thomas. <em>Elements of
+Information Theory</em>. Wiley, 2006.</p>
+<p>G. E. Karniadakis, I. G. Kevrekidis, L. Lu, P. Perdikaris, S. Wang,
+and L. Yang. Physics-informed machine learning. <em>Nature Reviews
+Physics</em>, 3:422–440, 2021.</p>
+<p>N. Tishby and N. Zaslavsky. Deep learning and the information
+bottleneck principle. In <em>IEEE Information Theory Workshop</em>,
+2015.</p>
+</div>
+</div><details class="tex-source"><summary><i class="fa-solid fa-code"></i> .tex source</summary><pre class="highlight"><code>% Demo paper: information-theoretic perception for robot decision making.
+% Embedded with {% tex_file &quot;/assets/papers/example-paper.tex&quot; %}.
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,fit,backgrounds,calc}
+\definecolor{teal}{HTML}{2AA198}
+\definecolor{orange}{HTML}{D07A3F}
+\definecolor{blue}{HTML}{61AFEF}
+\definecolor{green}{HTML}{98C379}
+\definecolor{purple}{HTML}{C678DD}
+\definecolor{papergray}{HTML}{5C6370}
+\usepackage[colorlinks=true,urlcolor=blue,linkcolor=black,citecolor=blue]{hyperref}
+\setlength{\parskip}{0.4em}
+
+\title{Learning to Perceive, Perceiving to Act:\\
+  An Information-Theoretic View of Robot Decision Making}
+\author{Shivaram Kumar Jagannathan\\
+  \small{\texttt{shivaram.jagannathan [at] outlook [dot] com}}}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Robot decision making is only as reliable as the information supplied by
+perception. This paper develops a complementary view of learning-based
+robotics in which deep visual models, information theory, and physical
+inductive biases work together. A perception system should not merely predict
+what is visible; it should estimate which uncertainties matter for the next
+decision and choose observations that reduce them. We formalise this idea with
+mutual information, Bayesian belief updates, and expected information value.
+We then connect these objectives to physics-informed representation learning,
+where geometry, dynamics, and conservation laws regularise learned models.
+Optimisation-based controllers, search-based planners, and learned policies
+are treated as downstream decision mechanisms that can all benefit from a
+better belief state. The result is a view of perception as an active,
+decision-aware inference process rather than a passive front end.
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+
+Robotic systems must infer hidden state from incomplete, noisy, and often
+adversarial observations before they can choose a useful action. A camera does
+not reveal mass, friction, contact mode, or whether an occluded object will
+move when pushed. A learned policy can be expressive, while a symbolic planner
+can be interpretable and compositional, but both still depend on the quality of
+the state or belief supplied to them.
+
+The choice of decision mechanism does not remove this dependence. Optimisation,
+search, sampling, and learned policies provide different ways to convert beliefs
+into actions, but each inherits the blind spots of its perceptual interface. Our
+claim is therefore narrow: perception should be trained and evaluated by how it
+changes downstream decisions, not only by pixel-level or object-level accuracy.
+
+The central question is therefore:
+\begin{quote}
+  Which observation should a robot seek next, and how much will that
+  observation improve the decisions it can make?
+\end{quote}
+
+Figure~\ref{fig:loop} gives the proposed loop. A deep model extracts a
+representation from sensor data, an information-theoretic objective identifies
+decision-relevant uncertainty, and a planner or controller chooses an action
+that both pursues the task and improves the next belief update.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[
+  scale=.88, transform shape,
+  every node/.style={font=\footnotesize},
+  box/.style={rounded corners=5pt, draw=#1!85, fill=#1!28!black,
+    text=white, align=center, minimum height=12mm, minimum width=23mm,
+    line width=1pt, font=\small\bfseries, inner sep=4pt},
+  arr/.style={-{Latex[length=2.6mm,width=1.8mm]}, line width=1.15pt, white!72},
+  ann/.style={font=\scriptsize\bfseries, text=white!72}
+]
+\begin{scope}[on background layer]
+  \fill[black!84, rounded corners=10pt] (-1.25,-3.05) rectangle (13.0,1.55);
+  \draw[white!12, rounded corners=10pt, line width=.7pt]
+    (-1.25,-3.05) rectangle (13.0,1.55);
+\end{scope}
+% top pipeline
+\node[box=green]  (world)    at (0,0)    {World\\$s_t$};
+\node[box=blue]   (sensor)   at (2.9,0)  {Sensors\\$o_t$};
+\node[box=purple] (encoder)  at (5.8,0)  {Encoder\\$z_t$};
+\node[box=teal]   (belief)   at (8.7,0)  {Belief\\$q(s_t)$};
+\node[box=orange] (decision) at (11.6,0) {Decision\\planner / policy};
+% bottom action
+\node[box=orange] (action)   at (11.6,-2.1) {Action\\$a_t$};
+
+% forward arrows
+\draw[arr] (world)    -- (sensor);
+\draw[arr] (sensor)   -- (encoder);
+\draw[arr] (encoder)  -- (belief);
+\draw[arr] (belief)   -- (decision);
+\draw[arr] (decision) -- (action);
+
+% labels above the pipeline (never on the arrows)
+\node[ann] at (1.45,1.0)  {OBSERVE};
+\node[ann] at (4.35,1.0)  {ENCODE};
+\node[ann] at (7.25,1.0)  {UPDATE};
+\node[ann] at (10.15,1.0) {SELECT};
+
+% return path below, clear of everything
+\draw[arr, white!55]
+  (action.west) -- ++(-2.0,0) |- (world.south);
+\node[ann, text=teal!82] at (5.8,-2.55)
+  {task progress + information gain $I(S;O\mid a)$};
+
+% soft grouping under perception
+\begin{scope}[on background layer]
+  \node[fit=(sensor)(encoder), rounded corners=5pt, inner sep=4pt,
+    draw=purple!55, dashed, line width=.7pt] {};
+\end{scope}
+\node[ann, text=purple!70] at (4.35,-0.95) {perception};
+\end{tikzpicture}
+\caption{Perception and decision making as one loop. The robot can choose
+actions for task progress and for information gain, while the downstream
+planner, controller, or policy operates on an explicitly uncertain belief.}
+\label{fig:loop}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[
+  scale=.86, transform shape,
+  every node/.style={font=\footnotesize},
+  lab/.style={font=\scriptsize, text=white!88},
+  sublab/.style={font=\tiny, text=white!65}
+]
+% ---- room ----
+\fill[black!82, rounded corners=9pt] (-0.45,-0.95) rectangle (12.55,5.55);
+\fill[black!78] (-0.3,-0.8) rectangle (12.4,5.4);           % wall
+\fill[black!70] (-0.3,-0.8) -- (12.4,-0.8) -- (12.4,0.35) -- (-0.3,0.35) -- cycle; % floor
+\draw[white!18, line width=.6pt] (-0.3,0.35) -- (12.4,0.35);
+% floor grid
+\foreach \x in {0.4,1.6,2.8,4.0,5.2,6.4,7.6,8.8,10.0,11.2}
+  \draw[white!8, line width=.4pt] (\x,-0.8) -- (\x+0.35,0.35);
+% window + light
+\fill[blue!35!black] (0.35,2.7) rectangle (2.35,4.85);
+\draw[white!35, line width=.8pt] (0.35,2.7) rectangle (2.35,4.85);
+\draw[white!25, line width=.5pt] (1.35,2.7) -- (1.35,4.85);
+\draw[white!25, line width=.5pt] (0.35,3.775) -- (2.35,3.775);
+\fill[orange!55] (1.85,4.35) circle (0.22);
+\foreach \a in {-18,0,18}
+  \draw[orange!40, line width=.45pt] (1.85,4.35) -- ++(\a:0.55);
+% plant
+\fill[green!45!black] (0.7,0.35) rectangle (0.95,1.35);
+\fill[green!55] (0.55,1.45) circle (0.28);
+\fill[green!48] (1.05,1.55) circle (0.32);
+\fill[green!60] (0.8,1.85) circle (0.24);
+
+% ---- table ----
+\fill[brown!45!black] (7.0,0.9) rectangle (11.6,1.15);
+\fill[brown!35!black] (7.15,0.35) rectangle (7.4,0.9);
+\fill[brown!35!black] (11.2,0.35) rectangle (11.45,0.9);
+\fill[brown!50!black] (7.0,1.15) -- (11.6,1.15) -- (11.45,1.35) -- (7.15,1.35) -- cycle;
+% visible objects on table
+\fill[blue!60] (7.55,1.35) rectangle (8.05,1.95);
+\fill[blue!75] (7.55,1.95) -- (8.05,1.95) -- (7.95,2.15) -- (7.65,2.15) -- cycle;
+\fill[teal!55] (8.35,1.35) circle (0.28);
+\fill[teal!70] (8.35,1.55) circle (0.18);
+
+% ---- tall occluder ----
+\fill[purple!40!black] (9.15,0.35) rectangle (9.75,3.55);
+\draw[purple!70, line width=1pt] (9.15,0.35) rectangle (9.75,3.55);
+\foreach \y in {0.7,1.3,1.9,2.5,3.1}
+  \draw[purple!50, line width=.4pt] (9.15,\y) -- (9.75,\y);
+\node[lab, rotate=90, anchor=south] at (9.05,1.95) {occluder};
+
+% ---- hidden object behind occluder ----
+\fill[orange!70] (10.35,1.35) ellipse (0.32 and 0.38);
+\fill[orange!85] (10.35,1.85) ellipse (0.18 and 0.12);
+\draw[orange!90, dashed, line width=.9pt] (10.35,1.6) circle (0.62);
+\node[lab, anchor=west] at (10.95,2.45) {hidden object};
+\node[sublab, anchor=west] at (10.95,2.15) {uncertain state};
+
+% ---- robot (detailed) ----
+% shadow
+\fill[black!50, opacity=0.35] (3.55,0.18) ellipse (1.15 and 0.18);
+% wheels
+\fill[white!25] (2.85,0.28) circle (0.28);
+\fill[white!15] (2.85,0.28) circle (0.12);
+\fill[white!25] (4.25,0.28) circle (0.28);
+\fill[white!15] (4.25,0.28) circle (0.12);
+\draw[white!40, line width=.7pt] (2.85,0.28) circle (0.28);
+\draw[white!40, line width=.7pt] (4.25,0.28) circle (0.28);
+% chassis
+\fill[blue!65!black] (2.55,0.45) -- (4.55,0.45) -- (4.7,1.15) -- (2.4,1.15) -- cycle;
+\draw[blue!85, line width=.8pt] (2.55,0.45) -- (4.55,0.45) -- (4.7,1.15) -- (2.4,1.15) -- cycle;
+\fill[blue!55!black] (2.7,1.15) rectangle (4.4,1.75);
+\draw[blue!80, line width=.7pt] (2.7,1.15) rectangle (4.4,1.75);
+% chest panel
+\fill[teal!40!black] (3.05,1.28) rectangle (4.05,1.62);
+\fill[teal!70] (3.2,1.38) rectangle (3.55,1.52);
+\fill[orange!70] (3.7,1.38) rectangle (3.9,1.52);
+% neck + head
+\fill[white!30] (3.4,1.75) rectangle (3.7,2.05);
+\fill[teal!60!black] (2.95,2.05) -- (4.15,2.05) -- (4.25,2.85) -- (2.85,2.85) -- cycle;
+\draw[teal!85, line width=.8pt] (2.95,2.05) -- (4.15,2.05) -- (4.25,2.85) -- (2.85,2.85) -- cycle;
+% camera lens
+\fill[black!80] (3.55,2.45) circle (0.28);
+\fill[teal!50] (3.55,2.45) circle (0.18);
+\fill[white!90] (3.48,2.52) circle (0.05);
+\draw[orange!80, line width=.7pt] (3.55,2.45) circle (0.32);
+% antenna
+\draw[white!50, line width=.7pt] (3.55,2.85) -- (3.55,3.25);
+\fill[orange!80] (3.55,3.3) circle (0.08);
+% arm reaching toward table
+\fill[blue!55!black] (4.55,1.35) -- (5.55,1.55) -- (5.65,1.75) -- (4.55,1.55) -- cycle;
+\fill[blue!50!black] (5.55,1.55) -- (6.35,1.85) -- (6.45,2.0) -- (5.55,1.75) -- cycle;
+\fill[teal!60] (6.35,1.85) -- (6.7,1.75) -- (6.85,1.95) -- (6.45,2.05) -- cycle;
+\fill[orange!75] (6.7,1.7) circle (0.09);
+\fill[orange!75] (6.85,2.0) circle (0.09);
+
+% ---- FOV cone from camera to occluder (semi-transparent) ----
+\fill[orange!30, opacity=0.28]
+  (3.85,2.45) -- (9.15,3.35) -- (9.15,1.05) -- cycle;
+\draw[orange!70, dashed, line width=.7pt] (3.85,2.45) -- (9.15,3.35);
+\draw[orange!70, dashed, line width=.7pt] (3.85,2.45) -- (9.15,1.05);
+\node[lab] at (6.2,3.55) {partial observation};
+\node[sublab] at (6.2,3.25) {occluder blocks the object};
+
+% ---- probe action path (clear bottom corridor) ----
+\draw[-{Latex[length=2.8mm,width=2mm]}, teal!85, line width=1.4pt]
+  (4.9,0.05) -- (9.55,0.05);
+\node[lab, anchor=north] at (7.2,-0.15) {probe / change viewpoint};
+\node[sublab, anchor=north] at (7.2,-0.42) {action chosen for information gain};
+
+% ---- caption labels in free space ----
+\node[lab, anchor=south] at (3.55,3.45) {active robot};
+\node[sublab, anchor=south west] at (2.4,0.55) {learned perception + control};
+\end{tikzpicture}
+\caption{A pictorial view of active perception. The robot does not treat the
+occluded object as a nuisance outside the planner: it moves its viewpoint or
+probes the scene to reduce uncertainty before committing to a decision.}
+\label{fig:robot-scene}
+\end{figure}
+
+\section{Information as a Decision Resource}
+\label{sec:information}
+
+Let $S$ denote latent task state, $O$ an observation, $A$ an action, and $G$
+the task objective. A belief $q(s)$ summarises what the robot currently knows.
+The uncertainty of that belief can be measured by entropy,
+
+\begin{equation}
+  H_q(S) = -\mathbb{E}_{s\sim q}\left[\log q(s)\right].
+  \label{eq:entropy}
+\end{equation}
+
+An observation is useful when it reduces uncertainty about variables that affect
+future decisions. Conditional mutual information captures this value:
+
+\begin{equation}
+  \mathcal{I}(A) = I(S;O\mid A=a)
+  = H(S\mid A=a) - H(S\mid O,A=a).
+  \label{eq:mutual-information}
+\end{equation}
+
+The action need not be a dedicated sensing motion. A grasp, camera pan, or
+contact-rich push can simultaneously make progress and reveal geometry or
+material properties. We can express this trade-off as
+
+\begin{equation}
+  a_t^* = \operatorname*{arg\,max}_{a\in\mathcal{A}}
+  \underbrace{\mathbb{E}[R(G)\mid a]}_{\text{task value}}
+  + \beta\underbrace{I(S;O\mid a)}_{\text{information value}}.
+  \label{eq:active-action}
+\end{equation}
+
+The coefficient $\beta$ does not declare planning or control unimportant. It
+controls when the robot should spend effort resolving uncertainty rather than
+optimising under an unreliable belief. In a well-observed state, the first term
+dominates; near an ambiguous contact or occlusion, the second can be decisive.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[
+  scale=.96, transform shape,
+  every node/.style={font=\footnotesize},
+  ax/.style={-{Latex[length=2.2mm]}, line width=.9pt, white!55},
+  lab/.style={font=\scriptsize, text=white!85}
+]
+\begin{scope}[on background layer]
+  \fill[black!84, rounded corners=10pt] (-4.25,-.72) rectangle (5.15,3.25);
+  \draw[white!12, rounded corners=10pt, line width=.7pt]
+    (-4.25,-.72) rectangle (5.15,3.25);
+\end{scope}
+% axes
+\draw[ax] (-3.8,0) -- (4.1,0);
+\draw[ax] (-3.5,0) -- (-3.5,2.85);
+\node[lab] at (4.1,-0.35) {state $S$};
+\node[lab, rotate=90] at (-3.85,1.4) {density};
+
+% prior: wide, low
+\fill[blue!32, opacity=0.30]
+  plot[domain=-3.4:3.4, samples=140] (\x, {1.05*exp(-0.5*((\x)/1.15)^2)})
+  -- (3.4,0) -- (-3.4,0) -- cycle;
+\draw[blue!75, line width=1.5pt]
+  plot[domain=-3.4:3.4, samples=140] (\x, {1.05*exp(-0.5*((\x)/1.15)^2)});
+\draw[blue!60, dashed, line width=.7pt] (0,0) -- (0,1.05);
+
+% posterior: narrow, tall, shifted
+\fill[teal!38, opacity=0.38]
+  plot[domain=0.35:2.05, samples=140] (\x, {2.55*exp(-0.5*((\x-1.2)/0.36)^2)})
+  -- (2.05,0) -- (0.35,0) -- cycle;
+\draw[teal!80, line width=1.5pt]
+  plot[domain=-0.1:2.5, samples=140] (\x, {2.55*exp(-0.5*((\x-1.2)/0.36)^2)});
+\draw[teal!65, dashed, line width=.7pt] (1.2,0) -- (1.2,2.55);
+
+% measurement ticks on axis
+\foreach \x/\s in {1.05/1.2, 1.2/1.6, 1.32/1.2}
+  \fill[orange!80] (\x,0) circle (\s pt);
+
+% labels in empty regions only
+\node[lab, text=blue!80] at (-1.7,1.55) {prior $H(S)$};
+\node[lab, text=teal!85] at (2.55,2.45) {posterior $H(S\mid O)$};
+\node[lab, text=orange!85] at (-1.7,0.55) {measurement $O$};
+\draw[orange!75, -{Latex[length=2mm]}, line width=.9pt]
+  (-0.85,0.55) -- (0.95,0.18);
+
+% information gain callout — right margin, free of curves
+\draw[orange!80, line width=1.1pt]
+  (2.85,2.2) -- (3.25,2.2) -- (3.25,0.15) -- (2.85,0.15);
+\node[lab, text=orange!85, anchor=west] at (3.35,1.15) {$I(S;O)$};
+\node[lab, text=white!60, anchor=west] at (3.35,0.75) {info.\ gain};
+\end{tikzpicture}
+\caption{An informative observation transforms a broad prior into a more useful
+posterior. The value is not abstract certainty; it is the reduction in
+uncertainty relevant to the next action.}
+\label{fig:belief-update}
+\end{figure}
+
+\section{Deep Representations with Physical Structure}
+\label{sec:physics}
+
+Deep learning provides flexible representations for pixels, point clouds,
+proprioception, and contact histories. Yet unconstrained representations can
+use shortcuts that fail under viewpoint changes, new materials, or altered
+dynamics. Physical structure offers inductive biases that improve data
+efficiency and improve the meaning of latent variables.
+
+For a learned dynamics model $f_\theta$, a physics-informed objective can
+combine data fit with a residual from a known differential equation:
+
+\begin{equation}
+  \mathcal{L}(\theta) = \mathcal{L}_{\mathrm{data}}(\theta)
+  + \lambda_{\mathrm{phys}}\,
+  \mathbb{E}_{t}\left[\left\|
+    \frac{\partial \hat{x}_\theta}{\partial t}
+    - F_{\mathrm{phys}}(\hat{x}_\theta,u_t)
+  \right\|^2\right].
+  \label{eq:physics-loss}
+\end{equation}
+
+The same principle applies beyond explicit dynamics. SE(3)-equivariant
+features respect rigid-body transformations; geometric encoders preserve
+relations between points; differentiable simulators expose contact and
+constraint structure; and neural operators can learn corrections to PDE or
+rigid-body models. These priors do not replace learning. They restrict the
+hypothesis space to functions that are easier for a robot to identify.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[
+  scale=.78, transform shape,
+  every node/.style={font=\footnotesize},
+  block/.style={rounded corners=5pt, draw=#1!85, fill=#1!28!black,
+    text=white, align=center, minimum height=13mm, minimum width=25mm,
+    line width=1pt, font=\small\bfseries, inner sep=4pt},
+  arr/.style={-{Latex[length=2.6mm,width=1.8mm]}, line width=1.15pt, white!72},
+  ann/.style={font=\scriptsize\bfseries, text=white!72}
+]
+\begin{scope}[on background layer]
+  \fill[black!84, rounded corners=10pt] (-1.45,-2.05) rectangle (14.65,1.6);
+  \draw[white!12, rounded corners=10pt, line width=.7pt]
+    (-1.45,-2.05) rectangle (14.65,1.6);
+\end{scope}
+% single clean row
+\node[block=blue]   (obs)    at (0,0)    {Observations\\images + contact};
+\node[block=purple] (enc)    at (3.3,0)  {Deep encoder\\equivariant $z$};
+\node[block=green]  (phys)   at (6.6,0)  {Physics prior\\ODE / geometry};
+\node[block=teal]   (latent) at (9.9,0)  {Decision state\\uncertainty};
+\node[block=orange] (policy) at (13.2,0) {Decision\\planner / policy};
+
+\draw[arr] (obs)    -- (enc);
+\draw[arr] (enc)    -- (phys);
+\draw[arr] (phys)   -- (latent);
+\draw[arr] (latent) -- (policy);
+
+% labels above, clear of arrows
+\node[ann] at (1.65,1.02)  {FEATURES};
+\node[ann] at (4.95,1.02)  {CONSTRAIN};
+\node[ann] at (8.25,1.02)  {INFER};
+\node[ann] at (11.55,1.02) {ACT};
+
+% feedback path fully below the row
+\draw[arr, dashed, white!50]
+  (policy.south) -- ++(0,-1.15) -| (enc.south);
+\node[ann, text=orange!75] at (8.25,-1.55)
+  {task loss + information value (joint training)};
+\end{tikzpicture}
+\caption{A hybrid perception model. Deep features capture appearance and
+contact cues, while physical structure regularises the latent state passed to
+the planner or controller. The decision objective can train the whole system.}
+\label{fig:hybrid}
+\end{figure}
+
+\section{A Unified Learning Objective}
+\label{sec:unified}
+
+The preceding pieces suggest a training objective that scores representations
+by both predictive quality and their usefulness for action. Let $Z=f_\theta(O)$
+be a learned representation and $\pi_\psi$ a decision mechanism. A schematic
+objective is
+
+\begin{equation}
+  \min_{\theta,\psi}\;
+  \mathbb{E}\left[\mathcal{L}_{\mathrm{task}}(\pi_\psi(Z),G)
+  + \alpha\,\mathcal{L}_{\mathrm{phys}}(Z)
+  - \beta\,I(Z;S\mid G)\right].
+  \label{eq:unified-loss}
+\end{equation}
+
+The final term is deliberately conditional on the goal. Maximising information
+about every possible property is wasteful; the robot should preserve
+information that changes the decision. In practice, $I(Z;S\mid G)$ can be
+approximated with variational bounds, contrastive objectives, ensembles, or
+uncertainty-aware world models. The physics term can be a differentiable
+residual, an equivariance penalty, or a simulator consistency loss.
+
+This view also clarifies the role of existing decision systems. A structured
+planner can use a belief whose state variables carry calibrated uncertainty. An
+optimisation-based controller can select trajectories that expose informative
+contact modes. A learned policy can receive a latent state that separates
+task-relevant ambiguity from nuisance variation. The decision mechanism
+changes; the information interface remains.
+
+\section{Discussion}
+\label{sec:discussion}
+
+Several challenges remain. Mutual information is difficult to estimate in high
+dimensions, and a poor variational bound can reward representation artifacts.
+Physics models are incomplete, so an overly strong residual can make the model
+less accurate in regimes where the assumed equations fail. Finally, active
+information gathering has a real cost: time, energy, collision risk, and
+hardware wear must enter the objective alongside information value.
+
+These limitations motivate a pragmatic combination of methods rather than a
+single replacement for existing robotics stacks. Deep networks provide rich
+perceptual features, physical priors improve extrapolation, information theory
+identifies what uncertainty matters, and planners or controllers turn beliefs
+into structured action. The most useful systems will likely compose all four.
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+Perception and decision making should not be separated by an interface that
+forgets uncertainty. A robot should learn representations that preserve the
+information needed to act, use physical structure to make those representations
+stable, and choose observations when they have high expected decision value.
+This perspective is compatible with search, optimisation, and learned policies:
+it gives each of them a better, more informative belief on which to operate.
+
+\begin{thebibliography}{9}
+\bibitem{cover2006elements}
+T.~M. Cover and J.~A. Thomas.
+\newblock \emph{Elements of Information Theory}.
+\newblock Wiley, 2006.
+
+\bibitem{karniadakis2021physics}
+G.~E. Karniadakis, I.~G. Kevrekidis, L.~Lu, P.~Perdikaris, S.~Wang, and
+L.~Yang.
+\newblock Physics-informed machine learning.
+\newblock \emph{Nature Reviews Physics}, 3:422--440, 2021.
+
+\bibitem{tishby2015deep}
+N.~Tishby and N.~Zaslavsky.
+\newblock Deep learning and the information bottleneck principle.
+\newblock In \emph{IEEE Information Theory Workshop}, 2015.
+\end{thebibliography}
+
+\end{document}
+</code></pre></details></div>
+
+<p>Note the numbered equation cross-references (<code class="language-plaintext highlighter-rouge">\eqref</code>) and citations
+(<code class="language-plaintext highlighter-rouge">[1]</code>, <code class="language-plaintext highlighter-rouge">[2]</code>, <code class="language-plaintext highlighter-rouge">[3]</code>) that resolve against the manual bibliography — a full
+research paper, rendered in place in Computer Modern, the classic LaTeX font.</p>
+
+<h2 id="every-cell-gets">Every cell gets</h2>
+
+<ul>
+  <li><strong>Real page content</strong> — pandoc converts the LaTeX to HTML: selectable,
+searchable, mobile-friendly text in <strong>Computer Modern</strong> (self-hosted Latin
+Modern). Math stays as TeX and is typeset by the site’s MathJax with <code class="language-plaintext highlighter-rouge">ams</code>
+equation numbering.</li>
+  <li><strong>A <code class="language-plaintext highlighter-rouge">.pdf</code> download</strong> — the same source is compiled with pdfLaTeX and staged
+next to the page for download.</li>
+  <li><strong>A collapsible <code class="language-plaintext highlighter-rouge">.tex</code> source</strong> — syntax-highlighted, so readers can copy the
+source directly.</li>
+</ul>
+
+<h2 id="clear-build-diagnostics">Clear build diagnostics</h2>
+
+<p>Invalid sources are isolated to their own cell instead of stopping the rest of
+the site from building. The build log identifies the source and reports the
+converter or compiler output needed to fix it. If pandoc can render the page
+content but pdfLaTeX cannot produce a PDF—for example, because a package is
+missing—the HTML remains available and the toolbar reports that the download
+could not be generated.</p>
+
+<p>This page keeps every example valid so it also serves as a clean visual check
+for the complete HTML, PDF, bibliography, equation, and TikZ pipeline.</p>
+
+<h2 id="syntax-reference">Syntax reference</h2>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">tex_cell</span><span class="w"> </span><span class="na">label</span><span class="o">=</span><span class="nv">my-paper</span><span class="w"> </span><span class="cp">%}</span>          &lt;!-- optional name for the .pdf --&gt;
+\title{...}\maketitle
+\begin{abstract}...\end{abstract}
+\section{...}...
+<span class="cp">{%</span><span class="w"> </span><span class="nt">endtex_cell</span><span class="w"> </span><span class="cp">%}</span>
+</code></pre></div></div>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">tex_file</span><span class="w"> </span><span class="s2">"/assets/papers/example-paper.tex"</span><span class="w"> </span><span class="cp">%}</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">tex_cell</code> auto-wraps in <code class="language-plaintext highlighter-rouge">\documentclass[11pt]{article}</code> + <code class="language-plaintext highlighter-rouge">geometry</code>,
+<code class="language-plaintext highlighter-rouge">amsmath</code>, <code class="language-plaintext highlighter-rouge">hyperref</code>, <code class="language-plaintext highlighter-rouge">booktabs</code>, <code class="language-plaintext highlighter-rouge">enumitem</code>, etc. Write a full
+<code class="language-plaintext highlighter-rouge">\documentclass</code> yourself to opt out.</li>
+  <li>Compiled artifacts are cached in <code class="language-plaintext highlighter-rouge">.jekyll-cache/tex/</code> and only recompiled
+when the source changes.</li>
+  <li>Requires <code class="language-plaintext highlighter-rouge">pandoc</code> (HTML), <code class="language-plaintext highlighter-rouge">pdflatex</code> (TeX Live, PDF), and <code class="language-plaintext highlighter-rouge">pdfinfo</code> (poppler,
+page count) on the machine that builds the site. Binary paths can be
+overridden with the <code class="language-plaintext highlighter-rouge">PANDOC</code> / <code class="language-plaintext highlighter-rouge">PDFLATEX</code> / <code class="language-plaintext highlighter-rouge">PDFINFO</code> env vars.</li>
+</ul>
+
+  </div>
+
+</article>
+
+<div class="photo-lightbox" id="post-lightbox" aria-hidden="true" role="dialog"><button class="photo-close" id="post-lb-close" aria-label="Close">&times;</button><button class="photo-nav photo-prev" id="post-lb-prev" aria-label="Previous">&larr;</button><button class="photo-nav photo-next" id="post-lb-next" aria-label="Next">&rarr;</button><div class="photo-stage"><img id="post-lb-img" alt=""><div class="photo-meta" id="post-lb-meta"></div></div></div>
+<script>
+(function() {
+  var lb = document.getElementById('post-lightbox');
+  if (!lb) return;
+  var img  = document.getElementById('post-lb-img');
+  var meta = document.getElementById('post-lb-meta');
+  var prev  = document.getElementById('post-lb-prev');
+  var next  = document.getElementById('post-lb-next');
+  var close = document.getElementById('post-lb-close');
+
+  var items = [];
+  document.querySelectorAll('.post-content img, .note-content img').forEach(function(el) {
+    if (el.closest('a')) return;
+    if (el.hasAttribute('data-no-lightbox')) return;
+    if (el.classList.contains('jvf-no-lightbox')) return;
+    if (el.naturalHeight > 0 && el.naturalHeight <= 80) return;
+    el.style.cursor = 'zoom-in';
+    el.dataset.lbIndex = items.length;
+    el.dataset.lbSrc   = el.getAttribute('data-full') || el.src;
+    el.dataset.lbAlt   = el.getAttribute('alt') || '';
+    var fig = el.closest('figure');
+    var cap = fig && fig.querySelector('figcaption');
+    el.dataset.lbCap = cap ? cap.innerHTML : '';
+    items.push(el);
+  });
+
+  var idx = 0;
+
+  function show(i) {
+    if (i < 0) i = items.length - 1;
+    if (i >= items.length) i = 0;
+    idx = i;
+    var el = items[idx];
+    img.src = el.dataset.lbSrc;
+    img.alt = el.dataset.lbAlt || '';
+    if (el.dataset.lbCap) {
+      meta.innerHTML = '<div class="lb-pc">' + el.dataset.lbCap + '</div>';
+      meta.style.display = '';
+    } else if (el.dataset.lbAlt) {
+      meta.textContent = el.dataset.lbAlt;
+      meta.style.display = '';
+    } else {
+      meta.style.display = 'none';
+    }
+  }
+  function open(i) {
+    show(i);
+    lb.classList.add('open');
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function shut() {
+    lb.classList.remove('open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    img.src = '';
+  }
+
+  items.forEach(function(el) {
+    el.addEventListener('click', function() { open(parseInt(el.dataset.lbIndex, 10)); });
+  });
+  prev.addEventListener('click', function(e) { e.stopPropagation(); show(idx - 1); });
+  next.addEventListener('click', function(e) { e.stopPropagation(); show(idx + 1); });
+  close.addEventListener('click', shut);
+  lb.addEventListener('click', function(e) { if (e.target === lb) shut(); });
+  document.addEventListener('keydown', function(e) {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape')     shut();
+    if (e.key === 'ArrowLeft')  show(idx - 1);
+    if (e.key === 'ArrowRight') show(idx + 1);
+  });
+})();
+</script>
+
+    </main>
+
+    <footer class="site-footer">
+  <p>Shivaram Kumar Jagannathan · Algorithmic Robotics Group, Nanyang Technological University · 50 Nanyang Ave, Singapore 639798</p>
+  <p>Email: shivaram.jagannathan [at] outlook [dot] com · <a href="https://scholar.google.com/citations?user=geKWO64AAAAJ&hl=en">Google Scholar</a> · <a href="https://github.com/ShirakuGIT">GitHub</a> · <a href="https://www.linkedin.com/in/shivaramkumarj/">LinkedIn</a> · <a href="https://x.com/shirakuex">X</a> · <a href="/feed.xml">RSS</a></p>
+  <p class="modified">Last modified: August 4, 2026. &copy; 2026 Shivaram Kumar Jagannathan.</p>
+</footer>
+
+<script>
+  // Email links carry "name [at] host [dot] tld" so scrapers miss them; decode on click.
+  function emailDecode(el) {
+    var e = el.getAttribute("data-email")
+      .replace(/\s*\[at\]\s*/g, "@")
+      .replace(/\s*\[dot\]\s*/g, ".");
+    window.location.href = "mailto:" + e;
+    return false;
+  }
+</script>
+
+
+  </body>
+
+</html>

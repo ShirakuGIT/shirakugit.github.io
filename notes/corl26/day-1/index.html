@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+(function () {
+  var saved = null;
+  try { saved = localStorage.getItem("theme"); } catch (e) {}
+  var dark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+  document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+})();
+</script>
+
+
+  
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  
+
+  <!-- SEO: meta, Open Graph, Twitter cards, JSON-LD (jekyll-seo-tag) -->
+  <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>CoRL 2026, Day 1: absorbing the frontier model | Shivaram Kumar Jagannathan</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="CoRL 2026, Day 1: absorbing the frontier model" />
+<meta name="author" content="Shivaram Kumar Jagannathan" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="Shivaram Kumar Jagannathan — robotics researcher at NTU Singapore (Algorithmic Robotics Group), working on spatial intelligence, 3D reconstruction, SLAM and real-world robot deployments." />
+<meta name="twitter:description" property="og:description" content="Shivaram Kumar Jagannathan — robotics researcher at NTU Singapore (Algorithmic Robotics Group), working on spatial intelligence, 3D reconstruction, SLAM and real-world robot deployments." />
+<link rel="canonical" href="https://shivaram.net/notes/corl26/day-1/" />
+<meta property="og:url" content="https://shivaram.net/notes/corl26/day-1/" />
+<meta property="og:site_name" content="Shivaram Kumar Jagannathan" />
+<meta property="og:image" content="https://shivaram.net/images/headshot.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-11-14T18:26:32+05:30" />
+<meta property="article:modified_time" content="2026-11-14T18:26:32+05:30" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://shivaram.net/images/headshot.jpg" />
+<meta name="twitter:title" content="CoRL 2026, Day 1: absorbing the frontier model" />
+<meta name="twitter:site" content="@shirakuex" />
+<meta name="twitter:creator" content="@Shivaram Kumar Jagannathan" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Shivaram Kumar Jagannathan"},"dateModified":"2026-11-14T18:26:32+05:30","datePublished":"2026-11-14T18:26:32+05:30","description":"Shivaram Kumar Jagannathan — robotics researcher at NTU Singapore (Algorithmic Robotics Group), working on spatial intelligence, 3D reconstruction, SLAM and real-world robot deployments.","headline":"CoRL 2026, Day 1: absorbing the frontier model","image":"https://shivaram.net/images/headshot.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https://shivaram.net/notes/corl26/day-1/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://shivaram.net/images/headshot.jpg"},"name":"Shivaram Kumar Jagannathan"},"url":"https://shivaram.net/notes/corl26/day-1/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <!-- Reinforce the headshot as the share/preview image across engines -->
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="1024">
+  <meta property="og:image:alt" content="Shivaram Kumar Jagannathan">
+  <meta name="twitter:image:alt" content="Shivaram Kumar Jagannathan">
+  <!-- RSS feed discovery (jekyll-feed) -->
+  <link type="application/atom+xml" rel="alternate" href="https://shivaram.net/feed.xml" title="Shivaram Kumar Jagannathan" />
+
+  <link rel="preload" href="/assets/fonts/LM8-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/site.css?v=1794660992">
+  <link rel="icon" type="image/png" sizes="96x96" href="https://shivaram.net/images/favicon-96.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="https://shivaram.net/images/favicon-48.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://shivaram.net/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://shivaram.net/images/favicon-16.png">
+  <link rel="shortcut icon" type="image/x-icon" href="https://shivaram.net/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://shivaram.net/images/apple-touch-icon.png">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#181818" media="(prefers-color-scheme: dark)">
+
+  <!-- Person structured data for richer search / AI entity understanding -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Shivaram Kumar Jagannathan",
+    "givenName": "Shivaram",
+    "additionalName": "Kumar",
+    "familyName": "Jagannathan",
+    "alternateName": [
+      "Shivaram",
+      "Shivaram Kumar",
+      "Shivaram K",
+      "Shivaram K Jagannathan",
+      "Shivaram Kumar J",
+      "Shivaram Jagannathan",
+      "S. K. Jagannathan",
+      "Shiraku"
+    ],
+    "url": "https://shivaram.net/",
+    "mainEntityOfPage": "https://shivaram.net/",
+    "image": "https://shivaram.net/images/headshot.jpg",
+    "jobTitle": "Robotics Researcher",
+    "description": "Shivaram — robotics researcher at NTU Singapore. Also goes by Shivaram Kumar, Shivaram K, Shivaram Kumar Jagannathan.",
+    "affiliation": [
+      { "@type": "Organization", "name": "Nanyang Technological University" },
+      { "@type": "CollegeOrUniversity", "name": "Manipal Institute of Technology" }
+    ],
+    "knowsAbout": ["Robotics", "Spatial Intelligence", "Task and Motion Planning", "SLAM", "Sensor Fusion", "Machine Learning", "Computer Vision", "3D Reconstruction"],
+    "sameAs": [
+      "https://scholar.google.com/citations?user=geKWO64AAAAJ&hl=en",
+      "https://github.com/ShirakuGIT",
+      "https://www.linkedin.com/in/shivaramkumarj/",
+      "https://x.com/shirakuex"
+    ]
+  }
+  </script>
+
+  <!-- WebSite schema to claim sitelinks-search-box + canonical site name -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "url": "https://shivaram.net/",
+    "name": "Shivaram",
+    "alternateName": ["Shivaram Kumar Jagannathan", "Shivaram Kumar", "Shivaram K Jagannathan"],
+    "author": { "@type": "Person", "name": "Shivaram Kumar Jagannathan" }
+  }
+  </script>
+  <!-- No icon fonts or web-font services: the homepage style is text-only (AGENTS.md §7.0).
+       Latin Modern is self-hosted in assets/fonts/. Calendly is a plain link (social.html). -->
+
+  <link rel="preconnect" href="https://player.vimeo.com">
+  <link rel="preconnect" href="https://i.vimeocdn.com">
+  <link rel="preconnect" href="https://f.vimeocdn.com">
+
+
+
+<!-- Google Analytics (original) -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '');
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','');</script>
+<!-- End Google Tag Manager -->
+
+
+
+<script>
+MathJax = {
+    tex: {
+    inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+    tags: 'ams'  // should be 'ams', 'none', or 'all' }. This line makes the equation numbering and labeling work
+    }, 
+    svg: {
+    fontCache: 'global'
+    }
+};
+</script>
+<script
+    type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script> 
+
+</head>
+
+
+  <body>
+
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id="
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="masthead">
+  <p class="site-name"><a href="/">Shivaram Kumar Jagannathan</a></p>
+  <p class="who">Robotics researcher, <a href="https://algrobogroup.github.io/">Algorithmic Robotics Group</a>, NTU Singapore</p>
+  <nav class="nav" aria-label="Site"><a href="/about/">about</a><a href="/projects/">projects</a><a href="/research/">research</a><a href="/blogs/">blogs</a><a href="/notes/">notes</a><a href="/photography/">photography</a><a href="/feed.xml">rss</a>
+    <button type="button" class="theme-toggle" id="theme-toggle" hidden aria-label="Switch colour theme"></button>
+    <script>
+    (function () {
+      var root = document.documentElement, btn = document.getElementById("theme-toggle");
+      function label() {
+        var dark = root.getAttribute("data-theme") === "dark";
+        btn.textContent = dark ? "\u2600" : "\u263E";   /* ☀ in dark mode, ☾ in light mode */
+        btn.title = btn.ariaLabel = dark ? "Switch to light mode" : "Switch to dark mode";
+      }
+      btn.addEventListener("click", function () {
+        var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        try { localStorage.setItem("theme", next); } catch (e) {}
+        label();
+      });
+      label();
+      btn.hidden = false;
+    })();
+    </script>
+    <div class="nav-search" id="nav-search">
+  <i class="fa-solid fa-magnifying-glass search-icon" aria-hidden="true"></i>
+  <input type="search" id="search-input" placeholder="Search…" autocomplete="off"
+         role="combobox" aria-expanded="false" aria-controls="search-results" aria-label="Search site">
+  <div class="search-panel" id="search-panel">
+    <div class="search-count" id="search-count"></div>
+    <ul id="search-results" class="search-results" role="listbox"></ul>
+  </div>
+</div>
+<script>
+(function(){
+  var input   = document.getElementById('search-input');
+  var panel   = document.getElementById('search-panel');
+  var listEl  = document.getElementById('search-results');
+  var countEl = document.getElementById('search-count');
+  var wrap    = document.getElementById('nav-search');
+  var docs = null, active = -1, current = [];
+  var indexUrl = '/search.json';
+
+  // strip stray liquid / html / markdown so indexed + shown text is plain prose
+  function clean(s){
+    return (s||'')
+      .replace(/\{[%{][\s\S]*?[%}]\}/g, ' ')      // liquid tags / output braces
+      .replace(/\{[%{][\s\S]*$/g, ' ')            // dangling (truncated) liquid
+      .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')    // markdown links -> text
+      .replace(/<[^>]*>/g, ' ')                   // real html tags
+      .replace(/&lt;[^&]*?&gt;/g, ' ')            // escaped html tags
+      .replace(/\b[a-z-]+=("|&quot;)[^"]*?("|&quot;)/gi, ' ') // leftover attr="..."
+      .replace(/&[a-z]+;/gi, ' ')                 // html entities
+      .replace(/[#>*`~|_]{1,}/g, ' ')             // markdown punctuation
+      .replace(/[\u00a0\u200b\u2009\u202f]/g, ' ') // nbsp / thin / zero-width
+      .replace(/\s+/g, ' ').trim();
+  }
+  // lowercase + drop punctuation so "I'm", "SLAM!", "task-motion" all match
+  function norm(s){ return (s||'').toLowerCase().replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim(); }
+  function terms(q){ return norm(q).split(' ').filter(function(t){ return t.length>1; }); }
+
+  // --- n-gram (trigram) helpers for typo tolerance ---
+  function trigrams(s){            // padded trigram set of a token
+    s = '  ' + s + '  ';
+    var g = {};
+    for(var i=0; i<s.length-2; i++) g[s.substr(i,3)] = 1;
+    return g;
+  }
+  function dice(a, b){             // Dice coefficient of two trigram sets (0..1)
+    var inter = 0, na = 0, nb = 0, k;
+    for(k in a){ na++; if(b[k]) inter++; }
+    for(k in b){ nb++; }
+    return (na+nb) ? (2*inter)/(na+nb) : 0;
+  }
+  // index a field into unique tokens + their trigram sets (prefix + n-gram index)
+  function fieldIndex(text, weight){
+    var seen = {}, toks = [], tri = [], parts = norm(text).split(' ');
+    for(var i=0;i<parts.length;i++){
+      var p = parts[i];
+      if(p.length>1 && !seen[p]){ seen[p]=1; toks.push(p); tri.push(trigrams(p)); }
+    }
+    return { w: weight, text: norm(text), toks: toks, tri: tri };
+  }
+
+  function load(){
+    if(docs) return Promise.resolve();
+    return fetch(indexUrl).then(function(r){ return r.json(); }).then(function(json){
+      docs = json.map(function(it){
+        var content = clean(it.content);
+        return {
+          title: it.title, url: it.url, type: it.type, date: it.date,
+          tags: it.tags, category: it.category, content: content,
+          fields: [
+            fieldIndex(it.title, 6),
+            fieldIndex((it.tags||'') + ' ' + (it.category||''), 3),
+            fieldIndex(content, 1)
+          ],
+          nt: norm(it.title), nc: norm(content)
+        };
+      });
+    });
+  }
+
+  // best match tier of query term `t` inside one field: exact > prefix > substring > fuzzy
+  function fieldTier(f, t, qtri){
+    var tier = 0;
+    for(var i=0;i<f.toks.length;i++){
+      var tok = f.toks[i];
+      if(tok === t) return 1;                          // exact word — can't beat
+      if(tok.indexOf(t) === 0){ if(tier<0.85) tier=0.85; }      // prefix (as-you-type)
+      else if(tok.indexOf(t) > -1){ if(tier<0.6) tier=0.6; }    // substring
+    }
+    if(tier < 0.85 && t.length >= 3){                  // n-gram fuzzy (typo tolerance)
+      for(var j=0;j<f.tri.length;j++){
+        var d = dice(qtri, f.tri[j]);
+        if(d >= 0.5){ var ft = 0.5*d; if(ft>tier) tier=ft; }
+      }
+    }
+    return tier;
+  }
+
+  // every query term must match some field (exact/prefix/substring/fuzzy); sum weighted best
+  function search(q){
+    var ts = terms(q);
+    if(!ts.length || !docs) return [];
+    var nq = norm(q), out = [];
+    var qtri = ts.map(trigrams);
+    docs.forEach(function(d){
+      var score = 0, all = true;
+      for(var i=0;i<ts.length;i++){
+        var best = 0;
+        for(var f=0; f<d.fields.length; f++){
+          var tier = fieldTier(d.fields[f], ts[i], qtri[i]);
+          var s = d.fields[f].w * tier;
+          if(s > best) best = s;
+        }
+        if(best === 0){ all = false; break; }
+        score += best;
+      }
+      if(!all) return;
+      if(nq && d.nt.indexOf(nq) > -1) score += 12;   // whole phrase in title
+      if(nq && d.nc.indexOf(nq) > -1) score += 4;    // whole phrase in body
+      out.push({ item: d, score: score });
+    });
+    out.sort(function(a,b){ return b.score - a.score; });
+    return out;
+  }
+
+  function esc(s){ return (s||'').replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function highlight(text, ts){
+    var out = esc(text);
+    ts.forEach(function(t){
+      var re = new RegExp('('+t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig');
+      out = out.replace(re, '<mark>$1</mark>');
+    });
+    return out;
+  }
+  function snippet(content, ts){
+    if(!content) return '';
+    var lc = content.toLowerCase(), pos = -1;
+    for(var i=0;i<ts.length;i++){ var p = lc.indexOf(ts[i]); if(p>-1 && (pos<0||p<pos)) pos = p; }
+    var start = pos>60 ? pos-60 : 0;
+    var slice = content.slice(start, start+170);
+    if(start>0) slice = '… '+slice;
+    if(start+170 < content.length) slice = slice+' …';
+    return highlight(slice, ts);
+  }
+  function icon(type){
+    return type==='post'
+      ? '<i class="fa-solid fa-pen-nib sr-icon"></i>'
+      : '<i class="fa-regular fa-file-lines sr-icon"></i>';
+  }
+  function render(results, q){
+    var ts = terms(q);
+    current = results.slice(0, 8);
+    if(!current.length){
+      countEl.textContent = '';
+      listEl.innerHTML = '<li class="search-empty">No results for “'+esc(q)+'”</li>';
+      panel.classList.add('open'); input.setAttribute('aria-expanded','true'); return;
+    }
+    countEl.textContent = current.length + (current.length===1?' result':' results');
+    listEl.innerHTML = current.map(function(r, i){
+      var it = r.item;
+      var meta = it.type==='post' ? (it.date || 'Blog post') : 'Page';
+      if(it.tags) meta += ' · ' + esc(it.tags);
+      var snip = snippet(it.content, ts);
+      return '<li role="option" data-i="'+i+'" class="sr-item">'+
+               '<a href="'+it.url+'">'+
+                 '<div class="sr-head">'+icon(it.type)+
+                   '<span class="sr-title">'+highlight(it.title, ts)+'</span>'+
+                   '<span class="sr-badge">'+(it.type==='post'?'Blog':'Page')+'</span>'+
+                 '</div>'+
+                 (snip ? '<div class="sr-snippet">'+snip+'</div>' : '')+
+                 '<div class="sr-meta">'+meta+'</div>'+
+               '</a></li>';
+    }).join('');
+    active = -1;
+    panel.classList.add('open'); input.setAttribute('aria-expanded','true');
+  }
+  function close(){ panel.classList.remove('open'); input.setAttribute('aria-expanded','false'); active = -1; }
+  function setActive(n){
+    var items = listEl.querySelectorAll('.sr-item');
+    if(!items.length) return;
+    if(active>-1 && items[active]) items[active].classList.remove('active');
+    active = (n+items.length)%items.length;
+    items[active].classList.add('active');
+    items[active].scrollIntoView({block:'nearest'});
+  }
+
+  if(input){
+    input.addEventListener('input', function(){
+      var raw = input.value.trim();
+      if(norm(raw).length < 2){ close(); listEl.innerHTML=''; countEl.textContent=''; return; }
+      load().then(function(){
+        if(input.value.trim() !== raw) return;   // ignore stale async result
+        render(search(raw), raw);
+      });
+    });
+    input.addEventListener('focus', load);
+    input.addEventListener('keydown', function(e){
+      if(e.key==='ArrowDown'){ e.preventDefault(); setActive(active+1); }
+      else if(e.key==='ArrowUp'){ e.preventDefault(); setActive(active-1); }
+      else if(e.key==='Enter'){
+        var items = listEl.querySelectorAll('.sr-item a');
+        if(active>-1 && items[active]){ window.location = items[active].getAttribute('href'); }
+        else if(items[0]){ window.location = items[0].getAttribute('href'); }
+      }
+      else if(e.key==='Escape'){ close(); input.blur(); }
+    });
+    document.addEventListener('click', function(e){ if(wrap && !wrap.contains(e.target)) close(); });
+  }
+})();
+</script>
+
+  </nav>
+</header>
+
+
+    <main id="content">
+      <article class="article note" itemscope itemtype="http://schema.org/Article">
+
+  <header class="article-head">
+    <p class="article-back"><a href="/notes/">← All notes</a></p>
+    <h1 class="article-title" itemprop="headline">CoRL 2026, Day 1: absorbing the frontier model</h1>
+    <p class="article-meta">
+      Note · <a href="/notes/#cat-conference">Conference</a> · <span class="status">done</span> · updated <time datetime="2026-11-14T00:00:00+05:30">November 14, 2026</time><br>corl, robot-learning, foundation-models, benchmarks
+    </p>
+  </header>
+
+  <nav class="toc-inline" id="toc-inline" aria-label="Contents" hidden><p>Contents</p><ol id="toc-inline-list"></ol></nav>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var box = document.getElementById('toc-inline'), list = document.getElementById('toc-inline-list');
+  if (!box || !list) return;
+  function slugify(s) {
+    return (s || '').toLowerCase().trim().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-');
+  }
+  var heads = [];
+  document.querySelectorAll('.post-content :is(h1,h2,h3,h4), .note-content :is(h1,h2,h3,h4)').forEach(function (h) {
+    if (h.closest('.tex-html, .jupyter-notebook')) return;
+    if (!h.id) h.id = slugify(h.textContent);
+    heads.push(h);
+  });
+  if (heads.length < 3) return;
+  heads.forEach(function (h) {
+    var li = document.createElement('li'), a = document.createElement('a');
+    li.className = 'lvl-' + h.tagName.charAt(1);
+    a.href = '#' + h.id;
+    a.textContent = h.textContent;
+    li.appendChild(a);
+    list.appendChild(li);
+  });
+  box.hidden = false;
+});
+</script>
+
+
+  <div class="article-body note-content" itemprop="articleBody">
+    <p>Part of a three-day series. Start with the <a href="/notes/corl26/synthesis/">cross-day synthesis</a> for background and definitions of the terms used here.</p>
+
+<p>Day 1 opened in the shadow of <strong>GPT-6 Astra</strong>, a general-purpose frontier model released two months earlier. It was not designed for robots, yet when connected directly to simulated robots it completed far more tasks than purpose-built robot foundation models. The day’s talks kept returning to one question: if a general model can already plan and act, what is left for robot learning? The answers clustered around three ideas. Physical control runs against a clock that slow models cannot meet. Contact and force are still poorly handled. And the benchmarks the field uses to measure progress can hide the failures that matter.</p>
+
+<h2 id="frontier-reasoning-meets-the-physical-clock">Frontier reasoning meets the physical clock</h2>
+
+<p>The keynote that framed the day came from <strong>Hang Zhao</strong>, who leads a robotics lab at Tsinghua University and co-founded the robotics company Galaxea AI. He started by acknowledging Astra’s results, telling the audience that “many of us in this community are not ready for this.” He then pointed out what the benchmarks left out: <strong>time</strong>. Each call to Astra took about 18 seconds, and the simulated robot spent 97% of each episode standing still while the model thought. Simulation benchmarks normally pause the world while the model computes, which hides this cost.</p>
+
+<p>To make the point concrete, Zhao tested five ways of connecting a frontier model to a robot in a simulated kitchen. They ranged from having the model write a program once, to calling it at every step, to letting it orchestrate a library of small, fast learned skills. With the clock paused, all but the simplest scored above 60%. With a real 50-second deadline, the approaches that called the model at every step collapsed to 15–20%. Orchestration, where the slow model decides <em>what</em> to do and fast skills decide <em>how</em>, held at 65%.</p>
+
+<p><figure class="post-figure" style="max-width: 80%"><img src="https://shivaram.net/images/notes/corl26/d1_zhao_wallclock.jpg" alt="Success rates with the clock paused (grey) and running (orange). Approaches that consult the frontier model at every step collapse when time is real. (Hang Zhao)" loading="lazy" /><figcaption>Success rates with the clock paused (grey) and running (orange). Approaches that consult the frontier model at every step collapse when time is real. (Hang Zhao)</figcaption></figure></p>
+
+<p>He also mapped jobs onto the layers. A fixed assembly line needs only System 0. Parcel sorting needs a strong System 1. Housework needs a strong System 2 but can tolerate a slower System 1. And his group’s latest fast world-action model runs at 60 milliseconds per action on a single gaming GPU.</p>
+
+<p>From this he argued that robot systems should be divided <strong>by reaction time rather than by function</strong>. The traditional split is perception, planning, and control. His proposal is System 2 (a frontier model, reasoning over seconds to minutes), System 1 (a learned policy reacting to the hand and object at tens of decisions per second), and System 0 (a controller managing contact and balance hundreds of times per second). A slipping cup, in this view, is a System 0 problem: perception and correction both have to happen within milliseconds, so they cannot be split across layers.</p>
+
+<p>His most useful observation concerned the connections between layers. Higher layers already pass rich instructions downward: language, goals, programs. Very little flows back up. A lower layer rarely reports that force has changed, that an object is slipping, or that it is unsure. His example was a humanoid following a “lift the box” command while the box slid out of its hands, with “no way to tell anyone.”</p>
+
+<p><figure class="post-figure" style="max-width: 80%"><img src="https://shivaram.net/images/notes/corl26/d1_zhao_feedback.jpg" alt="Instructions flow down the stack; feedback about contact, progress, and confidence mostly does not flow back up. (Hang Zhao)" loading="lazy" /><figcaption>Instructions flow down the stack; feedback about contact, progress, and confidence mostly does not flow back up. (Hang Zhao)</figcaption></figure></p>
+
+<p>Asked whether System 2 research was now finished, Zhao largely agreed: “it’s a good news that system 2 are largely solved by the frontier models.” He then added that these models “are not really designed for robotics”, being weak at spatial reasoning and at closing the loop on a physical task. There is “still space to explore for system two,” he said, but more opportunity in System 1 and System 0, and suggested a physical split of compute: System 2 in the cloud, System 1 on a server shared by robots in a factory or store, and System 0 on the robot itself.</p>
+
+<p><strong>Why it matters.</strong> This talk set the terms for the rest of the conference. It accepted frontier models as a genuine capability while arguing that they occupy only the slowest layer of a robot. The open research moved to the fast layers and to the feedback between them.</p>
+
+<h2 id="generalist-policies-what-helps-them-generalize">Generalist policies: what helps them generalize</h2>
+
+<p>The first research session examined <strong>generalist policies</strong>: single models trained on many tasks and robots, in the hope that they can combine skills in new ways. The hope is modeled on image generators, which could draw an “avocado armchair” without ever having seen one by combining “avocado” and “armchair.”</p>
+
+<p><strong>Physical Intelligence</strong>, a startup building robot foundation models, presented the most concrete result. Real robot datasets always mix good demonstrations with clumsy ones. Naively adding more low-quality data made their laundry-folding model <em>worse</em>, because the model learned to imitate the average. When each demonstration was labeled with information about its quality, adding more data made the model <em>better</em>, because the model could then be asked for the high-quality behavior. They also showed a model folding shirts on a robot arm for which no folding data had ever been collected, by combining folding knowledge from one robot with movement knowledge from another. They were candid that quality labels are still assigned by hand, and called measuring data quality “an active area of research.”</p>
+
+<p>Two other talks addressed what policies should remember. Most current robot policies decide from a single camera frame and have no memory. In one example, a policy cooking a grilled cheese had no notion of elapsed time and would leave it on the pan indefinitely. Adding compressed short-term video and running text summaries let a policy work on 15-minute tasks and even change strategy after a mistake. A Stanford and NVIDIA team argued that <strong>context length</strong> should become a scaling axis for robots, as it has for language models. Their model used 8,000 steps of history at constant speed, and its performance rose steadily as context grew.</p>
+
+<p>Several shorter talks showed how fragile generalization still is:</p>
+<ul>
+  <li>Policies often <strong>ignore the instruction</strong> and repeat a well-practiced task whenever the scene contains its familiar objects. On one standard benchmark they score highly even with the language input removed.</li>
+  <li>A <a href="https://arxiv.org/abs/2607.29687">Berkeley study</a> found that robots don’t need to practice every combination of skills (a quarter of the combinations was enough). When they did fail on a new combination, the training data already contained every motion needed, and a single demonstration per task fixed it. So the problem was picking the right skill from the instruction, not missing motor skill.</li>
+  <li>A study of <strong>cross-robot transfer</strong> showed that adding just 5% of data from the target robot to pretraining raised one robot’s success from 51 to 69. Papers use “zero-shot” for both settings, so their numbers often can’t be compared.</li>
+</ul>
+
+<p><strong>Why it matters.</strong> Scaling generalist models works best when the model is told what good behavior looks like, and combining skills is possible but fragile. Researchers claiming generalization need to state precisely what the model saw during training.</p>
+
+<h2 id="world-models-and-simulation-as-data-sources">World models and simulation as data sources</h2>
+
+<p>A <strong>world model</strong> predicts what the world will look like after the robot acts. Three uses appeared on Day 1:</p>
+<ul>
+  <li><strong>As a policy.</strong> NVIDIA’s DreamZero fine-tuned a large video-generation model to predict future frames and actions together. Without task-specific training, it solved tasks such as untying shoelaces better than standard robot models, after its inference was sped up from 5.7 seconds to 0.15 seconds per step.</li>
+  <li><strong>As an evaluator.</strong> Testing a policy inside a world model is far cheaper than running real robots. Giving the model a spatial memory, so objects did not change shape when they went out of view, raised the agreement between imagined and real success rates to 0.97.</li>
+  <li><strong>As an attack surface.</strong> One study showed that subtly altered images in third-party training data could make a world model generate harmful behaviors that a policy would then learn. This is an early warning that the data supply chain for robots needs security.</li>
+</ul>
+
+<p>On simulation, the Allen Institute for AI trained policies <strong>entirely on synthetic data</strong>: 1.7 million simulated demonstrations across 94,000 generated environments, with everything randomized that could be. The policies transferred to real robots for pick-and-place with no real data at all. The authors noted that deformable objects such as cloth are not yet supported.</p>
+
+<p><strong>Why it matters.</strong> Generated data, from video models or physics simulators, is becoming a serious alternative to collecting robot data by hand, at least for rigid objects.</p>
+
+<h2 id="the-benchmarking-problem">The benchmarking problem</h2>
+
+<p>One of the most discussed talks came from the Toyota Technological Institute at Chicago, under the title <strong>“What are we actually benchmarking?”</strong> A shared benchmark lets labs compare methods, but once everyone optimizes for it, it quietly becomes the field’s definition of progress. The team showed four ways a high score can mislead:</p>
+<ol>
+  <li><strong>Shortcuts.</strong> A tiny model with no robot pretraining, which treats each instruction as an arbitrary ID rather than reading it, scored 97.6 on LIBERO. A high LIBERO score is widely read as evidence of large-scale pretraining and language understanding.</li>
+  <li><strong>Noise.</strong> Few reported improvements on standard benchmarks are statistically significant given the number of trials run.</li>
+  <li><strong>Narrow tests.</strong> Moving test objects slightly, within the range seen in training, lowered every policy’s score.</li>
+  <li><strong>Data advantages.</strong> A small model given extra simulated training data matched the best reported result, so the score cannot separate genuine generalization from better data.</li>
+</ol>
+
+<p><figure class="post-figure" style="max-width: 80%"><img src="https://shivaram.net/images/notes/corl26/d1_bench_shortcut.jpg" alt="A 0.09-billion-parameter model with no robot pretraining nearly matches the best large models on a standard benchmark." loading="lazy" /><figcaption>A 0.09-billion-parameter model with no robot pretraining nearly matches the best large models on a standard benchmark.</figcaption></figure></p>
+
+<p>The root cause, the presenters argued, is a public, fixed, narrow test set. Asked which benchmarks are most at risk, they answered that now that frontier models can “practice on” any public benchmark without retraining, all of them are.</p>
+
+<p>A sponsor initiative, <strong>Robot Colosseum</strong>, answered with scale. Hundreds of robots were evaluated more than 21,000 times in real homes, factories, and cafés. No model was best everywhere, general frontier agents could rival specialized robot models (according to their slide), no humanoid model reached full success, and about 400–500 head-to-head comparisons were needed before differences became statistically meaningful. The organizers offered 10,000 hours of free evaluation to academic labs.</p>
+
+<p><strong>Why it matters.</strong> The field’s most-used scoreboards can overstate real capability. Results should be read with that in mind, and the talks argued for adding hidden, more diverse, or real-world evaluation.</p>
+
+<h2 id="speed-as-a-research-topic">Speed as a research topic</h2>
+
+<p>A whole spotlight session was given over to making policies faster or cheaper to run, which is academic support for Zhao’s point about time:</p>
+<ul>
+  <li><a href="https://arxiv.org/abs/2506.07530">BitVLA</a> shrank a robot model’s weights to three values (-1, 0, +1). It used 11 times less memory and ran 4.4 times faster than a comparable open model.</li>
+  <li>One system split a model between the cloud and the robot by predicting what the cloud part would compute, raising the control rate almost tenfold.</li>
+  <li>A policy that decides for itself when to replan, instead of replanning on a fixed schedule, saved about 38% of the model calls at the same success rate.</li>
+  <li>A model-based method that plans in chunks ran 30 times faster at inference than a standard baseline.</li>
+</ul>
+
+<h2 id="industrys-answer-everything-is-a-skill">Industry’s answer: “everything is a skill”</h2>
+
+<p><strong>Jim Fan</strong>, who leads robotics research at NVIDIA, gave the day’s most memorable industry talk. He described the community’s reaction to Astra as five stages of grief: denial (“cherry-picked”), anger, bargaining (“they still need my motion planner, right?”), depression (“my PhD is now a joke in the system prompt”), and acceptance (“winter is coming”). Then he added a sixth stage, <strong>celebration</strong>. His argument was that “you can’t possibly be excited about a System 1 for language models and hold a funeral for robotics.” A fast, reactive layer is exactly what robots need and what frontier models lack.</p>
+
+<p><figure class="post-figure" style="max-width: 80%"><img src="https://shivaram.net/images/notes/corl26/d1_jimfan_grief.jpg" alt="The community's reaction to Astra: five stages of grief, followed by celebration. (Jim Fan, NVIDIA)" loading="lazy" /><figcaption>The community's reaction to Astra: five stages of grief, followed by celebration. (Jim Fan, NVIDIA)</figcaption></figure></p>
+
+<p>NVIDIA’s approach pairs Astra with GR00T 2, its own 2-billion-parameter model that predicts future frames and actions together. GR00T learns from “easy” data: grippers worn by people, motion-capture gloves, an exoskeleton that maps one-to-one onto a robot hand, and simulation. Astra contributes in three ways. It can draw guidance directly onto the camera image for GR00T to follow, monitor execution and correct the action only when needed, or write and test code skills in simulation that the robot can call on. He showed an assembly cell running overnight at “essentially 100% robustness”, a self-reported figure with no stated test protocol. As Fan put it, “neither Astra nor GR00T can do this alone.” His case for local models was blunt: “You need to own System 1, untethered.”</p>
+
+<p>His conclusion was that Astra “didn’t shatter our dreams, but it shattered our walled gardens.” Frontier models lower the barrier to entry, so robotics “is no longer an elitist sport.” NVIDIA announced open releases of its model weights, simulator, agent framework, annotation models, 100,000 hours of human video, and hardware designs.</p>
+
+<p>Other industry voices reinforced the picture. GM described driving policies trained by <strong>self-play</strong> in a simulator running more than 50,000 times faster than real time, combined with imitation of human driving, and targets an “eyes-off” highway product for 2028. It also uses vision-language models in the car to reason about unusual scenes, such as a crash site with police cars, and offline to mine and triage driving data. Several companies now sell <strong>egocentric human video</strong> by the million hours. One company’s promotional video stated flatly that “teleop data is not scalable at all.”</p>
+
+<p><strong>Why it matters.</strong> NVIDIA’s version of the working architecture is a frontier model as supervisor and planner, with a fast, locally owned model doing the physical work. Other companies drew the boundaries differently. Open releases are now part of how companies compete.</p>
+
+<h2 id="the-academic-keynotes-interaction-touch-and-the-boulder">The academic keynotes: interaction, touch, and the boulder</h2>
+
+<p><strong>Negar Mehr</strong> (UC Berkeley) argued that interaction between multiple agents is a distinct problem that more data will not solve. When two robots carry an object together, one robot’s small deviation from its demonstrations can doom the whole task. The data needed to cover such cases grows exponentially with the number of agents. Her group’s most promising results used foundation models as <strong>coaches</strong>: breaking tasks into steps, writing reward functions, and judging which agent deserved credit for a team outcome. These coaches outperformed standard multi-agent learning methods by a wide margin, even with the weaker models available in 2025.</p>
+
+<p><strong>Wolfram Burgard</strong> (University of Technology Nuremberg), a pioneer of probabilistic robotics, framed the field’s history through the myth of <strong>Sisyphus</strong>, condemned to push a boulder uphill only to watch it roll back. Robotics has pushed three times: probabilistic methods in the 1990s, deep learning in the 2010s, and foundation models now. Each time the community believed the boulder would reach the top. He believes foundation models are a genuine step, and said that building the AI is “mostly underestimated by investors … and even politicians”. He listed what they still miss:</p>
+<ul>
+  <li>Precision. Classical methods localize a robot on a factory floor to about a millimeter. “Who believes that this can be achieved with foundation models as well? Nobody… maybe in a few years.” He put manipulation at “level three, maybe a few level four” on a self-driving-style autonomy scale.</li>
+  <li>Calibrated uncertainty: knowing how confident a learned perception system really is, which classical estimation depends on.</li>
+  <li>The ability to handle messy, unstructured homes, which is why factories will be automated much sooner.</li>
+  <li><strong>Touch and force.</strong> “There are many people in the world who don’t have vision and still live a decent life. But there’s very few people in the world who don’t have tactile information.” This, he argued, is where robotics can distinguish itself from computer vision.</li>
+  <li>Navigation. He was surprised “so few people” at the conference work on it.</li>
+</ul>
+
+<p>He also voiced unease about growing public skepticism toward AI, and closed with a call for academia to pool resources in <strong>“a CERN of robotics”</strong> to stay relevant next to large industrial teams. University compute isn’t uniformly scarce, though. His Bavarian center was receiving “an additional number of thousand GB200 GPUs”, and in the opening, Peter Stone said UT Austin’s new computing school has “the most GPUs of any computing group” in the US.</p>
+
+<p><figure class="post-figure" style="max-width: 70%"><img src="https://shivaram.net/images/notes/corl26/d1_burgard_cern.jpg" alt="Burgard's closing call: shared infrastructure and a jointly built robotics foundation model. (Wolfram Burgard)" loading="lazy" /><figcaption>Burgard's closing call: shared infrastructure and a jointly built robotics foundation model. (Wolfram Burgard)</figcaption></figure></p>
+
+<h2 id="day-1-conclusions">Day 1 conclusions</h2>
+
+<ol>
+  <li><strong>In Zhao’s timed tests, frontier models worked as slow planners, not controllers.</strong> They handle task-level reasoning well but are too slow for physical control. Response time is now a design constraint, and a research area, in its own right.</li>
+  <li><strong>Industry is building beneath and around frontier models.</strong> Companies on stage were investing in fast local models, cheap data sources, and open software stacks.</li>
+  <li><strong>Academia’s advantage lies in rigor and in problems that do not scale away.</strong> Valid evaluation, calibrated uncertainty, touch and force, multi-agent interaction, and continual learning all resist being solved by more data alone.</li>
+  <li><strong>The data question is open.</strong> No Day 1 speaker argued that teleoperation alone would scale. Human video, simulation, and generated data are the contenders.</li>
+</ol>
+
+<h2 id="sources">Sources</h2>
+
+<p>Livestream: <a href="https://www.youtube.com/watch?v=F_4AAOQsWlA">Day 1</a>. Papers mentioned that are on arXiv:
+<a href="https://arxiv.org/abs/2602.15922">DreamZero</a> ·
+<a href="https://arxiv.org/abs/2603.16861">MolmoBot</a> ·
+<a href="https://arxiv.org/abs/2606.04233">What are we actually benchmarking?</a> ·
+<a href="https://arxiv.org/abs/2603.03596">MEM (memory)</a> ·
+<a href="https://arxiv.org/abs/2601.12993">Being-H0.5</a> ·
+<a href="https://arxiv.org/abs/2602.17659">When vision overrides language</a> ·
+<a href="https://arxiv.org/abs/2607.29687">Diagnosing compositional generalization</a> ·
+<a href="https://arxiv.org/abs/2506.07530">BitVLA</a> ·
+<a href="https://arxiv.org/abs/2502.03349">Robust autonomy emerges from self-play</a> (cited by GM).
+<a href="https://arxiv.org/abs/2604.15483">π0.7</a> ·
+<a href="https://arxiv.org/abs/2607.15275">RoboTTT</a> ·
+<a href="https://arxiv.org/abs/2606.18960">Mem-World</a> ·
+<a href="https://arxiv.org/abs/2609.16864">TEMPO</a> ·
+<a href="https://arxiv.org/abs/2610.12007">REACT</a>.
+Robot Colosseum and GR00T 2 had no paper I could find.</p>
+
+
+  </div>
+
+</article>
+
+<div class="photo-lightbox" id="post-lightbox" aria-hidden="true" role="dialog"><button class="photo-close" id="post-lb-close" aria-label="Close">&times;</button><button class="photo-nav photo-prev" id="post-lb-prev" aria-label="Previous">&larr;</button><button class="photo-nav photo-next" id="post-lb-next" aria-label="Next">&rarr;</button><div class="photo-stage"><img id="post-lb-img" alt=""><div class="photo-meta" id="post-lb-meta"></div></div></div>
+<script>
+(function() {
+  var lb = document.getElementById('post-lightbox');
+  if (!lb) return;
+  var img  = document.getElementById('post-lb-img');
+  var meta = document.getElementById('post-lb-meta');
+  var prev  = document.getElementById('post-lb-prev');
+  var next  = document.getElementById('post-lb-next');
+  var close = document.getElementById('post-lb-close');
+
+  var items = [];
+  document.querySelectorAll('.post-content img, .note-content img').forEach(function(el) {
+    if (el.closest('a')) return;
+    if (el.hasAttribute('data-no-lightbox')) return;
+    if (el.classList.contains('jvf-no-lightbox')) return;
+    if (el.naturalHeight > 0 && el.naturalHeight <= 80) return;
+    el.style.cursor = 'zoom-in';
+    el.dataset.lbIndex = items.length;
+    el.dataset.lbSrc   = el.getAttribute('data-full') || el.src;
+    el.dataset.lbAlt   = el.getAttribute('alt') || '';
+    var fig = el.closest('figure');
+    var cap = fig && fig.querySelector('figcaption');
+    el.dataset.lbCap = cap ? cap.innerHTML : '';
+    items.push(el);
+  });
+
+  var idx = 0;
+
+  function show(i) {
+    if (i < 0) i = items.length - 1;
+    if (i >= items.length) i = 0;
+    idx = i;
+    var el = items[idx];
+    img.src = el.dataset.lbSrc;
+    img.alt = el.dataset.lbAlt || '';
+    if (el.dataset.lbCap) {
+      meta.innerHTML = '<div class="lb-pc">' + el.dataset.lbCap + '</div>';
+      meta.style.display = '';
+    } else if (el.dataset.lbAlt) {
+      meta.textContent = el.dataset.lbAlt;
+      meta.style.display = '';
+    } else {
+      meta.style.display = 'none';
+    }
+  }
+  function open(i) {
+    show(i);
+    lb.classList.add('open');
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function shut() {
+    lb.classList.remove('open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    img.src = '';
+  }
+
+  items.forEach(function(el) {
+    el.addEventListener('click', function() { open(parseInt(el.dataset.lbIndex, 10)); });
+  });
+  prev.addEventListener('click', function(e) { e.stopPropagation(); show(idx - 1); });
+  next.addEventListener('click', function(e) { e.stopPropagation(); show(idx + 1); });
+  close.addEventListener('click', shut);
+  lb.addEventListener('click', function(e) { if (e.target === lb) shut(); });
+  document.addEventListener('keydown', function(e) {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape')     shut();
+    if (e.key === 'ArrowLeft')  show(idx - 1);
+    if (e.key === 'ArrowRight') show(idx + 1);
+  });
+})();
+</script>
+
+    </main>
+
+    <footer class="site-footer">
+  <p>Shivaram Kumar Jagannathan · Algorithmic Robotics Group, Nanyang Technological University · 50 Nanyang Ave, Singapore 639798</p>
+  <p>Email: shivaram.jagannathan [at] outlook [dot] com · <a href="https://scholar.google.com/citations?user=geKWO64AAAAJ&hl=en">Google Scholar</a> · <a href="https://github.com/ShirakuGIT">GitHub</a> · <a href="https://www.linkedin.com/in/shivaramkumarj/">LinkedIn</a> · <a href="https://x.com/shirakuex">X</a> · <a href="/feed.xml">RSS</a></p>
+  <p class="modified">Last modified: November 14, 2026. &copy; 2026 Shivaram Kumar Jagannathan.</p>
+</footer>
+
+<script>
+  // Email links carry "name [at] host [dot] tld" so scrapers miss them; decode on click.
+  function emailDecode(el) {
+    var e = el.getAttribute("data-email")
+      .replace(/\s*\[at\]\s*/g, "@")
+      .replace(/\s*\[dot\]\s*/g, ".");
+    window.location.href = "mailto:" + e;
+    return false;
+  }
+</script>
+
+
+  </body>
+
+</html>

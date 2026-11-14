@@ -1,0 +1,201 @@
+[{
+    "title": "Towards a Theory of Robot Intelligence",
+    "url": "/2026/07/05/theory-of-robot-intelligence.html",
+    "type": "post",
+    "date": "Jul 5, 2026",
+    "tags": "robotics, ideas, shower-thoughts, work-in-progress",
+    "category": "",
+    "content": "Note: Work in progress. I have been having these late night thoughts on what could be an interesting theory of robot intelligence. For context, I’m a young roboticist, I’ve been in the field for 2 years, and I’m just breaking into research. I’ve worked on all sides of robotics at the fundamental level - planning for manipulation and navigation, SLAM, visual perception, controls. I’ve not worked heavily on whole-body control, locomotion, etc. but I think those challenges are more inherently control-theoretic rather than planning. I’m not an expert, this article is probably just to segment my current thought process on what my observations (perception) is about regarding robotics. I’ve been transitioning full time into robotics for the better part of..."
+  },{
+    "title": "Welcome to the Blog",
+    "url": "/2026/06/01/welcome-to-the-blog.html",
+    "type": "post",
+    "date": "Jun 1, 2026",
+    "tags": "meta, robotics",
+    "category": "",
+    "content": "This is a sample post showing everything the blog supports. Delete it once you publish your own. To start a new post, run ./new-post.sh \"My Title\" tag1 tag2. Math (LaTeX) Inline math like $\\nabla \\cdot \\mathbf{B} = 0$ works, and so do display blocks: \\[\\hat{x}_{k} = \\hat{x}_{k}^{-} + K_k \\left( z_k - H \\hat{x}_{k}^{-} \\right)\\] That’s the Kalman filter measurement update — handy for sensor fusion. Images An image with a caption. Use width to constrain it. Video Embed YouTube, Vimeo, or a hosted .mp4: Drop in any YouTube ID. GIFs Use a .gif, or — lighter and smoother — a silent looping .mp4: {% include gif.html src=\"/images/demo.gif\" caption=\"A looping demo.\" %} {% include gif.html mp4=\"/images/demo.mp4\" caption=\"Same, but as mp4.\"..."
+  },{
+    "title": "About",
+    "url": "/about/",
+    "type": "page",
+    "date": "",
+    "tags": "",
+    "category": "",
+    "content": "About Shivaram Kumar JagannathanResearcher, Nanyang Technological University Email | CV | Google Scholar | GitHub | LinkedIn | X | Book a meeting I'm a researcher working at the intersection of robotics and intelligence - classical robotics, spatial intelligence, machine learning, and real-world robot deployments. At the Algorithmic Robotics Group, NTU, I work under Dr. Yoonchang Sung on visual priors for robot decision-making, and 3D reconstruction for object search in cluttered scenes. Earlier, I worked extensively on perception and SLAM for industrial autonomous mobile robots. Experience"
+  },{
+    "title": "News",
+    "url": "/allnews.html",
+    "type": "page",
+    "date": "",
+    "tags": "",
+    "category": "",
+    "content": "News 2026-09-17 Imagine-TAMP: Imagination-Guided Task and Motion Planning in Partial Observability (preprint) New preprint on deciding where to look and what to move when the target object is hidden. arXivResearch2026-09-16 CaSCo: Cascade-Aware Soft-Collision Motion Planning (preprint) New preprint on motion planning that weighs the risk of bumping objects, including knock-on collisions. arXivResearch2026-01-16 Joined the Algorithmic Robotics Group @ NTU Singapore (milestone) Working under Dr. Yoonchang Sung. ARG"
+  },{
+    "title": "Blog",
+    "url": "/blogs/",
+    "type": "page",
+    "date": "",
+    "tags": "",
+    "category": "",
+    "content": "2026-07-05: Towards a Theory of Robot Intelligence 6 min read · robotics, ideas, shower-thoughts, work-in-progress Note: Work in progress. Read more → 2026-06-01: Welcome to the Blog 1 min read · meta, robotics This is a sample post showing everything the blog supports. Delete it once you publish your own. To start a new post, run ./new-post.sh \"My Title\" tag1 tag2. Read more → Also available as an RSS feed. Shorter, rougher writing lives in the notes."
+  },{
+    "title": "Home",
+    "url": "/",
+    "type": "page",
+    "date": "",
+    "tags": "",
+    "category": "",
+    "content": "Hi, I’m Shiva — friends call me Shiraku. I’m a researcher working at the intersection of robotics and intelligence — classical robotics, spatial intelligence, machine learning, and real-world robot deployments. Right now I’m at ARG, NTU Singapore under Dr. Yoonchang Sung — using visual priors to inform robot decision-making, and 3D reconstruction for object search in cluttered scenes. Also known as Shivaram, Shivaram Kumar, Shivaram K, Shivaram K Jagannathan, Shivaram Kumar J, Shivaram Jagannathan, S. K. Jagannathan. Email | CV | Google Scholar | GitHub | LinkedIn | X | Book a meeting"
+  },{
+    "title": "Notes",
+    "url": "/notes/",
+    "type": "page",
+    "date": "",
+    "tags": "",
+    "category": "",
+    "content": "A working garden — book notes, paper digests, course study notes, tutorial implementations, and rough drafts. Grouped by category below, most recently updated first. Jump to: Conference (4) Course (1) Misc (3) Reading (1) Tutorial (1) Conference 2026-11-14: CoRL 2026: where robot learning thinks it is going (done)Across all three days: what the field now treats as solved, what remains open, and where academia and industry agree and disagree.corl, robot-learning, synthesis 2026-11-14: CoRL 2026, Day 3: agents, world models, and the big debate (done)Frontier models enter robotics as programmers, world models as infrastructure. The closing debate asked whether imitation plus fine-tuning will yield commercially viable generalist robots. The room seemed skeptical, though no votes were counted.corl, robot-learning, world-models, debate 2026-11-14:..."
+  },{
+    "title": "Photography",
+    "url": "/photography/",
+    "type": "page",
+    "date": "",
+    "tags": "",
+    "category": "",
+    "content": "Photos from places I’ve been and things I’ve seen. Click any image to view full-size. Pipa Girl Clarke Quay, Singapore Skyline Marina Bay, Singapore Marina Bay Sands Marina Bay, Singapore Swan Lake Botanic Gardens, Singapore March 1, 2026 January 24, 2026 Weill Hall UC Berkeley, California Little Havana Miami, Florida Little Havana Miami, Florida Muir Woods Muir Woods, California Palace of Fine Arts San Francisco, California Palace of Fine Arts San Francisco, California Trans America Pyramid San Francisco, California Conservatory of Flowers San Francisco, California Mount Tamalpais Marin County, California Devil's Slide Pacifica, California Devil's Slide Pacifica, California Twin Peaks San Francisco, California &times; &larr; &rarr;"
+  },{
+    "title": "Projects",
+    "url": "/projects/",
+    "type": "page",
+    "date": "",
+    "tags": "",
+    "category": "",
+    "content": "Projects Some projects I’ve built! Each one links to its code or video. Autonomous AMR docking with a UR5 arm for pick-and-place Logistics CoBotROS 2 Humble logistics systemMobile robot navigation with Nav2 and slam_toolbox, paired with UR5 manipulation via MoveIt2 and ArUco markers. code on GitHub SAM3D reconstruction + FoundationPose localization Perception PipelinePerception and grasp generationMetric 3D reconstruction of a scene using SAM3D, followed by object localization and grasp generation using FoundationPose and Grasp Sampler. code on GitHub Parallel-jaw grasp sampling on a mesh object Grasp SamplerDependency-light grasp samplerGenerates 6-DoF parallel-jaw grasps for any mesh by combining primitive, OBB-face and antipodal samplers. code on GitHub Human-to-robot motion mimicry via adaptive IK ATOMROS 2 teleoperation frameworkMaps Meta Quest 2 controller poses..."
+  },{
+    "title": "Publications",
+    "url": "/publications/",
+    "type": "page",
+    "date": "",
+    "tags": "",
+    "category": "",
+    "content": "&lt;!doctype html&gt; Publications Moved to Research."
+  },{
+    "title": "Research",
+    "url": "/research/",
+    "type": "page",
+    "date": "",
+    "tags": "",
+    "category": "",
+    "content": "Research Publications, newest first. Each has a [TL;DR], the full [Abstract] and a copyable [BibTeX] entry. Also on Google Scholar. Preprints Imagine-TAMP: Imagination-Guided Task and Motion Planning in Partial Observability Antareep Singha, Shivaram Kumar, Yoonwoo Kim, &amp; Yoonchang Sung (2026)Preprint, arXiv:2609.20396 arXiv TL;DRA task and motion planning framework that combines vision-language models and imagined 3D scene geometry to reason about hidden objects, evaluate where to look and what to manipulate, and select efficient plans before expensive motion planning. AbstractRobots operating in cluttered environments must often manipulate objects whose locations are only partially observable. A central challenge is deciding whether to acquire another observation or to first manipulate objects that may occlude the target. Conventional task and motion planning (TAMP) approaches..."
+  },{
+    "title": "Software",
+    "url": "/software/",
+    "type": "page",
+    "date": "",
+    "tags": "",
+    "category": "",
+    "content": "## Software Example Software WEBSITE GIT PAPER Authors: Example authors Example software description."
+  },{
+    "title": "Talks",
+    "url": "/talks/",
+    "type": "page",
+    "date": "",
+    "tags": "",
+    "category": "",
+    "content": "### Invited talks {% bibliography --query @incollection[keywords ^= invited] %} ### Regular talks {% bibliography --query @incollection[keywords != invited] %}"
+  },{
+    "title": "Teaching",
+    "url": "/teaching/",
+    "type": "page",
+    "date": "",
+    "tags": "",
+    "category": "",
+    "content": "## Teaching * Introduction to Physics (1961--63) [Textbook here!](https://www.feynmanlectures.caltech.edu/)"
+  },{
+    "title": "Team",
+    "url": "/team/",
+    "type": "page",
+    "date": "",
+    "tags": "",
+    "category": "",
+    "content": "## Team **We are looking for new team members** [(see openings)]({{ site.url }}{{ site.baseurl }}/vacancies) **!** ## PI {% for member in site.data.pi %} {{ member.name }} {{ member.info }} {% include social.html member=member size=\"2\" %} {{ member.education[0] }} {{ member.education[1] }} {% endfor %} ## Current Students and Postdocs {% assign number_printed = 0 %} {% for member in site.data.team_members %} {% assign even_odd = number_printed | modulo: 2 %} {% if even_odd == 0 %} {% endif %} {{ member.name }} {{ member.info }} {% include social.html member=member size=\"2\" %} {% assign number_printed = number_printed | plus: 1 %} {% if even_odd == 1 %} {% endif %} {% endfor %} {% assign even_odd = number_printed | modulo:..."
+  },{
+    "title": "CoRL 2026, Day 1: absorbing the frontier model",
+    "url": "/notes/corl26/day-1/",
+    "type": "post",
+    "date": "Nov 14, 2026",
+    "tags": "corl, robot-learning, foundation-models, benchmarks",
+    "category": "conference",
+    "content": "Part of a three-day series. Start with the cross-day synthesis for background and definitions of the terms used here. Day 1 opened in the shadow of GPT-6 Astra, a general-purpose frontier model released two months earlier. It was not designed for robots, yet when connected directly to simulated robots it completed far more tasks than purpose-built robot foundation models. The day’s talks kept returning to one question: if a general model can already plan and act, what is left for robot learning? The answers clustered around three ideas. Physical control runs against a clock that slow models cannot meet. Contact and force are still poorly handled. And the benchmarks the field uses to measure progress can hide the failures that..."
+  },{
+    "title": "CoRL 2026, Day 2: from demonstrations to deployments",
+    "url": "/notes/corl26/day-2/",
+    "type": "post",
+    "date": "Nov 14, 2026",
+    "tags": "corl, robot-learning, deployment, reinforcement-learning",
+    "category": "conference",
+    "content": "Part of a three-day series. See the cross-day synthesis for background and definitions. Day 1 established that general frontier models now handle much of a robot’s high-level reasoning. Day 2 turned to a more practical question: how do robot models become reliable enough to do real work? A generalist model that succeeds 80% of the time is impressive in a lab demo, but useless on a factory line that cannot stop. The day’s research sessions covered the tools for closing that gap: human video as training data, reinforcement learning after pretraining, force and touch, and humanoid control. The afternoon added production metrics from robots doing work in real factories. Human video as primary training data Collecting robot demonstrations by teleoperation..."
+  },{
+    "title": "CoRL 2026, Day 3: agents, world models, and the big debate",
+    "url": "/notes/corl26/day-3/",
+    "type": "post",
+    "date": "Nov 14, 2026",
+    "tags": "corl, robot-learning, world-models, debate",
+    "category": "conference",
+    "content": "Part of a three-day series. See the cross-day synthesis for background and definitions. The last day had two halves with very different characters. The morning consisted of short research presentations: less opinion, more evidence about where current methods work and where they break. The afternoon moved to a concert hall for the conference’s set pieces: a keynote by Fei-Fei Li on world models, a conversation between Li and AMD’s chief executive Lisa Su, and a formal debate on the question underlying the whole week. Is today’s dominant recipe, imitating human demonstrations and then fine-tuning, enough to produce general-purpose robots that companies can sell at a profit? Morning: frontier models as programmers Day 1 established that frontier models are too slow..."
+  },{
+    "title": "CoRL 2026: where robot learning thinks it is going",
+    "url": "/notes/corl26/synthesis/",
+    "type": "post",
+    "date": "Nov 14, 2026",
+    "tags": "corl, robot-learning, synthesis",
+    "category": "conference",
+    "content": "Per-day notes: Day 1 · Day 2 · Day 3 The Conference on Robot Learning (CoRL) is the main venue where machine-learning methods for robots are presented. The 2026 edition, held in Austin in November, was the largest so far. Attendance roughly doubled to about 4,800 people, submissions tripled to about 2,100 papers, and around 40% of attendees came from industry. This note pulls together what the three days of talks, keynotes, and the closing debate suggest about where the field is heading. It focuses on three questions: what researchers now treat as solved, what they treat as open, and where academic and industrial views differ. The background that shaped everything About two months before the conference, a general-purpose frontier..."
+  },{
+    "title": "CS231n — Lecture 1: History of computer vision",
+    "url": "/notes/cs231n-lecture-1/",
+    "type": "post",
+    "date": "Nov 14, 2026",
+    "tags": "cs231n, computer-vision, stanford",
+    "category": "course",
+    "content": "Course meta Stanford CS231n — Deep Learning for Computer Vision. Reading-along the 2024 lecture set. I’ll keep one note per lecture, plus separate notes for assignments. Lecture 1 — visual recognition through the years Biological roots Hubel &amp; Wiesel (1959) — single-cell recordings in cat V1. Found simple cells responding to oriented edges, complex cells pooling over position. Inspired the hierarchical structure later baked into CNNs. Pre-deep era Block world (Roberts, 1963) — first attempt at 3D recovery. Generalized cylinders / pictorial structures — parts + springs. SIFT (Lowe, 1999) — keypoint matching that actually worked. HoG + linear SVM (Dalal &amp; Triggs, 2005) — pedestrian detection. PASCAL VOC &amp; later ImageNet drove benchmark culture. Deep era AlexNet (Krizhevsky 2012)..."
+  },{
+    "title": "Inline notebook snippets — demo",
+    "url": "/notes/inline-notebook-snippets/",
+    "type": "post",
+    "date": "Nov 14, 2026",
+    "tags": "meta, syntax",
+    "category": "misc",
+    "content": "For quick one-cell illustrations the full .ipynb embed is overkill. The {% nb_cell %} block tag renders an inline notebook-style cell, auto-numbered, with optional output. Plain stdout In [1]:import numpy as np print(np.array([1, 2, 3]).sum())Out[1]:6 Error / traceback In [2]:1 / 0Out[2]:Traceback (most recent call last): File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt; ZeroDivisionError: division by zero Multiple outputs in one cell Mix stdout, image, and HTML in the same cell — sentinels just stack: In [3]:import matplotlib.pyplot as plt plt.plot([0, 1, 4, 9, 16, 25]) plt.show() print(\"plotted squares\")Out[3]:plotted squares (The image sentinel takes a normal site path — drop your plot under images/ or assets/ and point at it.) Different language In [4]:ls _notes/ | wc -lOut[4]:4 No prompt gutter..."
+  },{
+    "title": "LaTeX compilation — demo",
+    "url": "/notes/latex-compilation-demo/",
+    "type": "post",
+    "date": "Nov 14, 2026",
+    "tags": "meta, syntax, latex",
+    "category": "misc",
+    "content": "Research notes sometimes deserve to look like a paper — title, abstract, sections, tables, bibliography — not just inline math. This site can now compile full LaTeX documents at build time and render them in the page as real content (ar5iv-style), in the same spirit as the .ipynb notebook cells. Two tags — pandoc turns the LaTeX into page content, pdfLaTeX compiles the same source to a PDF for download: Tag What it does {% tex_cell %} Renders the inline LaTeX in the tag body {% tex_file \"path.tex\" %} Renders an external .tex file Inline cell The tag body is wrapped in a small article preamble for you (unless it already contains \\documentclass), so you can just write the paper:..."
+  },{
+    "title": "nanoGPT from scratch — Karpathy walkthrough",
+    "url": "/notes/nanogpt-from-scratch/",
+    "type": "post",
+    "date": "Nov 14, 2026",
+    "tags": "llm, transformers, karpathy, pytorch",
+    "category": "tutorial",
+    "content": "Following Karpathy’s Let’s build GPT from scratch video and the nanoGPT repo. Reimplementing each piece in a fresh notebook to make sure I can derive it without copy-paste. Plan Bigram baseline on tinyshakespeare. Add self-attention → multi-head → blocks. Add positional embeddings + layer norm + residual. Train on GPU, sample. Swap dataset (my own corpus). Live notebook (Will replace with my actual training notebook — for now the embed demo proves the wiring works.) .ipynbNotebook embed demo This .ipynb is rendered statically at Jekyll build time. Markdown, code, stdout, errors, plots, and DataFrames all work. In [1]:msg = 'Hello from a notebook cell.' print(msg)Hello from a notebook cell. In [2]:def answer(): return 6 * 7 answer()Out[2]:42Math also renders (MathJax..."
+  },{
+    "title": "Reading list",
+    "url": "/notes/reading-list/",
+    "type": "post",
+    "date": "Nov 14, 2026",
+    "tags": "robotics, machine-learning",
+    "category": "reading",
+    "content": "https://whattotelltherobot.com/p/why-robotics-is-a-pre-paradigm-field"
+  },{
+    "title": "Welcome to the notes garden",
+    "url": "/notes/welcome/",
+    "type": "post",
+    "date": "Nov 14, 2026",
+    "tags": "meta",
+    "category": "misc",
+    "content": "This section is a working garden — a low-friction place to dump study notes, paper digests, book reactions, tutorial walkthroughs, sketches, and rough drafts. Things here are intentionally unfinished. Some entries are a few bullets; some are full write-ups. They get tidied (or deleted) over time. Categories Filter at the top of /notes/. Current ones — they grow organically: course — lecture notes for a class I’m taking (CS231n, etc.) paper — notes on a research paper I’m studying book — reading notes / margin commentary tutorial — implementation walkthroughs (nanoGPT, etc.) lab — bench / experiment notes, debugging logs art — sketches, photos, visual experiments misc — everything else What works inside a note Same markdown features as the..."
+  }]

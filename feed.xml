@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://shivaram.net/feed.xml" rel="self" type="application/atom+xml" /><link href="https://shivaram.net/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-11-14T18:26:32+05:30</updated><id>https://shivaram.net/feed.xml</id><title type="html">Shivaram Kumar Jagannathan</title><subtitle>Shivaram Kumar Jagannathan — robotics researcher at NTU Singapore (Algorithmic Robotics Group), working on spatial intelligence, 3D reconstruction, SLAM and real-world robot deployments.</subtitle><author><name>Shivaram Kumar Jagannathan</name><email>shivaram.jagannathan [at] outlook [dot] com</email></author><entry><title type="html">Towards a Theory of Robot Intelligence</title><link href="https://shivaram.net/2026/07/05/theory-of-robot-intelligence.html" rel="alternate" type="text/html" title="Towards a Theory of Robot Intelligence" /><published>2026-07-05T00:00:00+05:30</published><updated>2026-07-05T00:00:00+05:30</updated><id>https://shivaram.net/2026/07/05/theory-of-robot-intelligence</id><content type="html" xml:base="https://shivaram.net/2026/07/05/theory-of-robot-intelligence.html"><![CDATA[<h1 id="note-work-in-progress">Note: Work in progress.</h1>
+
+<p>I have been having these late night thoughts on what could be an interesting theory of robot intelligence.</p>
+
+<p>For context, I’m a young roboticist, I’ve been in the field for 2 years, and I’m just breaking into research. I’ve worked on all sides of robotics at the fundamental level - planning for manipulation and navigation, SLAM, visual perception, controls. I’ve not worked heavily on whole-body control, locomotion, etc. but I think those challenges are more inherently control-theoretic rather than planning.</p>
+
+<p>I’m not an expert, this article is probably just to segment my current thought process on what my observations (perception) is about regarding robotics. I’ve been transitioning full time into robotics for the better part of the last 3 years, ever since I found my heart doesn’t lie in Software Engineering or Computer Science.</p>
+
+<p>I got into robotics just when VLAs and policy fine-tuned models were taking off, but before the embodied AI concept took the world by storm. I’m a firm believer in not falling for the hype, but definitely bias my belief state towards it.</p>
+
+<p>A lot of my thought process, articles I read, lectures I watch and thoughts I have will be synthesized and put here, for my later reference, and for the world to see.</p>
+
+<p>So the purpose of this blog isn’t to break any new grounds, it’s generally borrowing ideas and restating many of the prevailing philosophies more succicntly. But I hope that the ideas present here encourage both me to come up with novel research and future roboticists to innovate.</p>
+
+<p>I might have vastly and wildly incorrect opinions or assumptions, but I think it’s important to recognize them and have them in the first place, because what’s deemed correct and incorrect today are deemed so by the observations of yesterday. If I am coompletely incorrect though, I’d love to rectify my understanding about it so feel free to email it!</p>
+
+<p>It is difficult for me to pen down all of my thoughts instantaneously, because a lot of my creative process, reasoning and thinking occurs during times of distraction. I therefore do not have a coherent stream of reasoning which I can write and call it a day. So consider this an evolving view where my perception and action continue to inform this article.</p>
+
+<h3 id="classical-approach-to-intelligence">Classical approach to intelligence</h3>
+
+<p>Many foundational approaches in modern robotics achieve intelligent behavior by leveraging structured representations tailored to specific tasks or environments.</p>
+
+<p>One example is <strong>Task and Motion Planning (TAMP)</strong>, where a robot reasons over a symbolic representation of the world described using a <a href="https://planning.wiki/">planning domain definition language</a>. The planning domain is expressed through abstractions such as <a href="https://www.cs.toronto.edu/~sheila/2542/w09/A1/introtopddl2.pdf">objects, predicates, actions, and fluents</a>, allowing high-level reasoning over sequential decision-making problems. In many ways, TAMP extends ideas from <a href="https://aiplanning-tutorial.github.io/#:~:text=AI%20Planning%20is,in%20their%20applications.">classical AI planning</a> by coupling symbolic planning with geometric and motion-level constraints.</p>
+
+<p><figure class="post-figure" style="max-width: 50%"><img src="https://shivaram.net/images/task-and-motion-planning-infographic.png" alt="Task and Motion Planning, simplified. Generated with ChatGPT." loading="lazy" /><figcaption>Task and Motion Planning, simplified. Generated with ChatGPT.</figcaption></figure></p>
+
+<p>While TAMP has been highly successful for many robotic applications, its underlying abstractions also impose practical limitations. The planner reasons over a predefined symbolic model of the world, making it challenging to handle situations that fall outside the assumptions encoded in that representation. As environments become more open-ended and less structured, extending these systems to general-purpose intelligence becomes increasingly difficult.</p>
+
+<p>This has contributed to a growing interest in approaches that learn representations directly from interaction and large-scale data, such as <strong>Reinforcement Learning</strong> and <strong>Foundation Models</strong>. These paradigms have demonstrated significantly stronger generalization across tasks than many hand-engineered systems. As argued in Richard Sutton’s essay, <a href="http://www.incompleteideas.net/IncIdeas/BitterLesson.html"><em>The Bitter Lesson</em></a>, methods that leverage computation and learning at scale have historically outperformed approaches that rely heavily on handcrafted domain knowledge.</p>
+
+<p>My view is that the next step toward general robot intelligence is unlikely to come from increasingly sophisticated planners alone. Instead, it may require shifting the emphasis toward systems that first learn rich, grounded world representations through interaction, with planning emerging as one component of a broader perception–action loop.</p>
+
+<blockquote>
+  <p><strong>TODO:</strong> Discuss robotics capabilities that remain comparatively underexplored, such as autonomous world-model acquisition, continual adaptation, and embodied interaction.</p>
+</blockquote>
+
+<h3 id="my-theory-of-robot-intelligence">My theory of robot intelligence</h3>
+
+<p>My perspective draws heavily from <strong><a href="https://en.wikipedia.org/wiki/Cognitive_neuroscience">cognitive neuroscience</a></strong> and <strong><a href="https://en.wikipedia.org/wiki/Evolutionary_biology">evolutionary biology</a></strong>.</p>
+
+<p>Long before sophisticated communication emerged, organisms survived by building internal models of their environment through continuous interaction. The richness of those models is curbed by an organism’s embodiment—its sensory and motor capabilities. A fish understands an aquatic world far better than a terrestrial one, while humans can reason across a much broader range of environments because of their different perceptual and physical capabilities.</p>
+
+<p>This is where I believe modern robotics diverges from biological intelligence.</p>
+
+<p>Classical AI planning reasons over highly abstract symbolic actions using representations such as <strong><a href="https://en.wikipedia.org/wiki/Planning_Domain_Definition_Language">PDDL (Planning Domain Definition Language)</a></strong>. Actions such as <em>pick</em>, <em>place</em>, <em>move</em>, and <em>grasp</em> are represented by predefined preconditions and effects. This abstraction is computationally necessary, but it strips away much of the perceptual and physical nuance that real organisms exploit while acting. When these assumptions break down because of uncertainty, <strong><a href="https://en.wikipedia.org/wiki/Belief_state">belief state</a></strong> errors, <strong><a href="https://en.wikipedia.org/wiki/Inverse_kinematics">inverse kinematics</a></strong> failures, or incomplete observations, planners often become brittle. The search fails not because the task is impossible, but because the available action space is fixed and incomplete.</p>
+
+<p>Biological intelligence behaves differently. When an action fails, organisms rarely continue searching within the same abstract action space. Instead, they act to improve their understanding of the world. They change their viewpoint, manipulate the environment, probe uncertain objects, or gather additional sensory evidence. These actions are valuable not only because they accomplish tasks, but because they refine the organism’s internal world representation.</p>
+
+<p>In other words, organisms do not simply plan over a world representation—they continually construct it. Every action is simultaneously an attempt to achieve a goal and an opportunity to acquire information. As the world representation improves, new affordances, strategies, and actions become available. What initially appears to be a deadlock is often a consequence of incomplete understanding rather than an impossible problem.</p>
+
+<p>This view is closely aligned with several foundational ideas in cognitive science:</p>
+
+<p><figure class="post-figure" style="max-width: 80%"><img src="https://shivaram.net/images/intelligence-as-a-loop.png" alt="Intelligence as a loop" loading="lazy" /><figcaption>Intelligence as a loop</figcaption></figure></p>
+
+<ul>
+  <li><strong><a href="https://en.wikipedia.org/wiki/Umwelt">Umwelt</a></strong> (Jakob von Uexküll): every organism experiences a world shaped by its sensory and motor capabilities.</li>
+  <li><strong><a href="https://en.wikipedia.org/wiki/Affordance">Affordance</a></strong> (James J. Gibson): organisms perceive environments in terms of opportunities for action rather than static objects.</li>
+  <li><strong><a href="https://en.wikipedia.org/wiki/Free_energy_principle#Active_inference">Active inference</a></strong> and the <strong><a href="https://en.wikipedia.org/wiki/Free_energy_principle">Free Energy Principle</a></strong> (Karl Friston): perception and action form a continuous feedback loop in which agents update internal models while acting to shape future observations.</li>
+</ul>
+
+<p>My argument is that robot intelligence should follow the same principle. Planning should not operate over a fixed symbolic representation of the world. Instead, planning, perception, and action should form a continuous <strong>perception–action loop</strong> in which acting improves understanding, and improved understanding expands the space of feasible actions.</p>
+
+<p>Language, planning, and reasoning are therefore downstream capabilities. They should emerge from an embodied, continually evolving world representations rather than serve as its foundation.</p>
+
+<p>From this perspective, the primary objective of robot learning is not to imitate behavior or generate fluent language, but to acquire robust, grounded models of the world through interaction. The quality of a robot’s reasoning is ultimately determined by the quality of the world representation it constructs—and that model can only be built through the continual cycle of perception and action.</p>
+
+<h3 id="further-reading">Further Reading</h3>
+
+<p>The ideas in this post draw heavily from the following foundational works.</p>
+
+<h5 id="jakob-von-uexküll--umwelt">Jakob von Uexküll — <em>Umwelt</em></h5>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Umwelt">Umwelt (Wikipedia)</a></li>
+  <li><a href="https://monoskop.org/images/7/77/Uexkull_Jakob_von_A_Foray_Into_the_Worlds_of_Animals_and_Humans_with_A_Theory_of_Meaning.pdf"><em>A Foray into the Worlds of Animals and Humans</em> (1934)</a></li>
+</ul>
+
+<h5 id="james-j-gibson--affordances--ecological-perception">James J. Gibson — <em>Affordances &amp; Ecological Perception</em></h5>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Affordance">Affordance (Wikipedia)</a></li>
+  <li><a href="https://archive.org/details/ecologicalapproa0000gibs"><em>The Ecological Approach to Visual Perception</em> (Internet Archive)</a></li>
+</ul>
+
+<h5 id="karl-friston--active-inference">Karl Friston — <em>Active Inference</em></h5>
+
+<p>I personally feel when you get the time, you should really investigate deeply into all the particular topics being discussed in the Free Energy Principle Wikipedia page.</p>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Free_energy_principle">Free Energy Principle (Wikipedia)</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Free_energy_principle#Active_inference">Active Inference (Wikipedia)</a></li>
+  <li><a href="https://direct.mit.edu/books/oa-monograph/5299/Active-InferenceThe-Free-Energy-Principle-in-Mind"><em>Active Inference: The Free Energy Principle in Mind, Brain, and Behavior</em> (MIT Press)</a></li>
+</ul>
+
+<h3 id="related-concepts">Related Concepts</h3>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Embodied_cognition">Embodied cognition</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Ecological_psychology">Ecological psychology</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Planning_Domain_Definition_Language">Planning Domain Definition Language (PDDL)</a></li>
+</ul>]]></content><author><name>Shivaram Kumar Jagannathan</name></author><category term="robotics" /><category term="ideas" /><category term="shower-thoughts" /><category term="work-in-progress" /><summary type="html"><![CDATA[Note: Work in progress.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://shivaram.net/images/headshot.jpg" /><media:content medium="image" url="https://shivaram.net/images/headshot.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Welcome to the Blog</title><link href="https://shivaram.net/2026/06/01/welcome-to-the-blog.html" rel="alternate" type="text/html" title="Welcome to the Blog" /><published>2026-06-01T00:00:00+05:30</published><updated>2026-06-01T00:00:00+05:30</updated><id>https://shivaram.net/2026/06/01/welcome-to-the-blog</id><content type="html" xml:base="https://shivaram.net/2026/06/01/welcome-to-the-blog.html"><![CDATA[<p>This is a sample post showing everything the blog supports. Delete it once you
+publish your own. To start a new post, run <code class="language-plaintext highlighter-rouge">./new-post.sh "My Title" tag1 tag2</code>.</p>
+
+<h2 id="math-latex">Math (LaTeX)</h2>
+
+<p>Inline math like $\nabla \cdot \mathbf{B} = 0$ works, and so do display blocks:</p>
+
+\[\hat{x}_{k} = \hat{x}_{k}^{-} + K_k \left( z_k - H \hat{x}_{k}^{-} \right)\]
+
+<p>That’s the Kalman filter measurement update — handy for sensor fusion.</p>
+
+<h2 id="images">Images</h2>
+
+<p><figure class="post-figure" style="max-width: 70%"><img src="https://shivaram.net/images/feynman.jpg" alt="An image with a caption. Use width to constrain it." loading="lazy" /><figcaption>An image with a caption. Use width to constrain it.</figcaption></figure></p>
+
+<h2 id="video">Video</h2>
+
+<p>Embed YouTube, Vimeo, or a hosted <code class="language-plaintext highlighter-rouge">.mp4</code>:</p>
+
+<p><figure class="post-video"><div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/aircAruvnKk" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div><figcaption>Drop in any YouTube ID.</figcaption></figure></p>
+
+<h2 id="gifs">GIFs</h2>
+
+<p>Use a <code class="language-plaintext highlighter-rouge">.gif</code>, or — lighter and smoother — a silent looping <code class="language-plaintext highlighter-rouge">.mp4</code>:</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">include</span><span class="w"> </span>gif.html<span class="w"> </span><span class="na">src</span><span class="o">=</span><span class="s2">"/images/demo.gif"</span><span class="w"> </span><span class="na">caption</span><span class="o">=</span><span class="s2">"A looping demo."</span><span class="w"> </span><span class="cp">%}</span>
+<span class="cp">{%</span><span class="w"> </span><span class="nt">include</span><span class="w"> </span>gif.html<span class="w"> </span><span class="na">mp4</span><span class="o">=</span><span class="s2">"/images/demo.mp4"</span><span class="w"> </span><span class="na">caption</span><span class="o">=</span><span class="s2">"Same, but as mp4."</span><span class="w"> </span><span class="cp">%}</span>
+</code></pre></div></div>
+
+<h2 id="code">Code</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">fuse</span><span class="p">(</span><span class="n">imu</span><span class="p">,</span> <span class="n">lidar</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nf">kalman_update</span><span class="p">(</span><span class="n">imu</span><span class="p">,</span> <span class="n">lidar</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Everything above is plain Markdown plus the <code class="language-plaintext highlighter-rouge">figure</code> / <code class="language-plaintext highlighter-rouge">video</code> / <code class="language-plaintext highlighter-rouge">gif</code> includes.</p>
+
+<h2 id="jupyter-notebooks">Jupyter notebooks</h2>
+
+<p>Drop a <code class="language-plaintext highlighter-rouge">.ipynb</code> anywhere under <code class="language-plaintext highlighter-rouge">assets/notebooks/</code> and embed it inline:</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">jupyter_notebook</span><span class="w"> </span><span class="s2">"/assets/notebooks/demo.ipynb"</span><span class="w"> </span><span class="cp">%}</span>
+</code></pre></div></div>
+
+<p>Renders at build time — markdown cells, syntax-highlighted code, stdout, errors, plots (PNG/SVG), HTML (dataframes), and LaTeX. Live example:</p>
+
+<div class="jupyter-notebook" data-src="/assets/notebooks/demo.ipynb"><div class="jupyter-toolbar"><a href="/assets/notebooks/demo.ipynb" download class="jupyter-download" title="Download .ipynb"><i class="fa-solid fa-download"></i> .ipynb</a></div><div class="jupyter-cell jupyter-markdown"><h1 id="notebook-embed-demo">Notebook embed demo</h1>
+
+<p>This <code>.ipynb</code> is rendered statically at Jekyll build time. Markdown, code, stdout, errors, plots, and DataFrames all work.</p>
+</div><div class="jupyter-cell jupyter-code"><div class="jupyter-prompt jupyter-prompt-in">In&nbsp;[1]:</div><div class="jupyter-input"><pre class="highlight"><code><span class="n">msg</span> <span class="o">=</span> <span class="sh">'</span><span class="s">Hello from a notebook cell.</span><span class="sh">'</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></code></pre></div><div class="jupyter-output-block"><pre class="jupyter-output jupyter-stdout">Hello from a notebook cell.
+</pre></div></div><div class="jupyter-cell jupyter-code"><div class="jupyter-prompt jupyter-prompt-in">In&nbsp;[2]:</div><div class="jupyter-input"><pre class="highlight"><code><span class="k">def</span> <span class="nf">answer</span><span class="p">():</span>
+    <span class="k">return</span> <span class="mi">6</span> <span class="o">*</span> <span class="mi">7</span>
+
+<span class="nf">answer</span><span class="p">()</span></code></pre></div><div class="jupyter-output-block"><div class="jupyter-prompt jupyter-prompt-out">Out[2]:</div><pre class="jupyter-output jupyter-plain">42</pre></div></div><div class="jupyter-cell jupyter-markdown"><p>Math also renders (MathJax already loaded):</p>
+
+\[J(\theta) = \tfrac{1}{2} \sum_i (h_\theta(x_i) - y_i)^2\]
+</div><div class="jupyter-cell jupyter-code"><div class="jupyter-prompt jupyter-prompt-in">In&nbsp;[3]:</div><div class="jupyter-input"><pre class="highlight"><code><span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span></code></pre></div><div class="jupyter-output-block"><pre class="jupyter-output jupyter-error-output">Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+ZeroDivisionError: division by zero</pre></div></div></div>]]></content><author><name>Shivaram Kumar Jagannathan</name></author><category term="meta" /><category term="robotics" /><summary type="html"><![CDATA[This is a sample post showing everything the blog supports. Delete it once you publish your own. To start a new post, run ./new-post.sh "My Title" tag1 tag2.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://shivaram.net/images/headshot.jpg" /><media:content medium="image" url="https://shivaram.net/images/headshot.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
