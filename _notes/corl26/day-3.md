@@ -93,7 +93,7 @@ The moderator admitted that he had tried "really hard for the fight not to be ab
 
 ## Awards and what comes next
 
-The best-paper committee chose six finalists from the 21 oral papers. **SuperMimic**, which trains a general humanoid motion controller in 3 hours on one GPU, won Best Paper. **RobotTTT**, which gives robot policies 8,000 steps of memory, won Best Student Paper. The other finalists were Play to Perfect (simulation-trained precision assembly), GRAIL (humanoid data from video generation), "What are we actually benchmarking?" (the critique of standard benchmarks), and DISCO (search-based planning distilled into a policy). The selection rewarded efficiency, memory, simulation-to-real transfer, generated data, and honest evaluation.
+The best-paper committee chose six finalists from the 21 oral papers. **SuperMimic**, which trains a general humanoid motion controller in 3 hours on one GPU, won Best Paper. **RoboTTT**, which gives robot policies 8,000 steps of memory, won Best Student Paper. The other finalists were Play to Perfect (simulation-trained precision assembly), GRAIL (humanoid data from video generation), "What are we actually benchmarking?" (the critique of standard benchmarks), and DISCO (search-based planning distilled into a policy). The selection rewarded efficiency, memory, simulation-to-real transfer, generated data, and honest evaluation.
 
 The organizers also announced a new year-round journal, *Transactions on Robot Learning*, whose top papers will be presented at future CoRLs, which answers Burgard's Day 1 call to publish shared work in journals. They also announced a Test of Time award for CoRL papers, starting next year. After a run of projector failures, the general chair joked that "debugging PowerPoints on stage with my advisor" showed "how hard it is to do robotics in the real world."
 
@@ -120,5 +120,13 @@ Livestreams: [Day 3 morning](https://www.youtube.com/watch?v=bYUBR0OcK_c), [Day 
 [Intent disambiguation](https://arxiv.org/abs/2609.34270) ·
 [SuperMimic](https://arxiv.org/abs/2610.28480) ·
 [What are we actually benchmarking?](https://arxiv.org/abs/2606.04233).
-AtomBench has a [project page](https://flageval-baai.github.io/AtomBenchPage/). Graph-as-Policy, RATS, MetaControl, RobotTTT, and World Labs' Atlas had no arXiv record I could find.
+[ATOM-Bench](https://arxiv.org/abs/2606.16826) ([project page](https://flageval-baai.github.io/AtomBenchPage/)) ·
+[Graph-as-Policy (GaP)](https://arxiv.org/abs/2607.05369) ·
+[RATS (Playful Agentic Robot Learning)](https://arxiv.org/abs/2606.19419) ·
+[SCOPE](https://arxiv.org/abs/2610.12431) ·
+[REALM (last few meters)](https://arxiv.org/abs/2607.03792) ·
+[TANGO](https://arxiv.org/abs/2609.09158) ·
+[OSCAR](https://arxiv.org/abs/2606.00990) ·
+[RoboTTT](https://arxiv.org/abs/2607.15275).
+World Labs described Atlas in a [blog post](https://worldlabs.ai/blog/atlas). MetaControl had no paper I could find.
 

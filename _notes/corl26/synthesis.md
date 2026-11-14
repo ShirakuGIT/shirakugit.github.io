@@ -99,7 +99,7 @@ The following problems were raised by several speakers from both sectors, which 
 | Cognitive architectures with parallel processes at multiple time scales | Hang Zhao's System 0/1/2 layering by reaction time, and the missing feedback between layers (Day 1) |
 | Computation speed: direct ALM control and "pre-coding" both take minutes to hours | Zhao's wall-clock experiment, where step-by-step frontier control collapsed; a whole spotlight session on faster, cheaper policies (Day 1) |
 | Computational resource rationality: spending limited compute on what matters most right now | No direct counterpart; a policy that decides when to replan is the closest (Day 1) |
-| Persistent memory of people, places, and things | MEM, RobotTTT's long context, agent skill libraries stored as code (Days 1 and 3) |
+| Persistent memory of people, places, and things | MEM, RoboTTT's long context, agent skill libraries stored as code (Days 1 and 3) |
 | Rational behavior under uncertainty about the world and the goal | Burgard's call for calibrated uncertainty; uncertainty-aware control and intent clarification by asking questions (Days 1 and 3) |
 | Planning under time constraints | Kaelbling's own debate line: an answer in an hour and a half means "you've missed the bus" (Day 3) |
 | Safety guarantees for multi-process, largely learned systems | Martín-Martín: probabilistic assessment via test suites, with unsafe events still occurring (Day 2) |
