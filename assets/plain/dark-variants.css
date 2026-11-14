@@ -1,0 +1,64 @@
+/* Development-only dark palettes: add ?dark=<name> to any page (forces dark
+   mode). Overview of all of them at /plain/dark/. Loaded by includes/head.html
+   outside production only. The selectors out-rank site.css's dark block. */
+
+/* current — what is live: neutral graphite, blue links */
+
+/* ink — true black for OLED screens, softer grey text */
+html:root.dark-ink[data-theme] {
+  --ink: #d0d0d0; --paper: #000; --muted: #8c8c8c; --rule: #444; --hair: #262626; --wash: #0d0d0d;
+  --link: #79a8ff; --visited: #b892ff; --hover: #ff7a7a;
+  --bar: #0f1522; --bar-rule: #2c3a5c;
+  --box: #0a0a0a; --mark: #4a4200; --target: #2e2b00; --err-wash: #261010;
+}
+
+/* dim — lighter charcoal, lower contrast, gentlest for long reading */
+html:root.dark-dim[data-theme] {
+  --ink: #d6d4d0; --paper: #262626; --muted: #a3a3a3; --rule: #5e5e5e; --hair: #3a3a3a; --wash: #2e2e2e;
+  --link: #93b8f5; --visited: #c3a6ee; --hover: #f59494;
+  --bar: #30364a; --bar-rule: #4a567a;
+  --box: #2b2b2b; --mark: #5c5410; --target: #4a4610; --err-wash: #3a2222;
+}
+
+/* warm — sepia night: brown-black paper, parchment text, amber links */
+html:root.dark-warm[data-theme] {
+  --ink: #e6dccb; --paper: #1c1915; --muted: #a89c88; --rule: #5c5346; --hair: #3a342b; --wash: #24201b;
+  --link: #e3b56b; --visited: #d29a86; --hover: #ff9a6b;
+  --bar: #2e281f; --bar-rule: #5a4c36;
+  --box: #221e19; --mark: #5c4a10; --target: #3d3410; --err-wash: #3a1f18;
+  --code-str: #e8a98f; --code-num: #e3c57b; --code-add: #b5cf8a;
+  --prompt-in: #e3c57b; --prompt-out: #e8a98f;
+}
+
+/* slate — blue-grey night, like a late-90s workstation desktop */
+html:root.dark-slate[data-theme] {
+  --ink: #d5dde6; --paper: #1a2029; --muted: #95a3b3; --rule: #4c5a6b; --hair: #2d3744; --wash: #212833;
+  --link: #79c0ff; --visited: #b9a3ff; --hover: #ff9b8a;
+  --bar: #243447; --bar-rule: #3f5873;
+  --box: #1f2630; --mark: #554c12; --target: #3a3614; --err-wash: #3a2226;
+}
+
+/* phosphor — green-screen terminal: near-black, pale green text */
+html:root.dark-phosphor[data-theme] {
+  --ink: #c4dcc0; --paper: #0c100c; --muted: #82a07d; --rule: #3a4f38; --hair: #1f2b1e; --wash: #121812;
+  --link: #8fe08a; --visited: #c6d97a; --hover: #ffd27a;
+  --bar: #142314; --bar-rule: #2f5230;
+  --box: #101610; --mark: #3e4a10; --target: #2a3410; --err-wash: #2a1612;
+  --code-str: #e0c97a; --code-num: #8fe0c8; --code-add: #8fe08a;
+  --prompt-in: #8fe0c8; --prompt-out: #e0c97a;
+}
+
+/* navy — deep midnight blue, white text, classic link colours lightened */
+html:root.dark-navy[data-theme] {
+  --ink: #e4e8f0; --paper: #0f1630; --muted: #9aa5c0; --rule: #3c4a74; --hair: #222c4e; --wash: #151d3a;
+  --link: #8cc4ff; --visited: #d0a6ff; --hover: #ffb08a;
+  --bar: #1c2850; --bar-rule: #3a4c85;
+  --box: #131b38; --mark: #5a5014; --target: #3a3618; --err-wash: #3a1e2e;
+}
+
+/* soft — "current" tuned for every screen: same neutral grey a touch lifted,
+   text dimmed slightly to cut glow, links unchanged */
+html:root.dark-soft[data-theme] {
+  --ink: #dcdad6; --paper: #181818; --muted: #a3a3a3; --rule: #575757; --hair: #333; --wash: #202020;
+  --box: #1e1e1e;
+}

@@ -1,0 +1,41 @@
+---
+layout: null
+permalink: /plain/dark/
+sitemap: false
+search: false
+---
+{%- comment -%} Prototype: every dark palette from assets/plain/dark-variants.css side by side. {%- endcomment -%}
+{%- assign variants = "current|neutral graphite (live now),soft|current tuned for every screen,ink|true black for OLED,dim|lighter charcoal and lower contrast,warm|sepia night with amber links,slate|blue-grey workstation,phosphor|green-screen terminal,navy|deep midnight blue" | split: "," -%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Dark palettes — {{ site.title }}</title>
+  <style>
+    body { margin: 0; padding: 16px; background: #888; font: 15px/1.4 -apple-system, "Helvetica Neue", Arial, sans-serif; color: #000; }
+    p.top { margin: 0 0 14px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(520px, 1fr)); gap: 18px; }
+    figure { margin: 0; }
+    figcaption { margin: 0 0 6px; }
+    figcaption b { font-size: 17px; }
+    .frame { height: 560px; overflow: hidden; border: 1px solid #000; background: #000; }
+    .frame iframe { width: 1040px; height: 1120px; border: 0; transform: scale(.5); transform-origin: 0 0; }
+  </style>
+</head>
+<body>
+<p class="top">Dark palettes for shivaram.net, each showing the real home page at half size. Click a name to open it full size, then browse:
+the <code>?dark=</code> stays only on that page, so add it to <code>/blogs/</code> or a post URL to see more.</p>
+<div class="grid">
+{%- for v in variants %}{% assign kv = v | split: "|" %}
+  <figure>
+    <figcaption><a href="{{ '/' | relative_url }}?dark={{ kv[0] }}"><b>{{ kv[0] }}</b></a> — {{ kv[1] }}
+      · <a href="{{ '/research/' | relative_url }}?dark={{ kv[0] }}">research</a>
+      · <a href="{{ '/blogs/' | relative_url }}?dark={{ kv[0] }}">blogs</a></figcaption>
+    <div class="frame"><iframe src="{{ '/' | relative_url }}?dark={{ kv[0] }}" loading="lazy" title="{{ kv[0] }}"></iframe></div>
+  </figure>
+{%- endfor %}
+</div>
+</body>
+</html>

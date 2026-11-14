@@ -241,6 +241,10 @@ its header comment), linked from `_includes/head.html`. Rules — keep them:
   `[data-theme="dark"]`, with a `prefers-color-scheme` copy for no-JS — keep
   the two dark blocks in `site.css` identical. TikZ figures (dark-on-transparent SVG) are flipped with
   `filter: invert(1) hue-rotate(180deg)`; photos never are.
+  The dark palette ("soft", chosen Nov 2026) is neutral grey #181818 with
+  #dcdad6 text (~12.7:1) — deliberately not pure black (OLED smear, glow) and
+  not tinted (shifts on uncalibrated screens). Keep it neutral; aim for
+  11–13:1 body contrast. Other palettes tried: `/plain/dark/`, `?dark=<name>`.
 - **Era furniture**: home masthead = big name, postal contact block with
   `[at] [dot]` email, portrait top-right in a 1px border (links to /about/);
   other pages get a compact name + role. Bracketed nav `[about] [projects] …`,

@@ -7,6 +7,9 @@
   <!-- Development only: headshot layout experiments, ?photo=big|left|top -->
   <link rel="stylesheet" href="{{ '/assets/plain/photo-variants.css' | relative_url }}">
   <script>(function () { var v = new URLSearchParams(location.search).get("photo"); if (/^(big|left|top)$/.test(v || "")) document.documentElement.classList.add("photo-" + v); })();</script>
+  <!-- Development only: dark palette experiments, ?dark=ink|dim|warm|slate|phosphor|navy (overview: /plain/dark/) -->
+  <link rel="stylesheet" href="{{ '/assets/plain/dark-variants.css' | relative_url }}">
+  <script>(function () { var v = new URLSearchParams(location.search).get("dark"), r = document.documentElement; if (!/^(current|soft|ink|dim|warm|slate|phosphor|navy)$/.test(v || "")) return; r.setAttribute("data-theme", "dark"); r.classList.add("dark-" + v); })();</script>
   {%- endif %}
 
   {% if page.noindex %}
@@ -34,7 +37,7 @@
   <link rel="shortcut icon" type="image/x-icon" href="{{ site.url }}{{ site.baseurl }}/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="{{ site.url }}{{ site.baseurl }}/images/apple-touch-icon.png">
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#141414" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#181818" media="(prefers-color-scheme: dark)">
 
   <!-- Person structured data for richer search / AI entity understanding -->
   <script type="application/ld+json">

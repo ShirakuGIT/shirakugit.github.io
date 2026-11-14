@@ -7,7 +7,7 @@
    Plain CSS, no framework, no icon fonts. Dark mode follows the system setting.
 
    Colours — every colour is a variable below; keep to these (light / dark):
-     ink #000/#e8e6e3 · paper #fff/#141414 · link #0000ee/#8ab4ff
+     ink #000/#dcdad6 · paper #fff/#181818 · link #0000ee/#8ab4ff
      visited #551a8b/#c9a0ff · hover #cc0000/#ff8080
      bar tint #e6e9f2/#20263a · bar rule #a8b0c8/#3e4a6b
      greys: muted #555/#a8a8a8 · rule #999/#5a5a5a · hair #ccc/#333 · wash #f5f5f5/#1c1c1c
@@ -39,20 +39,20 @@
    The two blocks below must stay identical. */
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --ink: #e8e6e3; --paper: #141414; --muted: #a8a8a8; --rule: #5a5a5a; --hair: #333; --wash: #1c1c1c;
+  --ink: #dcdad6; --paper: #181818; --muted: #a3a3a3; --rule: #575757; --hair: #333; --wash: #202020;
   --link: #8ab4ff; --visited: #c9a0ff; --hover: #ff8080;
   --bar: #20263a; --bar-rule: #3e4a6b;
-  --box: #1a1a1a; --mark: #5c5200; --target: #3a3600; --err-wash: #2e1616;
+  --box: #1e1e1e; --mark: #5c5200; --target: #3a3600; --err-wash: #2e1616;
   --code-str: #f1a3a3; --code-num: #a8c7ff; --code-add: #8fd48f;
   --prompt-in: #a8c7ff; --prompt-out: #f1a3a3;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
     color-scheme: dark;
-    --ink: #e8e6e3; --paper: #141414; --muted: #a8a8a8; --rule: #5a5a5a; --hair: #333; --wash: #1c1c1c;
+    --ink: #dcdad6; --paper: #181818; --muted: #a3a3a3; --rule: #575757; --hair: #333; --wash: #202020;
     --link: #8ab4ff; --visited: #c9a0ff; --hover: #ff8080;
     --bar: #20263a; --bar-rule: #3e4a6b;
-    --box: #1a1a1a; --mark: #5c5200; --target: #3a3600; --err-wash: #2e1616;
+    --box: #1e1e1e; --mark: #5c5200; --target: #3a3600; --err-wash: #2e1616;
     --code-str: #f1a3a3; --code-num: #a8c7ff; --code-add: #8fd48f;
     --prompt-in: #a8c7ff; --prompt-out: #f1a3a3;
   }
