@@ -19,10 +19,13 @@ Photos from places I've been and things I've seen. Click any image to view full-
 <div class="photo-grid" id="photo-grid">
 {% for p in photos %}
   {% assign thumb = p.thumb | default: p.src %}
-  {% assign alt = p.alt | default: p.title %}
+  {% capture when %}{{ p.date | date: "%B %-d, %Y" }}{% endcapture %}
+  {% assign title = p.title | default: when %}
+  {% assign untitled = "Photograph, " | append: when %}
+  {% assign alt = p.alt | default: p.title | default: untitled %}
   <figure class="photo-item"
           data-src="{{ p.src }}"
-          data-title="{{ p.title | escape }}"
+          data-title="{{ title | escape }}"
           data-location="{{ p.location | escape }}"
           data-date="{{ p.date | date: '%b %-d, %Y' }}"
           data-camera="{{ p.camera | escape }}"
@@ -32,7 +35,7 @@ Photos from places I've been and things I've seen. Click any image to view full-
           data-index="{{ forloop.index0 }}">
     <a href="{{ p.src }}"><img loading="lazy" src="{{ thumb }}" alt="{{ alt | escape }}"></a>
     <figcaption class="photo-caption">
-      <span class="photo-title">{{ p.title }}</span>
+      <span class="photo-title">{{ title }}</span>
       {% if p.location %}<span class="photo-loc">{{ p.location }}</span>{% endif %}
     </figcaption>
   </figure>
