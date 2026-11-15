@@ -121,20 +121,19 @@ He also voiced unease about growing public skepticism toward AI, and closed with
 
 ## Sources
 
-Livestream: [Day 1](https://www.youtube.com/watch?v=F_4AAOQsWlA). Papers mentioned that are on arXiv:
-[DreamZero](https://arxiv.org/abs/2602.15922) ·
-[MolmoBot](https://arxiv.org/abs/2603.16861) ·
-[What are we actually benchmarking?](https://arxiv.org/abs/2606.04233) ·
-[MEM (memory)](https://arxiv.org/abs/2603.03596) ·
-[Being-H0.5](https://arxiv.org/abs/2601.12993) ·
-[When vision overrides language](https://arxiv.org/abs/2602.17659) ·
-[Diagnosing compositional generalization](https://arxiv.org/abs/2607.29687) ·
-[BitVLA](https://arxiv.org/abs/2506.07530) ·
-[Robust autonomy emerges from self-play](https://arxiv.org/abs/2502.03349) (cited by GM).
-[π0.7](https://arxiv.org/abs/2604.15483) ·
-[RoboTTT](https://arxiv.org/abs/2607.15275) ·
-[Mem-World](https://arxiv.org/abs/2606.18960) ·
-[TEMPO](https://arxiv.org/abs/2609.16864) ·
-[REACT](https://arxiv.org/abs/2610.12007).
-Robot Colosseum and GR00T 2 had no paper I could find.
-
+- Livestream: [Day 1](https://www.youtube.com/watch?v=F_4AAOQsWlA).
+- [DreamZero](https://arxiv.org/abs/2602.15922), arXiv:2602.15922.
+- [MolmoBot](https://arxiv.org/abs/2603.16861), arXiv:2603.16861.
+- [What are we actually benchmarking?](https://arxiv.org/abs/2606.04233), arXiv:2606.04233.
+- [MEM (memory)](https://arxiv.org/abs/2603.03596), arXiv:2603.03596.
+- [Being-H0.5](https://arxiv.org/abs/2601.12993), arXiv:2601.12993.
+- [When vision overrides language](https://arxiv.org/abs/2602.17659), arXiv:2602.17659.
+- [Diagnosing compositional generalization](https://arxiv.org/abs/2607.29687), arXiv:2607.29687.
+- [BitVLA](https://arxiv.org/abs/2506.07530), arXiv:2506.07530.
+- [Robust autonomy emerges from self-play](https://arxiv.org/abs/2502.03349), arXiv:2502.03349 (cited by GM).
+- [π0.7](https://arxiv.org/abs/2604.15483), arXiv:2604.15483.
+- [RoboTTT](https://arxiv.org/abs/2607.15275), arXiv:2607.15275.
+- [Mem-World](https://arxiv.org/abs/2606.18960), arXiv:2606.18960.
+- [TEMPO](https://arxiv.org/abs/2609.16864), arXiv:2609.16864.
+- [REACT](https://arxiv.org/abs/2610.12007), arXiv:2610.12007.
+- Robot Colosseum and GR00T 2: no paper found.

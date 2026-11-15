@@ -116,28 +116,30 @@ On academia, he said "we don't understand what we're building yet," and that the
 
 ## Sources
 
-Livestream: [Day 2](https://www.youtube.com/watch?v=uPXoJm-L3YY). Papers mentioned that are on arXiv:
-[EgoScale](https://arxiv.org/abs/2602.16710) ·
-[RL Token](https://arxiv.org/abs/2604.23073) ·
-[FPO++ (flow policy gradients)](https://arxiv.org/abs/2602.02481) ·
-[FlowDAgger](https://arxiv.org/abs/2607.08877) ·
-[SuperMimic](https://arxiv.org/abs/2610.28480) ·
-[Visible Touch](https://arxiv.org/abs/2609.14156) ·
-[Never Too Late for Force](https://arxiv.org/abs/2607.14236) ·
-[WireCraft](https://arxiv.org/abs/2606.18097) ·
-[Driving, fast or slow?](https://arxiv.org/abs/2606.15251) ·
-[Sequential asymmetric imitation](https://arxiv.org/abs/2606.16490) ·
-[RoboNaldo](https://arxiv.org/abs/2606.11092).
-Background: [π\*0.6](https://arxiv.org/abs/2511.14759) (the slower full-model RL recipe that RL Token contrasted itself with), [Gemini Robotics](https://arxiv.org/abs/2503.20020), [SONIC](https://arxiv.org/abs/2511.07820) (the 128-GPU baseline), [AgiBot World](https://arxiv.org/abs/2503.06669).
-[GRAIL](https://arxiv.org/abs/2606.05160) ·
-[Play2Perfect](https://arxiv.org/abs/2606.26428) ·
-[DISCO](https://arxiv.org/abs/2610.25785) ·
-[PACE](https://arxiv.org/abs/2610.16308) ·
-[FACTR 2](https://arxiv.org/abs/2606.12406) ·
-[Contact-rich VLA failures](https://arxiv.org/abs/2608.01402) ·
-[SLAC](https://arxiv.org/abs/2506.04147) ·
-[SafeMimic](https://arxiv.org/abs/2506.15847) ·
-[DataMIL](https://arxiv.org/abs/2505.09603) ·
-[GUILD](https://arxiv.org/abs/2611.05368).
-Gemini Robotics 2.5 had no paper I could find.
-
+- Livestream: [Day 2](https://www.youtube.com/watch?v=uPXoJm-L3YY).
+- [EgoScale](https://arxiv.org/abs/2602.16710), arXiv:2602.16710.
+- [RL Token](https://arxiv.org/abs/2604.23073), arXiv:2604.23073.
+- [FPO++ (flow policy gradients)](https://arxiv.org/abs/2602.02481), arXiv:2602.02481.
+- [FlowDAgger](https://arxiv.org/abs/2607.08877), arXiv:2607.08877.
+- [SuperMimic](https://arxiv.org/abs/2610.28480), arXiv:2610.28480.
+- [Visible Touch](https://arxiv.org/abs/2609.14156), arXiv:2609.14156.
+- [Never Too Late for Force](https://arxiv.org/abs/2607.14236), arXiv:2607.14236.
+- [WireCraft](https://arxiv.org/abs/2606.18097), arXiv:2606.18097.
+- [Driving, fast or slow?](https://arxiv.org/abs/2606.15251), arXiv:2606.15251.
+- [Sequential asymmetric imitation](https://arxiv.org/abs/2606.16490), arXiv:2606.16490.
+- [RoboNaldo](https://arxiv.org/abs/2606.11092), arXiv:2606.11092.
+- [π\*0.6](https://arxiv.org/abs/2511.14759), arXiv:2511.14759 (the slower full-model RL recipe that RL Token contrasted itself with).
+- [Gemini Robotics](https://arxiv.org/abs/2503.20020), arXiv:2503.20020.
+- [SONIC](https://arxiv.org/abs/2511.07820), arXiv:2511.07820 (the 128-GPU baseline).
+- [AgiBot World](https://arxiv.org/abs/2503.06669), arXiv:2503.06669.
+- [GRAIL](https://arxiv.org/abs/2606.05160), arXiv:2606.05160.
+- [Play2Perfect](https://arxiv.org/abs/2606.26428), arXiv:2606.26428.
+- [DISCO](https://arxiv.org/abs/2610.25785), arXiv:2610.25785.
+- [PACE](https://arxiv.org/abs/2610.16308), arXiv:2610.16308.
+- [FACTR 2](https://arxiv.org/abs/2606.12406), arXiv:2606.12406.
+- [Contact-rich VLA failures](https://arxiv.org/abs/2608.01402), arXiv:2608.01402.
+- [SLAC](https://arxiv.org/abs/2506.04147), arXiv:2506.04147.
+- [SafeMimic](https://arxiv.org/abs/2506.15847), arXiv:2506.15847.
+- [DataMIL](https://arxiv.org/abs/2505.09603), arXiv:2505.09603.
+- [GUILD](https://arxiv.org/abs/2611.05368), arXiv:2611.05368.
+- Gemini Robotics 2.5: no paper found.

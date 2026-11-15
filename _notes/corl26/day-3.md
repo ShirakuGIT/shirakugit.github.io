@@ -112,23 +112,24 @@ The next conference, **CoRL 2027, will be held in Paris.**
 
 ## Sources
 
-Livestreams: [Day 3 morning](https://www.youtube.com/watch?v=bYUBR0OcK_c), [Day 3 afternoon](https://www.youtube.com/watch?v=vzyHMAlvglU). The afternoon had no captions and was transcribed locally, so quotes may contain small errors and speaker names are inferred. Papers mentioned that are on arXiv:
-[SidewalkBench](https://arxiv.org/abs/2606.16953) ·
-[PHUMA](https://arxiv.org/abs/2510.26236) ·
-[OpenHLM](https://arxiv.org/abs/2606.22174) ·
-[VisionSIM](https://arxiv.org/abs/2611.08368) ·
-[Kamino (Disney)](https://arxiv.org/abs/2603.16536) ·
-[LadderMan](https://arxiv.org/abs/2606.05873) ·
-[Intent disambiguation](https://arxiv.org/abs/2609.34270) ·
-[SuperMimic](https://arxiv.org/abs/2610.28480) ·
-[What are we actually benchmarking?](https://arxiv.org/abs/2606.04233).
-[ATOM-Bench](https://arxiv.org/abs/2606.16826) ([project page](https://flageval-baai.github.io/AtomBenchPage/)) ·
-[Graph-as-Policy (GaP)](https://arxiv.org/abs/2607.05369) ·
-[RATS (Playful Agentic Robot Learning)](https://arxiv.org/abs/2606.19419) ·
-[SCOPE](https://arxiv.org/abs/2610.12431) ·
-[REALM (last few meters)](https://arxiv.org/abs/2607.03792) ·
-[TANGO](https://arxiv.org/abs/2609.09158) ·
-[OSCAR](https://arxiv.org/abs/2606.00990) ·
-[RoboTTT](https://arxiv.org/abs/2607.15275).
-World Labs described Atlas in a [blog post](https://worldlabs.ai/blog/atlas). MetaControl had no paper I could find.
-
+- Livestream: [Day 3 morning](https://www.youtube.com/watch?v=bYUBR0OcK_c).
+- Livestream: [Day 3 afternoon](https://www.youtube.com/watch?v=vzyHMAlvglU). No captions; transcribed locally, so quotes may contain small errors and speaker names are inferred.
+- [SidewalkBench](https://arxiv.org/abs/2606.16953), arXiv:2606.16953.
+- [PHUMA](https://arxiv.org/abs/2510.26236), arXiv:2510.26236.
+- [OpenHLM](https://arxiv.org/abs/2606.22174), arXiv:2606.22174.
+- [VisionSIM](https://arxiv.org/abs/2611.08368), arXiv:2611.08368.
+- [Kamino (Disney)](https://arxiv.org/abs/2603.16536), arXiv:2603.16536.
+- [LadderMan](https://arxiv.org/abs/2606.05873), arXiv:2606.05873.
+- [Intent disambiguation](https://arxiv.org/abs/2609.34270), arXiv:2609.34270.
+- [SuperMimic](https://arxiv.org/abs/2610.28480), arXiv:2610.28480.
+- [What are we actually benchmarking?](https://arxiv.org/abs/2606.04233), arXiv:2606.04233.
+- [ATOM-Bench](https://arxiv.org/abs/2606.16826), arXiv:2606.16826 ([project page](https://flageval-baai.github.io/AtomBenchPage/)).
+- [Graph-as-Policy (GaP)](https://arxiv.org/abs/2607.05369), arXiv:2607.05369.
+- [RATS (Playful Agentic Robot Learning)](https://arxiv.org/abs/2606.19419), arXiv:2606.19419.
+- [SCOPE](https://arxiv.org/abs/2610.12431), arXiv:2610.12431.
+- [REALM (last few meters)](https://arxiv.org/abs/2607.03792), arXiv:2607.03792.
+- [TANGO](https://arxiv.org/abs/2609.09158), arXiv:2609.09158.
+- [OSCAR](https://arxiv.org/abs/2606.00990), arXiv:2606.00990.
+- [RoboTTT](https://arxiv.org/abs/2607.15275), arXiv:2607.15275.
+- World Labs, [Atlas](https://worldlabs.ai/blog/atlas), blog post.
+- MetaControl: no paper found.
