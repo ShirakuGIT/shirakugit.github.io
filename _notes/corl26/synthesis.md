@@ -35,11 +35,15 @@ A few terms come up constantly in these notes. They are worth fixing before goin
 - **Egocentric human data.** Video recorded from a person's point of view (head or wrist cameras) while they do everyday tasks. It is much cheaper to collect than robot teleoperation, so companies now sell it at scale.
 - **Shared autonomy / interventions.** A deployment mode in which a robot works autonomously while a remote human watches and takes over before a failure. The takeovers ("interventions") become new training data.
 
-## An outside probe: do frontier models know one robot arm too well?
+## Were frontier models trained on robot data?
 
-A probe that circulated during the conference week ([repository](https://github.com/swannaiden/vlm-robotics-training)) asks whether frontier models have seen robot-specific data. It asks 50 models to compute a robot arm's hand position directly from its joint angles, without reasoning step by step, using joint angles sampled from a public Franka Panda dataset. It then changes the arm's geometry. A model that keeps giving answers that fit the Panda rather than the arm it was actually given has probably seen Panda-specific data. That would fit Franka's own claim at the conference that more than half of single-arm CoRL 2024 papers used its arm.
+Three days before the conference, on 6 November, Aiden Swann (a Stanford robotics PhD and a fellow at Goodfire) posted a [thread](https://x.com/SwannAiden/status/2118741112227774702) claiming that "GPT-6 Astra's robotic capabilities are not emergent. It was trained on robotics specific data. So were GPT-6.1 Sol and Gemini Argon." His evidence is a kinematics probe, with the method published in a [repository](https://github.com/swannaiden/vlm-robotics-training). It asks 50 models to compute a robot arm's hand position directly from its joint angles, without reasoning step by step, using joint angles sampled from a public Franka Panda dataset.
 
-Treat this with care. The repository describes the method but does not name which models stood out, I have not rerun it, and I could not verify the social-media claims that came with it. Even a confirmed Panda bias would only show exposure to that one arm's kinematics. It would not show what data each lab used, or where frontier models' robot skills come from in general.
+The key experiment changes the arm's geometry: its Denavit–Hartenberg (DH) parameters, the standard numbers that describe each link's length and twist. A model that has only learned kinematics in general should follow the new geometry. A model that keeps giving answers that fit the Panda, rather than the arm it was actually given, has probably memorized Panda-specific data. That fits Franka's own claim at the conference that more than half of single-arm CoRL 2024 papers used its arm.
+
+If the result holds, Astra's robot skills owe something to robot data in its training, and are not purely a by-product of internet-scale text and images. That matters for the rest of these notes. "A general model beat the robot models" reads differently if the general model had seen robot data too.
+
+Treat this with care. It is one researcher's probe, reported on social media, and I have not rerun it. I could only read the thread's opening post, not the follow-up posts with the DH results. A Panda bias would show exposure to that one arm's kinematics. It would not show how much robot data each lab used or what kind. The model names come from the talks' auto-captions and the thread, and none of the labs has confirmed its training data.
 
 ## What the field now treats as "solved", and how narrowly
 
@@ -108,7 +112,7 @@ The problems named most consistently, by both sectors, were **contact and touch,
 ## Sources
 
 - The four livestreams: [Day 1](https://www.youtube.com/watch?v=F_4AAOQsWlA), [Day 2](https://www.youtube.com/watch?v=uPXoJm-L3YY), [Day 3 morning](https://www.youtube.com/watch?v=bYUBR0OcK_c), [Day 3 afternoon](https://www.youtube.com/watch?v=vzyHMAlvglU) (9–11 November 2026). Quotes come from auto-captions or a local Whisper transcript, so small wording errors are possible. The Day 3 afternoon transcript has no speaker labels, so speaker names there are inferred.
-- [vlm-robotics-training](https://github.com/swannaiden/vlm-robotics-training), the kinematics probe repository.
+- Aiden Swann, [thread on frontier models' robot training data](https://x.com/SwannAiden/status/2118741112227774702), X, 6 November 2026, and [vlm-robotics-training](https://github.com/swannaiden/vlm-robotics-training), the kinematics probe repository.
 - Kyle Vedder, [Opinion piece: cargo cults, data flywheels, and novelty pumps](https://vedder.io/misc/novelty_pump.html); Chris Paxton, [How Much Is Robot Deployment Data Worth?](https://itcanthink.substack.com/p/how-much-is-robot-deployment-data) (21 July 2026).
 - Papers are linked from each day's note. The full report, with a 118-entry bibliography, is a LaTeX PDF built from the same sources.
 
