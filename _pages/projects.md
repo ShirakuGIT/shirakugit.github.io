@@ -8,9 +8,6 @@ permalink: /projects/
 # Projects
 {: .page-title}
 
-Some projects I've built! Each one links to its code or video.
-{: .page-intro}
-
 {::nomarkdown}
 <ul class="projects">
 {%- for project in site.data.projects %}
@@ -18,7 +15,6 @@ Some projects I've built! Each one links to its code or video.
   <li class="project" id="{{ project.name | slugify }}">
     <figure class="project-media">
       {%- if _link %}<a href="{{ _link }}">{% include project-media.html media=project.media caption=project.caption %}</a>{% else %}{% include project-media.html media=project.media caption=project.caption %}{% endif %}
-      {%- if project.caption %}<figcaption>{{ project.caption }}</figcaption>{% endif %}
     </figure>
     <div class="project-text">
       <p class="project-name">{% if _link %}<a href="{{ _link }}">{{ project.name }}</a>{% else %}{{ project.name }}{% endif %}</p>

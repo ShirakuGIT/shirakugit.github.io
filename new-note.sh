@@ -51,6 +51,11 @@ embedded Jupyter notebooks all work.
 
 <!-- Jupyter notebook -->
 {% raw %}{% jupyter_notebook "/assets/notebooks/your-notebook.ipynb" %}{% endraw %}
+
+<!-- Sources: one per line, as a list -->
+## Sources
+
+- Author, [Title](https://example.org), Venue, 2026.
 EOF
 
 echo "Created $FILE"

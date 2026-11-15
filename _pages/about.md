@@ -7,8 +7,8 @@ permalink: /about/
 
 {% for member in site.data.pi %}
 <div class="profile" markdown="0">
-  <img class="portrait" src="{{ '/images/' | append: member.photo | relative_url }}" alt="{{ member.name }}" width="160" height="160"/>
-  <h1 class="page-title">About</h1>
+  <img class="portrait" src="{{ '/images/' | append: member.photo | relative_url }}" alt="{{ member.name }}" width="230" height="230"/>
+  <h1 class="page-title visually-hidden">About</h1>
   <p class="profile-name"><b>{{ member.name }}</b><br><i>{{ member.info }}</i></p>
   {% include social.html member=member %}
 </div>

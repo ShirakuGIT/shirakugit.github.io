@@ -9,21 +9,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 {%- assign _home = false -%}{%- if page.layout == "homelay" -%}{%- assign _home = true -%}{%- endif -%}
 {%- assign _me = site.data.pi[0] -%}
-{%- assign _addr = site.location | strip_newlines | split: "<br/>" -%}
-{%- capture _addr -%}{%- for _l in _addr -%}{%- assign _t = _l | strip -%}{%- if _t != "" -%}{%- unless forloop.first -%}, {% endunless -%}{{ _t }}{%- endif -%}{%- endfor -%}{%- endcapture %}
 <header class="masthead{% if _home %} masthead--home{% endif %}">
+  {%- if _home %}<a class="portrait-link" href="{{ '/about/' | relative_url }}"><img class="portrait" src="{{ '/images/' | append: _me.photo | relative_url }}" alt="{{ _me.name }}" width="230" height="230"></a>{% endif %}
   {% if _home %}<h1 class="site-name">{% else %}<p class="site-name">{% endif %}<a href="{{ '/' | relative_url }}">{{ _me.name }}</a>{% if _home %}</h1>{% else %}</p>{% endif %}
-  <p class="who">Robotics researcher, <a href="https://algrobogroup.github.io/">Algorithmic Robotics Group</a>, NTU Singapore</p>
   {%- if _home %}
-  <p class="contact">Algorithmic Robotics Group<br>Nanyang Technological University<br>{{ _addr }}<br>Email: {{ site.email }}</p>
-  <a class="portrait-link" href="{{ '/about/' | relative_url }}"><img class="portrait" src="{{ '/images/' | append: _me.photo | relative_url }}" alt="{{ _me.name }}" width="150" height="150"></a>
+  <p class="who">Robotics researcher, Algorithmic Robotics Group, NTU Singapore</p>
   {%- endif %}
   <nav class="nav" aria-label="Site">
     {%- for p in site.nav_pages -%}
       {%- assign _url = '/' | append: p.name | append: '/' -%}
       <a href="{{ _url | relative_url }}"{% if page.url == _url %} aria-current="page"{% endif %}>{{ p.name }}</a>
     {%- endfor -%}
-    <a href="{{ '/feed.xml' | relative_url }}">rss</a>
     <button type="button" class="theme-toggle" id="theme-toggle" hidden aria-label="Switch colour theme"></button>
     <script>
     (function () {

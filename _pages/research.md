@@ -8,9 +8,6 @@ permalink: /research/
 # Research
 {: .page-title}
 
-Publications, newest first. Each has a [TL;DR], the full [Abstract] and a copyable [BibTeX] entry. Also on [Google Scholar](https://scholar.google.com/citations?user=geKWO64AAAAJ&hl=en).
-{: .page-intro}
-
 {% capture preprint_count %}{% bibliography_count --query @unpublished %}{% endcapture %}
 {% if preprint_count != "0" %}
 ## Preprints

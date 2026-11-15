@@ -209,6 +209,17 @@ Drop the image under `images/` then:
 
 `width` is optional (defaults to full container).
 
+Figures load from the right place automatically (relative in `jekyll serve`,
+absolute in the production build), so there is nothing to configure.
+
+### Contents box and Sources (automatic / convention)
+
+- **Contents** is built automatically from your `##`/`###` headings when a post
+  or note has 3 or more. A pinned "Contents ▾" bar at the top of the window; click to open.
+  Nothing to write.
+- **Sources**: end with `## Sources` and one source per line as a bullet list,
+  e.g. `- Author, [Title](url), Venue, 2026.` (the scaffolds include a stub).
+
 For a plain `<img>` without caption, just standard markdown:
 
 ```markdown

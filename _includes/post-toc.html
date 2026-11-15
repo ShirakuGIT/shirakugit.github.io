@@ -1,14 +1,13 @@
 {%- comment -%}
-  Inline "Contents" box for posts and notes — the old-web version of a table
-  of contents: a bordered box floated top-right of the article (stacked on
-  phones), listing the article's H1–H4. Built in JS from the rendered
+  "Contents" navigation for posts and notes, listing the article's H1–H4:
+  a collapsed <details> bar pinned to the top of the window (see site.css). Built in JS from the rendered
   headings; stays hidden (and the page reads normally) without JS or when the
   article has fewer than 3 sections. Headings inside compiled LaTeX cells
   (.tex-html) are the paper's own structure and are skipped.
   Runs on DOMContentLoaded because it is included *before* the article body.
   Emitted without {::nomarkdown}: it is included from HTML layouts.
 {%- endcomment -%}
-<nav class="toc-inline" id="toc-inline" aria-label="Contents" hidden><p>Contents</p><ol id="toc-inline-list"></ol></nav>
+<nav class="toc-inline" id="toc-inline" aria-label="Contents" hidden><details id="toc-details"><summary>Contents</summary><ol id="toc-inline-list"></ol></details></nav>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
   var box = document.getElementById('toc-inline'), list = document.getElementById('toc-inline-list');
@@ -32,5 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
     list.appendChild(li);
   });
   box.hidden = false;
+  // Tapping a link closes the list again.
+  list.addEventListener('click', function () { document.getElementById('toc-details').open = false; });
 });
 </script>

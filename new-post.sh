@@ -42,6 +42,11 @@ Write your post here. Markdown, LaTeX, images, GIFs and video all work.
 
 <!-- GIF (or a silent looping mp4) -->
 {% raw %}{% include gif.html src="/images/demo.gif" caption="A demo." %}{% endraw %}
+
+<!-- Sources: one per line, as a list -->
+## Sources
+
+- Author, [Title](https://example.org), Venue, 2026.
 EOF
 
 echo "Created $FILE"

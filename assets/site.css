@@ -3,7 +3,7 @@
 
    An early-2000s academic homepage: wide near-fluid page, LaTeX's Latin Modern
    (Roman 8 cut),
-   tinted section bars, bracketed nav, blue/purple underlined links, bold dates.
+   quiet hairline section headings, bracketed nav, blue/purple underlined links, bold dates.
    Plain CSS, no framework, no icon fonts. Dark mode follows the system setting.
 
    Colours — every colour is a variable below; keep to these (light / dark):
@@ -98,23 +98,25 @@ i.ph, i[class^="fa-"], i[class*=" fa-"], i[class^="ai-"], i[class*=" ai-"] { dis
   overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
 }
 
-/* Section bars: every h2 is the classic tinted bar. */
-h2 { font-size: 1.15em; font-weight: bold; background: var(--bar); border-top: 1px solid var(--bar-rule); padding: 3px 8px; margin: 1.6em 0 .7em; }
+/* Section headings: a bold line over a hairline (the tinted bar was too loud). */
+h2 { font-size: 1.1em; font-weight: bold; border-bottom: 1px solid var(--rule); padding: 0 0 2px; margin: 1.8em 0 .7em; }
 h3 { font-size: 1.05em; margin: 1.3em 0 .5em; }
 .aside, .meta { color: var(--muted); font-size: .9em; }
 .small { font-size: .9em; }
 
 /* -------------------------------------------------------------- header --- */
-.masthead { display: grid; grid-template-columns: 1fr auto; column-gap: 24px; align-items: start; margin-bottom: 1.2em; position: relative; }
-.masthead > * { grid-column: 1; }
+.masthead { margin-bottom: 1.2em; position: relative; overflow: hidden; }
 .site-name { font-size: 1.4em; font-weight: bold; line-height: 1.15; margin: 0 0 .15em; }
-.masthead--home .site-name { font-size: 2em; }
+.masthead--home .site-name { font-size: 1.9em; }
 .site-name a, .site-name a:visited { color: var(--ink); text-decoration: none; }
-.who { margin: 0 0 .5em; font-style: italic; }
+.who { margin: 0 0 .4em; font-style: italic; color: var(--muted); }
 .contact { margin: 0 0 .8em; line-height: 1.35; }
-.portrait-link { grid-column: 2; grid-row: 1 / span 4; }
-.portrait { grid-column: 2; grid-row: 1 / span 4; width: 150px; height: auto; border: 1px solid var(--ink); padding: 2px; background: var(--paper); }
-.nav { margin: .3em 0 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: .2em .5em; }
+.masthead--home { text-align: center; margin-bottom: 1.6em; }
+.masthead--home .nav { justify-content: center; }
+.masthead--home .nav-search { margin-left: 0; }
+.portrait-link { display: block; width: max-content; margin: 0 auto .7em; }
+.portrait { display: block; width: 230px; height: 230px; object-fit: cover; object-position: center 20%; border-radius: 50%; border: 1px solid var(--rule); padding: 0; background: var(--paper); }
+.nav { margin: .6em 0 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: .2em .5em; }
 .nav > a { white-space: nowrap; }
 .nav > a::before, .nav > a::after { color: var(--ink); }
 .nav > a::before { content: "["; }
@@ -130,7 +132,8 @@ h3 { font-size: 1.05em; margin: 1.3em 0 .5em; }
 
 /* search (includes/search.html) — an old-fashioned box at the end of the nav */
 .nav-search { position: relative; margin-left: auto; }
-.nav-search input { font: .9em var(--font); padding: 1px 4px; border: 1px solid var(--rule); width: 12em; background: var(--paper); color: var(--ink); }
+.nav-search input { font: .9em var(--font); padding: 0 2px; border: 0; border-bottom: 1px solid var(--hair); border-radius: 0; width: 7em; background: transparent; color: var(--ink); }
+.nav-search input:focus { outline: 0; border-bottom-color: var(--ink); }
 .search-panel { display: none; position: absolute; right: 0; top: 1.8em; z-index: 20; width: min(34em, 90vw); max-height: 70vh; overflow-y: auto; background: var(--paper); border: 1px solid var(--ink); padding: 4px 8px; box-shadow: 2px 2px 0 var(--hair); }
 .search-panel.open, .nav-search.open .search-panel, .search-panel.is-open { display: block; }
 .search-count { color: var(--muted); font-size: .85em; margin: 2px 0 4px; }
@@ -146,9 +149,9 @@ h3 { font-size: 1.05em; margin: 1.3em 0 .5em; }
 .sr-snippet mark, .sr-title mark { background: var(--mark); color: inherit; }
 
 /* -------------------------------------------------------------- footer --- */
-.site-footer { margin-top: 2.5em; border-top: 1px solid var(--rule); padding-top: .5em; font-size: .9em; }
+.site-footer { margin-top: 3em; border-top: 1px solid var(--hair); padding-top: .5em; font-size: .88em; color: var(--muted); }
 .site-footer p { margin: 0 0 .2em; }
-.site-footer .modified { font-style: italic; }
+.site-footer .modified { margin-top: .1em; }
 
 /* ------------------------------------------------------- page headings --- */
 .page-title { font-size: 1.6em; line-height: 1.2; margin: .3em 0 .4em; }
@@ -156,10 +159,11 @@ h3 { font-size: 1.05em; margin: 1.3em 0 .5em; }
 
 /* ---------------------------------------------------------------- home --- */
 .intro { margin: .4em 0 .8em; }
+.intro p:last-child { margin-bottom: 0; }
 .links-line { margin: 0 0 .8em; }
 ul.things, ul.plain-list, ol.dated { padding-left: 1.6em; margin: .4em 0 .8em; }
 ul.things { list-style: disc; }
-ul.things li, ol.dated li { margin: 0 0 .4em; }
+ul.things li, ol.dated li { margin: 0 0 .3em; }
 ul.things li > a:first-child { font-weight: bold; }
 ol.dated { list-style: disc; }
 ol.dated time, .date { font-weight: bold; }
@@ -175,8 +179,9 @@ ol.dated time::after { content: ":"; }
 .bracket-links a { margin-right: .35em; white-space: nowrap; }
 
 /* --------------------------------------------------------------- about --- */
-.profile { overflow: hidden; margin-bottom: 1em; }
-.profile .portrait { float: right; margin: 0 0 1em 1.5em; width: 160px; }
+.profile { text-align: center; margin-bottom: 1.6em; }
+.profile .portrait { margin: .3em auto .7em; }
+.profile-name { margin: 0 0 .5em; }
 /* Experience logos: one centred row spread across the full width; each logo
    gets an equal cell and is scaled to fit it. Wraps into centred rows on phones. */
 .logo-strip { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 22px 0; margin: 1em 0 1.2em; }
@@ -217,12 +222,13 @@ ul.bib-compact li { margin-bottom: .45em; }
 
 /* --------------------------------------------------------- blog / notes --- */
 .post-list { list-style: none; padding: 0; margin: .5em 0 1em; }
-.post-list > li { margin: 0 0 1.1em; }
+.post-list > li { margin: 0 0 .45em; }
 .post-list .post-link { font-weight: bold; font-size: 1.05em; }
 .post-list .excerpt { margin: .15em 0 0; }
 .tags { color: var(--muted); font-size: .9em; }
 .status { font-variant: small-caps; color: var(--muted); }
 .category-index { margin: 0 0 1em; }
+.category-index a + a::before { content: " · "; color: var(--ink); display: inline-block; text-decoration: none; margin: 0 .2em 0 -.1em; }
 
 /* ------------------------------------------------------------ articles --- */
 .article-head { margin: .4em 0 1.4em; border-bottom: 1px solid var(--rule); }
@@ -247,15 +253,22 @@ figure, .post-figure, .post-video, .post-gif { text-align: center; margin-left: 
 .video-embed { position: relative; aspect-ratio: 16 / 9; max-width: 720px; margin: 0 auto; }
 .video-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
-/* inline "Contents" box built by includes/post-toc.html */
-.toc-inline { float: right; clear: right; width: 16em; margin: 0 0 1em 1.5em; padding: .4em .8em .5em; border: 1px solid var(--rule); background: var(--box); font-size: .88em; }
+/* "Contents" navigation built by includes/post-toc.html. No animation.
+   One design at every width: a one-line "Contents" bar pinned to the top of the
+   window; click it (a <details>) and the list drops over the text. */
+.toc-inline { position: sticky; top: 0; z-index: 5; margin: 0 0 1em; background: var(--paper); border-bottom: 1px solid var(--rule); font-size: .92em; }
 .toc-inline[hidden] { display: none; }
-.toc-inline p { margin: 0 0 .2em; font-weight: bold; }
-.toc-inline ol { margin: 0; padding-left: 1.3em; }
-.toc-inline li { margin: .1em 0; }
-.toc-inline .lvl-1 { list-style: none; margin-left: -1.3em; font-weight: bold; }
+.toc-inline details { position: relative; }
+.toc-inline summary { cursor: pointer; padding: .35em 0; font-weight: bold; list-style: none; }
+.toc-inline summary::-webkit-details-marker { display: none; }
+.toc-inline summary::after { content: " \25BE"; }
+.toc-inline details[open] summary::after { content: " \25B4"; }
+.toc-inline ol { position: absolute; left: 0; top: 100%; width: min(100%, 36em); margin: 0; padding: .4em .8em .5em 2.2em; max-height: 60vh; overflow-y: auto; background: var(--box); border: 1px solid var(--rule); }
+.toc-inline li { margin: .15em 0; }
+.toc-inline .lvl-1 { list-style: none; margin-left: -1.4em; font-weight: bold; }
 .toc-inline .lvl-3 { margin-left: 1em; }
 .toc-inline .lvl-4 { margin-left: 2em; font-size: .95em; }
+.article-body :is(h1, h2, h3, h4) { scroll-margin-top: 2.6em; }
 
 /* --------------------------------------------- photography + lightbox --- */
 .photo-intro { margin-bottom: 1em; }
@@ -347,17 +360,13 @@ figure, .post-figure, .post-video, .post-gif { text-align: center; margin-left: 
 /* --------------------------------------------------------------- phone --- */
 @media (max-width: 620px) {
   body { font-size: 16px; padding: 12px 14px 30px; }
-  .masthead { grid-template-columns: 1fr; }
-  .portrait-link { grid-column: 1; grid-row: auto; order: -1; }
-  .portrait { grid-column: 1; grid-row: auto; width: 110px; margin: .2em 0 .6em; order: -1; }
+  .portrait { width: 160px; height: 160px; }
   .nav-search { margin-left: 0; width: 100%; }
   .nav-search input { width: 100%; }
-  .profile .portrait { width: 110px; }
   .logo-strip a { flex: 0 0 50%; min-width: 0; }
   .logo-strip img { height: 42px; }
   .pub-entry, .project { grid-template-columns: 1fr; }
   .pub-thumb { max-width: 320px; }
-  .toc-inline { float: none; width: auto; margin: 0 0 1em; }
   blockquote { margin: 1em 1em; }
   .site-name, .masthead--home .site-name { font-size: 1.5em; }
 }

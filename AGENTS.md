@@ -245,10 +245,10 @@ its header comment), linked from `_includes/head.html`. Rules — keep them:
   #dcdad6 text (~12.7:1) — deliberately not pure black (OLED smear, glow) and
   not tinted (shifts on uncalibrated screens). Keep it neutral; aim for
   11–13:1 body contrast. Other palettes tried: `/plain/dark/`, `?dark=<name>`.
-- **Era furniture**: home masthead = big name, postal contact block with
-  `[at] [dot]` email, portrait top-right in a 1px border (links to /about/);
+- **Era furniture**: home masthead = big name, one role line,
+  circular portrait icon left of the name/role (230px, centred above a centred name/role/nav, links to /about/; the one deliberate border-radius); no postal block, and the home page lists only papers + 5 recent posts/notes;
   other pages get a compact name + role. Bracketed nav `[about] [projects] …`,
-  every `h2` is a tinted section bar, plain disc bullets, **bold ISO dates**
+  every `h2` is a bold heading over a hairline rule (the tinted bar was dropped in the Nov 2026 declutter; `--bar` is still used by table heads, search and toolbars), plain disc bullets, **bold ISO dates**
   (`2026-11-14: title`), always-underlined links, `[bracketed]` action links,
   italic "Last modified" footer. No radii, shadows, cards, or animations.
 - **Pictures are centred** by CSS (figure include, lone `![](…)` images, video
@@ -265,7 +265,7 @@ Where things live: `_includes/{head,header,footer,news-list,social,post-toc}.htm
 `_layouts/{default,homelay,page,gridlay,textlay,post,note}.html`,
 `_layouts/bibtemplate.html` (research entry) and `_layouts/bibcompact.html`
 (one-line entry; home uses `{% bibliography --template bibcompact %}`).
-Home sections (Papers, Projects, Writing, News, Elsewhere) are data-driven in
+Home sections (now just Papers and Writing; Projects/News/Elsewhere were dropped Nov 2026) are data-driven in
 `homelay.html`; `_pages/home.md` holds only the bio.
 
 **Status (Nov 14, 2026):** migrated on branch `redesign/homepage`, uncommitted,
