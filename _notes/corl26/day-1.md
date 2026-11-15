@@ -2,12 +2,14 @@
 title: "CoRL 2026, Day 1: absorbing the frontier model"
 category: conference
 status: done
-updated: 2026-11-14
+updated: 2026-11-15
 tags: [corl, robot-learning, foundation-models, benchmarks]
 summary: "A general frontier model now outperforms robot foundation models in simulation. Day 1 asked what that leaves for robotics, and answered with time, contact, and measurement."
 ---
 
 Part of a three-day series. Start with the [cross-day synthesis](/notes/corl26/synthesis/) for background and definitions of the terms used here.
+
+Watch: [Day 1 livestream on YouTube](https://www.youtube.com/watch?v=F_4AAOQsWlA).
 
 Day 1 opened in the shadow of **GPT-6 Astra**, a general-purpose frontier model released two months earlier. It was not designed for robots, yet when connected directly to simulated robots it completed far more tasks than purpose-built robot foundation models. The day's talks kept returning to one question: if a general model can already plan and act, what is left for robot learning? The answers clustered around three ideas. Physical control runs against a clock that slow models cannot meet. Contact and force are still poorly handled. And the benchmarks the field uses to measure progress can hide the failures that matter.
 

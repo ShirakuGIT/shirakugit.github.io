@@ -2,10 +2,12 @@
 title: "CoRL 2026: where robot learning thinks it is going"
 category: conference
 status: done
-updated: 2026-11-14
+updated: 2026-11-15
 tags: [corl, robot-learning, synthesis]
 summary: "Across all three days: what the field now treats as solved, what remains open, and where academia and industry agree and disagree."
 ---
+
+Watch the livestreams on YouTube: [Day 1](https://www.youtube.com/watch?v=F_4AAOQsWlA), [Day 2](https://www.youtube.com/watch?v=uPXoJm-L3YY), [Day 3 morning](https://www.youtube.com/watch?v=bYUBR0OcK_c), [Day 3 afternoon](https://www.youtube.com/watch?v=vzyHMAlvglU).
 
 Per-day notes: [Day 1](/notes/corl26/day-1/) · [Day 2](/notes/corl26/day-2/) · [Day 3](/notes/corl26/day-3/)
 
@@ -96,6 +98,8 @@ This table is my reading of the talks, not something any speaker said.
 | Time horizon | Assisted deployments already running; dated milestones in 2027 and 2028 | Open-ended scientific problems, with no dates attached |
 
 The two sectors look less opposed than complementary. Industry is setting near-term targets and reporting production metrics. Academia is scrutinizing what counts as genuine progress and working on the problems that scale alone does not appear to fix.
+
+Individual speakers show the differences more clearly than the two columns do. Zhao's Tsinghua lab and Mehr took capabilities that look strong and found the mechanism that breaks them: a capable planner that misses a deadline, and a capable agent that throws off its partner. On the industry side, NVIDIA's Jim Fan wants skills that are "adaptable and steerable," while Boston Dynamics' Alberto Rodriguez calls dividing manipulation into skills "a fallacy." Tedrake asks how stronger pretrained models make corrections from deployment more valuable. Kaelbling doubts that commercial viability is what researchers "should be mostly worried about," and points to applications, theory, and better sensing and actuation hardware. These agendas don't conflict; they cover different parts of the field.
 
 ## Where a research bet looks strongest
 

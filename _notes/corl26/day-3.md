@@ -2,12 +2,14 @@
 title: "CoRL 2026, Day 3: agents, world models, and the big debate"
 category: conference
 status: done
-updated: 2026-11-14
+updated: 2026-11-15
 tags: [corl, robot-learning, world-models, debate]
 summary: "Frontier models enter robotics as programmers, world models as infrastructure. The closing debate asked whether imitation plus fine-tuning will yield commercially viable generalist robots. The room seemed skeptical, though no votes were counted."
 ---
 
 Part of a three-day series. See the [cross-day synthesis](/notes/corl26/synthesis/) for background and definitions.
+
+Watch: [Day 3 morning](https://www.youtube.com/watch?v=bYUBR0OcK_c) and [Day 3 afternoon](https://www.youtube.com/watch?v=vzyHMAlvglU) livestreams on YouTube.
 
 The last day had two halves with very different characters. The morning consisted of short research presentations: less opinion, more evidence about where current methods work and where they break. The afternoon moved to a concert hall for the conference's set pieces: a keynote by Fei-Fei Li on world models, a conversation between Li and AMD's chief executive Lisa Su, and a formal debate on the question underlying the whole week. **Is today's dominant recipe, imitating human demonstrations and then fine-tuning, enough to produce general-purpose robots that companies can sell at a profit?**
 

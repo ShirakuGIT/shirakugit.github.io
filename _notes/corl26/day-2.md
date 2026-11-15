@@ -2,12 +2,14 @@
 title: "CoRL 2026, Day 2: from demonstrations to deployments"
 category: conference
 status: done
-updated: 2026-11-14
+updated: 2026-11-15
 tags: [corl, robot-learning, deployment, reinforcement-learning]
 summary: "Generalist robot models are useful out of the box but not reliable enough for production. Day 2 showed how that gap is closing, with production numbers from real factories."
 ---
 
 Part of a three-day series. See the [cross-day synthesis](/notes/corl26/synthesis/) for background and definitions.
+
+Watch: [Day 2 livestream on YouTube](https://www.youtube.com/watch?v=uPXoJm-L3YY).
 
 Day 1 established that general frontier models now handle much of a robot's high-level reasoning. Day 2 turned to a more practical question: **how do robot models become reliable enough to do real work?** A generalist model that succeeds 80% of the time is impressive in a lab demo, but useless on a factory line that cannot stop. The day's research sessions covered the tools for closing that gap: human video as training data, reinforcement learning after pretraining, force and touch, and humanoid control. The afternoon added production metrics from robots doing work in real factories.
 
@@ -78,7 +80,7 @@ The afternoon sponsor talks gave the clearest view yet of industrial deployment,
 **Boston Dynamics** reported an early deployment of its Atlas humanoid at Hyundai's plant in Savannah, Georgia, sequencing parts in the order an assembly line consumes them. The system runs one action model on the robot and a cloud "job harness" built on a fine-tuned Gemini model, with the job description written as an ordinary text prompt. Its findings tempered the optimism:
 - **None of the frontier vision-language models tested was reliable enough without fine-tuning** to judge task completion or pick the right part.
 - No action-model architecture "really excels". All needed substantial data, about 400 hours of teleoperation, to reach production reliability.
-- End-to-end, Atlas completed 98.6% of tasks, though about 1 in 10 needed a brief human intervention, roughly one every 20 minutes. Each task took between one and two minutes, and the line ran at about 2 minutes per task where 1 minute is needed to be economically worthwhile.
+- End-to-end, Atlas completed 98.6% of tasks, though about 1 in 10 needed a brief human intervention, roughly one every 20 minutes. Each task took between one and two minutes, and Atlas ran at about 2 minutes per task, which the speaker called "50% slower than it should be" (in other words, half the target throughput), where 1 minute is needed to be economically worthwhile.
 
 They predicted Atlas's **first full 8-hour production shift in 2027**. Their two general lessons were that dividing manipulation into separate skills "is a fallacy because skills blend into each other," and that "behavior performance is more limited today by data quality than scale."
 
