@@ -2,7 +2,7 @@
 title: "CoRL 2026, Day 1: absorbing the frontier model"
 category: conference
 status: done
-updated: 2026-11-15
+updated: 2026-11-16
 tags: [corl, robot-learning, foundation-models, benchmarks]
 summary: "A general frontier model now outperforms robot foundation models in simulation. Day 1 asked what that leaves for robotics, and answered with time, contact, and measurement."
 ---
@@ -25,7 +25,7 @@ He also mapped jobs onto the layers. A fixed assembly line needs only System 0. 
 
 From this he argued that robot systems should be divided **by reaction time rather than by function**. The traditional split is perception, planning, and control. His proposal is System 2 (a frontier model, reasoning over seconds to minutes), System 1 (a learned policy reacting to the hand and object at tens of decisions per second), and System 0 (a controller managing contact and balance hundreds of times per second). A slipping cup, in this view, is a System 0 problem: perception and correction both have to happen within milliseconds, so they cannot be split across layers.
 
-His most useful observation concerned the connections between layers. Higher layers already pass rich instructions downward: language, goals, programs. Very little flows back up. A lower layer rarely reports that force has changed, that an object is slipping, or that it is unsure. His example was a humanoid following a "lift the box" command while the box slid out of its hands, with "no way to tell anyone."
+His most useful observation concerned the connections between layers. Higher layers already pass rich instructions downward: language, goals, programs. Very little flows back up. A lower layer rarely reports that force has changed, that an object is slipping, or that it is unsure. His example was a humanoid following a "lift the box" command while the box slid out of its hands, with "no way to tell anyone." He was just as frank about his own group's whole-body work: "Is motion enough? Of course not." Wiping a table is "mostly force and very little motion", and of the methods that carry human motion over to a robot body, his group's included, "neither of them knows anything about force yet."
 
 {% include figure.html src="/images/notes/corl26/d1_zhao_feedback.jpg" caption="Instructions flow down the stack; feedback about contact, progress, and confidence mostly does not flow back up. (Hang Zhao)" width="80%" %}
 
@@ -43,8 +43,8 @@ Two other talks addressed what policies should remember. Most current robot poli
 
 Several shorter talks showed how fragile generalization still is:
 - Policies often **ignore the instruction** and repeat a well-practiced task whenever the scene contains its familiar objects. On one standard benchmark they score highly even with the language input removed.
-- A [Berkeley study](https://arxiv.org/abs/2607.29687) found that robots don't need to practice every combination of skills (a quarter of the combinations was enough). When they did fail on a new combination, the training data already contained every motion needed, and a single demonstration per task fixed it. So the problem was picking the right skill from the instruction, not missing motor skill.
-- A study of **cross-robot transfer** showed that adding just 5% of data from the target robot to pretraining raised one robot's success from 51 to 69. Papers use "zero-shot" for both settings, so their numbers often can't be compared.
+- A [Berkeley study](https://arxiv.org/abs/2607.29687) found that robots don't need to practice every combination of skills (a quarter of the combinations was enough). When they did fail on a new combination, the training data already contained every motion needed, and a single demonstration per task fixed it. So the problem was picking the right skill from the instruction, not missing motor skill. One counterexample stood out: a modular policy given a perfect high-level planner did well on independent tasks "but it fails in the dependent pairs", where one step changes what the next one needs. Perfect orchestration alone did not fix that.
+- A study of **cross-robot transfer** showed that replacing "just 5% of the training data with target robot data" raised one robot's success from 51 to 69. Papers use "zero-shot" for both settings, so their numbers often can't be compared.
 
 **Why it matters.** Scaling generalist models works best when the model is told what good behavior looks like, and combining skills is possible but fragile. Researchers claiming generalization need to state precisely what the model saw during training.
 
@@ -79,7 +79,9 @@ A sponsor initiative, **Robot Colosseum**, answered with scale. Hundreds of robo
 
 A whole spotlight session was given over to making policies faster or cheaper to run, which is academic support for Zhao's point about time:
 - [BitVLA](https://arxiv.org/abs/2506.07530) shrank a robot model's weights to three values (-1, 0, +1). It used 11 times less memory and ran 4.4 times faster than a comparable open model.
-- One system split a model between the cloud and the robot by predicting what the cloud part would compute, raising the control rate almost tenfold.
+- One system was built to run "for onboard devices", rejecting a cloud GPU because of "long network latency", and its inference engine ran almost ten times faster.
+
+Two talks warned that speed alone is not the fix. [TEMPO](https://arxiv.org/abs/2609.16864) found that fast policies still failed on moving objects, missing a moving bottle because they did not know its velocity: "cutting inference latency alone isn't enough." [REACT](https://arxiv.org/abs/2610.12007) argued that "simply speeding up inference" does not make a policy look at fresh observations more often. In his Q&A, Zhao made a related point: judging by human reactions, touch needs several hundred updates per second while vision tolerates 100 ms or more, so a robot need not be "as fast as possible", only fast enough for each sense.
 - A policy that decides for itself when to replan, instead of replanning on a fixed schedule, saved about 38% of the model calls at the same success rate.
 - A model-based method that plans in chunks ran 30 times faster at inference than a standard baseline.
 
@@ -99,16 +101,16 @@ Other industry voices reinforced the picture. GM described driving policies trai
 
 ## The academic keynotes: interaction, touch, and the boulder
 
-**Negar Mehr** (UC Berkeley) argued that interaction between multiple agents is a distinct problem that more data will not solve. When two robots carry an object together, one robot's small deviation from its demonstrations can doom the whole task. The data needed to cover such cases grows exponentially with the number of agents. Her group's most promising results used foundation models as **coaches**: breaking tasks into steps, writing reward functions, and judging which agent deserved credit for a team outcome. These coaches outperformed standard multi-agent learning methods by a wide margin, even with the weaker models available in 2025.
+**Negar Mehr** (UC Berkeley) argued that interaction between multiple agents is a distinct problem that more data alone will not solve: "I don't think relying just on scalable data collection is going to be the answer simply because it is not even scalable." When two robots carry an object together, one robot's small deviation from its demonstrations can doom the whole task. The data needed to cover such cases grows exponentially with the number of agents. Her group's most promising results used foundation models as **coaches**: breaking tasks into steps, writing reward functions, and judging which agent deserved credit for a team outcome. These coaches outperformed standard multi-agent learning methods by a wide margin, even with the weaker models available in 2025.
 
 **Wolfram Burgard** (University of Technology Nuremberg), a pioneer of probabilistic robotics, framed the field's history through the myth of **Sisyphus**, condemned to push a boulder uphill only to watch it roll back. Robotics has pushed three times: probabilistic methods in the 1990s, deep learning in the 2010s, and foundation models now. Each time the community believed the boulder would reach the top. He believes foundation models are a genuine step, and said that building the AI is "mostly underestimated by investors ... and even politicians". He listed what they still miss:
-- Precision. Classical methods localize a robot on a factory floor to about a millimeter. "Who believes that this can be achieved with foundation models as well? Nobody... maybe in a few years." He put manipulation at "level three, maybe a few level four" on a self-driving-style autonomy scale.
+- Precision. Classical methods localize a robot on a factory floor to about a millimeter. "Who believes that this can be achieved with foundation models as well? Nobody... maybe in a few years." When he asked where manipulation sits on a self-driving-style autonomy scale, the room's answer, apparently by show of hands, was "level three maybe a few level four".
 - Calibrated uncertainty: knowing how confident a learned perception system really is, which classical estimation depends on.
 - The ability to handle messy, unstructured homes, which is why factories will be automated much sooner.
 - **Touch and force.** "There are many people in the world who don't have vision and still live a decent life. But there's very few people in the world who don't have tactile information." This, he argued, is where robotics can distinguish itself from computer vision.
-- Navigation. He was surprised "so few people" at the conference work on it.
+- Navigation. He was surprised "so few people" at the conference work on it, and his own learned navigation had to add map scale back in: "we cannot completely get rid of geometry."
 
-He also voiced unease about growing public skepticism toward AI, and closed with a call for academia to pool resources in **"a CERN of robotics"** to stay relevant next to large industrial teams. University compute isn't uniformly scarce, though. His Bavarian center was receiving "an additional number of thousand GB200 GPUs", and in the opening, Peter Stone said UT Austin's new computing school has "the most GPUs of any computing group" in the US.
+He also voiced unease about growing public skepticism toward AI, citing its energy use and "companies who let their interns go wild with their ... agents", and closed with a call for academia to pool resources in **"a CERN of robotics"** to stay relevant next to large industrial teams. Asked why so few groups collect their own force data, he was blunt: "it is very convenient to basically sit on your desk and use data that is available", collecting new data "is actually a lot of effort", and being first in a new area means "getting many citations". University compute isn't uniformly scarce, though. His Bavarian center was receiving "an additional number of thousand GB200 GPUs", and in the opening, Peter Stone said UT Austin's new computing school has "the most GPUs of any computing group" in the US.
 
 {% include figure.html src="/images/notes/corl26/d1_burgard_cern.jpg" caption="Burgard's closing call: shared infrastructure and a jointly built robotics foundation model. (Wolfram Burgard)" width="70%" %}
 
