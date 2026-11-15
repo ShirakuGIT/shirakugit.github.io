@@ -116,3 +116,6 @@ The problems named most consistently, by both sectors, were **contact and touch,
 - Kyle Vedder, [Opinion piece: cargo cults, data flywheels, and novelty pumps](https://vedder.io/misc/novelty_pump.html); Chris Paxton, [How Much Is Robot Deployment Data Worth?](https://itcanthink.substack.com/p/how-much-is-robot-deployment-data) (21 July 2026).
 - Papers are linked from each day's note. The full report, with a 118-entry bibliography, is a LaTeX PDF built from the same sources.
 
+---
+
+*These notes were synthesized and refined using AI.*

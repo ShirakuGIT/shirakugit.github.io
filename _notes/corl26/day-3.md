@@ -133,3 +133,7 @@ The next conference, **CoRL 2027, will be held in Paris.**
 - [RoboTTT](https://arxiv.org/abs/2607.15275), arXiv:2607.15275.
 - World Labs, [Atlas](https://worldlabs.ai/blog/atlas), blog post.
 - MetaControl: no paper found.
+
+---
+
+*These notes were synthesized and refined using AI.*

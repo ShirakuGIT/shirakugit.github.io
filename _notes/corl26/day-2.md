@@ -143,3 +143,7 @@ On academia, he said "we don't understand what we're building yet," and that the
 - [DataMIL](https://arxiv.org/abs/2505.09603), arXiv:2505.09603.
 - [GUILD](https://arxiv.org/abs/2611.05368), arXiv:2611.05368.
 - Gemini Robotics 2.5: no paper found.
+
+---
+
+*These notes were synthesized and refined using AI.*

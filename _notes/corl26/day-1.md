@@ -137,3 +137,7 @@ He also voiced unease about growing public skepticism toward AI, and closed with
 - [TEMPO](https://arxiv.org/abs/2609.16864), arXiv:2609.16864.
 - [REACT](https://arxiv.org/abs/2610.12007), arXiv:2610.12007.
 - Robot Colosseum and GR00T 2: no paper found.
+
+---
+
+*These notes were synthesized and refined using AI.*
