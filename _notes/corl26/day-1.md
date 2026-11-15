@@ -80,10 +80,10 @@ A sponsor initiative, **Robot Colosseum**, answered with scale. Hundreds of robo
 A whole spotlight session was given over to making policies faster or cheaper to run, which is academic support for Zhao's point about time:
 - [BitVLA](https://arxiv.org/abs/2506.07530) shrank a robot model's weights to three values (-1, 0, +1). It used 11 times less memory and ran 4.4 times faster than a comparable open model.
 - One system was built to run "for onboard devices", rejecting a cloud GPU because of "long network latency", and its inference engine ran almost ten times faster.
-
-Two talks warned that speed alone is not the fix. [TEMPO](https://arxiv.org/abs/2609.16864) found that fast policies still failed on moving objects, missing a moving bottle because they did not know its velocity: "cutting inference latency alone isn't enough." [REACT](https://arxiv.org/abs/2610.12007) argued that "simply speeding up inference" does not make a policy look at fresh observations more often. In his Q&A, Zhao made a related point: judging by human reactions, touch needs several hundred updates per second while vision tolerates 100 ms or more, so a robot need not be "as fast as possible", only fast enough for each sense.
 - A policy that decides for itself when to replan, instead of replanning on a fixed schedule, saved about 38% of the model calls at the same success rate.
 - A model-based method that plans in chunks ran 30 times faster at inference than a standard baseline.
+
+Two talks warned that speed alone is not the fix. [TEMPO](https://arxiv.org/abs/2609.16864) found that fast policies still failed on moving objects, missing a moving bottle because they did not know its velocity: "cutting inference latency alone isn't enough." [REACT](https://arxiv.org/abs/2610.12007) argued that "simply speeding up inference" does not make a policy look at fresh observations more often. In his Q&A, Zhao made a related point: judging by human reactions, touch needs several hundred updates per second while vision tolerates 100 ms or more, so a robot need not be "as fast as possible", only fast enough for each sense.
 
 ## Industry's answer: "everything is a skill"
 

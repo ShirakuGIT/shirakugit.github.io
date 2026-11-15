@@ -68,7 +68,8 @@ Two other results bear on the frontier-model question. **DISCO**, later named on
 Two papers later named award finalists made strong claims about humanoid robots:
 - **GRAIL** (NVIDIA) used video-generation models to *generate* humanoid training data: sitting, climbing stairs, picking up objects. Motions were extracted from the generated video and filtered for physical validity. The resulting 35,000 motions trained policies that worked on real robots with no real-world data. The authors' stated vision is that "data is no longer the bottleneck". Asked what the bottleneck then becomes, they named the gap between simulation and reality.
 - **SuperMimic** (UC Berkeley) trained a controller that makes a humanoid follow any reference motion, using a learned model of the robot's dynamics. It took **3 hours on one GPU**, compared with an established method that used "more than 100 GPUs for a week". "We solved the compute problem," the presenter said, though the claim applies to this training step, not to robotics in general. He also noted a smaller dataset and a faster GPU, so it isn't a like-for-like comparison. Asked whether a lab with a thousand humanoids could learn this way in the real world, he said it would take "10,000 humanoid and 1,000 mo cap system". So the bottleneck had moved, not vanished.
-- **Robonaldo**, a soccer-playing humanoid, closed the session. Asked when such robots would play soccer with people, the presenter said "maybe one or two years". The chair's reply: "That's pretty aggressive."
+
+The session's last oral, **Robonaldo**, was a soccer-playing humanoid. Asked when such robots would play soccer with people, the presenter said "maybe one or two years". The chair's reply: "That's pretty aggressive."
 
 ## Industry: who should be the robot's brain?
 
