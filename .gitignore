@@ -8,3 +8,5 @@ images/photography-originals/
 .jekyll-pid
 .jekyll-serve.log
 
+.DS_Store
+/full-map-height-above-ground.png

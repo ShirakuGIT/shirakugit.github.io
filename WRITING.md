@@ -340,6 +340,15 @@ this for you. You only need it when authoring raw HTML directly.
 
 ## 15. Deploy
 
+One command saves your changes and updates the live site, any time (new post, note, design tweak):
+
+```bash
+./scripts/ship.sh                # checks the build, shows changes, asks once, commits, pushes main, deploys, waits until live
+./scripts/ship.sh -y "message"   # no prompt, your own commit message
+./scripts/ship.sh --no-deploy    # commit + push the source only
+```
+
+The manual route, if you prefer:
 ```bash
 bundle exec rake publish
 ```

@@ -26,13 +26,18 @@
 @font-face { font-family: "Inter"; font-style: normal; font-weight: bold; font-display: swap; src: url("fonts/inter-latin-700-normal.woff2") format("woff2"); }
 @font-face { font-family: "Inter"; font-style: italic; font-weight: bold; font-display: swap; src: url("fonts/inter-latin-700-italic.woff2") format("woff2"); }
 
+@font-face { font-family: "Charis"; font-style: normal; font-weight: normal; font-display: swap; src: url("fonts/charis-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Charis"; font-style: normal; font-weight: bold; font-display: swap; src: url("fonts/charis-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Charis"; font-style: italic; font-weight: normal; font-display: swap; src: url("fonts/charis-latin-400-italic.woff2") format("woff2"); }
+@font-face { font-family: "Charis"; font-style: italic; font-weight: bold; font-display: swap; src: url("fonts/charis-latin-700-italic.woff2") format("woff2"); }
+
 :root {
   /* Body font: swap this one line to change the whole site's typeface. */
-  --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; /* classic: "LM Roman 8", "Latin Modern Roman", serif */
+  --font: Charter, "Charis", "Iowan Old Style", Georgia, serif; /* Charis = open Charter clone, self-hosted so every device matches */ --sans: "Inter", system-ui, sans-serif; /* classic: "LM Roman 8", "Latin Modern Roman", serif */
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --ink: #000; --paper: #fff; --muted: #555; --rule: #999; --hair: #ccc; --wash: #f5f5f5;
-  --link: #0000ee; --visited: #551a8b; --hover: #cc0000;
-  --bar: #e6e9f2; --bar-rule: #a8b0c8;
+  --ink: #333; --paper: #fbfbf9; --muted: #737373; --rule: #d4d4d4; --hair: #e8e8e8; --wash: #f7f7f7;
+  --link: #2c4a8a; --visited: #2c4a8a; --hover: #000;
+  --bar: #f0f0f0; --bar-rule: #cfcfcf;
   --box: #fafafa; --mark: #ffff99; --target: #ffffcc; --err-wash: #fff4f4;
   --code-str: #a31515; --code-num: #000080; --code-add: #006400;
   --prompt-in: #00008b; --prompt-out: #8b0000;
@@ -43,8 +48,8 @@
    The two blocks below must stay identical. */
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --ink: #dcdad6; --paper: #181818; --muted: #a3a3a3; --rule: #575757; --hair: #333; --wash: #202020;
-  --link: #8ab4ff; --visited: #c9a0ff; --hover: #ff8080;
+  --ink: #cfcfcf; --paper: #1a1a1a; --muted: #8c8c8c; --rule: #3e3e3e; --hair: #2a2a2a; --wash: #202020;
+  --link: #93a9d6; --visited: #93a9d6; --hover: #e4e4e4;
   --bar: #20263a; --bar-rule: #3e4a6b;
   --box: #1e1e1e; --mark: #5c5200; --target: #3a3600; --err-wash: #2e1616;
   --code-str: #f1a3a3; --code-num: #a8c7ff; --code-add: #8fd48f;
@@ -53,8 +58,8 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
     color-scheme: dark;
-    --ink: #dcdad6; --paper: #181818; --muted: #a3a3a3; --rule: #575757; --hair: #333; --wash: #202020;
-    --link: #8ab4ff; --visited: #c9a0ff; --hover: #ff8080;
+    --ink: #cfcfcf; --paper: #1a1a1a; --muted: #8c8c8c; --rule: #3e3e3e; --hair: #2a2a2a; --wash: #202020;
+    --link: #93a9d6; --visited: #93a9d6; --hover: #e4e4e4;
     --bar: #20263a; --bar-rule: #3e4a6b;
     --box: #1e1e1e; --mark: #5c5200; --target: #3a3600; --err-wash: #2e1616;
     --code-str: #f1a3a3; --code-num: #a8c7ff; --code-add: #8fd48f;
@@ -69,21 +74,22 @@
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; background: var(--paper); }
 body {
-  max-width: 980px; margin: 0 auto; padding: 18px 20px 40px;
+  max-width: 860px; margin: 0 auto; padding: 18px 20px 40px;
   background: var(--paper); color: var(--ink);
-  font: 16px/1.6 var(--font); letter-spacing:-.005em; overflow-wrap: break-word;
+  font: 112.5%/1.65 var(--font); overflow-wrap: break-word;
 }
-a { color: var(--link); }
+a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: .18em; text-decoration-color: color-mix(in srgb, var(--link) 40%, transparent); }
 a:visited { color: var(--visited); }
-a:hover { color: var(--hover); }
-p { margin: 0 0 .9em; }
+a:hover { color: var(--hover); text-decoration-color: currentColor; }
+p { margin: 0 0 1em; }
 h1, h2, h3, h4, h5, h6 { line-height: 1.25; }
 img, video, iframe, svg { max-width: 100%; height: auto; }
 hr { border: 0; border-top: 1px solid var(--rule); margin: 1.5em 0; }
 code, kbd, samp, pre { font-family: var(--mono); font-size: .9em; }
 pre { background: var(--wash); border: 1px solid var(--hair); padding: .6em .8em; overflow-x: auto; line-height: 1.35; }
 pre code { font-size: 1em; }
-blockquote { margin: 1em 2.5em; }
+blockquote { margin: 1.2em 0; padding: .1em 0 .1em 1.1em; border-left: 3px solid var(--rule); color: var(--muted); }
+blockquote p:last-child { margin-bottom: 0; }
 table { border-collapse: collapse; margin: 1em 0; display: block; max-width: 100%; overflow-x: auto; }
 th, td { border: 1px solid var(--rule); padding: 2px 8px; text-align: left; vertical-align: top; }
 th { background: var(--bar); }
@@ -103,8 +109,12 @@ i.ph, i[class^="fa-"], i[class*=" fa-"], i[class^="ai-"], i[class*=" ai-"] { dis
 }
 
 /* Section headings: a bold line over a hairline (the tinted bar was too loud). */
-h2 { font-size: 1.1em; font-weight: bold; border-bottom: 1px solid var(--rule); padding: 0 0 2px; margin: 1.8em 0 .7em; }
-h3 { font-size: 1.05em; margin: 1.3em 0 .5em; }
+/* One heading style everywhere: Inter (--sans), bold, normal text colour, sentence case. Size steps down 1.6 / 1.3 / 1.1 / 1em; only h2 carries a hairline. */
+h1, h2, h3, h4, h5, h6 { font-family: var(--sans); font-weight: bold; color: var(--ink); text-transform: none; letter-spacing: -.01em; }
+h1 { font-size: 1.6em; margin: 1.2em 0 .5em; }
+h2 { font-size: 1.3em; border-bottom: 1px solid var(--hair); padding: 0 0 4px; margin: 1.8em 0 .7em; }
+h3 { font-size: 1.1em; margin: 1.5em 0 .5em; }
+h4 { font-size: 1em; font-style: italic; margin: 1.3em 0 .4em; }
 .aside, .meta { color: var(--muted); font-size: .9em; }
 .small { font-size: .9em; }
 
@@ -113,7 +123,7 @@ h3 { font-size: 1.05em; margin: 1.3em 0 .5em; }
 .site-name { font-size: 1.4em; font-weight: bold; line-height: 1.15; margin: 0 0 .15em; }
 .masthead--home .site-name { font-size: 1.9em; }
 .site-name a, .site-name a:visited { color: var(--ink); text-decoration: none; }
-.who { margin: 0 0 .4em; font-style: italic; color: var(--muted); }
+.who { margin: 0 0 .4em; font-style: italic; color: var(--muted); font-size: .9em; }
 .contact { margin: 0 0 .8em; line-height: 1.35; }
 .masthead--home { text-align: center; margin-bottom: 1.6em; }
 .masthead--home .nav { justify-content: center; }
@@ -158,7 +168,7 @@ h3 { font-size: 1.05em; margin: 1.3em 0 .5em; }
 .site-footer .modified { margin-top: .1em; }
 
 /* ------------------------------------------------------- page headings --- */
-.page-title { font-size: 1.6em; line-height: 1.2; margin: .3em 0 .4em; }
+.page-title { line-height: 1.2; margin: .3em 0 .4em; }
 .page-intro { margin-bottom: 1em; }
 
 /* ---------------------------------------------------------------- home --- */
@@ -169,9 +179,10 @@ ul.things, ul.plain-list, ol.dated { padding-left: 1.6em; margin: .4em 0 .8em; }
 ul.things { list-style: disc; }
 ul.things li, ol.dated li { margin: 0 0 .3em; }
 ul.things li > a:first-child { font-weight: bold; }
-ol.dated { list-style: disc; }
-ol.dated time, .date { font-weight: bold; }
-ol.dated time::after { content: ":"; }
+ol.dated { list-style: none; padding-left: 0; }
+ol.dated li { margin: 0 0 .6em; }
+ol.dated li > a { font-weight: bold; }  /* item titles are bold links everywhere: papers, writing, notes, posts, projects */
+ol.dated time, .date { color: var(--muted); font-variant-numeric: tabular-nums; font-size: .9em; margin-right: .7em; }
 .more { margin: -.2em 0 1em; }
 
 /* ---------------------------------------------------------------- news --- */
@@ -220,8 +231,8 @@ ul.bib-compact li { margin-bottom: .45em; }
 .project:last-child { border-bottom: 0; }
 .project-media img, .project-media video { display: block; width: 100%; height: auto; border: 1px solid var(--hair); background: var(--wash); }
 .project-media figcaption { font-size: .82em; margin-top: .2em; }
-.project-name { font-size: 1.15em; font-weight: bold; margin: 0 0 .1em; }
-.project-sub { font-style: italic; margin: 0 0 .4em; }
+.project-name { font-weight: bold; margin: 0 0 .1em; }
+.project-sub { font-style: italic; color: var(--muted); margin: 0 0 .4em; }
 .project p { margin-bottom: .4em; }
 
 /* --------------------------------------------------------- blog / notes --- */
@@ -237,12 +248,8 @@ ul.bib-compact li { margin-bottom: .45em; }
 /* ------------------------------------------------------------ articles --- */
 .article-head { margin: .4em 0 1.4em; border-bottom: 1px solid var(--rule); }
 .article-back { margin: 0 0 .4em; font-size: .9em; }
-.article-title { font-size: 1.7em; line-height: 1.2; margin: 0 0 .2em; }
-.article-meta { font-style: italic; color: var(--muted); margin: 0 0 .6em; }
-.article-body h1 { font-size: 1.35em; margin: 1.4em 0 .5em; }
-.article-body h2 { font-size: 1.15em; }
-.article-body h3 { font-size: 1.05em; }
-.article-body h4 { font-size: 1em; font-style: italic; }
+.article-title { line-height: 1.2; margin: 0 0 .2em; }
+.article-meta { font-style: italic; color: var(--muted); font-size: .9em; margin: 0 0 .6em; }
 .article-body li { margin-bottom: .25em; }
 .article-body img { border: 1px solid var(--hair); }
 .article-body :target { background: var(--target); }
@@ -385,8 +392,12 @@ figure, .post-figure, .post-video, .post-gif { text-align: center; margin-left: 
 /* jekyll-scholar wraps entries in <ol class="bibliography"><li> */
 ol.bibliography { list-style: none; padding: 0; margin: .4em 0 1em; }
 ol.bibliography > li { margin: 0 0 1.5em; }
-.bib-compact ol.bibliography { list-style: disc; padding-left: 1.6em; }
-.bib-compact ol.bibliography > li { margin: 0 0 .5em; }
+.bib-compact ol.bibliography { list-style: none; padding: 0; }
+.bib-compact ol.bibliography > li { margin: 0 0 1.1em; }
+.bib-compact span { display: block; }
+.bc-title { font-weight: bold; line-height: 1.35; }
+.bc-authors { color: var(--ink); font-size: .92em; margin-top: .15em; }
+.bc-venue { color: var(--muted); font-style: italic; font-size: .92em; }
 
 /* Affiliation logos were drawn light for the old dark theme: show them as dark
    silhouettes on white; in dark mode they already read as light-on-dark. */
@@ -394,3 +405,31 @@ ol.bibliography > li { margin: 0 0 1.5em; }
 .logo-strip a:hover img { opacity: 1; }
 :root[data-theme="dark"] .logo-strip img { filter: none; opacity: .9; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme]) .logo-strip img { filter: none; opacity: .9; } }
+
+/* sans for the chrome (name, nav, headings, footer), serif for reading */
+.site-name, .nav, .toc-inline, .site-footer { font-family: var(--sans); }
+.nav, .site-footer { font-size: .85em; }
+/* LaTeX cells keep the paper's own structure, set in the body serif rather than the site's sans headings */
+.tex-html :is(h1, h2, h3, h4), .tex-html .title { font-family: var(--font); letter-spacing: 0; }
+
+/* Line breaking and rhythm: balanced headings, no one-word last lines, no hyphenation, comfortable list spacing. */
+h1, h2, h3, h4, .site-name, .who, .bc-title, .pub-title, .project-name { text-wrap: balance; }
+p, li, dd, figcaption, blockquote { text-wrap: pretty; }
+body { hyphens: none; }
+.article-body li { margin: 0 0 .35em; }
+.article-body ul, .article-body ol { margin: 0 0 1em; padding-left: 1.5em; }
+.article-body li > ul, .article-body li > ol { margin: .35em 0 .2em; }
+
+/* Reading comfort (evidence-based defaults):
+   - 40em measure (~65-75 characters a line) for prose; wide blocks (figures, tables, code, headers) stay full width.
+   - 18px (112.5%, so it honours the browser's font-size setting) at 1.65 leading, left-aligned, no justification.
+   - Off-white / charcoal paper and soft ink: contrast 11-12:1 (AAA, but short of the glare of pure black on white); muted text >= 4.5:1.
+   - Dark mode gets a little extra letter-spacing, because light-on-dark text blooms and looks tighter.
+   - Links are always underlined (never colour alone); visitors who ask for more contrast get it. */
+.article-body :is(p, ul, ol, dl, blockquote), .intro p, .profile p, .page-body :is(p, ul, ol) { max-width: 40em; }
+:root[data-theme="dark"] body { letter-spacing: .012em; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) body { letter-spacing: .012em; } }
+@media (prefers-contrast: more) {
+  :root { --ink: #000; --muted: #444; --link: #0a2a6e; --rule: #777; --hair: #aaa; }
+  :root[data-theme="dark"] { --ink: #fff; --muted: #ccc; --link: #bcd0ff; --rule: #888; --hair: #555; }
+}

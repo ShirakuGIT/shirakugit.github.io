@@ -26,7 +26,7 @@ permalink: /notes/
 <ul class="post-list">
   {%- for note in in_cat %}
   <li>
-    {%- if note.updated %}<span class="date">{{ note.updated | date: "%Y-%m-%d" }}:</span> {% endif -%}
+    {%- if note.updated %}<span class="date">{{ note.updated | date: "%Y-%m-%d" }}</span> {% endif -%}
     <a class="post-link" href="{{ note.url | relative_url }}">{{ note.title }}</a>{% if note.status %} <span class="status">({{ note.status }})</span>{% endif %}
   </li>
   {%- endfor %}

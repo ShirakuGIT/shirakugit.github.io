@@ -2,7 +2,7 @@
 ---
 {%- comment -%}
   One-line publication for the home page:
-  {% bibliography --template bibcompact %} → "Title. Authors. Venue. [arXiv]"
+  {% bibliography --template bibcompact %} → three stacked lines: title (link), authors, venue
 {%- endcomment -%}
 {%- assign _span_open = '<span id="' | append: entry.key | append: '">' -%}
 {%- assign _ref_clean = reference | remove_first: _span_open | remove_first: '</span>' -%}
@@ -14,4 +14,4 @@
 {%- assign _link = nil -%}
 {%- if entry.doi -%}{%- if entry.type == 'unpublished' -%}{%- assign _link = entry.doi | prepend: 'https://arxiv.org/abs/' -%}{%- else -%}{%- assign _link = entry.doi | prepend: 'http://doi.org/' -%}{%- endif -%}{%- endif -%}
 {%- if entry.type == 'unpublished' -%}{%- assign _venue = "Preprint, " | append: entry.year -%}{%- else -%}{%- assign _venue = entry.journal | default: entry.booktitle | append: ", " | append: entry.year -%}{%- endif -%}
-{% if _link %}<a href="{{ _link }}"><b>{{ _title_html }}</b></a>{% else %}<b>{{ _title_html }}</b>{% endif %}. {{ _authors }}. <i>{{ _venue }}</i>.
+<span class="bc-title">{% if _link %}<a href="{{ _link }}">{{ _title_html }}</a>{% else %}{{ _title_html }}{% endif %}</span><span class="bc-authors">{{ _authors }}</span><span class="bc-venue">{{ _venue }}</span>
