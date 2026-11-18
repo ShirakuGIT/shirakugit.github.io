@@ -31,9 +31,20 @@
 @font-face { font-family: "Charis"; font-style: italic; font-weight: normal; font-display: swap; src: url("fonts/charis-latin-400-italic.woff2") format("woff2"); }
 @font-face { font-family: "Charis"; font-style: italic; font-weight: bold; font-display: swap; src: url("fonts/charis-latin-700-italic.woff2") format("woff2"); }
 
+@font-face { font-family: "Atkinson Hyperlegible"; font-style: normal; font-weight: normal; font-display: swap; src: url("fonts/atkinson-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Atkinson Hyperlegible"; font-style: normal; font-weight: bold; font-display: swap; src: url("fonts/atkinson-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Atkinson Hyperlegible"; font-style: italic; font-weight: normal; font-display: swap; src: url("fonts/atkinson-latin-400-italic.woff2") format("woff2"); }
+@font-face { font-family: "Atkinson Hyperlegible"; font-style: italic; font-weight: bold; font-display: swap; src: url("fonts/atkinson-latin-700-italic.woff2") format("woff2"); }
+
+@font-face { font-family: "Inter Light"; font-style: normal; font-weight: 300; font-display: swap; src: url("fonts/inter-latin-300-normal.woff2") format("woff2"); }
+@font-face { font-family: "Inter Light"; font-style: normal; font-weight: 600; font-display: swap; src: url("fonts/inter-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Inter Light"; font-style: italic; font-weight: 300; font-display: swap; src: url("fonts/inter-latin-300-italic.woff2") format("woff2"); }
+@font-face { font-family: "Inter Light"; font-style: italic; font-weight: 600; font-display: swap; src: url("fonts/inter-latin-600-italic.woff2") format("woff2"); }
+
 :root {
   /* Body font: swap this one line to change the whole site's typeface. */
-  --font: Charter, "Charis", "Iowan Old Style", Georgia, serif; /* Charis = open Charter clone, self-hosted so every device matches */ --sans: "Inter", system-ui, sans-serif; /* classic: "LM Roman 8", "Latin Modern Roman", serif */
+  --font: "Inter Light", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; /* Inter at weight 300 (body) and 600 (bold/headings). Earlier: system-ui, Atkinson Hyperlegible, Charis, LM Roman 8 */
+  --sans: var(--font);
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --ink: #333; --paper: #fbfbf9; --muted: #737373; --rule: #d4d4d4; --hair: #e8e8e8; --wash: #f7f7f7;
   --link: #2c4a8a; --visited: #2c4a8a; --hover: #000;
@@ -48,7 +59,7 @@
    The two blocks below must stay identical. */
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --ink: #cfcfcf; --paper: #1a1a1a; --muted: #8c8c8c; --rule: #3e3e3e; --hair: #2a2a2a; --wash: #202020;
+  --ink: #dadada; --paper: #1a1a1a; --muted: #8c8c8c; --rule: #3e3e3e; --hair: #2a2a2a; --wash: #202020;
   --link: #93a9d6; --visited: #93a9d6; --hover: #e4e4e4;
   --bar: #20263a; --bar-rule: #3e4a6b;
   --box: #1e1e1e; --mark: #5c5200; --target: #3a3600; --err-wash: #2e1616;
@@ -58,7 +69,7 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
     color-scheme: dark;
-    --ink: #cfcfcf; --paper: #1a1a1a; --muted: #8c8c8c; --rule: #3e3e3e; --hair: #2a2a2a; --wash: #202020;
+    --ink: #dadada; --paper: #1a1a1a; --muted: #8c8c8c; --rule: #3e3e3e; --hair: #2a2a2a; --wash: #202020;
     --link: #93a9d6; --visited: #93a9d6; --hover: #e4e4e4;
     --bar: #20263a; --bar-rule: #3e4a6b;
     --box: #1e1e1e; --mark: #5c5200; --target: #3a3600; --err-wash: #2e1616;
@@ -74,9 +85,9 @@
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; background: var(--paper); }
 body {
-  max-width: 860px; margin: 0 auto; padding: 18px 20px 40px;
+  max-width: 760px; margin: 0 auto; padding: 18px 20px 40px;
   background: var(--paper); color: var(--ink);
-  font: 112.5%/1.65 var(--font); overflow-wrap: break-word;
+  font: 112.5%/1.65 var(--font); font-weight: 300; overflow-wrap: break-word;
 }
 a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: .18em; text-decoration-color: color-mix(in srgb, var(--link) 40%, transparent); }
 a:visited { color: var(--visited); }
@@ -421,14 +432,13 @@ body { hyphens: none; }
 .article-body li > ul, .article-body li > ol { margin: .35em 0 .2em; }
 
 /* Reading comfort (evidence-based defaults):
-   - 40em measure (~65-75 characters a line) for prose; wide blocks (figures, tables, code, headers) stay full width.
+   - the whole page is one centred 760px column (40em of text, ~65-75 characters a line), so header, text and lists share the same left and right edges.
    - 18px (112.5%, so it honours the browser's font-size setting) at 1.65 leading, left-aligned, no justification.
    - Off-white / charcoal paper and soft ink: contrast 11-12:1 (AAA, but short of the glare of pure black on white); muted text >= 4.5:1.
    - Dark mode gets a little extra letter-spacing, because light-on-dark text blooms and looks tighter.
    - Links are always underlined (never colour alone); visitors who ask for more contrast get it. */
-.article-body :is(p, ul, ol, dl, blockquote), .intro p, .profile p, .page-body :is(p, ul, ol) { max-width: 40em; }
-:root[data-theme="dark"] body { letter-spacing: .012em; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) body { letter-spacing: .012em; } }
+:root[data-theme="dark"] body { letter-spacing: .01em; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) body { letter-spacing: .01em; } }
 @media (prefers-contrast: more) {
   :root { --ink: #000; --muted: #444; --link: #0a2a6e; --rule: #777; --hair: #aaa; }
   :root[data-theme="dark"] { --ink: #fff; --muted: #ccc; --link: #bcd0ff; --rule: #888; --hair: #555; }

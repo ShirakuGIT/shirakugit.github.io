@@ -340,12 +340,17 @@ this for you. You only need it when authoring raw HTML directly.
 
 ## 15. Deploy
 
-One command saves your changes and updates the live site, any time (new post, note, design tweak):
+One command saves your changes and updates the live site, any time (new post, note, design tweak). Run `./scripts/ship.sh -h` for every option.
 
 ```bash
-./scripts/ship.sh                # checks the build, shows changes, asks once, commits, pushes main, deploys, waits until live
-./scripts/ship.sh -y "message"   # no prompt, your own commit message
-./scripts/ship.sh --no-deploy    # commit + push the source only
+./scripts/ship.sh                                  # suggests a message: Enter accepts, type your own, e = editor, q = cancel
+./scripts/ship.sh "my message"                     # your own message
+./scripts/ship.sh -m "Subject" -m "More detail"    # multi-paragraph message
+./scripts/ship.sh -e                               # write the message in $EDITOR
+./scripts/ship.sh -p _posts -p _notes "new posts"  # stage only these paths
+./scripts/ship.sh -n                               # dry run: show what would happen, change nothing
+./scripts/ship.sh --no-deploy | --no-push          # source only / commit only
+./scripts/ship.sh --deploy-only                    # just republish what is already committed
 ```
 
 The manual route, if you prefer:
