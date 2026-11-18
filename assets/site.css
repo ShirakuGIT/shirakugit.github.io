@@ -21,11 +21,15 @@
 @font-face { font-family: "LM Roman 8"; font-style: italic; font-weight: normal; font-display: swap; src: url("fonts/LM8-italic.woff2") format("woff2"); }
 @font-face { font-family: "LM Roman 8"; font-style: normal; font-weight: bold; font-display: swap; src: url("fonts/LM8-bold.woff2") format("woff2"); }
 @font-face { font-family: "LM Roman 8"; font-style: italic; font-weight: bold; font-display: swap; src: url("fonts/LM-bold-italic.woff2") format("woff2"); }
+@font-face { font-family: "Inter"; font-style: normal; font-weight: normal; font-display: swap; src: url("fonts/inter-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Inter"; font-style: italic; font-weight: normal; font-display: swap; src: url("fonts/inter-latin-400-italic.woff2") format("woff2"); }
+@font-face { font-family: "Inter"; font-style: normal; font-weight: bold; font-display: swap; src: url("fonts/inter-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Inter"; font-style: italic; font-weight: bold; font-display: swap; src: url("fonts/inter-latin-700-italic.woff2") format("woff2"); }
 
 :root {
   /* Body font: swap this one line to change the whole site's typeface. */
-  --font: "LM Roman 8", "Latin Modern Roman", "CMU Serif", "Times New Roman", Times, serif;
-  --mono: "Courier New", Courier, monospace;
+  --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; /* classic: "LM Roman 8", "Latin Modern Roman", serif */
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --ink: #000; --paper: #fff; --muted: #555; --rule: #999; --hair: #ccc; --wash: #f5f5f5;
   --link: #0000ee; --visited: #551a8b; --hover: #cc0000;
   --bar: #e6e9f2; --bar-rule: #a8b0c8;
@@ -67,7 +71,7 @@ html { -webkit-text-size-adjust: 100%; background: var(--paper); }
 body {
   max-width: 980px; margin: 0 auto; padding: 18px 20px 40px;
   background: var(--paper); color: var(--ink);
-  font: 17px/1.45 var(--font); overflow-wrap: break-word;
+  font: 16px/1.6 var(--font); letter-spacing:-.005em; overflow-wrap: break-word;
 }
 a { color: var(--link); }
 a:visited { color: var(--visited); }
