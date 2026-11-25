@@ -1,15 +1,14 @@
 {%- comment -%}
-  Site header bar (Karpathy-style): dark top rule, name left, nav right.
+  Site header bar (Karpathy-style): dark top rule, one row of links, home first.
 {%- endcomment -%}
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ site.google_tag_manager }}"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-{%- assign _me = site.data.pi[0] -%}
 <header class="site-header">
   <div class="wrap">
-    <a class="site-title" href="{{ '/' | relative_url }}">{{ _me.name }}</a>
     <nav class="site-nav" aria-label="Site">
+    <a class="page-link" href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>home</a>
     {%- for p in site.nav_pages -%}
       {%- assign _url = '/' | append: p.name | append: '/' -%}
       <a class="page-link" href="{{ _url | relative_url }}"{% if page.url == _url %} aria-current="page"{% endif %}>{{ p.name }}</a>

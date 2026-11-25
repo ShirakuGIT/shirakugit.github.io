@@ -31,14 +31,10 @@
 @font-face { font-family: "Atkinson Hyperlegible"; font-style: italic; font-weight: normal; font-display: swap; src: url("fonts/atkinson-latin-400-italic.woff2") format("woff2"); }
 @font-face { font-family: "Atkinson Hyperlegible"; font-style: italic; font-weight: bold; font-display: swap; src: url("fonts/atkinson-latin-700-italic.woff2") format("woff2"); }
 
-@font-face { font-family: "Inter Light"; font-style: normal; font-weight: 300; font-display: swap; src: url("fonts/inter-latin-300-normal.woff2") format("woff2"); }
-@font-face { font-family: "Inter Light"; font-style: normal; font-weight: 600; font-display: swap; src: url("fonts/inter-latin-600-normal.woff2") format("woff2"); }
-@font-face { font-family: "Inter Light"; font-style: italic; font-weight: 300; font-display: swap; src: url("fonts/inter-latin-300-italic.woff2") format("woff2"); }
-@font-face { font-family: "Inter Light"; font-style: italic; font-weight: 600; font-display: swap; src: url("fonts/inter-latin-600-italic.woff2") format("woff2"); }
 
 :root {
   /* Body font: swap this one line to change the whole site's typeface. */
-  --font: Helvetica, "Inter Light", "Inter", Arial, sans-serif; /* Inter at weight 300 (body) and 600 (bold/headings). Earlier: system-ui, Atkinson Hyperlegible, Charis, LM Roman 8 */
+  --font: Helvetica, Arial, sans-serif; /* same stack as karpathy.github.io; body weight 300. Earlier: Inter, system-ui, Atkinson Hyperlegible, Charis, LM Roman 8 */
   --sans: var(--font);
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --ink: #111; --paper: #fdfdfd; --muted: #737373; --rule: #d4d4d4; --hair: #e8e8e8; --wash: #f7f7f7;
@@ -92,7 +88,7 @@ a:visited { color: var(--visited); }
 a:hover { color: var(--hover); text-decoration: underline; }
 .wrap { max-width: 800px; margin: 0 auto; padding: 0 30px; }
 p { margin: 0 0 1em; }
-strong, b { font-weight: 600; }
+strong, b { font-weight: bold; }
 h1, h2, h3, h4, h5, h6 { line-height: 1.25; }
 img, video, iframe, svg { max-width: 100%; height: auto; }
 hr { border: 0; border-top: 1px solid var(--rule); margin: 1.5em 0; }
@@ -104,7 +100,7 @@ blockquote { margin: 30px 0; padding-left: 20px; border-left: 4px solid var(--ha
 blockquote p:last-child { margin-bottom: 0; }
 table { border-collapse: collapse; margin: 20px 0; display: block; max-width: 100%; overflow-x: auto; font-size: 15px; font-variant-numeric: tabular-nums; }
 th, td { border: 0; border-bottom: 1px solid var(--hair); padding: 6px 14px 6px 0; text-align: left; vertical-align: top; }
-th { font-weight: 600; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+th { font-weight: bold; border-bottom: 1px solid var(--rule); white-space: nowrap; }
 thead th, table > tr:first-child > th { border-top: 1px solid var(--rule); }
 tbody tr:last-child td { border-bottom: 1px solid var(--rule); }
 dt { font-weight: bold; }
@@ -139,7 +135,7 @@ h5, h6 { font-size: 100%; margin: 24px 0 12px; }
 :root[data-theme="dark"] .site-title, :root[data-theme="dark"] .site-title:visited { color: var(--ink); }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .site-title, :root:not([data-theme="light"]) .site-title:visited { color: var(--ink); } }
 /* The name is long, so the nav sits on its own row under it. */
-.site-nav { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 20px; margin-top: -10px; letter-spacing: -.5px; }
+.site-nav { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 20px; padding: 14px 0; letter-spacing: -.5px; }
 .site-nav > a { color: var(--muted); white-space: nowrap; }
 .site-nav > a:hover { color: var(--hover); }
 .site-nav > a[aria-current="page"] { color: var(--ink); }
@@ -315,7 +311,7 @@ figure, .post-figure, .post-video, .post-gif { text-align: center; margin-left: 
 .jupyter-cell { padding: 10px 14px; border-bottom: 1px solid var(--hair); }
 .jupyter-cell:last-child { border-bottom: 0; }
 .jupyter-markdown p { margin-bottom: .4em; }
-.jupyter-markdown :is(h1, h2, h3, h4), .tex-html :is(h1, h2, h3, h4) { font-family: var(--font); font-weight: 600; letter-spacing: 0; line-height: 1.3; }
+.jupyter-markdown :is(h1, h2, h3, h4), .tex-html :is(h1, h2, h3, h4) { font-family: var(--font); font-weight: bold; letter-spacing: 0; line-height: 1.3; }
 .jupyter-markdown :is(h1, h2, h3, h4) { font-size: 1.1em; margin: 0 0 .4em; }
 .jupyter-code { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 4px 8px; align-items: start; }
 .jupyter-noprompt { grid-template-columns: minmax(0, 1fr); }
@@ -379,7 +375,7 @@ figure, .post-figure, .post-video, .post-gif { text-align: center; margin-left: 
 @media (max-width: 620px) {
   .wrap { padding: 0 16px; }
   .site-title { font-size: 22px; line-height: 48px; }
-  .site-nav { margin-top: -6px; }
+  .site-nav { padding: 10px 0; }
   h1 { font-size: 30px; letter-spacing: -1.25px; } h2 { font-size: 26px; } h3 { font-size: 22px; }
   .nav-search { width: 100%; }
   .nav-search input { width: 100%; }
@@ -420,7 +416,7 @@ ol.bibliography > li { margin: 0 0 1.5em; }
 .tex-html :is(h1, h2, h3, h4), .tex-html .title { font-family: var(--font); letter-spacing: 0; }
 
 /* Line breaking and rhythm: balanced headings, no one-word last lines, no hyphenation, comfortable list spacing. */
-h1, h2, h3, h4, .site-name, .who, .bc-title, .pub-title, .project-name { text-wrap: balance; }
+.site-name, .who, .bc-title, .pub-title, .project-name { text-wrap: balance; }
 p, li, dd, figcaption, blockquote { text-wrap: pretty; }
 body { hyphens: none; }
 .article-body li { margin: 0 0 .35em; }

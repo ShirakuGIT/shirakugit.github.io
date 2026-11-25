@@ -221,12 +221,12 @@ replaced the earlier early-2000s "LM Roman 8" homepage look. Reference sources:
 Source of truth: **`assets/site.css`** (plain CSS, no Sass, no framework; read
 its header comment), linked from `_includes/head.html`. Rules — keep them:
 
-- **Base**: `Helvetica` at weight 300 (`--font`; falls back to self-hosted
-  Inter Light, then Arial, so non-Mac visitors still get a light face), 16px /
+- **Base**: `Helvetica, Arial, sans-serif` at weight 300 (`--font`; exactly
+  karpathy.github.io's stack, so non-Apple visitors get Arial, as on his site), 16px /
   1.5, off-white paper `#fdfdfd`, an 800px `.wrap` column with 30px side padding.
 - **Header**: full-width bar with a 5px dark top rule and a hairline underneath.
-  The name (26px, -1px tracking) is on one row and the nav is on a second row,
-  because our name is too long to share a row. Nav links are grey with no
+  One row of nav links, with "home" first (no big site title, so the name
+  appears once, under the portrait on the home page). Nav links are grey with no
   brackets and no underline. The theme toggle and search sit at the end of the nav.
 - **Headings are light** (weight 300, `line-height` 1.1) and big with negative
   tracking: h1 36px, h2 32px, h3 26px, h4 20px. No bold headings, no rules under them.
