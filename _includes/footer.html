@@ -1,8 +1,26 @@
 {%- assign _me = site.data.pi[0] -%}
 <footer class="site-footer">
-<div class="wrap">
-  <p><a href="#" onclick="return emailDecode(this);" data-email="{{ site.email }}">Email</a> · <a href="{{ _me.cv | prepend: '/' | relative_url }}">CV</a> · <a href="{{ _me.scholar }}">Scholar</a> · <a href="{{ _me.github }}">GitHub</a> · <a href="{{ _me.linkedin }}">LinkedIn</a> · <a href="{{ _me.twitter }}">X</a> · <a href="{{ '/feed.xml' | relative_url }}">RSS</a></p>
-  <p class="modified">&copy; {{ "now" | date: "%Y" }} {{ _me.name }} · updated {{ page.last_modified_at | default: page.updated | default: site.time | date: "%b %-d, %Y" }}</p>
+<div class="wrap footer-cols">
+  <div class="column">
+    <h2 class="footer-heading">{{ _me.name }}</h2>
+    <p><a href="#" onclick="return emailDecode(this);" data-email="{{ site.email }}">Email</a></p>
+    <p class="modified">&copy; {{ "now" | date: "%Y" }} · updated {{ page.last_modified_at | default: page.updated | default: site.time | date: "%b %-d, %Y" }}</p>
+  </div>
+  <div class="column">
+    <h2 class="footer-heading">Elsewhere</h2>
+    <ul>
+      <li><a href="{{ _me.cv | prepend: '/' | relative_url }}">CV</a></li>
+      <li><a href="{{ _me.scholar }}">Scholar</a></li>
+      <li><a href="{{ _me.github }}">GitHub</a></li>
+      <li><a href="{{ _me.linkedin }}">LinkedIn</a></li>
+      <li><a href="{{ _me.twitter }}">X</a></li>
+      <li><a href="{{ '/feed.xml' | relative_url }}">RSS</a></li>
+    </ul>
+  </div>
+  <div class="column">
+    <h2 class="footer-heading">About</h2>
+    <p>Robotics researcher at the Algorithmic Robotics Group, NTU Singapore. Notes, papers and photographs.</p>
+  </div>
 </div>
 </footer>
 

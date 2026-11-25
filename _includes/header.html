@@ -1,5 +1,5 @@
 {%- comment -%}
-  Site header bar (Karpathy-style): dark top rule, one row of links, home first.
+  Site header bar (Karpathy-style): dark top rule, name-less title (home) on the left, links on the right; a menu button on phones.
 {%- endcomment -%}
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ site.google_tag_manager }}"
@@ -8,7 +8,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <header class="site-header">
   <div class="wrap">
     <nav class="site-nav" aria-label="Site">
-    <a class="page-link" href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>home</a>
+    <a class="site-title" href="{{ '/' | relative_url }}">home</a>
+    <button type="button" class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav-links">menu</button>
+    <div class="nav-links" id="nav-links">
     {%- for p in site.nav_pages -%}
       {%- assign _url = '/' | append: p.name | append: '/' -%}
       <a class="page-link" href="{{ _url | relative_url }}"{% if page.url == _url %} aria-current="page"{% endif %}>{{ p.name }}</a>
@@ -33,6 +35,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     })();
     </script>
     {% include search.html %}
+    </div>
+    <script>
+    (function () {
+      var b = document.getElementById("menu-btn"), n = document.getElementById("nav-links");
+      b.addEventListener("click", function () {
+        var open = n.classList.toggle("open");
+        b.setAttribute("aria-expanded", open);
+      });
+    })();
+    </script>
     </nav>
   </div>
 </header>
