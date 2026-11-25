@@ -1,7 +1,9 @@
 {%- assign _me = site.data.pi[0] -%}
 <footer class="site-footer">
+<div class="wrap">
   <p><a href="#" onclick="return emailDecode(this);" data-email="{{ site.email }}">Email</a> · <a href="{{ _me.cv | prepend: '/' | relative_url }}">CV</a> · <a href="{{ _me.scholar }}">Scholar</a> · <a href="{{ _me.github }}">GitHub</a> · <a href="{{ _me.linkedin }}">LinkedIn</a> · <a href="{{ _me.twitter }}">X</a> · <a href="{{ '/feed.xml' | relative_url }}">RSS</a></p>
   <p class="modified">&copy; {{ "now" | date: "%Y" }} {{ _me.name }} · updated {{ page.last_modified_at | default: page.updated | default: site.time | date: "%b %-d, %Y" }}</p>
+</div>
 </footer>
 
 <script>

@@ -47,7 +47,7 @@ Three repos have to be tracked separately:
 | Layouts | `_layouts/*.html` | `default` → `homelay`/`gridlay`/`page`/`post`/`note`/... |
 | Reusable snippets | `_includes/*.html` | `figure video gif jupyter_notebook calendar …` |
 | Custom plugins | `_plugins/*.rb` | Require Jekyll restart |
-| **Styles** | `assets/site.css` | The homepage style (§7.0): plain CSS, LM Roman 8, light + dark |
+| **Styles** | `assets/site.css` | The Karpathy-inspired style (§7.0): plain CSS, Helvetica Light, light + dark |
 | Legacy styles (unlinked) | `_sass/SHB_css.scss`, `assets/main.scss` | Old earthy Bootstrap theme; delete after redesign approval |
 | A/B regression harness | `scripts/ab_compare.py` | Old-vs-new build comparison + screenshots (§7.0) |
 | Design prototypes | `_plugins/plain_preview.rb`, `_includes/plain/`, `assets/plain/*.css` | Generates `/plain/<style>/` for home + every post/note |
@@ -211,46 +211,46 @@ otherwise it falls back to grey `misc`.
 
 ## 7. Design system
 
-### 7.0 The homepage style (chosen Nov 2026) — the site's design
+### 7.0 The Karpathy-inspired style (chosen Nov 25, 2026) — the site's design
 
-The site uses an **early-2000s academic homepage** look — a professor's
-`~user/` page circa 2003, in the lineage of bellard.org, nullprogram, cat-v,
-Paul Graham, Dennis Ritchie's page. Shiva picked it after comparing eight
-prototypes. **All design work builds on this**; the old dark earthy Bootstrap
-theme (§7.1) is retired.
+The site takes its look from **karpathy.github.io** (inspiration, not a copy):
+neat, light and quiet. Shiva liked its font, its clean text and its tables. It
+replaced the earlier early-2000s "LM Roman 8" homepage look. Reference sources:
+`https://karpathy.github.io/css/main.css` and the repo `karpathy/karpathy.github.io`.
 
 Source of truth: **`assets/site.css`** (plain CSS, no Sass, no framework; read
 its header comment), linked from `_includes/head.html`. Rules — keep them:
 
-- **Wide, near-fluid page**: `body { max-width: 980px }` (~110-char lines).
-  Shiva explicitly asked to "go wider". No narrow reading column.
-- **Font: Latin Modern Roman 8** (`--font` in `site.css`) — LaTeX's Latin
-  Modern at its 8pt optical size: same design, sturdier and wider, so it reads
-  better on screens. Shiva tried Lora, Libertinus, STIX Two, New Computer
-  Modern Book, Old Standard TT and others (`/plain/fonts/`) and chose LM8.
-  Files: `assets/fonts/LM8-{regular,italic,bold}.woff2` (+ `LM-bold-italic` as
-  the bold italic), subset from CTAN OTFs with fonttools (GUST licence). Code
-  in Courier New. No web-font services, no icon fonts.
-- **Very few colours**, all CSS variables in `:root` (light / dark): ink,
-  paper, link blue, visited purple, hover red, one section-bar tint, greys.
-  Don't add colours; add a variable only if a new role truly needs one.
-- **Dark mode + [light]/[dark] switch**: `includes/theme.html` (top of
-  `<head>`, no flash) sets `<html data-theme>` from the visitor's saved choice
-  (localStorage `theme`) or the system setting; the bracketed button at the
-  end of the nav flips and saves it. CSS keys the dark palette off
-  `[data-theme="dark"]`, with a `prefers-color-scheme` copy for no-JS — keep
-  the two dark blocks in `site.css` identical. TikZ figures (dark-on-transparent SVG) are flipped with
-  `filter: invert(1) hue-rotate(180deg)`; photos never are.
-  The dark palette ("soft", chosen Nov 2026) is neutral grey #181818 with
-  #dcdad6 text (~12.7:1) — deliberately not pure black (OLED smear, glow) and
-  not tinted (shifts on uncalibrated screens). Keep it neutral; aim for
-  11–13:1 body contrast. Other palettes tried: `/plain/dark/`, `?dark=<name>`.
-- **Era furniture**: home masthead = big name, one role line,
-  circular portrait icon left of the name/role (230px, centred above a centred name/role/nav, links to /about/; the one deliberate border-radius); no postal block, and the home page lists only papers + 5 recent posts/notes;
-  other pages get a compact name + role. Bracketed nav `[about] [projects] …`,
-  every `h2` is a bold heading over a hairline rule (the tinted bar was dropped in the Nov 2026 declutter; `--bar` is still used by table heads, search and toolbars), plain disc bullets, **bold ISO dates**
-  (`2026-11-14: title`), always-underlined links, `[bracketed]` action links,
-  italic "Last modified" footer. No radii, shadows, cards, or animations.
+- **Base**: `Helvetica` at weight 300 (`--font`; falls back to self-hosted
+  Inter Light, then Arial, so non-Mac visitors still get a light face), 16px /
+  1.5, off-white paper `#fdfdfd`, an 800px `.wrap` column with 30px side padding.
+- **Header**: full-width bar with a 5px dark top rule and a hairline underneath.
+  The name (26px, -1px tracking) is on one row and the nav is on a second row,
+  because our name is too long to share a row. Nav links are grey with no
+  brackets and no underline. The theme toggle and search sit at the end of the nav.
+- **Headings are light** (weight 300, `line-height` 1.1) and big with negative
+  tracking: h1 36px, h2 32px, h3 26px, h4 20px. No bold headings, no rules under them.
+  Headings inside embeds (notebook, LaTeX) reset to 600 weight and normal tracking.
+- **Links**: blue (visited links the same blue, so lists look even), no underline until hover (then black/white and underlined).
+- **Lists** (blogs, notes, home "Writing"): grey 15px date (`Nov 23, 2026`) on
+  its own line above a 20px light title link, 30px between items (`.post-date`,
+  `.post-link`). Footer: hairline, 30px padding, grey 15px.
+- **Tables**: no vertical rules; a rule above the header and below the last row,
+  hairlines between rows, bold header cells, tabular numbers.
+- **Code and quotes**: soft tinted code boxes (`--code-bg`, `--code-border`),
+  italic quotes with a 4px grey left rule, centred 14px captions.
+- **Notebook and LaTeX embeds**: hairline frame with 3px radius, quiet toolbar,
+  muted `In [n]:` prompts, plain outputs with a 2px left rule.
+- **No brackets anywhere**: nav, `bracket-links`, `[abstract]`/`[bibtex]` and
+  download links are plain links.
+- **Colours** are CSS variables in `:root` (light) plus two **identical** dark
+  blocks (`[data-theme="dark"]` and a `prefers-color-scheme` copy). Dark mode and
+  the toggle (`includes/theme.html`) are our own additions, as are search, the
+  sticky Contents bar, the lightbox and the visitor map. Dark palette: neutral
+  grey `#1a1a1a` paper, `#dadada` text. TikZ figures are inverted in dark mode; photos never.
+- **Home page**: header bar, then circular portrait (160px, links to /about/),
+  the name as the single `<h1>`, one role line, bio, Papers, and the 5 latest
+  posts/notes.
 - **Pictures are centred** by CSS (figure include, lone `![](…)` images, video
   and GIF embeds) — authors don't add per-image markup.
 - **Interactive bits are minimal and degrade**: research TL;DR / Abstract /
@@ -258,7 +258,7 @@ its header comment), linked from `_includes/head.html`. Rules — keep them:
   (hidden without JS or with < 3 headings); photo thumbnails link to the full
   image and JS upgrades them to the lightbox; notes are grouped by category
   with anchors (no filter JS); search box kept (`includes/search.html`).
-- Must work at phone width: masthead stacks, photo above name, no horizontal
+- Must work at phone width: header and nav wrap, no horizontal
   scroll — verify in a 390px iframe (headless Chrome won't go below 500px).
 
 Where things live: `_includes/{head,header,footer,news-list,social,post-toc}.html`,

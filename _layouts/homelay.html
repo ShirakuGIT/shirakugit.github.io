@@ -8,6 +8,11 @@ layout: default
   news and photographs are one click away in the nav.
 {%- endcomment -%}
 {%- assign _me = site.data.pi[0] -%}
+<div class="home-top">
+  <a class="portrait-link" href="{{ '/about/' | relative_url }}"><img class="portrait" src="{{ '/images/' | append: _me.photo | relative_url }}" alt="{{ _me.name }}" width="230" height="230"></a>
+  <h1 class="page-title">{{ _me.name }}</h1>
+  <p class="who">Robotics researcher, Algorithmic Robotics Group, NTU Singapore</p>
+</div>
 <div class="intro">
   {{ content }}
 </div>
@@ -33,7 +38,7 @@ layout: default
 <ol class="dated">
 {%- for _it in _items limit: 5 -%}
   {%- assign _f = _it | split: "^^" %}
-  <li><time datetime="{{ _f[0] }}">{{ _f[0] }}</time> <a href="{{ _f[1] | relative_url }}">{{ _f[2] }}</a></li>
+  <li><time class="post-date" datetime="{{ _f[0] }}">{{ _f[0] | date: "%b %-d, %Y" }}</time><a class="post-link" href="{{ _f[1] | relative_url }}">{{ _f[2] }}</a></li>
 {%- endfor %}
 </ol>
 <p class="more"><a href="{{ '/blogs/' | relative_url }}">All posts</a> · <a href="{{ '/notes/' | relative_url }}">All notes</a> · <a href="{{ '/allnews.html' | relative_url }}">News</a></p>

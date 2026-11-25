@@ -1,24 +1,18 @@
 {%- comment -%}
-  Site masthead. The home page (layout: homelay) gets the full early-2000s
-  header — big name, postal contact block, portrait top-right; every other
-  page gets the compact name + role + nav.
+  Site header bar (Karpathy-style): dark top rule, name left, nav right.
 {%- endcomment -%}
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ site.google_tag_manager }}"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-{%- assign _home = false -%}{%- if page.layout == "homelay" -%}{%- assign _home = true -%}{%- endif -%}
 {%- assign _me = site.data.pi[0] -%}
-<header class="masthead{% if _home %} masthead--home{% endif %}">
-  {%- if _home %}<a class="portrait-link" href="{{ '/about/' | relative_url }}"><img class="portrait" src="{{ '/images/' | append: _me.photo | relative_url }}" alt="{{ _me.name }}" width="230" height="230"></a>{% endif %}
-  {% if _home %}<h1 class="site-name">{% else %}<p class="site-name">{% endif %}<a href="{{ '/' | relative_url }}">{{ _me.name }}</a>{% if _home %}</h1>{% else %}</p>{% endif %}
-  {%- if _home %}
-  <p class="who">Robotics researcher, Algorithmic Robotics Group, NTU Singapore</p>
-  {%- endif %}
-  <nav class="nav" aria-label="Site">
+<header class="site-header">
+  <div class="wrap">
+    <a class="site-title" href="{{ '/' | relative_url }}">{{ _me.name }}</a>
+    <nav class="site-nav" aria-label="Site">
     {%- for p in site.nav_pages -%}
       {%- assign _url = '/' | append: p.name | append: '/' -%}
-      <a href="{{ _url | relative_url }}"{% if page.url == _url %} aria-current="page"{% endif %}>{{ p.name }}</a>
+      <a class="page-link" href="{{ _url | relative_url }}"{% if page.url == _url %} aria-current="page"{% endif %}>{{ p.name }}</a>
     {%- endfor -%}
     <button type="button" class="theme-toggle" id="theme-toggle" hidden aria-label="Switch colour theme"></button>
     <script>
@@ -40,5 +34,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     })();
     </script>
     {% include search.html %}
-  </nav>
+    </nav>
+  </div>
 </header>

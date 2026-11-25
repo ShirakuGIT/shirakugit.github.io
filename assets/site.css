@@ -1,16 +1,11 @@
 /* =============================================================================
-   site.css — the "homepage" style (AGENTS.md §7.0)
+   site.css — modelled on karpathy.github.io (AGENTS.md §7.0)
 
-   An early-2000s academic homepage: wide near-fluid page, LaTeX's Latin Modern
-   (Roman 8 cut),
-   quiet hairline section headings, bracketed nav, blue/purple underlined links, bold dates.
-   Plain CSS, no framework, no icon fonts. Dark mode follows the system setting.
-
-   Colours — every colour is a variable below; keep to these (light / dark):
-     ink #000/#dcdad6 · paper #fff/#181818 · link #0000ee/#8ab4ff
-     visited #551a8b/#c9a0ff · hover #cc0000/#ff8080
-     bar tint #e6e9f2/#20263a · bar rule #a8b0c8/#3e4a6b
-     greys: muted #555/#a8a8a8 · rule #999/#5a5a5a · hair #ccc/#333 · wash #f5f5f5/#1c1c1c
+   Helvetica Light at 16px/1.5, an 800px column, a 5px dark rule over a hairline
+   header (name left, nav right), large light headings with tight tracking, blue
+   links with no underline until hover. Our additions: dark mode + toggle, search,
+   sticky Contents bar, embeds. Plain CSS, no framework, no icon fonts.
+   Every colour is a variable in :root (light) and the two identical dark blocks.
    ========================================================================== */
 
 /* Latin Modern Roman 8 — LaTeX's Latin Modern at its 8pt optical size: the same
@@ -43,11 +38,12 @@
 
 :root {
   /* Body font: swap this one line to change the whole site's typeface. */
-  --font: "Inter Light", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; /* Inter at weight 300 (body) and 600 (bold/headings). Earlier: system-ui, Atkinson Hyperlegible, Charis, LM Roman 8 */
+  --font: Helvetica, "Inter Light", "Inter", Arial, sans-serif; /* Inter at weight 300 (body) and 600 (bold/headings). Earlier: system-ui, Atkinson Hyperlegible, Charis, LM Roman 8 */
   --sans: var(--font);
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --ink: #333; --paper: #fbfbf9; --muted: #737373; --rule: #d4d4d4; --hair: #e8e8e8; --wash: #f7f7f7;
-  --link: #2c4a8a; --visited: #2c4a8a; --hover: #000;
+  --ink: #111; --paper: #fdfdfd; --muted: #737373; --rule: #d4d4d4; --hair: #e8e8e8; --wash: #f7f7f7;
+  --link: #226fd6; --visited: #226fd6; --hover: #000;
+  --topbar: #333; --head-bg: #fff; --code-bg: #eef; --code-border: #d5d5e9;
   --bar: #f0f0f0; --bar-rule: #cfcfcf;
   --box: #fafafa; --mark: #ffff99; --target: #ffffcc; --err-wash: #fff4f4;
   --code-str: #a31515; --code-num: #000080; --code-add: #006400;
@@ -60,7 +56,8 @@
 :root[data-theme="dark"] {
   color-scheme: dark;
   --ink: #dadada; --paper: #1a1a1a; --muted: #8c8c8c; --rule: #3e3e3e; --hair: #2a2a2a; --wash: #202020;
-  --link: #93a9d6; --visited: #93a9d6; --hover: #e4e4e4;
+  --link: #7aa8f0; --visited: #7aa8f0; --hover: #fff;
+  --topbar: #5a5a5a; --head-bg: #1f1f1f; --code-bg: #232733; --code-border: #353b4d;
   --bar: #20263a; --bar-rule: #3e4a6b;
   --box: #1e1e1e; --mark: #5c5200; --target: #3a3600; --err-wash: #2e1616;
   --code-str: #f1a3a3; --code-num: #a8c7ff; --code-add: #8fd48f;
@@ -70,7 +67,8 @@
   :root:not([data-theme]) {
     color-scheme: dark;
     --ink: #dadada; --paper: #1a1a1a; --muted: #8c8c8c; --rule: #3e3e3e; --hair: #2a2a2a; --wash: #202020;
-    --link: #93a9d6; --visited: #93a9d6; --hover: #e4e4e4;
+    --link: #7aa8f0; --visited: #7aa8f0; --hover: #fff;
+  --topbar: #5a5a5a; --head-bg: #1f1f1f; --code-bg: #232733; --code-border: #353b4d;
     --bar: #20263a; --bar-rule: #3e4a6b;
     --box: #1e1e1e; --mark: #5c5200; --target: #3a3600; --err-wash: #2e1616;
     --code-str: #f1a3a3; --code-num: #a8c7ff; --code-add: #8fd48f;
@@ -85,28 +83,33 @@
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; background: var(--paper); }
 body {
-  max-width: 760px; margin: 0 auto; padding: 18px 20px 40px;
+  margin: 0; padding: 0;
   background: var(--paper); color: var(--ink);
-  font: 112.5%/1.65 var(--font); font-weight: 300; overflow-wrap: break-word;
+  font: 100%/1.5 var(--font); font-weight: 300; overflow-wrap: break-word;
 }
-a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: .18em; text-decoration-color: color-mix(in srgb, var(--link) 40%, transparent); }
+a { color: var(--link); text-decoration: none; }
 a:visited { color: var(--visited); }
-a:hover { color: var(--hover); text-decoration-color: currentColor; }
+a:hover { color: var(--hover); text-decoration: underline; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 0 30px; }
 p { margin: 0 0 1em; }
+strong, b { font-weight: 600; }
 h1, h2, h3, h4, h5, h6 { line-height: 1.25; }
 img, video, iframe, svg { max-width: 100%; height: auto; }
 hr { border: 0; border-top: 1px solid var(--rule); margin: 1.5em 0; }
 code, kbd, samp, pre { font-family: var(--mono); font-size: .9em; }
-pre { background: var(--wash); border: 1px solid var(--hair); padding: .6em .8em; overflow-x: auto; line-height: 1.35; }
+pre { background: var(--code-bg); border: 1px solid var(--code-border); border-radius: 3px; padding: 8px 12px; overflow-x: auto; line-height: 1.35; }
+:not(pre) > code { background: var(--code-bg); border-radius: 3px; padding: 1px 5px; font-size: 15px; }
 pre code { font-size: 1em; }
-blockquote { margin: 1.2em 0; padding: .1em 0 .1em 1.1em; border-left: 3px solid var(--rule); color: var(--muted); }
+blockquote { margin: 30px 0; padding-left: 20px; border-left: 4px solid var(--hair); font-size: 18px; font-style: italic; letter-spacing: -.5px; color: var(--muted); }
 blockquote p:last-child { margin-bottom: 0; }
-table { border-collapse: collapse; margin: 1em 0; display: block; max-width: 100%; overflow-x: auto; }
-th, td { border: 1px solid var(--rule); padding: 2px 8px; text-align: left; vertical-align: top; }
-th { background: var(--bar); }
+table { border-collapse: collapse; margin: 20px 0; display: block; max-width: 100%; overflow-x: auto; font-size: 15px; font-variant-numeric: tabular-nums; }
+th, td { border: 0; border-bottom: 1px solid var(--hair); padding: 6px 14px 6px 0; text-align: left; vertical-align: top; }
+th { font-weight: 600; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+thead th, table > tr:first-child > th { border-top: 1px solid var(--rule); }
+tbody tr:last-child td { border-bottom: 1px solid var(--rule); }
 dt { font-weight: bold; }
 figure { margin: 1.2em 0; }
-figcaption { color: var(--muted); font-size: .9em; }
+figcaption { color: var(--muted); font-size: 14px; text-align: center; }
 details > summary { cursor: pointer; }
 button { font: inherit; }
 
@@ -119,45 +122,42 @@ i.ph, i[class^="fa-"], i[class*=" fa-"], i[class^="ai-"], i[class*=" ai-"] { dis
   overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
 }
 
-/* Section headings: a bold line over a hairline (the tinted bar was too loud). */
-/* One heading style everywhere: Inter (--sans), bold, normal text colour, sentence case. Size steps down 1.6 / 1.3 / 1.1 / 1em; only h2 carries a hairline. */
-h1, h2, h3, h4, h5, h6 { font-family: var(--sans); font-weight: bold; color: var(--ink); text-transform: none; letter-spacing: -.01em; }
-h1 { font-size: 1.6em; margin: 1.2em 0 .5em; }
-h2 { font-size: 1.3em; border-bottom: 1px solid var(--hair); padding: 0 0 4px; margin: 1.8em 0 .7em; }
-h3 { font-size: 1.1em; margin: 1.5em 0 .5em; }
-h4 { font-size: 1em; font-style: italic; margin: 1.3em 0 .4em; }
+/* Headings are light and large with tight tracking, as on karpathy.github.io. */
+h1, h2, h3, h4, h5, h6 { font-family: var(--sans); font-weight: 300; color: var(--ink); text-transform: none; line-height: 1.1; }
+h1 { font-size: 36px; letter-spacing: -1.75px; margin: 10px 0 20px; }
+h2 { font-size: 32px; letter-spacing: -1.25px; margin: 40px 0 20px; }
+h3 { font-size: 26px; letter-spacing: -1px; margin: 40px 0 20px; }
+h4 { font-size: 20px; letter-spacing: -1px; margin: 30px 0 15px; }
+h5, h6 { font-size: 100%; margin: 24px 0 12px; }
 .aside, .meta { color: var(--muted); font-size: .9em; }
 .small { font-size: .9em; }
 
 /* -------------------------------------------------------------- header --- */
-.masthead { margin-bottom: 1.2em; position: relative; overflow: hidden; }
-.site-name { font-size: 1.4em; font-weight: bold; line-height: 1.15; margin: 0 0 .15em; }
-.masthead--home .site-name { font-size: 1.9em; }
-.site-name a, .site-name a:visited { color: var(--ink); text-decoration: none; }
-.who { margin: 0 0 .4em; font-style: italic; color: var(--muted); font-size: .9em; }
-.contact { margin: 0 0 .8em; line-height: 1.35; }
-.masthead--home { text-align: center; margin-bottom: 1.6em; }
-.masthead--home .nav { justify-content: center; }
-.masthead--home .nav-search { margin-left: 0; }
-.portrait-link { display: block; width: max-content; margin: 0 auto .7em; }
-.portrait { display: block; width: 230px; height: 230px; object-fit: cover; object-position: center 20%; border-radius: 50%; border: 1px solid var(--rule); padding: 0; background: var(--paper); }
-.nav { margin: .6em 0 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: .2em .5em; }
-.nav > a { white-space: nowrap; }
-.nav > a::before, .nav > a::after { color: var(--ink); }
-.nav > a::before { content: "["; }
-.nav > a::after { content: "]"; }
-.nav > a[aria-current="page"] { color: var(--ink); font-weight: bold; text-decoration: none; }
+.site-header { border-top: 5px solid var(--topbar); border-bottom: 1px solid var(--hair); background: var(--head-bg); }
+.site-header .wrap { padding-bottom: 12px; }
+.site-title, .site-title:visited { display: block; color: var(--topbar); font-size: 26px; letter-spacing: -1px; line-height: 56px; text-decoration: none; }
+:root[data-theme="dark"] .site-title, :root[data-theme="dark"] .site-title:visited { color: var(--ink); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .site-title, :root:not([data-theme="light"]) .site-title:visited { color: var(--ink); } }
+/* The name is long, so the nav sits on its own row under it. */
+.site-nav { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 20px; margin-top: -10px; letter-spacing: -.5px; }
+.site-nav > a { color: var(--muted); white-space: nowrap; }
+.site-nav > a:hover { color: var(--hover); }
+.site-nav > a[aria-current="page"] { color: var(--ink); }
 
-/* [light]/[dark] switch — a button dressed as a bracketed nav link */
-.theme-toggle { background: none; border: 0; padding: 0; color: var(--link); text-decoration: underline; cursor: pointer; font: inherit; white-space: nowrap; }
+.home-top { margin: 10px 0 30px; }
+.home-top .portrait-link { margin: 0 0 20px; }
+.who { margin: 0 0 .4em; color: var(--muted); }
+.portrait-link { display: block; width: max-content; }
+.portrait { display: block; width: 160px; height: 160px; object-fit: cover; object-position: center 20%; border-radius: 50%; border: 1px solid var(--hair); padding: 0; background: var(--paper); }
+
+/* [light]/[dark] switch: a plain nav-style button */
+.theme-toggle { background: none; border: 0; padding: 0; color: var(--muted); cursor: pointer; font: inherit; white-space: nowrap; }
 .theme-toggle:hover { color: var(--hover); }
-.theme-toggle::before { content: "["; color: var(--ink); }
-.theme-toggle::after { content: "]"; color: var(--ink); }
 .theme-toggle[hidden] { display: none; }
 
 /* search (includes/search.html) — an old-fashioned box at the end of the nav */
-.nav-search { position: relative; margin-left: auto; }
-.nav-search input { font: .9em var(--font); padding: 0 2px; border: 0; border-bottom: 1px solid var(--hair); border-radius: 0; width: 7em; background: transparent; color: var(--ink); }
+.nav-search { position: relative; }
+.nav-search input { font: .9em var(--font); line-height: 1.4; padding: 0 2px; border: 0; border-bottom: 1px solid var(--hair); border-radius: 0; width: 7em; background: transparent; color: var(--ink); }
 .nav-search input:focus { outline: 0; border-bottom-color: var(--ink); }
 .search-panel { display: none; position: absolute; right: 0; top: 1.8em; z-index: 20; width: min(34em, 90vw); max-height: 70vh; overflow-y: auto; background: var(--paper); border: 1px solid var(--ink); padding: 4px 8px; box-shadow: 2px 2px 0 var(--hair); }
 .search-panel.open, .nav-search.open .search-panel, .search-panel.is-open { display: block; }
@@ -166,7 +166,7 @@ h4 { font-size: 1em; font-style: italic; margin: 1.3em 0 .4em; }
 .sr-item { border-top: 1px solid var(--hair); padding: 4px 0; }
 .sr-item.active, .sr-item[aria-selected="true"] { background: var(--bar); }
 .sr-item a { display: block; text-decoration: none; color: var(--ink); }
-.sr-title { color: var(--link); text-decoration: underline; font-weight: bold; }
+.sr-title { color: var(--link); }
 .sr-badge { color: var(--muted); font-size: .8em; margin-left: .4em; text-transform: lowercase; }
 .sr-badge::before { content: "("; } .sr-badge::after { content: ")"; }
 .sr-meta, .search-empty { color: var(--muted); font-size: .85em; }
@@ -174,12 +174,13 @@ h4 { font-size: 1em; font-style: italic; margin: 1.3em 0 .4em; }
 .sr-snippet mark, .sr-title mark { background: var(--mark); color: inherit; }
 
 /* -------------------------------------------------------------- footer --- */
-.site-footer { margin-top: 3em; border-top: 1px solid var(--hair); padding-top: .5em; font-size: .88em; color: var(--muted); }
+.site-footer { margin-top: 30px; border-top: 1px solid var(--hair); padding: 30px 0; font-size: 15px; letter-spacing: -.3px; color: var(--muted); }
 .site-footer p { margin: 0 0 .2em; }
 .site-footer .modified { margin-top: .1em; }
 
 /* ------------------------------------------------------- page headings --- */
-.page-title { line-height: 1.2; margin: .3em 0 .4em; }
+.page-title { margin: 10px 0 20px; }
+.page-content { padding: 30px 0; }
 .page-intro { margin-bottom: 1em; }
 
 /* ---------------------------------------------------------------- home --- */
@@ -190,9 +191,7 @@ ul.things, ul.plain-list, ol.dated { padding-left: 1.6em; margin: .4em 0 .8em; }
 ul.things { list-style: disc; }
 ul.things li, ol.dated li { margin: 0 0 .3em; }
 ul.things li > a:first-child { font-weight: bold; }
-ol.dated { list-style: none; padding-left: 0; }
-ol.dated li { margin: 0 0 .6em; }
-ol.dated li > a { font-weight: bold; }  /* item titles are bold links everywhere: papers, writing, notes, posts, projects */
+ol.dated li > a { font-weight: 300; }  /* item titles are bold links everywhere: papers, writing, notes, posts, projects */
 ol.dated time, .date { color: var(--muted); font-variant-numeric: tabular-nums; font-size: .9em; margin-right: .7em; }
 .more { margin: -.2em 0 1em; }
 
@@ -200,8 +199,6 @@ ol.dated time, .date { color: var(--muted); font-variant-numeric: tabular-nums; 
 .news-list .news-type { color: var(--muted); font-size: .9em; }
 .news-list .news-summary { display: block; color: var(--ink); }
 .news-list .news-links a { margin-right: .4em; }
-.bracket-links a::before { content: "["; color: var(--ink); }
-.bracket-links a::after { content: "]"; color: var(--ink); }
 .bracket-links a { margin-right: .35em; white-space: nowrap; }
 
 /* --------------------------------------------------------------- about --- */
@@ -224,10 +221,8 @@ ol.dated time, .date { color: var(--muted); font-variant-numeric: tabular-nums; 
 .pub-venue { margin: 0 0 .3em; font-style: italic; }
 .pub-links { margin: 0 0 .3em; }
 .pub-detail { margin: .2em 0 .4em; }
-.pub-detail > summary { display: inline; color: var(--link); text-decoration: underline; list-style: none; }
+.pub-detail > summary { display: inline; color: var(--link); cursor: pointer; list-style: none; }
 .pub-detail > summary::-webkit-details-marker { display: none; }
-.pub-detail > summary::before { content: "["; color: var(--ink); }
-.pub-detail > summary::after { content: "]"; color: var(--ink); }
 .pub-detail[open] > summary { color: var(--hover); }
 .pub-detail pre { margin: .4em 0 0; font-size: .8em; }
 .pub-detail p { margin: .4em 0 0; padding: .4em .7em; border-left: 3px solid var(--bar-rule); background: var(--box); }
@@ -247,9 +242,10 @@ ul.bib-compact li { margin-bottom: .45em; }
 .project p { margin-bottom: .4em; }
 
 /* --------------------------------------------------------- blog / notes --- */
-.post-list { list-style: none; padding: 0; margin: .5em 0 1em; }
-.post-list > li { margin: 0 0 .45em; }
-.post-list .post-link { font-weight: bold; font-size: 1.05em; }
+.post-list, ol.dated { list-style: none; padding: 0; margin: 20px 0; }
+.post-list > li, ol.dated > li { margin: 0 0 30px; }
+.post-date { display: block; font-size: 15px; color: var(--muted); font-weight: 300; margin: 0; }
+.post-link, ol.dated > li > a, .post-list .post-link { font-size: 20px; letter-spacing: -1px; line-height: 1.2; font-weight: 300; }
 .post-list .excerpt { margin: .15em 0 0; }
 .tags { color: var(--muted); font-size: .9em; }
 .status { font-variant: small-caps; color: var(--muted); }
@@ -257,10 +253,10 @@ ul.bib-compact li { margin-bottom: .45em; }
 .category-index a + a::before { content: " · "; color: var(--ink); display: inline-block; text-decoration: none; margin: 0 .2em 0 -.1em; }
 
 /* ------------------------------------------------------------ articles --- */
-.article-head { margin: .4em 0 1.4em; border-bottom: 1px solid var(--rule); }
+.article-head { margin: 10px 0 30px; }
 .article-back { margin: 0 0 .4em; font-size: .9em; }
-.article-title { line-height: 1.2; margin: 0 0 .2em; }
-.article-meta { font-style: italic; color: var(--muted); font-size: .9em; margin: 0 0 .6em; }
+.article-title { line-height: 1; margin: 0; }
+.article-meta { color: var(--muted); font-size: 15px; margin: 5px 0 0; }
 .article-body li { margin-bottom: .25em; }
 .article-body img { border: 1px solid var(--hair); }
 .article-body :target { background: var(--target); }
@@ -314,22 +310,22 @@ figure, .post-figure, .post-video, .post-gif { text-align: center; margin-left: 
 .photo-close:hover, .photo-nav:hover { color: #ff9999; }
 
 /* ----------------------------------------------- Jupyter notebook embed --- */
-.jupyter-notebook { margin: 1.2em 0; border: 1px solid var(--rule); font-size: .92em; }
-.jupyter-toolbar { display: flex; justify-content: flex-end; padding: 2px 8px; background: var(--bar); border-bottom: 1px solid var(--rule); font-size: .85em; }
-.jupyter-download::before { content: "["; color: var(--ink); } .jupyter-download::after { content: "]"; color: var(--ink); }
-.jupyter-cell { padding: 6px 10px; border-bottom: 1px solid var(--hair); }
+.jupyter-notebook { margin: 30px 0; border: 1px solid var(--hair); border-radius: 3px; font-size: 15px; }
+.jupyter-toolbar { display: flex; justify-content: flex-end; padding: 4px 12px; border-bottom: 1px solid var(--hair); font-size: 13px; }
+.jupyter-cell { padding: 10px 14px; border-bottom: 1px solid var(--hair); }
 .jupyter-cell:last-child { border-bottom: 0; }
 .jupyter-markdown p { margin-bottom: .4em; }
-.jupyter-markdown h1, .jupyter-markdown h2, .jupyter-markdown h3 { background: none; border: 0; padding: 0; font-size: 1.05em; margin: .5em 0 .3em; }
+.jupyter-markdown :is(h1, h2, h3, h4), .tex-html :is(h1, h2, h3, h4) { font-family: var(--font); font-weight: 600; letter-spacing: 0; line-height: 1.3; }
+.jupyter-markdown :is(h1, h2, h3, h4) { font-size: 1.1em; margin: 0 0 .4em; }
 .jupyter-code { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 4px 8px; align-items: start; }
 .jupyter-noprompt { grid-template-columns: minmax(0, 1fr); }
 .jupyter-noprompt .jupyter-output-block { grid-column: 1 / 2; }
-.jupyter-prompt { color: var(--prompt-in); font-family: var(--mono); font-size: .8em; padding-top: 6px; text-align: right; user-select: none; }
-.jupyter-prompt-out { color: var(--prompt-out); }
-.jupyter-input pre.highlight, .jupyter-input > code { margin: 0; }
+.jupyter-prompt { color: var(--muted); font-family: var(--mono); font-size: .8em; padding-top: 6px; text-align: right; user-select: none; }
+.jupyter-prompt-out { color: var(--muted); }
+.jupyter-input pre.highlight, .jupyter-input > code, .jupyter-input pre { margin: 0; border: 0; }
 .jupyter-output-block { grid-column: 2 / 3; display: flex; flex-direction: column; gap: 4px; margin-top: 2px; }
-.jupyter-output { margin: 0; font-family: var(--mono); font-size: .85em; line-height: 1.35; padding: 4px 8px; border-left: 3px solid var(--hair); overflow-x: auto; white-space: pre-wrap; }
-.jupyter-stderr, .jupyter-error-output { border-left-color: var(--hover); background: var(--err-wash); }
+.jupyter-output { margin: 0; font-family: var(--mono); font-size: 13.5px; line-height: 1.4; padding: 2px 10px; border: 0; border-left: 2px solid var(--hair); border-radius: 0; background: none; overflow-x: auto; white-space: pre-wrap; }
+.jupyter-stderr, .jupyter-error-output { border-left-color: var(--code-str); background: var(--err-wash); }
 .jupyter-image, .jupyter-html, .jupyter-latex { border-left: 0; padding: 4px 0; white-space: normal; font-family: var(--font); }
 .jupyter-image img, .jupyter-image svg { max-width: 100%; height: auto; }
 .jupyter-error { color: var(--hover); padding: 10px; }
@@ -340,16 +336,15 @@ figure, .post-figure, .post-video, .post-gif { text-align: center; margin-left: 
 }
 
 /* ------------------------------------------------- compiled LaTeX embed --- */
-.tex-paper { margin: 1.2em 0; border: 1px solid var(--rule); }
-.tex-toolbar { display: flex; align-items: center; gap: 10px; padding: 2px 8px; background: var(--bar); border-bottom: 1px solid var(--rule); font-size: .85em; }
+.tex-paper { margin: 30px 0; border: 1px solid var(--hair); border-radius: 3px; }
+.tex-toolbar { display: flex; align-items: center; gap: 10px; padding: 4px 12px; border-bottom: 1px solid var(--hair); font-size: 13px; }
 .tex-label { font-weight: bold; }
 .tex-meta { flex: 1; color: var(--muted); text-align: right; }
-.tex-download::before { content: "["; color: var(--ink); } .tex-download::after { content: "]"; color: var(--ink); }
 .tex-download { white-space: nowrap; }
 .tex-pdf-warn { color: var(--hover); white-space: nowrap; cursor: help; }
 .tex-html { padding: 18px 24px 22px; line-height: 1.5; }
 .tex-html .tex-titleblock { text-align: center; margin: 4px 0 16px; padding-bottom: 12px; border-bottom: 1px solid var(--hair); }
-.tex-html .tex-titleblock .title { margin: 0 0 6px; font-size: 1.5em; background: none; border: 0; padding: 0; }
+.tex-html .tex-titleblock .title { margin: 0 0 6px; font-size: 1.5em; font-weight: 300; }
 .tex-html .tex-titleblock .author, .tex-html .tex-titleblock .date { margin: 2px 0; }
 .tex-html .tex-abstract { margin: 0 2em 18px; font-size: .92em; }
 .tex-html .tex-abstract h1 { font-size: 1em; text-align: center; margin: 0 0 4px; }
@@ -359,13 +354,14 @@ figure, .post-figure, .post-video, .post-gif { text-align: center; margin-left: 
 .tex-html .tex-eqref { text-decoration: none; }
 .tex-html .tex-tikz { margin: 1em auto; text-align: center; }
 .tex-html .tex-tikz img { display: inline-block; max-width: 100%; height: auto; }
-.tex-html table caption { caption-side: bottom; color: var(--muted); font-size: .85em; padding-top: 4px; }
+.tex-html table { margin: 14px auto; }
+.tex-html table caption { caption-side: bottom; color: var(--muted); font-size: 14px; padding-top: 6px; }
 .tex-html .math.display { display: block; margin: .8em 0; overflow-x: auto; }
 .tex-html .tex-references { margin-top: 18px; font-size: .88em; }
 .tex-html .tex-references p { margin: .3em 0; padding-left: 2.4em; text-indent: -2.4em; text-align: left; }
 .tex-html .tex-bibnum { margin-right: 6px; }
-.tex-source { border-top: 1px solid var(--rule); background: var(--wash); }
-.tex-source summary { color: var(--link); font-size: .85em; padding: 4px 8px; text-decoration: underline; }
+.tex-source { border-top: 1px solid var(--hair); }
+.tex-source summary { color: var(--link); font-size: .85em; padding: 4px 8px; }
 .tex-source pre.highlight, .tex-source pre { margin: 0; border: 0; padding: 4px 10px 10px; font-size: .8em; }
 .tex-error-body { color: var(--hover); padding: 10px 12px; }
 .tex-error-log summary { color: var(--hover); }
@@ -381,22 +377,23 @@ figure, .post-figure, .post-video, .post-gif { text-align: center; margin-left: 
 
 /* --------------------------------------------------------------- phone --- */
 @media (max-width: 620px) {
-  body { font-size: 16px; padding: 12px 14px 30px; }
-  .portrait { width: 160px; height: 160px; }
-  .nav-search { margin-left: 0; width: 100%; }
+  .wrap { padding: 0 16px; }
+  .site-title { font-size: 22px; line-height: 48px; }
+  .site-nav { margin-top: -6px; }
+  h1 { font-size: 30px; letter-spacing: -1.25px; } h2 { font-size: 26px; } h3 { font-size: 22px; }
+  .nav-search { width: 100%; }
   .nav-search input { width: 100%; }
   .logo-strip a { flex: 0 0 50%; min-width: 0; }
   .logo-strip img { height: 42px; }
   .pub-entry, .project { grid-template-columns: 1fr; }
   .pub-thumb { max-width: 320px; }
   blockquote { margin: 1em 1em; }
-  .site-name, .masthead--home .site-name { font-size: 1.5em; }
 }
 
 /* --------------------------------------------------------------- print --- */
 @media print {
-  .nav, .nav-search, .toc-inline, .photo-lightbox { display: none !important; }
-  body { max-width: none; font-size: 11pt; }
+  .site-header, .toc-inline, .photo-lightbox { display: none !important; }
+  body { font-size: 11pt; }
   a { color: inherit; }
 }
 
@@ -418,8 +415,7 @@ ol.bibliography > li { margin: 0 0 1.5em; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme]) .logo-strip img { filter: none; opacity: .9; } }
 
 /* sans for the chrome (name, nav, headings, footer), serif for reading */
-.site-name, .nav, .toc-inline, .site-footer { font-family: var(--sans); }
-.nav, .site-footer { font-size: .85em; }
+.toc-inline, .site-footer { font-family: var(--sans); }
 /* LaTeX cells keep the paper's own structure, set in the body serif rather than the site's sans headings */
 .tex-html :is(h1, h2, h3, h4), .tex-html .title { font-family: var(--font); letter-spacing: 0; }
 
@@ -431,12 +427,12 @@ body { hyphens: none; }
 .article-body ul, .article-body ol { margin: 0 0 1em; padding-left: 1.5em; }
 .article-body li > ul, .article-body li > ol { margin: .35em 0 .2em; }
 
-/* Reading comfort (evidence-based defaults):
+/* Reading comfort notes (partly superseded by the Karpathy-style base):
    - the whole page is one centred 760px column (40em of text, ~65-75 characters a line), so header, text and lists share the same left and right edges.
    - 18px (112.5%, so it honours the browser's font-size setting) at 1.65 leading, left-aligned, no justification.
    - Off-white / charcoal paper and soft ink: contrast 11-12:1 (AAA, but short of the glare of pure black on white); muted text >= 4.5:1.
    - Dark mode gets a little extra letter-spacing, because light-on-dark text blooms and looks tighter.
-   - Links are always underlined (never colour alone); visitors who ask for more contrast get it. */
+   - Links are blue without underline until hover (as on karpathy.github.io); visitors who ask for more contrast get darker colours. */
 :root[data-theme="dark"] body { letter-spacing: .01em; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) body { letter-spacing: .01em; } }
 @media (prefers-contrast: more) {

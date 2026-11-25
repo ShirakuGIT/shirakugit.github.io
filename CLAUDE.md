@@ -56,7 +56,7 @@ Changes to `_plugins/*.rb` need a server restart (Jekyll loads plugins once); co
 - `_notes/*.md` — "digital garden" working notes with an `updated:` field and open-ended `category:`; subfolders are allowed.
 - `_layouts/*.html` + `_includes/*.html` — page scaffolds and reusable embeds (`figure`, `video`, `gif`, `jupyter_notebook`, tex includes, header/footer/sidebar).
 - `_plugins/*.rb` — custom Liquid tags: `tex_compile.rb` (LaTeX→HTML+PDF via pandoc/pdfLaTeX/pdfinfo on PATH, cached under `.jekyll-cache/tex/<sha>/`), `jupyter_notebook.rb`, `markdown.rb`, `ext.rb` (loads jekyll-scholar for the publications page, driven by `assets/ref.bib`).
-- **`assets/site.css` — the site's design ("homepage" style, Nov 2026)**: an early-2000s academic homepage — wide 980px page, Latin Modern Roman 8 (self-hosted in `assets/fonts/`), very few colours as CSS variables, dark mode via `prefers-color-scheme`. Plain CSS, no Bootstrap, no icon fonts. Read `AGENTS.md` §7.0 before any styling work.
+- **`assets/site.css` — the site's design (Karpathy-inspired, Nov 2026)**: neat and light, like karpathy.github.io — Helvetica Light 16px, 800px column, dark top rule + hairline header, big light headings, blue links without underline, hairline tables. Dark mode via `prefers-color-scheme` and a toggle. Plain CSS, no Bootstrap, no icon fonts. Read `AGENTS.md` §7.0 before any styling work.
 - `_sass/SHB_css.scss` / `assets/main.scss` — the retired dark "earthy" Bootstrap theme, no longer linked; slated for deletion. `_plugins/plain_preview.rb` + `/plain/` are the design prototypes used to choose the style (also slated for removal).
 - `scripts/ab_compare.py` — A/B regression harness: compares two production builds page by page (SEO head, content text, links, anchors, broken refs; `--shots` for side-by-side screenshots). Run it for any layout/style change.
 - `assets/visits.json` — visitor-map data. The daily GitHub Actions bot that used to commit it was removed in `8fe9ef0` (Nov 2026); refresh with `scripts/fetch_visits.py`, don't hand-edit. Still `git pull --rebase origin main` before pushing.
@@ -65,6 +65,6 @@ Changes to `_plugins/*.rb` need a server restart (Jekyll loads plugins once); co
 
 - **kramdown mangles raw HTML in `.md` files** (`parse_block_html: true`). Any hand-written HTML/JS block in a markdown page must be wrapped in `{::nomarkdown} ... {:/nomarkdown}` (Liquid still works inside it). The built-in `include`s (figure/video/gif/jupyter/tex) already handle this themselves.
 - **Never commit or push unless explicitly asked.** When you do, follow the existing commit style (`chore:`, `content:`, `tex:`, `feat:` — check `git log --oneline -10`) and rebase before pushing per the CI-bot note above.
-- Styling follows the **homepage style** (`AGENTS.md` §7.0): wide, LM Roman 8, minimal colours (variables, light + dark), plain HTML, no added chrome. Verify with `scripts/ab_compare.py`.
+- Styling follows the **Karpathy-inspired style** (`AGENTS.md` §7.0): light, quiet, few colours (variables, light + dark), no added chrome, no brackets. Verify with `scripts/ab_compare.py`.
 - Shiva's machine runs warm: keep screenshot passes and extra servers to a minimum and stop them when done.
 - Shiva often has their own `jekyll serve` on :4000 — don't kill it. For plugin changes (which need a restart), run a second server on another port.
